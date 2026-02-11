@@ -1,0 +1,673 @@
+[
+  {
+    "id": "001",
+    "game": "ds3",
+    "game_name": "Dark Souls III",
+    "title": "Farron Keep \u2014 Lever Interaction Collision Exploit",
+    "severity": "visual",
+    "type": "animation",
+    "type_display": "Collision / Animation",
+    "description": "Player model levitates above lever trigger geometry during a simultaneous climb input. The lever's activation animation then physically displaces the player position as it moves, resulting in an unintended floating state not cleared by normal movement.",
+    "tags": [
+      "Collision",
+      "Animation",
+      "Player Position",
+      "Exploitable"
+    ],
+    "reproduction_steps": [
+      "Navigate to the lever mechanism in Farron Keep",
+      "Position player at the base of the lever geometry",
+      "Initiate climb input simultaneously with lever activation",
+      "Player model clips onto lever; lever animation carries player upward",
+      "Player remains suspended in levitating state post-animation"
+    ],
+    "video_url": "https://youtu.be/TnLRcHJGSC8",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "002",
+    "game": "ds3",
+    "game_name": "Dark Souls III",
+    "title": "Enemy AI Ledge Pathfinding Failure \u2014 Thief NPC Self-Destruction",
+    "severity": "minor",
+    "type": "ai",
+    "type_display": "AI / Pathing",
+    "description": "A thief-type enemy NPC in the beginning area executes a backstep animation during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.",
+    "tags": [
+      "AI",
+      "Pathfinding",
+      "NPC",
+      "Ledge Detection",
+      "Self-Destruction"
+    ],
+    "reproduction_steps": [
+      "Locate thief-type enemy NPC near ledge in beginning area",
+      "Engage enemy in melee combat",
+      "Apply pressure to trigger enemy backstep evasion animation",
+      "Enemy backsteps off ledge edge without collision or pathfinding correction",
+      "NPC falls to fatal depth \u2014 self-destructs"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "003",
+    "game": "eldenring",
+    "game_name": "Elden Ring",
+    "title": "Messmer Fire Knight \u2014 Endgame AI Ledge Pathfinding Failure",
+    "severity": "minor",
+    "type": "ai",
+    "type_display": "AI / Pathing",
+    "description": "A Messmer Fire Knight enemy in an endgame area executes a backstep evasion animation that carries it off a nearby ledge, resulting in a fatal fall. Mirrors the DS3 thief NPC ledge pathfinding failure (see #002), indicating the backstep evasion AI does not perform ledge proximity checks before executing the animation across FromSoftware engine titles.",
+    "tags": [
+      "AI",
+      "Pathfinding",
+      "NPC",
+      "Ledge Detection",
+      "Self-Destruction",
+      "Cross-Title"
+    ],
+    "reproduction_steps": [
+      "Locate Messmer Fire Knight enemy near ledge in endgame area",
+      "Engage enemy in melee combat",
+      "Apply pressure to trigger backstep evasion behavior",
+      "Enemy backsteps off ledge without pathfinding correction",
+      "NPC falls to fatal depth \u2014 self-destructs"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "004",
+    "game": "fallout4",
+    "game_name": "Fallout 4",
+    "title": "Sanctuary Hills \u2014 Merchant NPC and Brahmin Midair Spawn",
+    "severity": "major",
+    "type": "spawning",
+    "type_display": "Spawning / Placement",
+    "description": "A merchant NPC and their Brahmin companion spawn at an elevated position above the ground geometry outside Sanctuary Hills. Both entities are airborne at spawn with no supporting geometry beneath them. Likely caused by a spawn point placement error or a failure in the ground-snapping logic applied at spawn time.",
+    "tags": [
+      "Spawning",
+      "NPC",
+      "Placement",
+      "Physics",
+      "Brahmin"
+    ],
+    "reproduction_steps": [
+      "Travel to or fast travel to Sanctuary Hills",
+      "Observe merchant NPC spawn event outside settlement boundary",
+      "Merchant NPC and Brahmin companion appear elevated above ground",
+      "Entities are suspended in air with no geometry beneath them at spawn"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "005",
+    "game": "fallout76",
+    "game_name": "Fallout 76",
+    "title": "\"Nanomachines, Snake!\" \u2014 Post-Combat NPC Hand Clip + Delayed Mass NPC Death Event",
+    "severity": "critical",
+    "type": "ai",
+    "type_display": "AI / Animation / State",
+    "description": "Two distinct bugs captured in sequence. (A) After shooting a hostile NPC attacking a friendly, the friendly NPC lowers her weapon hand but her off-hand remains locked in a grip pose, clipping through the hostile NPC's body \u2014 suggesting the off-hand animation state did not receive the combat-end signal. (B) Upon entering a nearby building and initiating dialogue with an NPC, that NPC and two others in the same space immediately collapse dead. Two NPCs survive. The deceased NPCs appear to share a designation or faction flag not shared by the survivors, suggesting a state or faction propagation error triggered by the dialogue event or the prior combat sequence.",
+    "tags": [
+      "Animation",
+      "AI",
+      "State Management",
+      "Faction Flag",
+      "NPC Death",
+      "Multi-Bug",
+      "Dialogue Trigger"
+    ],
+    "reproduction_steps": [
+      "Observe hostile NPC attacking a friendly NPC at Gilman Lumber Mill",
+      "Shoot and kill the hostile NPC",
+      "Observe friendly NPC \u2014 weapon hand lowers, off-hand remains clipping through hostile NPC body",
+      "Enter nearby building with multiple NPCs present",
+      "Initiate dialogue with the first NPC encountered",
+      "First NPC and two others in the room immediately collapse dead",
+      "Named NPCs survive \u2014 note any designation or faction differences between survivors and deceased"
+    ],
+    "video_url": "https://youtu.be/G0kmZ6-v3EQ",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "006",
+    "game": "fallout76",
+    "game_name": "Fallout 76",
+    "title": "\"Null Ghoul\" \u2014 Frozen NPC, Ragdoll Suppression, Melee Positional Teleport",
+    "severity": "major",
+    "type": "physics",
+    "type_display": "Physics / AI / Animation",
+    "description": "A Scorched Wanderer NPC is observed in a static frozen pose holding its sides \u2014 no idle animation active. Three sequential defects follow: (A) Shooting the NPC in the head destroys the head geometry but triggers no ragdoll response; the NPC remains in the frozen static pose headless. (B) Applying a melee attack causes the NPC to teleport approximately 10 feet to the left and suspend in the air at eye level, mid-ragdoll pose. (C) The NPC in the suspended state is not interactable and does not resolve \u2014 permanent suspension.",
+    "tags": [
+      "Physics",
+      "Ragdoll",
+      "AI",
+      "NPC",
+      "Frozen State",
+      "Teleport",
+      "Multi-Bug",
+      "Scorched"
+    ],
+    "reproduction_steps": [
+      "Locate Scorched Wanderer NPC in frozen static pose holding its sides",
+      "Shoot NPC in the head \u2014 head geometry is destroyed, no ragdoll triggers",
+      "NPC remains in frozen static pose despite head destruction",
+      "Apply melee attack to the frozen NPC",
+      "NPC teleports approximately 10 feet left and suspends at eye level in mid-ragdoll state",
+      "Attempt interaction \u2014 NPC is not interactable and remains permanently suspended"
+    ],
+    "video_url": "https://youtu.be/uk95XWXTaJk",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "007",
+    "game": "spiderman",
+    "game_name": "Marvel's Spider-Man Remastered",
+    "title": "River Boats Missing Collision \u2014 Ghost Geometry",
+    "severity": "major",
+    "type": "collision",
+    "type_display": "Collision / Physics",
+    "description": "Boats present in the river have no collision mesh assigned. Spider-Man passes through them entirely on contact and lands in the water as if the boats are not present. Visually the boats render correctly but are non-solid \u2014 classic ghost geometry caused by a missing or unassigned collision layer on the boat assets.",
+    "tags": [
+      "Collision",
+      "Ghost Geometry",
+      "Physics",
+      "Environment",
+      "Boat"
+    ],
+    "reproduction_steps": [
+      "Navigate to river area containing visible boats",
+      "Web-swing or dive toward a boat in the river",
+      "Spider-Man passes through boat geometry entirely on contact",
+      "Player lands in water \u2014 boat renders visually but has no physical collision response"
+    ],
+    "video_url": "https://youtu.be/6AdOc1mka8c",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "008",
+    "game": "rdr1",
+    "game_name": "Red Dead Redemption (Remastered)",
+    "title": "Blackwater Shop \u2014 Day/Night Transition LOD & Texture Streaming Failure",
+    "severity": "minor",
+    "type": "rendering",
+    "type_display": "Rendering / LOD",
+    "description": "Entering the Blackwater shop interior during the day-to-night transition while the shop state is flagged as closed causes a texture streaming failure. Interior surfaces fail to load entirely. Exterior LOD pop-in is visible through windows, with absent ground and building assets observable from within the shop. Likely a streaming budget or state-flag conflict triggered by the simultaneous shop-closed and time-transition conditions.",
+    "tags": [
+      "Rendering",
+      "LOD",
+      "Texture Streaming",
+      "State Conflict",
+      "Time-of-Day"
+    ],
+    "reproduction_steps": [
+      "Travel to Blackwater shop location",
+      "Wait for day-to-night time transition to begin",
+      "Enter shop during transition window while shop is in closed state",
+      "Observe missing interior textures on entry",
+      "Observe exterior LOD pop-in and absent building and ground assets visible from interior"
+    ],
+    "video_url": "https://youtu.be/e2iMGYisTZA",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "009",
+    "game": "rdr1",
+    "game_name": "Red Dead Redemption (Remastered)",
+    "title": "Character Levitation Above Chair Geometry \u2014 Multiple Locations",
+    "severity": "visual",
+    "type": "animation",
+    "type_display": "Animation / Placement",
+    "description": "Multiple characters across multiple locations are observed floating above chair geometry rather than sitting flush with the seat surface. The sitting animation plays correctly but the character's position is offset vertically from the chair mesh. Reproduces consistently across different characters and chair assets, suggesting a systemic issue with the sit anchor point or chair collision bounds in the remaster.",
+    "tags": [
+      "Animation",
+      "Placement",
+      "NPC",
+      "Chair",
+      "Vertical Offset",
+      "Multi-Location"
+    ],
+    "reproduction_steps": [
+      "Observe any NPC or character entering a seated state at a chair",
+      "Sitting animation triggers correctly",
+      "Character model is visibly separate from the chair seat surface by several inches to a foot",
+      "Reproduces across multiple chair types and locations \u2014 clip captures 5 to 6 instances"
+    ],
+    "video_url": "https://youtu.be/aTMxw0cYBv8",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "010",
+    "game": "rdr1",
+    "game_name": "Red Dead Redemption (Remastered)",
+    "title": "Horse Stuck on Fence Geometry \u2014 Extended Physics Resolution Failure",
+    "severity": "minor",
+    "type": "collision",
+    "type_display": "Collision / Physics",
+    "description": "Horse becomes lodged on top of fence geometry and the physics system fails to resolve the stuck state. Over approximately two minutes of attempting every available input to dislodge the animal, the horse progressively tilts to approximately 30 degrees nose-down as the physics engine attempts to find a valid ground normal beneath it. The horse remains stuck until an external action resolves the state, suggesting the fence collision bounds create a geometry trap the physics solver cannot escape.",
+    "tags": [
+      "Collision",
+      "Physics",
+      "Horse",
+      "Geometry Trap",
+      "Stuck State",
+      "Fence"
+    ],
+    "reproduction_steps": [
+      "Approach fence geometry on horseback",
+      "Jump horse onto top of fence",
+      "Horse lands on fence and becomes lodged \u2014 physics cannot resolve position",
+      "Attempt all available inputs to dislodge \u2014 horse remains stuck",
+      "Horse progressively tilts nose-down approximately 30 degrees as physics solver searches for ground normal",
+      "State persists until external resolution"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "011",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Shared Chair Occupation \u2014 Two NPCs Assigned Same Seat",
+    "severity": "visual",
+    "type": "ai",
+    "type_display": "AI / Pathing",
+    "description": "Two NPC characters are simultaneously assigned the same chair as their destination by the pathing system. Both NPCs execute the sit animation and occupy the same seat position, clipping through each other. Indicates the chair reservation or seat-assignment system failed to mark the seat as occupied before the second NPC claimed it.",
+    "tags": [
+      "AI",
+      "Pathing",
+      "NPC",
+      "Chair",
+      "Seat Assignment",
+      "Clipping"
+    ],
+    "reproduction_steps": [
+      "Observe NPC pathing behavior in a populated area with seating",
+      "Two NPCs approach the same chair simultaneously",
+      "Both execute sit animation \u2014 neither is rerouted to an alternate seat",
+      "Both NPCs occupy same chair position, clipping through each other"
+    ],
+    "video_url": "https://youtu.be/peJob1O9NEk",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "012",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Charles & John Simultaneous Hand Clip + Charles Idle Spit Animation",
+    "severity": "visual",
+    "type": "animation",
+    "type_display": "Animation / Model",
+    "description": "While Charles Smith and John Marston stand in proximity, both characters' idle hand animations begin clipping into their own torsos simultaneously. The synchronized nature of the clipping suggests a shared idle animation state triggered by proximity. Charles then executes a spit idle animation directed at John, which while likely an intentional ambient behavior, compounds the visual breakdown of the scene.",
+    "tags": [
+      "Animation",
+      "Clipping",
+      "NPC",
+      "Idle State",
+      "Proximity Trigger",
+      "Charles Smith"
+    ],
+    "reproduction_steps": [
+      "Position player as John Marston near Charles Smith in camp",
+      "Allow both characters to enter idle state while in close proximity",
+      "Both characters' hands begin clipping into their torsos simultaneously",
+      "Charles executes spit idle animation onto John",
+      "Observe combined visual breakdown of proximity idle system"
+    ],
+    "video_url": "https://youtu.be/8LRPRA9H4D4",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "013",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Synchronized Player/NPC Horse Dismount \u2014 Notable Emergent Behavior",
+    "severity": "visual",
+    "type": "animation",
+    "type_display": "Animation / Emergent",
+    "description": "Player and a nearby NPC execute horse dismount animations in perfect synchronization, producing an unintentional choreographed appearance. Classified as notable emergent behavior rather than a defect \u2014 the individual dismount animations are functioning correctly, but the coincidental synchronization exposes the lack of any animation desync or timing variance system between player and NPC dismount triggers. Worth logging as an edge case for animation system review.",
+    "tags": [
+      "Animation",
+      "Emergent Behavior",
+      "Horse",
+      "Dismount",
+      "Synchronization",
+      "Not a Bug"
+    ],
+    "reproduction_steps": [
+      "Ride horse in proximity to NPC also on horseback",
+      "Dismount horse",
+      "NPC dismounts simultaneously",
+      "Both animations play in perfect sync \u2014 appears choreographed",
+      "Note: individual animations function correctly \u2014 synchronization is coincidental"
+    ],
+    "video_url": "https://www.youtube.com/watch?v=GrPgyV3znuU",
+    "video_text": "NPC and player dismount simultaneously, appears choreographed"
+  },
+  {
+    "id": "014",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "NPC Animation Snap Between Scripted and Idle States \u2014 \"Dammit Dutch\"",
+    "severity": "minor",
+    "type": "animation",
+    "type_display": "Animation / State",
+    "description": "An NPC snaps abruptly between a scripted animation state and a standard idle animation, producing a visible frame-skip or pop in the character's pose. The transition lacks any blending. Captured during a moment involving Dutch van der Linde, where the scripted state ends and the idle system reclaims control without a smooth handoff.",
+    "tags": [
+      "Animation",
+      "State Transition",
+      "NPC",
+      "Blend Failure",
+      "Scripted State",
+      "Dutch"
+    ],
+    "reproduction_steps": [
+      "Observe Dutch van der Linde during or immediately after a scripted interaction or dialogue",
+      "Scripted animation state concludes",
+      "NPC snaps directly to idle animation without blending transition",
+      "Visible pose pop or frame skip occurs at state boundary"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "015",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Rowboat Hull Water Intrusion \u2014 Interior Flooded During Story Cutscene",
+    "severity": "major",
+    "type": "rendering",
+    "type_display": "Rendering / Physics",
+    "description": "During a story mission cutscene featuring Arthur Morgan and a boatman in a rowboat, the exterior water surface renders inside the boat hull. The water plane is not occluded by the boat geometry, making the boat interior appear flooded. Likely caused by the water plane not being properly clipped or masked by the boat mesh, or the boat lacking a water exclusion volume.",
+    "tags": [
+      "Rendering",
+      "Physics",
+      "Water",
+      "Cutscene",
+      "Hull",
+      "Arthur Morgan",
+      "Occlusion"
+    ],
+    "reproduction_steps": [
+      "Progress to story mission featuring Arthur and boatman in rowboat cutscene",
+      "Observe interior of rowboat during cutscene",
+      "Exterior water plane is visible inside the boat hull",
+      "Boat interior appears flooded \u2014 water surface not clipped by hull geometry"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "016",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Random NPC and Object Clipping \u2014 Multiple Instances",
+    "severity": "visual",
+    "type": "collision",
+    "type_display": "Collision / Rendering",
+    "description": "Multiple instances of NPC characters and world objects clipping through each other or through environment geometry. Captured across approximately 4 separate clips. Individual instances vary in specifics but share the same root cause: collision bounds that do not match visual mesh boundaries, or collision checks that fail under certain conditions.",
+    "tags": [
+      "Collision",
+      "Clipping",
+      "NPC",
+      "Environment",
+      "Multi-Instance"
+    ],
+    "reproduction_steps": [
+      "General world exploration and observation of NPC behavior",
+      "Multiple instances captured organically across different locations",
+      "NPCs and objects clip through environment geometry or each other",
+      "See individual clip timestamps for specific reproduction locations"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "017",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Fence NPC Counter-Climbing Pathing Behavior",
+    "severity": "minor",
+    "type": "ai",
+    "type_display": "AI / Pathing",
+    "description": "A Fence NPC exhibits unusual pathing behavior, climbing on top of a counter while navigating to their destination. The NPC's pathing system selects the counter surface as a valid traversal path rather than routing around it, suggesting the navmesh includes the counter top as walkable geometry or that the pathing cost for counter traversal is incorrectly low.",
+    "tags": [
+      "AI",
+      "Pathing",
+      "NPC",
+      "Navmesh",
+      "Fence",
+      "Counter"
+    ],
+    "reproduction_steps": [
+      "Visit a Fence location with a counter obstacle between spawn and destination",
+      "Observe Fence NPC pathing to their position",
+      "NPC climbs on top of counter surface during path traversal",
+      "NPC reaches destination via counter rather than routing around it"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "018",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Five Finger Fillet Knife Holster Offset \u2014 Knife Floats Outside Sheath",
+    "severity": "visual",
+    "type": "animation",
+    "type_display": "Animation / Model",
+    "description": "After completing a Five Finger Fillet minigame, the sheathing animation for the knife places the knife approximately 2 inches outside and below the leather sheath rather than inside it. The knife is visually holstered in mid-air adjacent to the sheath. Likely a bone attachment offset error specific to the post-minigame sheathing animation.",
+    "tags": [
+      "Animation",
+      "Model",
+      "Knife",
+      "Holster",
+      "Offset",
+      "Attachment Point",
+      "Minigame"
+    ],
+    "reproduction_steps": [
+      "Participate in a Five Finger Fillet minigame",
+      "Complete or exit the minigame",
+      "Observe knife sheathing animation",
+      "Knife is placed approximately 2 inches outside and below the sheath leather",
+      "Knife appears to float in air adjacent to sheath rather than inside it"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "019",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Horse Traverses Large Water Hole With Zero Physics Response",
+    "severity": "major",
+    "type": "physics",
+    "type_display": "Physics / Collision",
+    "description": "A horse at full gallop traverses a large water-filled hole (approximately 12 feet wide, 8 feet deep, with normally sloping edges) with no reduction in speed, momentum, or friction response. The horse passes through as if the water and terrain depression have no physical properties. Expected behavior would include speed reduction, splash effects, and momentum loss. Suggests the water volume or terrain depression lacks a physics trigger, or the horse physics layer is not interacting with it.",
+    "tags": [
+      "Physics",
+      "Horse",
+      "Water",
+      "Friction",
+      "Momentum",
+      "Terrain",
+      "Collision"
+    ],
+    "reproduction_steps": [
+      "Locate large water-filled depression in terrain during open world exploration",
+      "Bring horse to full gallop toward the water hole",
+      "Horse enters and exits the water hole at full speed",
+      "No speed reduction, momentum loss, friction response, or splash effects observed",
+      "Horse behaves as if water hole geometry is not present"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "020",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Horse Dismount Ragdoll Trigger \u2014 Intermittent, Cause Uncertain",
+    "severity": "minor",
+    "type": "physics",
+    "type_display": "Physics / Animation",
+    "description": "Dismounting a horse triggers an unexpected ragdoll response on the player character under circumstances that do not appear to warrant it. The dismount animation is interrupted and replaced with a ragdoll fall. Exact trigger condition is uncertain \u2014 may be related to horse speed, terrain slope, or a collision event at dismount. Classified as intermittent pending further reproduction attempts.",
+    "tags": [
+      "Physics",
+      "Ragdoll",
+      "Horse",
+      "Dismount",
+      "Intermittent",
+      "Animation Interrupt"
+    ],
+    "reproduction_steps": [
+      "Mount horse and ride at varying speeds across different terrain types",
+      "Execute dismount input",
+      "Intermittent: dismount animation is interrupted and player ragdolls on dismount",
+      "Exact condition for trigger unconfirmed \u2014 note terrain, speed, and any nearby collision at time of occurrence"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "021",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Depth Sorting Artifact Between Overlapping Light Bulbs",
+    "severity": "visual",
+    "type": "rendering",
+    "type_display": "Rendering / Depth Sort",
+    "description": "When multiple light bulb assets overlap in the scene, the depth sorting system fails to correctly resolve draw order. Background bulbs alternate between being correctly occluded, incorrectly drawn in front of foreground bulbs, and rapidly flickering between both states. This is a classic depth sorting or z-fighting artifact caused by insufficient z-buffer precision or incorrect render queue ordering for overlapping transparent or emissive geometry.",
+    "tags": [
+      "Rendering",
+      "Depth Sort",
+      "Z-Fighting",
+      "Light Bulb",
+      "Draw Order",
+      "Flicker"
+    ],
+    "reproduction_steps": [
+      "Locate scene with multiple overlapping or closely positioned light bulb assets",
+      "Observe light bulbs from a position where multiple bulbs overlap in screen space",
+      "Background bulbs flicker between occluded and incorrectly drawn-in-front states",
+      "Flickering alternates rapidly between correct and incorrect draw order"
+    ],
+    "video_url": "https://youtu.be/vbT2XDixgjY",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "022",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "\"Rock Trampoline\" \u2014 Invisible Launch Geometry Sends Horse and Player Airborne",
+    "severity": "major",
+    "type": "collision",
+    "type_display": "Collision / Physics",
+    "description": "During a peaceful gallop through a desert area, horse and player are launched approximately 6.5 feet into the air in opposite directions after contacting a specific rock. The rock visually appears normal. The launch force and opposite trajectories suggest either an invisible trigger volume with an upward force component is misplaced at this location, or a collision normal on the rock mesh is oriented incorrectly upward, converting horizontal momentum into vertical launch force.",
+    "tags": [
+      "Collision",
+      "Physics",
+      "Horse",
+      "Launch Geometry",
+      "Trigger Volume",
+      "Collision Normal"
+    ],
+    "reproduction_steps": [
+      "Locate specific rock geometry in desert area during open world exploration",
+      "Approach rock at gallop speed",
+      "Horse and player are launched approximately 6.5 feet airborne in opposite directions on contact",
+      "Rock appears visually normal \u2014 no visible trigger or ramp geometry present",
+      "Note exact location for reproduction \u2014 behavior is location-specific"
+    ],
+    "video_url": "https://youtu.be/DKc0MH8iAno",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "023",
+    "game": "witcher3",
+    "game_name": "The Witcher III: Wild Hunt",
+    "title": "Geralt Clips Into Tree Geometry During Post-Coronation Ermion Dialogue",
+    "severity": "minor",
+    "type": "collision",
+    "type_display": "Collision / Cutscene",
+    "description": "Following the completion of the Skellige King coronation quest and during the subsequent dialogue sequence with Ermion, Geralt is repositioned into a nearby tree. Geralt's model clips partially through the tree geometry and is half-visible for the duration of the dialogue. Likely caused by dialogue camera or character positioning logic placing Geralt at a mark that intersects with the tree's collision volume.",
+    "tags": [
+      "Collision",
+      "Cutscene",
+      "Dialogue",
+      "Geralt",
+      "Ermion",
+      "Skellige",
+      "Character Placement"
+    ],
+    "reproduction_steps": [
+      "Complete the Skellige King coronation quest",
+      "Initiate or allow the post-coronation dialogue sequence with Ermion to trigger",
+      "Observe Geralt's position at dialogue start",
+      "Geralt is placed inside or overlapping a tree \u2014 model clips through tree geometry",
+      "Geralt remains half-clipped through tree for duration of dialogue sequence"
+    ],
+    "video_url": "",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "024",
+    "game": "wolf",
+    "game_name": "Wolfenstein II: The New Colossus",
+    "title": "Air Vent Shaft \u2014 Power Slam Geometry Warp & Piston Platform Clip",
+    "severity": "critical",
+    "type": "collision",
+    "type_display": "Collision / Physics",
+    "description": "Two related collision failures at the same geometry location above an air vent shaft. (A) Performing a power slam directly above the vent triggers a positional warp approximately 15 feet from the point of impact \u2014 the player is teleported laterally on landing with no environmental explanation. (B) Standing idle in the same spot causes the player to gradually clip through the floor into the vent shaft below, driven by the piston platform collision pushing the player through solid geometry. Once inside the shaft the player is movement-locked until crouch input is used to restore navigation. Both bugs share a root location, suggesting a collision mesh gap or incorrect collision layer assignment on the vent cover geometry.",
+    "tags": [
+      "Collision",
+      "Physics",
+      "Positional Warp",
+      "Player Lock",
+      "Piston Platform",
+      "Multi-Repro",
+      "Geometry Gap"
+    ],
+    "reproduction_steps": [
+      "Locate air vent shaft in the specified level area",
+      "Position player directly above vent geometry",
+      "Path A \u2014 Execute power slam input: player warps approximately 15 feet laterally on landing",
+      "Path B \u2014 Stand idle above same vent: piston platform collision gradually pushes player through floor into vent shaft",
+      "Player enters vent shaft in movement-locked state",
+      "Input crouch to restore movement navigation inside the shaft"
+    ],
+    "video_url": "https://youtu.be/_elMOm5dU58",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "025",
+    "game": "cp77",
+    "game_name": "Cyberpunk 2077",
+    "title": "Johnny Silverhand Flashback — Invisible NPC Prop Interaction",
+    "severity": "visual",
+    "type": "animation",
+    "type_display": "Animation / Model",
+    "description": "During the Johnny Silverhand club flashback mission sequence, an NPC character model fails to render while its prop attachment data and interaction animations continue to execute normally. The result is a prop visibly held and manipulated by an invisible entity — the prop moves through the correct animation path with no visible character driving it. Likely a model streaming or LOD failure causing the mesh to not load while the animation skeleton and prop attachment point remain active.",
+    "tags": [
+      "Animation",
+      "Model Rendering",
+      "NPC",
+      "Cutscene",
+      "Prop Attachment",
+      "Invisible Entity"
+    ],
+    "reproduction_steps": [
+      "Progress to the Johnny Silverhand flashback sequence in 'Never Fade Away'",
+      "Enter the Afterlife",
+      "Observe NPC near prop interaction point",
+      "NPC model is absent — prop visibly animates in held position with no character attached",
+      "Prop continues through full animation path driven by invisible skeleton"
+    ],
+    "video_url": "https://youtu.be/jGILNASzJ4k",
+    "video_text": "Add YouTube link here"
+  }
+]
