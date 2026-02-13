@@ -530,7 +530,7 @@
           <div class="detail-grid">
             <div>
               <div class="detail-section-title">Description</div>
-              <p class="detail-text">A thief-type enemy NPC in the beginning area executes a sidestep manuever during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.</p>
+              <p class="detail-text">A thief-type enemy NPC in the beginning area executes a backstep manuever during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.</p>
               <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Pathfinding</span><span class="chip">NPC</span><span class="chip">Ledge Detection</span><span class="chip">Self-Destruction</span></div>
             </div>
             <div>
@@ -546,7 +546,7 @@
                 </li>
                 <li class="repro-step">
                   <span class="step-num">03</span>
-                  <span>Apply pressure to trigger enemy sidestep animation near ledge</span>
+                  <span>Apply pressure to trigger enemy backstep animation near ledge</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">04</span>
@@ -1875,3 +1875,4 @@
 </script>
 </body>
 </html>
+
