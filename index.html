@@ -530,7 +530,7 @@
           <div class="detail-grid">
             <div>
               <div class="detail-section-title">Description</div>
-              <p class="detail-text">A thief-type enemy NPC in the beginning area executes a backstep manuever during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.</p>
+              <p class="detail-text">A thief-type enemy NPC in the beginning area executes a backstepping manuever during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.</p>
               <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Pathfinding</span><span class="chip">NPC</span><span class="chip">Ledge Detection</span><span class="chip">Self-Destruction</span></div>
             </div>
             <div>
@@ -970,7 +970,7 @@
           <div class="detail-grid">
             <div>
               <div class="detail-section-title">Description</div>
-              <p class="detail-text">Horse becomes lodged on top of fence geometry and the physics system fails to resolve the stuck state. Over approximately two minutes of attempting every available input to dislodge the animal, the horse progressively tilts to approximately 30 degrees nose-down as the physics engine attempts to find a valid ground normal beneath it. The horse remains stuck until an external action resolves the state, suggesting the fence collision bounds create a geometry trap the physics solver cannot escape.</p>
+              <p class="detail-text">Horse becomes lodged on top of fence geometry and the physics system fails to resolve the stuck state. Over approximately two minutes of attempting every available input to dislodge the animal, the horse progressively tilts to approximately 20 degrees nose-down as the physics engine attempts to find a valid ground normal beneath it. The horse remains stuck in a galloping animation until dismounting moves the horse onto the nearby table, suggesting the fence collision bounds create a geometry trap the physics solver cannot escape.</p>
               <div class="detail-chips" style="margin-top:12px"><span class="chip">Collision</span><span class="chip">Physics</span><span class="chip">Horse</span><span class="chip">Geometry Trap</span><span class="chip">Stuck State</span><span class="chip">Fence</span></div>
             </div>
             <div>
@@ -1005,10 +1005,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/Jz3b6EL_M9I"
+              title="Bug clip #010"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -1237,7 +1241,7 @@
           <div class="detail-grid">
             <div>
               <div class="detail-section-title">Description</div>
-              <p class="detail-text">During a story mission cutscene featuring Arthur Morgan and a boatman in a rowboat, the exterior water surface renders inside the boat hull. The water plane is not occluded by the boat geometry, making the boat interior appear flooded. Likely caused by the water plane not being properly clipped or masked by the boat mesh, or the boat lacking a water exclusion volume.</p>
+              <p class="detail-text">During the &#x27;Dear Uncle Tacitus&#x27; cutscene featuring Arthur Morgan and a boatman in a rowboat, the exterior water surface renders inside the boat hull. The water plane is not occluded by the boat geometry, making the boat interior appear flooded. Likely caused by the water plane not being properly clipped or masked by the boat mesh, or the boat lacking a water exclusion volume.</p>
               <div class="detail-chips" style="margin-top:12px"><span class="chip">Rendering</span><span class="chip">Physics</span><span class="chip">Water</span><span class="chip">Cutscene</span><span class="chip">Hull</span><span class="chip">Arthur Morgan</span><span class="chip">Occlusion</span></div>
             </div>
             <div>
@@ -1264,10 +1268,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/7iFCqu7LOoA"
+              title="Bug clip #015"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -1331,37 +1339,49 @@
           <div class="detail-grid">
             <div>
               <div class="detail-section-title">Description</div>
-              <p class="detail-text">A Fence NPC exhibits unusual pathing behavior, climbing on top of a counter while navigating to their destination. The NPC&#x27;s pathing system selects the counter surface as a valid traversal path rather than routing around it, suggesting the navmesh includes the counter top as walkable geometry or that the pathing cost for counter traversal is incorrectly low.</p>
-              <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Pathing</span><span class="chip">NPC</span><span class="chip">Navmesh</span><span class="chip">Fence</span><span class="chip">Counter</span></div>
+              <p class="detail-text">After completing a stolen stagecoach transaction, a Fence NPC exhibits unusual pathing behavior while returning to his business position. The NPC walks directly into his countertop for approximately 3 seconds before the pathfinding system determines climbing over it as the solution. Upon reaching his destination behind the counter, the NPC levitates approximately 4 seconds above the correct ground position before falling through the counter/crate geometry to snap into the proper location. This suggests the navmesh includes the counter surface as valid traversal geometry and the destination coordinate has incorrect vertical positioning, causing the NPC to attempt spawning mid-air before gravity correction applies.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Pathing</span><span class="chip">NPC</span><span class="chip">Navmesh</span><span class="chip">Fence</span><span class="chip">Counter</span><span class="chip">Levitation</span><span class="chip">Clipping</span></div>
             </div>
             <div>
               <div class="detail-section-title">Reproduction Steps</div>
               <ul class="repro-steps">
                 <li class="repro-step">
                   <span class="step-num">01</span>
-                  <span>Visit a Fence location with a counter obstacle between spawn and destination</span>
+                  <span>Complete a stolen stagecoach transaction with a Fence NPC</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">02</span>
-                  <span>Observe Fence NPC pathing to their position</span>
+                  <span>Observe the Fence returning to their business position behind the counter</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">03</span>
-                  <span>NPC climbs on top of counter surface during path traversal</span>
+                  <span>NPC walks into counter obstacle for ~3 seconds before climbing response</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">04</span>
-                  <span>NPC reaches destination via counter rather than routing around it</span>
+                  <span>NPC climbs onto counter surface instead of pathing around</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">05</span>
+                  <span>NPC levitates above destination position for ~4 seconds</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">06</span>
+                  <span>NPC falls through geometry to correct ground position</span>
                 </li>
               </ul>
             </div>
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/-BgDvcwGz6A"
+              title="Bug clip #017"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -1429,7 +1449,7 @@
           <div class="detail-grid">
             <div>
               <div class="detail-section-title">Description</div>
-              <p class="detail-text">A horse at full gallop traverses a large water-filled hole (approximately 12 feet wide, 8 feet deep, with normally sloping edges) with no reduction in speed, momentum, or friction response. The horse passes through as if the water and terrain depression have no physical properties. Expected behavior would include speed reduction, splash effects, and momentum loss. Suggests the water volume or terrain depression lacks a physics trigger, or the horse physics layer is not interacting with it.</p>
+              <p class="detail-text">A horse at full gallop traverses a large water-filled hole (approximately 12 feet wide, 8 feet deep, with normally sloping edges) with no reduction in speed, momentum, or friction response. The horse passes through as if the water and terrain depression have no physical properties. Expected behavior would include speed reduction, slipping and momentum loss. Suggests the water volume or terrain depression lacks a physics trigger, or the horse physics layer is not interacting with it.</p>
               <div class="detail-chips" style="margin-top:12px"><span class="chip">Physics</span><span class="chip">Horse</span><span class="chip">Water</span><span class="chip">Friction</span><span class="chip">Momentum</span><span class="chip">Terrain</span><span class="chip">Collision</span></div>
             </div>
             <div>
@@ -1645,11 +1665,11 @@
               <ul class="repro-steps">
                 <li class="repro-step">
                   <span class="step-num">01</span>
-                  <span>Complete the Skellige King coronation quest</span>
+                  <span>Initiate the &#x27;Coronation&#x27; quest</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">02</span>
-                  <span>Initiate or allow the post-coronation dialogue sequence with Ermion to trigger</span>
+                  <span>Initiate dialogue with Ermion to trigger</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">03</span>
@@ -1668,10 +1688,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/L2IzTlreWeI"
+              title="Bug clip #023"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -1847,9 +1871,9 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["ds3", "rdr1", "wolf", "eldenring", "fallout76", "rdr2", "witcher3", "fallout4", "spiderman", "cp77"];
+    const gameKeys = ["eldenring", "fallout4", "rdr2", "cp77", "ds3", "fallout76", "wolf", "witcher3", "spiderman", "rdr1"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["ai", "animation", "spawning", "collision", "physics", "rendering"];
+    const typeKeys = ["animation", "spawning", "rendering", "collision", "ai", "physics"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
