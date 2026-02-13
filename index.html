@@ -530,7 +530,7 @@
           <div class="detail-grid">
             <div>
               <div class="detail-section-title">Description</div>
-              <p class="detail-text">A thief-type enemy NPC in the beginning area executes a backstep animation during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.</p>
+              <p class="detail-text">A thief-type enemy NPC in the beginning area executes a sidestep manuever during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.</p>
               <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Pathfinding</span><span class="chip">NPC</span><span class="chip">Ledge Detection</span><span class="chip">Self-Destruction</span></div>
             </div>
             <div>
@@ -546,11 +546,11 @@
                 </li>
                 <li class="repro-step">
                   <span class="step-num">03</span>
-                  <span>Apply pressure to trigger enemy backstep evasion animation</span>
+                  <span>Apply pressure to trigger enemy sidestep animation near ledge</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">04</span>
-                  <span>Enemy backsteps off ledge edge without collision or pathfinding correction</span>
+                  <span>Enemy steps off ledge edge without collision or pathfinding correction</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">05</span>
@@ -561,10 +561,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/YNNAswJJAak"
+              title="Bug clip #002"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -612,10 +616,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/VTaoKIMKEy0"
+              title="Bug clip #003"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -659,10 +667,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/IC-PL6CYmPg"
+              title="Bug clip #004"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -1201,10 +1213,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/KIrTLsfI4fs"
+              title="Bug clip #014"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -1444,10 +1460,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/zdEk4PlmZG4"
+              title="Bug clip #019"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -1578,7 +1598,7 @@
                 </li>
                 <li class="repro-step">
                   <span class="step-num">03</span>
-                  <span>Horse and player are launched approximately 6.5 feet airborne in opposite directions on contact</span>
+                  <span>Horse is launched approximately 4 feet vertically on contact, player dismount forced immediately</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">04</span>
@@ -1586,7 +1606,7 @@
                 </li>
                 <li class="repro-step">
                   <span class="step-num">05</span>
-                  <span>Note exact location for reproduction — behavior is location-specific</span>
+                  <span>Note exact location for reproduction — behavior may be location-specific</span>
                 </li>
               </ul>
             </div>
@@ -1827,9 +1847,9 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["witcher3", "cp77", "ds3", "rdr1", "rdr2", "wolf", "fallout76", "eldenring", "fallout4", "spiderman"];
+    const gameKeys = ["ds3", "rdr1", "wolf", "eldenring", "fallout76", "rdr2", "witcher3", "fallout4", "spiderman", "cp77"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["collision", "ai", "physics", "animation", "spawning", "rendering"];
+    const typeKeys = ["ai", "animation", "spawning", "collision", "physics", "rendering"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
