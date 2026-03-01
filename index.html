@@ -1517,7 +1517,7 @@
         <div class="bug-card-header">
           <div class="bug-id">#020</div>
           <div class="game-tag game-rdr2">Red Dead Redemption 2</div>
-          <div class="bug-title-text">Horse Dismount Ragdoll Trigger — Intermittent, Cause Uncertain</div>
+          <div class="bug-title-text">Horse Dismount Ragdoll Trigger</div>
           <div class="bug-type">Physics / Animation</div>
           <div class="severity-badge sev-minor">Minor</div>
         </div>
@@ -1533,29 +1533,29 @@
               <ul class="repro-steps">
                 <li class="repro-step">
                   <span class="step-num">01</span>
-                  <span>Mount horse and ride at varying speeds across different terrain types</span>
+                  <span>Ride on horse nearby collision boundary (fence, wall, etc.)</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">02</span>
-                  <span>Execute dismount input</span>
+                  <span>Execute dismount during horse&#x27;s impact with boundary</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">03</span>
-                  <span>Intermittent: dismount animation is interrupted and player ragdolls on dismount</span>
-                </li>
-                <li class="repro-step">
-                  <span class="step-num">04</span>
-                  <span>Exact condition for trigger unconfirmed — note terrain, speed, and any nearby collision at time of occurrence</span>
+                  <span>Intermittent: dismount animation is interrupted and player ragdolls</span>
                 </li>
               </ul>
             </div>
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/U5RpbpaP4oI"
+              title="Bug clip #020"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -1986,7 +1986,7 @@
           
           <div class="video-wrapper">
             <iframe
-              src="https://studio.youtube.com/video/w1D3_8iXW1Y/edit"
+              src="https://www.youtube.com/embed/w1D3_8iXW1Y"
               title="Bug clip #028"
               frameborder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -2056,9 +2056,9 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["ds3", "fallout76", "gtav", "spiderman", "dqxi", "fallout4", "cp77", "eldenring", "the_invincible", "rdr2", "wolf", "rdr1", "witcher3"];
+    const gameKeys = ["dqxi", "witcher3", "wolf", "gtav", "the_invincible", "cp77", "ds3", "rdr2", "spiderman", "fallout76", "eldenring", "fallout4", "rdr1"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["animation", "spawning", "physics", "collision", "ai", "rendering"];
+    const typeKeys = ["rendering", "spawning", "ai", "animation", "collision", "physics"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
