@@ -32,7 +32,7 @@
     "severity": "minor",
     "type": "ai",
     "type_display": "AI / Pathing",
-    "description": "A thief-type enemy NPC in the beginning area executes a backstep animation during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.",
+    "description": "A thief-type enemy NPC in the beginning area executes a backstepping manuever during combat that carries it off a ledge, resulting in a fatal fall. The AI pathfinding system fails to account for ledge proximity during backstep evasion logic, causing self-destruction. Related issue observed in Elden Ring (see #003), suggesting a systemic AI pathing defect across FromSoftware titles.",
     "tags": [
       "AI",
       "Pathfinding",
@@ -43,11 +43,11 @@
     "reproduction_steps": [
       "Locate thief-type enemy NPC near ledge in beginning area",
       "Engage enemy in melee combat",
-      "Apply pressure to trigger enemy backstep evasion animation",
-      "Enemy backsteps off ledge edge without collision or pathfinding correction",
+      "Apply pressure to trigger enemy backstep animation near ledge",
+      "Enemy steps off ledge edge without collision or pathfinding correction",
       "NPC falls to fatal depth \u2014 self-destructs"
     ],
-    "video_url": "",
+    "video_url": "https://www.youtube.com/watch?v=YNNAswJJAak",
     "video_text": "Add YouTube link here"
   },
   {
@@ -74,7 +74,7 @@
       "Enemy backsteps off ledge without pathfinding correction",
       "NPC falls to fatal depth \u2014 self-destructs"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/VTaoKIMKEy0?si=_u32yNbTaTOGM63S",
     "video_text": "Add YouTube link here"
   },
   {
@@ -99,7 +99,7 @@
       "Merchant NPC and Brahmin companion appear elevated above ground",
       "Entities are suspended in air with no geometry beneath them at spawn"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/IC-PL6CYmPg?si=evCnDlAgvOh9jQsl",
     "video_text": "Add YouTube link here"
   },
   {
@@ -247,7 +247,7 @@
     "severity": "minor",
     "type": "collision",
     "type_display": "Collision / Physics",
-    "description": "Horse becomes lodged on top of fence geometry and the physics system fails to resolve the stuck state. Over approximately two minutes of attempting every available input to dislodge the animal, the horse progressively tilts to approximately 30 degrees nose-down as the physics engine attempts to find a valid ground normal beneath it. The horse remains stuck until an external action resolves the state, suggesting the fence collision bounds create a geometry trap the physics solver cannot escape.",
+    "description": "Horse becomes lodged on top of fence geometry and the physics system fails to resolve the stuck state. Over approximately two minutes of attempting every available input to dislodge the animal, the horse progressively tilts to approximately 20 degrees nose-down as the physics engine attempts to find a valid ground normal beneath it. The horse remains stuck in a galloping animation until dismounting moves the horse onto the nearby table, suggesting the fence collision bounds create a geometry trap the physics solver cannot escape.",
     "tags": [
       "Collision",
       "Physics",
@@ -264,7 +264,7 @@
       "Horse progressively tilts nose-down approximately 30 degrees as physics solver searches for ground normal",
       "State persists until external resolution"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/Jz3b6EL_M9I",
     "video_text": "Add YouTube link here"
   },
   {
@@ -370,7 +370,7 @@
       "NPC snaps directly to idle animation without blending transition",
       "Visible pose pop or frame skip occurs at state boundary"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/KIrTLsfI4fs",
     "video_text": "Add YouTube link here"
   },
   {
@@ -381,7 +381,7 @@
     "severity": "major",
     "type": "rendering",
     "type_display": "Rendering / Physics",
-    "description": "During a story mission cutscene featuring Arthur Morgan and a boatman in a rowboat, the exterior water surface renders inside the boat hull. The water plane is not occluded by the boat geometry, making the boat interior appear flooded. Likely caused by the water plane not being properly clipped or masked by the boat mesh, or the boat lacking a water exclusion volume.",
+    "description": "During the 'Dear Uncle Tacitus' cutscene featuring Arthur Morgan and a boatman in a rowboat, the exterior water surface renders inside the boat hull. The water plane is not occluded by the boat geometry, making the boat interior appear flooded. Likely caused by the water plane not being properly clipped or masked by the boat mesh, or the boat lacking a water exclusion volume.",
     "tags": [
       "Rendering",
       "Physics",
@@ -397,7 +397,7 @@
       "Exterior water plane is visible inside the boat hull",
       "Boat interior appears flooded \u2014 water surface not clipped by hull geometry"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/7iFCqu7LOoA",
     "video_text": "Add YouTube link here"
   },
   {
@@ -433,23 +433,27 @@
     "severity": "minor",
     "type": "ai",
     "type_display": "AI / Pathing",
-    "description": "A Fence NPC exhibits unusual pathing behavior, climbing on top of a counter while navigating to their destination. The NPC's pathing system selects the counter surface as a valid traversal path rather than routing around it, suggesting the navmesh includes the counter top as walkable geometry or that the pathing cost for counter traversal is incorrectly low.",
+    "description": "After completing a stolen stagecoach transaction, a Fence NPC exhibits unusual pathing behavior while returning to his business position. The NPC walks directly into his countertop for approximately 3 seconds before the pathfinding system determines climbing over it as the solution. Upon reaching his destination behind the counter, the NPC levitates approximately 4 seconds above the correct ground position before falling through the counter/crate geometry to snap into the proper location. This suggests the navmesh includes the counter surface as valid traversal geometry and the destination coordinate has incorrect vertical positioning, causing the NPC to attempt spawning mid-air before gravity correction applies.",
     "tags": [
       "AI",
       "Pathing",
       "NPC",
       "Navmesh",
       "Fence",
-      "Counter"
+      "Counter",
+      "Levitation",
+      "Clipping"
     ],
     "reproduction_steps": [
-      "Visit a Fence location with a counter obstacle between spawn and destination",
-      "Observe Fence NPC pathing to their position",
-      "NPC climbs on top of counter surface during path traversal",
-      "NPC reaches destination via counter rather than routing around it"
+      "Complete a stolen stagecoach transaction with a Fence NPC",
+      "Observe the Fence returning to their business position behind the counter",
+      "NPC walks into counter obstacle for ~3 seconds before climbing response",
+      "NPC climbs onto counter surface instead of pathing around",
+      "NPC levitates above destination position for ~4 seconds",
+      "NPC falls through geometry to correct ground position"
     ],
-    "video_url": "",
-    "video_text": "Add YouTube link here"
+    "video_url": "https://youtu.be/-BgDvcwGz6A",
+    "video_text": "Fence NPC climbs counter and levitates before falling into position"
   },
   {
     "id": "018",
@@ -476,7 +480,7 @@
       "Knife is placed approximately 2 inches outside and below the sheath leather",
       "Knife appears to float in air adjacent to sheath rather than inside it"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/PJE45-s48JU",
     "video_text": "Add YouTube link here"
   },
   {
@@ -487,7 +491,7 @@
     "severity": "major",
     "type": "physics",
     "type_display": "Physics / Collision",
-    "description": "A horse at full gallop traverses a large water-filled hole (approximately 12 feet wide, 8 feet deep, with normally sloping edges) with no reduction in speed, momentum, or friction response. The horse passes through as if the water and terrain depression have no physical properties. Expected behavior would include speed reduction, splash effects, and momentum loss. Suggests the water volume or terrain depression lacks a physics trigger, or the horse physics layer is not interacting with it.",
+    "description": "A horse at full gallop traverses a large water-filled hole (approximately 12 feet wide, 8 feet deep, with normally sloping edges) with no reduction in speed, momentum, or friction response. The horse passes through as if the water and terrain depression have no physical properties. Expected behavior would include speed reduction, slipping and momentum loss. Suggests the water volume or terrain depression lacks a physics trigger, or the horse physics layer is not interacting with it.",
     "tags": [
       "Physics",
       "Horse",
@@ -504,14 +508,14 @@
       "No speed reduction, momentum loss, friction response, or splash effects observed",
       "Horse behaves as if water hole geometry is not present"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/zdEk4PlmZG4",
     "video_text": "Add YouTube link here"
   },
   {
     "id": "020",
     "game": "rdr2",
     "game_name": "Red Dead Redemption 2",
-    "title": "Horse Dismount Ragdoll Trigger \u2014 Intermittent, Cause Uncertain",
+    "title": "Horse Dismount Ragdoll Trigger",
     "severity": "minor",
     "type": "physics",
     "type_display": "Physics / Animation",
@@ -525,12 +529,11 @@
       "Animation Interrupt"
     ],
     "reproduction_steps": [
-      "Mount horse and ride at varying speeds across different terrain types",
-      "Execute dismount input",
-      "Intermittent: dismount animation is interrupted and player ragdolls on dismount",
-      "Exact condition for trigger unconfirmed \u2014 note terrain, speed, and any nearby collision at time of occurrence"
+      "Ride on horse nearby collision boundary (fence, wall, etc.)",
+      "Execute dismount during horse's impact with boundary",
+      "Intermittent: dismount animation is interrupted and player ragdolls"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/U5RpbpaP4oI?si=ktn_L4coUwi3d3LR",
     "video_text": "Add YouTube link here"
   },
   {
@@ -579,9 +582,9 @@
     "reproduction_steps": [
       "Locate specific rock geometry in desert area during open world exploration",
       "Approach rock at gallop speed",
-      "Horse and player are launched approximately 6.5 feet airborne in opposite directions on contact",
+      "Horse is launched approximately 4 feet vertically on contact, player dismount forced immediately",
       "Rock appears visually normal \u2014 no visible trigger or ramp geometry present",
-      "Note exact location for reproduction \u2014 behavior is location-specific"
+      "Note exact location for reproduction \u2014 behavior may be location-specific"
     ],
     "video_url": "https://youtu.be/DKc0MH8iAno",
     "video_text": "Add YouTube link here"
@@ -605,13 +608,13 @@
       "Character Placement"
     ],
     "reproduction_steps": [
-      "Complete the Skellige King coronation quest",
-      "Initiate or allow the post-coronation dialogue sequence with Ermion to trigger",
+      "Initiate the 'Coronation' quest",
+      "Initiate dialogue with Ermion to trigger",
       "Observe Geralt's position at dialogue start",
       "Geralt is placed inside or overlapping a tree \u2014 model clips through tree geometry",
       "Geralt remains half-clipped through tree for duration of dialogue sequence"
     ],
-    "video_url": "",
+    "video_url": "https://youtu.be/L2IzTlreWeI",
     "video_text": "Add YouTube link here"
   },
   {
@@ -669,5 +672,87 @@
     ],
     "video_url": "https://youtu.be/jGILNASzJ4k",
     "video_text": "Add YouTube link here"
-  }
+  },
+  {
+  "id": "026",
+  "game": "gtav",
+  "game_name": "Grand Theft Auto V",
+  "title": "Trevor Beard State Not Reflected in World Glass Surfaces",
+  "severity": "visual",
+  "type": "rendering",
+  "type_display": "Rendering / LOD",
+  "description": "When playing as Trevor Phillips with a beard applied via a barber, world-space reflective surfaces such as glass windows and mirrors display a beardless version of the character. The reflection does not match the current character model state, indicating the reflection render pass is drawing from a cached or default mesh variant rather than the player's current customized model.",
+  "tags": [
+    "Rendering",
+    "Reflection",
+    "Trevor",
+    "Character Customization",
+    "LOD",
+    "Stale Cache"
+  ],
+  "reproduction_steps": [
+    "Select Trevor Phillips as the active character",
+    "Visit a barber and apply any beard style",
+    "Locate an in-world glass or reflective surface (e.g. store windows, mirrors)",
+    "Observe character reflection in the surface",
+    "Reflection displays Trevor as beardless despite beard being applied to the active model"
+  ],
+  "video_url": "",
+  "video_text": "Add YouTube link here"
+},
+{
+  "id": "027",
+  "game": "dqxi",
+  "game_name": "Dragon Quest XI",
+  "title": "Door Occlusion Transparency Artifact When Running Past Foreground Posts",
+  "severity": "visual",
+  "type": "rendering",
+  "type_display": "Rendering / LOD",
+  "description": "When the player runs past posts or pillars positioned in front of a usable door object, the portion of the door occluded by the post briefly renders as transparent before correcting. This appears to be an occlusion culling or depth sort lag — the renderer momentarily treats the door region behind the post as not present based on a stale occlusion state from the previous frame, exposing the geometry behind it before the correct draw order resolves.",
+  "tags": [
+    "Rendering",
+    "Occlusion",
+    "Depth Sort",
+    "Door",
+    "Post",
+    "Transparency Artifact",
+    "Frame Lag"
+  ],
+  "reproduction_steps": [
+    "Locate a usable door object with posts or pillars positioned directly in front of it",
+    "Run the player character past the posts at speed",
+    "Observe the region of the door that falls behind the post geometry",
+    "Door area briefly renders as transparent / invisible before snapping to correct state",
+    "Effect is most visible during movement — stationary observation does not reproduce"
+  ],
+  "video_url": "https://youtu.be/NBebtY875Eg",
+  "video_text": "Add YouTube link here"
+},
+{
+  "id": "028",
+  "game": "the_invincible",
+  "game_name": "The Invincible",
+  "title": "Dual Shadow Cast on Cliff Edge — Player Shadow Projected Below Geometry",
+  "severity": "visual",
+  "type": "rendering",
+  "type_display": "Rendering / LOD",
+  "description": "While the player character stands atop a cliff in the first level, two simultaneous shadows are cast — one correctly projected onto the top cliff surface beneath the player, and a second shadow projected onto the terrain below the cliff face. The cliff geometry itself casts no shadow, leaving the lower shadow appearing to float without any connecting geometry to explain its source. Likely caused by the shadow casting system using multiple light sources or cascade shadow maps that do not account for cliff geometry as an occluder between the character and the lower terrain.",
+  "tags": [
+    "Rendering",
+    "Shadow",
+    "Cliff",
+    "Duplicate Shadow",
+    "Light Source",
+    "Shadow Cascade"
+  ],
+  "reproduction_steps": [
+    "Progress to the first level cliff area",
+    "Position the player character at the edge of or atop the cliff",
+    "Observe shadows cast by the player character",
+    "Two shadows visible simultaneously — one on cliff surface, one on terrain below",
+    "Cliff face itself casts no shadow, making the lower shadow appear to float"
+  ],
+  "video_url": "https://www.youtube.com/watch?v=w1D3_8iXW1Y",
+  "video_text": "Add YouTube link here"
+}
 ]
