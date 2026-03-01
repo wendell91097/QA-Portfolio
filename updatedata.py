@@ -5,7 +5,6 @@ from html import escape
 
 
 # ── GAME CONFIG ────────────────────────────────────────────────────────────────
-# Add new games here whenever you add a new game to bugs.json.
 # css_class maps to the .game-XXXX style in the CSS block below.
 GAME_CONFIG = {
     "ds3":        {"label": "Dark Souls III",               "css_class": "game-ds3"},
@@ -18,6 +17,9 @@ GAME_CONFIG = {
     "witcher3":   {"label": "The Witcher III",              "css_class": "game-witcher3"},
     "wolf":       {"label": "Wolfenstein II",               "css_class": "game-wolf"},
     "cp77":       {"label": "Cyberpunk 2077",               "css_class": "game-cp77"},
+    "gtav":       {"label": "GTA V",                        "css_class": "game-gtav"},
+    "dqxi":       {"label": "Dragon Quest XI",              "css_class": "game-dqxi"},
+    "the_invincible": {"label": "The Invincible",               "css_class": "game-invincible"},
 }
 
 # ── SEVERITY CONFIG ────────────────────────────────────────────────────────────
@@ -362,11 +364,14 @@ CSS = """
     display: flex; flex-direction: column; justify-content: center;
     padding: 0 32px 0 0; margin-right: 32px;
     border-right: 1px solid var(--border);
+    align-items: flex-start;
   }
   .stat-item:last-child { border-right: none; }
   .stat-value {
     font-family: 'Syne', sans-serif;
     font-weight: 800; font-size: 26px; color: var(--accent); line-height: 1;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-feature-settings: "lnum" 1, "tnum" 1;
   }
   .stat-label {
     font-size: 10px; color: var(--text-dim);
@@ -384,7 +389,6 @@ CSS = """
     grid-template-columns: 220px 1fr;
     min-height: calc(100vh - 140px);
   }
-
   /* SIDEBAR */
   .sidebar {
     border-right: 1px solid var(--border);
@@ -480,17 +484,20 @@ CSS = """
   .sev-visual   { background: rgba(77,171,247,0.15);  color: var(--visual);   border: 1px solid rgba(77,171,247,0.3); }
 
   /* GAME TAG COLORS */
-  .game-ds3       { background: rgba(255,77,77,0.1);    color: #ff7070; }
-  .game-eldenring { background: rgba(255,215,0,0.1);    color: #ffd700; }
-  .game-fallout4  { background: rgba(144,238,144,0.1);  color: #90ee90; }
-  .game-fallout76 { background: rgba(0,255,127,0.1);    color: #00c875; }
-  .game-spiderman { background: rgba(255,0,0,0.1);      color: #ff6b6b; }
-  .game-rdr1      { background: rgba(139,90,43,0.25);   color: #c4965a; }
-  .game-rdr2      { background: rgba(160,82,45,0.2);    color: #d4a96a; }
-  .game-witcher3  { background: rgba(255,165,0,0.1);    color: #ffb347; }
-  .game-wolf      { background: rgba(255,140,66,0.1);   color: #ffaa70; }
-  .game-cp77      { background: rgba(252,238,9,0.1);    color: #fcee09; }
+  .game-ds3       { background: rgba(180,30,30,0.15);   color: #cc3333; }  /* Dark Souls — deep blood red */
+  .game-eldenring { background: rgba(255,215,0,0.1);    color: #ffd700; }  /* Elden Ring — gold, keep as-is */
+  .game-fallout4  { background: rgba(144,238,144,0.12); color: #90ee90; }  /* Fallout 4 — pip-boy green, keep */
+  .game-fallout76 { background: rgba(0,180,255,0.1);    color: #00b4ff; }  /* Fallout 76 — Vault-Tec blue */
+  .game-spiderman { background: rgba(220,50,220,0.1);   color: #e060e0; }  /* Spider-Man — blue-suit purple-red */
+  .game-rdr1      { background: rgba(139,90,43,0.25);   color: #c4965a; }  /* RDR1 — dusty frontier tan */
+  .game-rdr2      { background: rgba(30,80,140,0.2);    color: #5b9bd5; }  /* RDR2 — cold steel blue (dawn/dusk sky) */
+  .game-witcher3  { background: rgba(255,165,0,0.1);    color: #ffb347; }  /* Witcher 3 — amber, keep */
+  .game-wolf      { background: rgba(200,200,200,0.08); color: #aaaaaa; }  /* Wolfenstein — cold steel grey */
+  .game-cp77      { background: rgba(252,238,9,0.1);    color: #fcee09; }  /* Cyberpunk — neon yellow, keep */
   .game-default   { background: rgba(156,163,175,0.1);  color: #9ca3af; }
+  .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }  /* GTA V — LS teal-green */
+  .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }  /* Dragon Quest — royal blue */
+  .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }  /* The Invincible — retro sci-fi purple */
 
   /* EXPANDED DETAIL */
   .bug-detail {
@@ -649,7 +656,7 @@ def build_dashboard(json_path: str, output_path: str) -> None:
       <div class="about-body">
         <div class="about-col">
           <div class="about-col-title">Background</div>
-          <p>Independent QA tester and game developer based in Ocean Springs, MS. Shipped WordSmith on Itch.io (Godot), completed 100+ hours of paid user testing, and self-directed bug documentation across {unique_games} AAA titles. Open to remote entry-level QA roles.</p>
+          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 100+ hours of paid user testing, and self-directed bug documentation across {unique_games} AAA titles. Open to remote entry-level QA roles.</p>
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>
@@ -675,7 +682,7 @@ def build_dashboard(json_path: str, output_path: str) -> None:
 
 <footer>
   <div>Wendell Lancaster — QA Portfolio // Built with precision</div>
-  <div>Ocean Springs, MS &nbsp;·&nbsp; wendell91097@gmail.com &nbsp;·&nbsp; (228) 237-6193</div>
+  <div>Boston, MA &nbsp;·&nbsp; wendell91097@gmail.com &nbsp;·&nbsp; (228) 237-6193</div>
 </footer>
 
 <script>
