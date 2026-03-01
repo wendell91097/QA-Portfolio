@@ -342,7 +342,7 @@
     <div class="stat-label">Documented Bugs</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">13</div>
+    <div class="stat-value">12</div>
     <div class="stat-label">AAA Titles Tested</div>
   </div>
   <div class="stat-item">
@@ -1336,10 +1336,14 @@
           </div>
           <div class="detail-section-title">Clip</div>
           
-          <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/lGFoxpfFjzU"
+              title="Bug clip #016"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
           </div>
         </div>
       </div>
@@ -2003,7 +2007,7 @@
       <div class="about-body">
         <div class="about-col">
           <div class="about-col-title">Background</div>
-          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 100+ hours of paid user testing, and self-directed bug documentation across 13 AAA titles. Open to remote entry-level QA roles.</p>
+          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 100+ hours of paid user testing, and self-directed bug documentation across 12 AAA titles. Open to remote entry-level QA roles.</p>
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>
@@ -2056,9 +2060,9 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["dqxi", "witcher3", "wolf", "gtav", "the_invincible", "cp77", "ds3", "rdr2", "spiderman", "fallout76", "eldenring", "fallout4", "rdr1"];
+    const gameKeys = ["wolf", "eldenring", "dqxi", "fallout4", "rdr2", "ds3", "fallout76", "spiderman", "gtav", "cp77", "witcher3", "rdr1", "the_invincible"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["rendering", "spawning", "ai", "animation", "collision", "physics"];
+    const typeKeys = ["animation", "ai", "rendering", "physics", "spawning", "collision"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
