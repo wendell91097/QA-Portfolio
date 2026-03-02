@@ -366,9 +366,9 @@
 
   /* RISK BADGES */
   .risk-badge {
-    font-size: 10px; font-weight: 700; padding: 3px 10px;
-    border-radius: 3px; text-align: center; text-transform: uppercase;
-    letter-spacing: 0.08em; white-space: nowrap;
+  font-size: 10px; font-weight: 700; padding: 3px 10px;
+  border-radius: 3px; text-align: center; text-transform: uppercase;
+  letter-spacing: 0.08em; white-space: nowrap; min-width: 80px;
   }
   .risk-high     { background: rgba(255,77,77,0.15);   color: var(--critical); border: 1px solid rgba(255,77,77,0.3); }
   .risk-moderate { background: rgba(255,140,66,0.15);  color: var(--major);    border: 1px solid rgba(255,140,66,0.3); }
@@ -2287,9 +2287,9 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["eldenring", "the_invincible", "rdr2", "wolf", "gtav", "dqxi", "spiderman", "rdr1", "witcher3", "cp77", "fallout76", "ds3", "fallout4"];
+    const gameKeys = ["dqxi", "ds3", "cp77", "spiderman", "rdr2", "gtav", "wolf", "the_invincible", "rdr1", "fallout76", "fallout4", "eldenring", "witcher3"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["spawning", "ai", "physics", "collision", "rendering", "animation"];
+    const typeKeys = ["physics", "rendering", "spawning", "animation", "ai", "collision"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
