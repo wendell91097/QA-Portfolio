@@ -131,6 +131,7 @@
     grid-template-columns: 220px 1fr;
     min-height: calc(100vh - 140px);
   }
+
   /* SIDEBAR */
   .sidebar {
     border-right: 1px solid var(--border);
@@ -167,6 +168,22 @@
     width: 8px; height: 8px; border-radius: 50%;
     display: inline-block; margin-right: 8px;
   }
+
+  /* TABS */
+  .tab-bar {
+    display: flex; gap: 0; border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .tab-btn {
+    padding: 10px 20px; background: none; border: none;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    color: var(--text-dim); font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; cursor: pointer; transition: all 0.15s;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel.hidden { display: none; }
 
   /* CONTENT */
   .content { padding: 28px 36px; }
@@ -226,22 +243,22 @@
   .sev-visual   { background: rgba(77,171,247,0.15);  color: var(--visual);   border: 1px solid rgba(77,171,247,0.3); }
 
   /* GAME TAG COLORS */
-  .game-ds3       { background: rgba(180,30,30,0.15);   color: #cc3333; }  /* Dark Souls — deep blood red */
-  .game-eldenring { background: rgba(255,215,0,0.1);    color: #ffd700; }  /* Elden Ring — gold, keep as-is */
-  .game-fallout4  { background: rgba(144,238,144,0.12); color: #90ee90; }  /* Fallout 4 — pip-boy green, keep */
-  .game-fallout76 { background: rgba(0,180,255,0.1);    color: #00b4ff; }  /* Fallout 76 — Vault-Tec blue */
-  .game-spiderman { background: rgba(220,50,220,0.1);   color: #e060e0; }  /* Spider-Man — blue-suit purple-red */
-  .game-rdr1      { background: rgba(139,90,43,0.25);   color: #c4965a; }  /* RDR1 — dusty frontier tan */
-  .game-rdr2      { background: rgba(30,80,140,0.2);    color: #5b9bd5; }  /* RDR2 — cold steel blue (dawn/dusk sky) */
-  .game-witcher3  { background: rgba(255,165,0,0.1);    color: #ffb347; }  /* Witcher 3 — amber, keep */
-  .game-wolf      { background: rgba(200,200,200,0.08); color: #aaaaaa; }  /* Wolfenstein — cold steel grey */
-  .game-cp77      { background: rgba(252,238,9,0.1);    color: #fcee09; }  /* Cyberpunk — neon yellow, keep */
+  .game-ds3       { background: rgba(180,30,30,0.15);   color: #cc3333; }
+  .game-eldenring { background: rgba(255,215,0,0.1);    color: #ffd700; }
+  .game-fallout4  { background: rgba(144,238,144,0.12); color: #90ee90; }
+  .game-fallout76 { background: rgba(0,180,255,0.1);    color: #00b4ff; }
+  .game-spiderman { background: rgba(220,50,220,0.1);   color: #e060e0; }
+  .game-rdr1      { background: rgba(139,90,43,0.25);   color: #c4965a; }
+  .game-rdr2      { background: rgba(30,80,140,0.2);    color: #5b9bd5; }
+  .game-witcher3  { background: rgba(255,165,0,0.1);    color: #ffb347; }
+  .game-wolf      { background: rgba(200,200,200,0.08); color: #aaaaaa; }
+  .game-cp77      { background: rgba(252,238,9,0.1);    color: #fcee09; }
   .game-default   { background: rgba(156,163,175,0.1);  color: #9ca3af; }
-  .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }  /* GTA V — LS teal-green */
-  .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }  /* Dragon Quest — royal blue */
-  .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }  /* The Invincible — retro sci-fi purple */
+  .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }
+  .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }
+  .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }
 
-  /* EXPANDED DETAIL */
+  /* EXPANDED DETAIL — BUG */
   .bug-detail {
     display: none; border-top: 1px solid var(--border);
     padding: 20px 18px 24px; background: var(--bg3);
@@ -283,6 +300,80 @@
   .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 4px; }
   .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
+  /* CASE STUDY CARDS */
+  .cs-list { display: flex; flex-direction: column; gap: 2px; }
+  .cs-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+    transition: border-color 0.2s, transform 0.15s;
+    cursor: pointer;
+    animation: slideIn 0.3s ease both;
+  }
+  .cs-card:hover { border-color: var(--border-bright); transform: translateX(3px); }
+  .cs-card.expanded { border-color: var(--accent); }
+
+  .cs-card-header {
+    display: grid;
+    grid-template-columns: 52px 180px 1fr auto;
+    align-items: center; padding: 14px 18px; gap: 16px;
+  }
+  .cs-classification {
+    font-size: 10px; color: var(--text-dim);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cs-title {
+    font-size: 13px; color: var(--text); font-weight: 400;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cs-meta { display: flex; gap: 6px; }
+
+  .cs-detail {
+    display: none; border-top: 1px solid var(--border);
+    padding: 20px 18px 24px; background: var(--bg3);
+  }
+  .cs-card.expanded .cs-detail { display: block; }
+
+  .cs-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .cs-meta-item {}
+
+  .cs-footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* FINDINGS */
+  .findings-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 4px; }
+  .finding-row {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+    cursor: pointer; transition: border-color 0.15s;
+  }
+  .finding-row:hover { border-color: var(--border-bright); }
+  .finding-header {
+    display: grid; grid-template-columns: 1fr 1fr auto;
+    align-items: center; padding: 10px 14px; gap: 12px;
+  }
+  .finding-category { font-size: 12px; color: var(--text); font-weight: 600; }
+  .finding-impact { font-size: 11px; color: var(--text-dim); }
+  .finding-body {
+    display: none; border-top: 1px solid var(--border);
+    padding: 14px; background: var(--bg);
+    grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .finding-expanded .finding-body { display: grid; }
+  .finding-col {}
+  .finding-label {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-dim); margin-bottom: 6px;
+  }
+
+  /* RISK BADGES */
+  .risk-badge {
+    font-size: 10px; font-weight: 700; padding: 3px 10px;
+    border-radius: 3px; text-align: center; text-transform: uppercase;
+    letter-spacing: 0.08em; white-space: nowrap;
+  }
+  .risk-high     { background: rgba(255,77,77,0.15);   color: var(--critical); border: 1px solid rgba(255,77,77,0.3); }
+  .risk-moderate { background: rgba(255,140,66,0.15);  color: var(--major);    border: 1px solid rgba(255,140,66,0.3); }
+  .risk-low      { background: rgba(77,171,247,0.15);  color: var(--visual);   border: 1px solid rgba(77,171,247,0.3); }
+
   /* ABOUT */
   .about-panel { margin-top: 36px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .about-header {
@@ -297,9 +388,11 @@
   }
   .about-col-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 10px; }
   .about-col p { font-size: 12px; color: var(--text-mid); line-height: 1.7; }
-  .skill-list { display: flex; flex-direction: column; gap: 4px; }
+  .skill-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .skill-list-single { display: flex; flex-direction: column; gap: 4px; }
   .skill-item { font-size: 11px; color: var(--text-mid); display: flex; align-items: center; gap: 8px; }
-  .skill-item::before { content: '▸'; color: var(--accent); font-size: 9px; }
+  .skill-list .skill-item::before,
+  .skill-list-single .skill-item::before { content: '▸'; color: var(--accent); font-size: 9px; }
 
   /* SCROLLBAR */
   ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -473,12 +566,19 @@
 
   <!-- CONTENT -->
   <div class="content">
-    <div class="content-header">
-      <div class="content-title">// Bug Reports</div>
-      <div class="result-count">Showing <span id="count">28</span> of 28 reports</div>
+
+    <!-- TABS -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="bugs" onclick="switchTab('bugs')">// Bug Reports</button>
+      <button class="tab-btn" data-tab="case-studies" onclick="switchTab('case-studies')">// Case Studies <span style="font-size:10px; opacity:0.6">(1)</span></button>
     </div>
 
-    <div class="bug-list" id="bugList">
+    <!-- BUG REPORTS PANEL -->
+    <div class="tab-panel" id="panel-bugs">
+      <div class="content-header">
+        <div class="result-count">Showing <span id="count">28</span> of 28 reports</div>
+      </div>
+      <div class="bug-list" id="bugList">
 
       <div class="bug-card" data-game="ds3" data-severity="visual" data-type="animation" onclick="toggleCard(this)" style="animation-delay:0.10s">
         <div class="bug-card-header">
@@ -1999,6 +2099,127 @@
           </div>
         </div>
       </div>
+      </div>
+    </div>
+
+    <!-- CASE STUDIES PANEL -->
+    <div class="tab-panel hidden" id="panel-case-studies">
+      <div class="content-header">
+        <div class="result-count"><span>1</span> evaluation</div>
+      </div>
+      <div class="cs-list">
+
+      <div class="cs-card" onclick="toggleCsCard(this)">
+        <div class="cs-card-header">
+          <div class="bug-id">CS-01</div>
+          <div class="cs-classification">Design &amp; Systems QA</div>
+          <div class="cs-title">Forward Systems Evaluation — Fallout 4 Faction &amp; Progression Architecture</div>
+          <div class="cs-meta">
+            <span class="risk-badge risk-high">3 High</span>
+            <span class="risk-badge risk-moderate">1 Moderate</span>
+          </div>
+        </div>
+        <div class="cs-detail">
+          <div class="cs-meta-grid">
+            <div class="cs-meta-item">
+              <div class="finding-label">Scope</div>
+              <p class="detail-text">Structured 40+ hour playthrough focused on faction reactivity, reputation modeling, radiant quest distribution, and settlement-based progression loops.</p>
+            </div>
+            <div class="cs-meta-item">
+              <div class="finding-label">Objective</div>
+              <p class="detail-text">Evaluate systemic engagement sustainability, incentive depth, and reactive world modeling from a long-term player retention perspective.</p>
+            </div>
+          </div>
+
+          <div class="detail-section-title" style="margin-top:20px">Executive Summary</div>
+          <p class="detail-text" style="margin-bottom:20px">Analysis identified limited gradient reactivity within faction systems, static territorial simulation behaviors outside milestone scripting, and diminishing incentive returns within radiant quest loops. These factors introduce moderate-to-high long-term engagement risk despite strong environmental design and moment-to-moment gameplay stability.</p>
+
+          <div class="detail-section-title">Findings</div>
+          <div class="findings-list">
+
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Faction Reputation Modeling</span>
+                  <span class="finding-impact">Player Agency &amp; Consequence Weight</span>
+                  <span class="risk-badge risk-high">High</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <p class="detail-text">Faction alignment primarily resolves through binary state changes rather than a layered or continuously reactive reputation spectrum. Intermediate behavioral shifts based on incremental player decisions are limited, reducing perceived systemic responsiveness.</p>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <p class="detail-text">Compressed consequence modeling may reduce long-term player investment in faction identity and moral positioning.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Territorial &amp; World State Simulation</span>
+                  <span class="finding-impact">World Reactivity &amp; Environmental Feedback</span>
+                  <span class="risk-badge risk-high">High</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <p class="detail-text">Faction-controlled spaces exhibit limited organic evolution outside scripted events. Territorial presence does not dynamically scale in visibility or systemic behavior relative to player-aligned activity.</p>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <p class="detail-text">Static environmental feedback may weaken the illusion of systemic world progression and reduce perceived impact of strategic alignment.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Radiant Quest Incentive Loop</span>
+                  <span class="finding-impact">Retention &amp; Loop Sustainability</span>
+                  <span class="risk-badge risk-high">High</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <p class="detail-text">Radiant objectives demonstrate structural repetition with minimal narrative or mechanical variance over time. Reward scaling does not sufficiently evolve to counter repetition fatigue.</p>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <p class="detail-text">Diminishing incentive variance may accelerate engagement drop-off in extended play sessions.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Settlement Progression Integration</span>
+                  <span class="finding-impact">System Cohesion</span>
+                  <span class="risk-badge risk-moderate">Moderate</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <p class="detail-text">Settlement mechanics function independently from faction reputation depth in most scenarios. Cross-system reinforcement between settlement growth and faction influence is limited.</p>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <p class="detail-text">Reduced cross-system coupling may fragment long-term strategic engagement.</p>
+                  </div>
+                </div>
+              </div>
+          </div>
+
+          <div class="cs-footer-grid">
+            <div>
+              <div class="finding-label" style="margin-top:20px">Conclusion</div>
+              <p class="detail-text">While core gameplay systems remain mechanically stable and environmentally immersive, faction reactivity depth and radiant loop variance present measurable long-term engagement risks. Future iterations could benefit from expanded gradient reputation modeling, dynamic territorial state simulation, and adaptive incentive scaling mechanisms.</p>
+            </div>
+            <div>
+              <div class="finding-label" style="margin-top:20px">Methodology Note</div>
+              <p class="detail-text" style="font-style:italic; color:var(--text-dim)">This evaluation reflects systems-level QA methodology focused on incentive architecture, reactive modeling depth, and retention risk analysis rather than isolated defect detection.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
     </div>
 
     <!-- ABOUT PANEL -->
@@ -2011,7 +2232,7 @@
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>
-          <div class="skill-list">
+          <div class="skill-list-single">
             <div class="skill-item">Bug documentation &amp; reproduction steps</div>
             <div class="skill-item">Defect classification &amp; severity rating</div>
             <div class="skill-item">Screen capture &amp; video evidence</div>
@@ -2056,13 +2277,19 @@
     if (!wasExpanded) card.classList.add('expanded');
   }
 
+  function toggleCsCard(card) {
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.cs-card').forEach(c => c.classList.remove('expanded'));
+    if (!wasExpanded) card.classList.add('expanded');
+  }
+
   function filterBugs(filter, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["wolf", "eldenring", "dqxi", "fallout4", "rdr2", "ds3", "fallout76", "spiderman", "gtav", "cp77", "witcher3", "rdr1", "the_invincible"];
+    const gameKeys = ["eldenring", "the_invincible", "rdr2", "wolf", "gtav", "dqxi", "spiderman", "rdr1", "witcher3", "cp77", "fallout76", "ds3", "fallout4"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["animation", "ai", "rendering", "physics", "spawning", "collision"];
+    const typeKeys = ["spawning", "ai", "physics", "collision", "rendering", "animation"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
@@ -2083,6 +2310,14 @@
     });
 
     document.getElementById('count').textContent = visible;
+  }
+
+  // Tab switching
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+    document.querySelector('.tab-btn[data-tab="' + tab + '"]').classList.add('active');
+    document.getElementById('panel-' + tab).classList.remove('hidden');
   }
 
 </script>
