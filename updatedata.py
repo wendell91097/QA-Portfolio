@@ -1,25 +1,26 @@
 import json
 import os
+import re
 from collections import Counter
 from html import escape
 
 
 # ── GAME CONFIG ────────────────────────────────────────────────────────────────
-# css_class maps to the .game-XXXX style in the CSS block below.
+# tier: "AAA" | "AA" | "indie"
 GAME_CONFIG = {
-    "ds3":        {"label": "Dark Souls III",               "css_class": "game-ds3"},
-    "eldenring":  {"label": "Elden Ring",                   "css_class": "game-eldenring"},
-    "fallout4":   {"label": "Fallout 4",                    "css_class": "game-fallout4"},
-    "fallout76":  {"label": "Fallout 76",                   "css_class": "game-fallout76"},
-    "spiderman":  {"label": "Spider-Man Remastered",        "css_class": "game-spiderman"},
-    "rdr1":       {"label": "RDR Remastered",               "css_class": "game-rdr1"},
-    "rdr2":       {"label": "Red Dead Redemption 2",        "css_class": "game-rdr2"},
-    "witcher3":   {"label": "The Witcher III",              "css_class": "game-witcher3"},
-    "wolf":       {"label": "Wolfenstein II",               "css_class": "game-wolf"},
-    "cp77":       {"label": "Cyberpunk 2077",               "css_class": "game-cp77"},
-    "gtav":       {"label": "GTA V",                        "css_class": "game-gtav"},
-    "dqxi":       {"label": "Dragon Quest XI",              "css_class": "game-dqxi"},
-    "the_invincible": {"label": "The Invincible",               "css_class": "game-invincible"},
+    "ds3":            {"label": "Dark Souls III",           "css_class": "game-ds3",        "tier": "AAA"},
+    "eldenring":      {"label": "Elden Ring",               "css_class": "game-eldenring",  "tier": "AAA"},
+    "fallout4":       {"label": "Fallout 4",                "css_class": "game-fallout4",   "tier": "AAA"},
+    "fallout76":      {"label": "Fallout 76",               "css_class": "game-fallout76",  "tier": "AAA"},
+    "spiderman":      {"label": "Spider-Man Remastered",    "css_class": "game-spiderman",  "tier": "AAA"},
+    "rdr1":           {"label": "RDR Remastered",           "css_class": "game-rdr1",       "tier": "AAA"},
+    "rdr2":           {"label": "Red Dead Redemption 2",    "css_class": "game-rdr2",       "tier": "AAA"},
+    "witcher3":       {"label": "The Witcher III",          "css_class": "game-witcher3",   "tier": "AAA"},
+    "wolf":           {"label": "Wolfenstein II",           "css_class": "game-wolf",       "tier": "AAA"},
+    "cp77":           {"label": "Cyberpunk 2077",           "css_class": "game-cp77",       "tier": "AAA"},
+    "gtav":           {"label": "GTA V",                    "css_class": "game-gtav",       "tier": "AAA"},
+    "dqxi":           {"label": "Dragon Quest XI",          "css_class": "game-dqxi",       "tier": "AAA"},
+    "the_invincible": {"label": "The Invincible",           "css_class": "game-invincible", "tier": "AA"},
 }
 
 # ── SEVERITY CONFIG ────────────────────────────────────────────────────────────
@@ -40,15 +41,22 @@ TYPE_CONFIG = {
     "spawning":  {"label": "Spawning / Placement"},
 }
 
+# ── RISK LEVEL CONFIG (Case Studies) ──────────────────────────────────────────
+RISK_CONFIG = {
+    "High":         {"css_class": "risk-high"},
+    "Moderate":     {"css_class": "risk-moderate"},
+    "Low":          {"css_class": "risk-low"},
+    "Low-Moderate": {"css_class": "risk-low-moderate"},
+}
 
-# ── HTML GENERATORS ────────────────────────────────────────────────────────────
+
+# ── HTML GENERATORS — BUG REPORTS ─────────────────────────────────────────────
 
 def make_video_embed(bug: dict) -> str:
     url = bug.get("video_url", "").strip()
     text = bug.get("video_text", "Add YouTube link here")
 
     if url:
-        # Convert standard YouTube watch URL to embed URL if needed
         embed_url = url
         if "youtube.com/watch?v=" in url:
             vid_id = url.split("watch?v=")[-1].split("&")[0]
@@ -128,14 +136,101 @@ def make_bug_card(bug: dict) -> str:
       </div>"""
 
 
-def make_sidebar(bugs: list) -> str:
-    # Count occurrences for each dimension
-    game_counts     = Counter(b["game"] for b in bugs)
-    sev_counts      = Counter(b["severity"] for b in bugs)
-    type_counts     = Counter(b["type"] for b in bugs)
-    total           = len(bugs)
+# ── HTML GENERATORS — CASE STUDIES ────────────────────────────────────────────
 
-    # Games section — only show games that appear in the data
+def make_bullet_list(text: str) -> str:
+    sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text.strip()) if s.strip()]
+    items = "".join(f"<li>{s}</li>" for s in sentences)
+    return f'<ul class="finding-bullets">{items}</ul>'
+
+
+def make_finding_row(finding: dict) -> str:
+    risk = finding.get("risk_level", "Low")
+    risk_cfg = RISK_CONFIG.get(risk, {"css_class": "risk-low"})
+    rec_html = ""
+    if finding.get("recommendation"):
+        rec_html = f"""
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      {make_bullet_list(finding.get('recommendation', ''))}
+                    </div>"""
+    return f"""
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">{escape(finding.get('category', ''))}</span>
+                  <span class="finding-impact">{escape(finding.get('impact_area', ''))}</span>
+                  <span class="risk-badge {risk_cfg['css_class']}">{escape(risk)}</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    {make_bullet_list(finding.get('analysis', ''))}
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    {make_bullet_list(finding.get('forward_risk', ''))}
+                    {rec_html}
+                  </div>
+                </div>
+              </div>"""
+
+
+def make_case_study_card(cs: dict) -> str:
+    findings_html = "".join(make_finding_row(f) for f in cs.get("findings", []))
+    high_count = sum(1 for f in cs.get("findings", []) if f.get("risk_level") == "High")
+    mod_count  = sum(1 for f in cs.get("findings", []) if f.get("risk_level") == "Moderate")
+
+    return f"""
+      <div class="cs-card" onclick="toggleCsCard(this)">
+        <div class="cs-card-header">
+          <div class="bug-id">{escape(cs.get('id', ''))}</div>
+          <div class="cs-classification">{escape(cs.get('classification', ''))}</div>
+          <div class="cs-title">{escape(cs.get('title', ''))}</div>
+          <div class="cs-meta">
+            <span class="risk-badge risk-high">{high_count} High</span>
+            <span class="risk-badge risk-moderate">{mod_count} Moderate</span>
+          </div>
+        </div>
+        <div class="cs-detail">
+          <div class="cs-meta-grid">
+            <div class="cs-meta-item">
+              <div class="finding-label">Scope</div>
+              <p class="detail-text">{escape(cs.get('scope', ''))}</p>
+            </div>
+            <div class="cs-meta-item">
+              <div class="finding-label">Objective</div>
+              <p class="detail-text">{escape(cs.get('objective', ''))}</p>
+            </div>
+          </div>
+
+          <div class="detail-section-title" style="margin-top:20px">Executive Summary</div>
+          <p class="detail-text" style="margin-bottom:20px">{escape(cs.get('executive_summary', ''))}</p>
+
+          <div class="detail-section-title">Findings</div>
+          <div class="findings-list">
+{findings_html}
+          </div>
+
+          <div class="cs-footer-grid">
+            <div>
+              <div class="finding-label" style="margin-top:20px">Conclusion</div>
+              <p class="detail-text">{escape(cs.get('conclusion', ''))}</p>
+            </div>
+            <div>
+              <div class="finding-label" style="margin-top:20px">Methodology Note</div>
+              <p class="detail-text" style="font-style:italic; color:var(--text-dim)">{escape(cs.get('professional_statement', ''))}</p>
+            </div>
+          </div>
+        </div>
+      </div>"""
+
+
+def make_sidebar(bugs: list) -> str:
+    game_counts = Counter(b["game"] for b in bugs)
+    sev_counts  = Counter(b["severity"] for b in bugs)
+    type_counts = Counter(b["type"] for b in bugs)
+    total       = len(bugs)
+
     game_btns = ""
     for game_key, cfg in GAME_CONFIG.items():
         count = game_counts.get(game_key, 0)
@@ -147,7 +242,6 @@ def make_sidebar(bugs: list) -> str:
         <span class="filter-count">{count}</span>
       </button>"""
 
-    # Severity section — only show severities that appear in the data
     sev_btns = ""
     for sev_key, cfg in SEVERITY_CONFIG.items():
         count = sev_counts.get(sev_key, 0)
@@ -159,7 +253,6 @@ def make_sidebar(bugs: list) -> str:
         <span class="filter-count">{count}</span>
       </button>"""
 
-    # Type section — only show types that appear in the data
     type_btns = ""
     for type_key, count in sorted(type_counts.items(), key=lambda x: -x[1]):
         label = TYPE_CONFIG.get(type_key, {}).get("label", type_key.title())
@@ -189,7 +282,10 @@ def make_sidebar(bugs: list) -> str:
 
 def make_stats_bar(bugs: list) -> str:
     total_bugs   = len(bugs)
-    unique_games = len(set(b["game"] for b in bugs))
+    unique_games = len({
+        gk for gk in set(b["game"] for b in bugs)
+        if GAME_CONFIG.get(gk, {}).get("tier") == "AAA"
+    })
 
     return f"""<div class="stats-bar">
   <div class="stat-item">
@@ -231,6 +327,12 @@ def make_filter_js(bugs: list) -> str:
     if (!wasExpanded) card.classList.add('expanded');
   }}
 
+  function toggleCsCard(card) {{
+    const wasExpanded = card.classList.contains('expanded');
+    document.querySelectorAll('.cs-card').forEach(c => c.classList.remove('expanded'));
+    if (!wasExpanded) card.classList.add('expanded');
+  }}
+
   function filterBugs(filter, btn) {{
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
@@ -259,6 +361,14 @@ def make_filter_js(bugs: list) -> str:
 
     document.getElementById('count').textContent = visible;
   }}
+
+  // Tab switching
+  function switchTab(tab) {{
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+    document.querySelector('.tab-btn[data-tab="' + tab + '"]').classList.add('active');
+    document.getElementById('panel-' + tab).classList.remove('hidden');
+  }}
 """
 
 
@@ -273,7 +383,7 @@ CSS = """
     --border-bright: #3a3d44;
     --text: #e2e4e8;
     --text-dim: #6b7280;
-    --text-mid: #9ca3af;
+    --text-mid: #c4c8d0;
     --accent: #e8ff47;
     --accent-dim: rgba(232, 255, 71, 0.12);
     --accent-glow: rgba(232, 255, 71, 0.04);
@@ -389,6 +499,7 @@ CSS = """
     grid-template-columns: 220px 1fr;
     min-height: calc(100vh - 140px);
   }
+
   /* SIDEBAR */
   .sidebar {
     border-right: 1px solid var(--border);
@@ -425,6 +536,22 @@ CSS = """
     width: 8px; height: 8px; border-radius: 50%;
     display: inline-block; margin-right: 8px;
   }
+
+  /* TABS */
+  .tab-bar {
+    display: flex; gap: 0; border-bottom: 1px solid var(--border);
+    margin-bottom: 20px;
+  }
+  .tab-btn {
+    padding: 10px 20px; background: none; border: none;
+    border-bottom: 2px solid transparent; margin-bottom: -1px;
+    color: var(--text-dim); font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; cursor: pointer; transition: all 0.15s;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-panel.hidden { display: none; }
 
   /* CONTENT */
   .content { padding: 28px 36px; }
@@ -484,22 +611,22 @@ CSS = """
   .sev-visual   { background: rgba(77,171,247,0.15);  color: var(--visual);   border: 1px solid rgba(77,171,247,0.3); }
 
   /* GAME TAG COLORS */
-  .game-ds3       { background: rgba(180,30,30,0.15);   color: #cc3333; }  /* Dark Souls — deep blood red */
-  .game-eldenring { background: rgba(255,215,0,0.1);    color: #ffd700; }  /* Elden Ring — gold, keep as-is */
-  .game-fallout4  { background: rgba(144,238,144,0.12); color: #90ee90; }  /* Fallout 4 — pip-boy green, keep */
-  .game-fallout76 { background: rgba(0,180,255,0.1);    color: #00b4ff; }  /* Fallout 76 — Vault-Tec blue */
-  .game-spiderman { background: rgba(220,50,220,0.1);   color: #e060e0; }  /* Spider-Man — blue-suit purple-red */
-  .game-rdr1      { background: rgba(139,90,43,0.25);   color: #c4965a; }  /* RDR1 — dusty frontier tan */
-  .game-rdr2      { background: rgba(30,80,140,0.2);    color: #5b9bd5; }  /* RDR2 — cold steel blue (dawn/dusk sky) */
-  .game-witcher3  { background: rgba(255,165,0,0.1);    color: #ffb347; }  /* Witcher 3 — amber, keep */
-  .game-wolf      { background: rgba(200,200,200,0.08); color: #aaaaaa; }  /* Wolfenstein — cold steel grey */
-  .game-cp77      { background: rgba(252,238,9,0.1);    color: #fcee09; }  /* Cyberpunk — neon yellow, keep */
+  .game-ds3       { background: rgba(180,30,30,0.15);   color: #cc3333; }
+  .game-eldenring { background: rgba(255,215,0,0.1);    color: #ffd700; }
+  .game-fallout4  { background: rgba(144,238,144,0.12); color: #90ee90; }
+  .game-fallout76 { background: rgba(0,180,255,0.1);    color: #00b4ff; }
+  .game-spiderman { background: rgba(220,50,220,0.1);   color: #e060e0; }
+  .game-rdr1      { background: rgba(139,90,43,0.25);   color: #c4965a; }
+  .game-rdr2      { background: rgba(30,80,140,0.2);    color: #5b9bd5; }
+  .game-witcher3  { background: rgba(255,165,0,0.1);    color: #ffb347; }
+  .game-wolf      { background: rgba(200,200,200,0.08); color: #aaaaaa; }
+  .game-cp77      { background: rgba(252,238,9,0.1);    color: #fcee09; }
   .game-default   { background: rgba(156,163,175,0.1);  color: #9ca3af; }
-  .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }  /* GTA V — LS teal-green */
-  .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }  /* Dragon Quest — royal blue */
-  .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }  /* The Invincible — retro sci-fi purple */
+  .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }
+  .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }
+  .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }
 
-  /* EXPANDED DETAIL */
+  /* EXPANDED DETAIL — BUG */
   .bug-detail {
     display: none; border-top: 1px solid var(--border);
     padding: 20px 18px 24px; background: var(--bg3);
@@ -517,7 +644,21 @@ CSS = """
   .repro-steps { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .repro-step { display: flex; gap: 12px; font-size: 12px; color: var(--text-mid); line-height: 1.5; }
   .step-num { color: var(--accent); font-weight: 700; font-size: 10px; min-width: 16px; padding-top: 2px; }
-  .detail-text { font-size: 12px; color: var(--text-mid); line-height: 1.7; }
+  .detail-text { font-size: 12px; color: var(--text-mid); line-height: 1.8; }
+
+  /* FINDING BULLETS */
+  .finding-bullets {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .finding-bullets li {
+    font-size: 12px; color: var(--text-mid); line-height: 1.7;
+    display: flex; gap: 10px; align-items: baseline;
+  }
+  .finding-bullets li::before {
+    content: "▸"; color: var(--accent); font-size: 9px;
+    flex-shrink: 0; margin-top: 2px;
+  }
   .detail-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .chip {
     font-size: 10px; padding: 3px 9px; border-radius: 2px;
@@ -541,6 +682,81 @@ CSS = """
   .video-wrapper { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 4px; }
   .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
 
+  /* CASE STUDY CARDS */
+  .cs-list { display: flex; flex-direction: column; gap: 2px; }
+  .cs-card {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+    transition: border-color 0.2s, transform 0.15s;
+    cursor: pointer;
+    animation: slideIn 0.3s ease both;
+  }
+  .cs-card:hover { border-color: var(--border-bright); transform: translateX(3px); }
+  .cs-card.expanded { border-color: var(--accent); }
+
+  .cs-card-header {
+    display: grid;
+    grid-template-columns: 52px 180px 1fr auto;
+    align-items: center; padding: 14px 18px; gap: 16px;
+  }
+  .cs-classification {
+    font-size: 10px; color: var(--text-dim);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cs-title {
+    font-size: 13px; color: var(--text); font-weight: 400;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .cs-meta { display: flex; gap: 6px; }
+
+  .cs-detail {
+    display: none; border-top: 1px solid var(--border);
+    padding: 20px 18px 24px; background: var(--bg3);
+  }
+  .cs-card.expanded .cs-detail { display: block; }
+
+  .cs-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .cs-meta-item {}
+
+  .cs-footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* FINDINGS */
+  .findings-list { display: flex; flex-direction: column; gap: 2px; margin-bottom: 4px; }
+  .finding-row {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 4px; overflow: hidden;
+    cursor: pointer; transition: border-color 0.15s;
+  }
+  .finding-row:hover { border-color: var(--border-bright); }
+  .finding-header {
+    display: grid; grid-template-columns: 1fr 1fr 100px;
+    align-items: center; padding: 10px 14px; gap: 12px;
+  }
+  .finding-category { font-size: 12px; color: var(--text); font-weight: 600; }
+  .finding-impact { font-size: 11px; color: var(--text-dim); text-align: right; }
+  .finding-body {
+    display: none; border-top: 1px solid var(--border);
+    padding: 14px; background: var(--bg);
+    grid-template-columns: 1fr 1fr; gap: 16px;
+  }
+  .finding-expanded .finding-body { display: grid; }
+  .finding-col {}
+  .finding-label {
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--text-dim); margin-bottom: 6px;
+  }
+
+  /* RISK BADGES — fit to content, no min-width */
+  .risk-badge {
+    font-size: 10px; font-weight: 700; padding: 3px 10px;
+    border-radius: 3px; text-align: center; text-transform: uppercase;
+    letter-spacing: 0.08em; white-space: nowrap; justify-self: end;
+  }
+  .risk-high          { background: rgba(255,77,77,0.15);    color: var(--critical); border: 1px solid rgba(255,77,77,0.3); }
+  .risk-moderate      { background: rgba(255,140,66,0.15);   color: var(--major);    border: 1px solid rgba(255,140,66,0.3); }
+  .risk-low           { background: rgba(77,171,247,0.15);   color: var(--visual);   border: 1px solid rgba(77,171,247,0.3); }
+  .risk-low-moderate  { background: rgba(255,209,102,0.15);  color: var(--minor);    border: 1px solid rgba(255,209,102,0.3); }
+
   /* ABOUT */
   .about-panel { margin-top: 36px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
   .about-header {
@@ -555,9 +771,11 @@ CSS = """
   }
   .about-col-title { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-dim); margin-bottom: 10px; }
   .about-col p { font-size: 12px; color: var(--text-mid); line-height: 1.7; }
-  .skill-list { display: flex; flex-direction: column; gap: 4px; }
+  .skill-list { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .skill-list-single { display: flex; flex-direction: column; gap: 4px; }
   .skill-item { font-size: 11px; color: var(--text-mid); display: flex; align-items: center; gap: 8px; }
-  .skill-item::before { content: '▸'; color: var(--accent); font-size: 9px; }
+  .skill-list .skill-item::before,
+  .skill-list-single .skill-item::before { content: '▸'; color: var(--accent); font-size: 9px; }
 
   /* SCROLLBAR */
   ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -577,21 +795,33 @@ CSS = """
 
 # ── MAIN BUILD FUNCTION ────────────────────────────────────────────────────────
 
-def build_dashboard(json_path: str, output_path: str) -> None:
-    with open(json_path, "r", encoding="utf-8") as f:
+def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_path: str) -> None:
+    with open(bugs_json_path, "r", encoding="utf-8") as f:
         bugs = json.load(f)
 
-    print(f"  Loaded {len(bugs)} bug reports from {json_path}")
+    case_studies = []
+    if os.path.exists(case_studies_json_path):
+        with open(case_studies_json_path, "r", encoding="utf-8") as f:
+            case_studies = json.load(f)
+        print(f"  Loaded {len(case_studies)} case studies from {case_studies_json_path}")
+    else:
+        print(f"  No case_studies.json found at {case_studies_json_path} — skipping section.")
 
-    # Build dynamic sections
+    print(f"  Loaded {len(bugs)} bug reports from {bugs_json_path}")
+
     stats_bar   = make_stats_bar(bugs)
     sidebar     = make_sidebar(bugs)
     bug_cards   = "\n".join(make_bug_card(b) for b in bugs)
     filter_js   = make_filter_js(bugs)
     total_bugs  = len(bugs)
-    unique_games = len(set(b["game"] for b in bugs))
+    unique_games = len({
+        gk for gk in set(b["game"] for b in bugs)
+        if GAME_CONFIG.get(gk, {}).get("tier") == "AAA"
+    })
 
-    # Build titles list for about panel
+    cs_cards    = "\n".join(make_case_study_card(cs) for cs in case_studies)
+    cs_count    = len(case_studies)
+
     all_games = []
     seen = set()
     for b in bugs:
@@ -641,13 +871,31 @@ def build_dashboard(json_path: str, output_path: str) -> None:
 
   <!-- CONTENT -->
   <div class="content">
-    <div class="content-header">
-      <div class="content-title">// Bug Reports</div>
-      <div class="result-count">Showing <span id="count">{total_bugs}</span> of {total_bugs} reports</div>
+
+    <!-- TABS -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="bugs" onclick="switchTab('bugs')">// Bug Reports</button>
+      <button class="tab-btn" data-tab="case-studies" onclick="switchTab('case-studies')">// Case Studies <span style="font-size:10px; opacity:0.6">({cs_count})</span></button>
     </div>
 
-    <div class="bug-list" id="bugList">
+    <!-- BUG REPORTS PANEL -->
+    <div class="tab-panel" id="panel-bugs">
+      <div class="content-header">
+        <div class="result-count">Showing <span id="count">{total_bugs}</span> of {total_bugs} reports</div>
+      </div>
+      <div class="bug-list" id="bugList">
 {bug_cards}
+      </div>
+    </div>
+
+    <!-- CASE STUDIES PANEL -->
+    <div class="tab-panel hidden" id="panel-case-studies">
+      <div class="content-header">
+        <div class="result-count"><span>{cs_count}</span> evaluation{'' if cs_count == 1 else 's'}</div>
+      </div>
+      <div class="cs-list">
+{cs_cards}
+      </div>
     </div>
 
     <!-- ABOUT PANEL -->
@@ -660,7 +908,7 @@ def build_dashboard(json_path: str, output_path: str) -> None:
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>
-          <div class="skill-list">
+          <div class="skill-list-single">
             <div class="skill-item">Bug documentation &amp; reproduction steps</div>
             <div class="skill-item">Defect classification &amp; severity rating</div>
             <div class="skill-item">Screen capture &amp; video evidence</div>
@@ -695,23 +943,24 @@ def build_dashboard(json_path: str, output_path: str) -> None:
         f.write(html)
 
     print(f"  Dashboard written to {output_path}")
-    print(f"  Stats: {total_bugs} bugs across {unique_games} titles")
+    print(f"  Stats: {total_bugs} bugs across {unique_games} titles, {cs_count} case studies")
 
 
 # ── ENTRY POINT ────────────────────────────────────────────────────────────────
 
 def main():
-    script_dir  = os.path.dirname(os.path.abspath(__file__))
-    json_path   = os.path.join(script_dir, "bugs.json")
-    output_path = os.path.join(script_dir, "qa-dashboard.html")
+    script_dir          = os.path.dirname(os.path.abspath(__file__))
+    bugs_json_path      = os.path.join(script_dir, "bugs.json")
+    case_studies_path   = os.path.join(script_dir, "case_studies.json")
+    output_path         = os.path.join(script_dir, "index.html")
 
-    if not os.path.exists(json_path):
-        print(f"ERROR: Could not find {json_path}")
+    if not os.path.exists(bugs_json_path):
+        print(f"ERROR: Could not find {bugs_json_path}")
         print("Make sure bugs.json is in the same folder as this script.")
         return
 
     print("Building QA dashboard...")
-    build_dashboard(json_path, output_path)
+    build_dashboard(bugs_json_path, case_studies_path, output_path)
     print("Done.")
 
 

@@ -15,7 +15,7 @@
     --border-bright: #3a3d44;
     --text: #e2e4e8;
     --text-dim: #6b7280;
-    --text-mid: #9ca3af;
+    --text-mid: #c4c8d0;
     --accent: #e8ff47;
     --accent-dim: rgba(232, 255, 71, 0.12);
     --accent-glow: rgba(232, 255, 71, 0.04);
@@ -276,7 +276,21 @@
   .repro-steps { list-style: none; display: flex; flex-direction: column; gap: 6px; }
   .repro-step { display: flex; gap: 12px; font-size: 12px; color: var(--text-mid); line-height: 1.5; }
   .step-num { color: var(--accent); font-weight: 700; font-size: 10px; min-width: 16px; padding-top: 2px; }
-  .detail-text { font-size: 12px; color: var(--text-mid); line-height: 1.7; }
+  .detail-text { font-size: 12px; color: var(--text-mid); line-height: 1.8; }
+
+  /* FINDING BULLETS */
+  .finding-bullets {
+    list-style: none; padding: 0; margin: 0;
+    display: flex; flex-direction: column; gap: 7px;
+  }
+  .finding-bullets li {
+    font-size: 12px; color: var(--text-mid); line-height: 1.7;
+    display: flex; gap: 10px; align-items: baseline;
+  }
+  .finding-bullets li::before {
+    content: "▸"; color: var(--accent); font-size: 9px;
+    flex-shrink: 0; margin-top: 2px;
+  }
   .detail-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
   .chip {
     font-size: 10px; padding: 3px 9px; border-radius: 2px;
@@ -347,11 +361,11 @@
   }
   .finding-row:hover { border-color: var(--border-bright); }
   .finding-header {
-    display: grid; grid-template-columns: 1fr 1fr auto;
+    display: grid; grid-template-columns: 1fr 1fr 100px;
     align-items: center; padding: 10px 14px; gap: 12px;
   }
   .finding-category { font-size: 12px; color: var(--text); font-weight: 600; }
-  .finding-impact { font-size: 11px; color: var(--text-dim); }
+  .finding-impact { font-size: 11px; color: var(--text-dim); text-align: right; }
   .finding-body {
     display: none; border-top: 1px solid var(--border);
     padding: 14px; background: var(--bg);
@@ -364,15 +378,16 @@
     color: var(--text-dim); margin-bottom: 6px;
   }
 
-  /* RISK BADGES */
+  /* RISK BADGES — fit to content, no min-width */
   .risk-badge {
-  font-size: 10px; font-weight: 700; padding: 3px 10px;
-  border-radius: 3px; text-align: center; text-transform: uppercase;
-  letter-spacing: 0.08em; white-space: nowrap; min-width: 80px;
+    font-size: 10px; font-weight: 700; padding: 3px 10px;
+    border-radius: 3px; text-align: center; text-transform: uppercase;
+    letter-spacing: 0.08em; white-space: nowrap; justify-self: end;
   }
-  .risk-high     { background: rgba(255,77,77,0.15);   color: var(--critical); border: 1px solid rgba(255,77,77,0.3); }
-  .risk-moderate { background: rgba(255,140,66,0.15);  color: var(--major);    border: 1px solid rgba(255,140,66,0.3); }
-  .risk-low      { background: rgba(77,171,247,0.15);  color: var(--visual);   border: 1px solid rgba(77,171,247,0.3); }
+  .risk-high          { background: rgba(255,77,77,0.15);    color: var(--critical); border: 1px solid rgba(255,77,77,0.3); }
+  .risk-moderate      { background: rgba(255,140,66,0.15);   color: var(--major);    border: 1px solid rgba(255,140,66,0.3); }
+  .risk-low           { background: rgba(77,171,247,0.15);   color: var(--visual);   border: 1px solid rgba(77,171,247,0.3); }
+  .risk-low-moderate  { background: rgba(255,209,102,0.15);  color: var(--minor);    border: 1px solid rgba(255,209,102,0.3); }
 
   /* ABOUT */
   .about-panel { margin-top: 36px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
@@ -2115,24 +2130,24 @@
           <div class="cs-classification">Design &amp; Systems QA</div>
           <div class="cs-title">Forward Systems Evaluation — Fallout 4 Faction &amp; Progression Architecture</div>
           <div class="cs-meta">
-            <span class="risk-badge risk-high">3 High</span>
-            <span class="risk-badge risk-moderate">1 Moderate</span>
+            <span class="risk-badge risk-high">5 High</span>
+            <span class="risk-badge risk-moderate">3 Moderate</span>
           </div>
         </div>
         <div class="cs-detail">
           <div class="cs-meta-grid">
             <div class="cs-meta-item">
               <div class="finding-label">Scope</div>
-              <p class="detail-text">Structured 40+ hour playthrough focused on faction reactivity, reputation modeling, radiant quest distribution, and settlement-based progression loops.</p>
+              <p class="detail-text">Structured 40+ hour playthrough focused on faction reactivity, reputation modeling, radiant quest distribution, settlement-based progression loops, companion systems, and world-state simulation. Supplemented by authored design critique and structured improvement proposals targeting remaster and future-iteration readiness.</p>
             </div>
             <div class="cs-meta-item">
               <div class="finding-label">Objective</div>
-              <p class="detail-text">Evaluate systemic engagement sustainability, incentive depth, and reactive world modeling from a long-term player retention perspective.</p>
+              <p class="detail-text">Evaluate systemic engagement sustainability, incentive depth, reactive world modeling, and cross-system cohesion from a long-term player retention and forward development perspective. Document improvement vectors with actionable implementation framing.</p>
             </div>
           </div>
 
           <div class="detail-section-title" style="margin-top:20px">Executive Summary</div>
-          <p class="detail-text" style="margin-bottom:20px">Analysis identified limited gradient reactivity within faction systems, static territorial simulation behaviors outside milestone scripting, and diminishing incentive returns within radiant quest loops. These factors introduce moderate-to-high long-term engagement risk despite strong environmental design and moment-to-moment gameplay stability.</p>
+          <p class="detail-text" style="margin-bottom:20px">Analysis identified limited gradient reactivity within faction systems, static territorial simulation behaviors outside milestone scripting, and diminishing incentive returns within radiant quest loops. Narrative infrastructure presents systemic lore inconsistencies, particularly in faction goal modeling for the Institute and Brotherhood of Steel, that undermine consequence weight. Settlement, crafting, and companion systems lack the cross-system integration depth needed to sustain late-game engagement. These factors introduce moderate-to-high long-term engagement risk despite strong environmental design and moment-to-moment gameplay stability. All findings are accompanied by forward-facing implementation proposals suited to remaster scope or sequel iteration.</p>
 
           <div class="detail-section-title">Findings</div>
           <div class="findings-list">
@@ -2146,11 +2161,60 @@
                 <div class="finding-body">
                   <div class="finding-col">
                     <div class="finding-label">Analysis</div>
-                    <p class="detail-text">Faction alignment primarily resolves through binary state changes rather than a layered or continuously reactive reputation spectrum. Intermediate behavioral shifts based on incremental player decisions are limited, reducing perceived systemic responsiveness.</p>
+                    <ul class="finding-bullets"><li>Faction alignment primarily resolves through binary state changes — Enemy or Non-Enemy — rather than a layered or continuously reactive reputation spectrum.</li><li>Intermediate behavioral shifts based on incremental player decisions are limited, reducing perceived systemic responsiveness.</li><li>The Commonwealth hosts over a dozen distinct faction entities (Minutemen, Brotherhood of Steel, Railroad, Institute, Diamond City, Goodneighbor, Bunker Hill, Atom Cats, Children of Atom, Triggermen, Gunners, Super Mutant groups, and multiple Raider bands) yet almost none maintain independent, reactive standing with the player.</li></ul>
                   </div>
                   <div class="finding-col">
                     <div class="finding-label">Forward Risk</div>
-                    <p class="detail-text">Compressed consequence modeling may reduce long-term player investment in faction identity and moral positioning.</p>
+                    <ul class="finding-bullets"><li>Compressed consequence modeling reduces long-term player investment in faction identity and moral positioning.</li><li>Players lack mechanical incentive to engage with minor factions meaningfully.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Implement a multi-axis reputation spectrum per faction with graduated behavioral thresholds.</li><li>Milestone-based unlocks (unique dialogue, NPC services, passive buffs, morale penalties to rival factions) should reinforce reputation investment at regular intervals.</li><li>Example: Railroad reputation unlocks escalating Sneak ATK Critical bonuses; Diamond City standing provides merchant discounts and complimentary Dugout Inn access.</li></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Faction Lore Consistency &amp; Goal Architecture</span>
+                  <span class="finding-impact">Narrative Integrity &amp; Player Decision Legibility</span>
+                  <span class="risk-badge risk-high">High</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <ul class="finding-bullets"><li>Core faction motivations contain structural inconsistencies that weaken the player's ability to make informed ideological choices.</li><li>The Institute's stated goal — advancing scientific knowledge for humanity — is contradicted by its deliberate maintenance of Commonwealth anarchy as leverage for talent recruitment, its fear of surface dwellers, and its hoarding of Synth technology.</li><li>The Brotherhood's absolutist anti-Synth doctrine (classifying Synths as more dangerous than atomic weapons) is not counterbalanced by accessible in-world arguments (i.e., Synths are only as dangerous as the humans directing them), leaving the player without the tools to critically engage the debate.</li><li>The Synth Question — whether to free/subjugate/destroy Synths, and how exactly that 'freedom' looks — is the thematic core of the setting, yet faction positions on it are underexplored across quest design.</li><li>Institute teleportation range (~440 miles, placing Far Harbor within operational scope) and targeting logic (will not beam into unknown structures or partially into geometry) suggests more systemic capability than the narrative leverages.</li></ul>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <ul class="finding-bullets"><li>Unresolved lore contradictions erode immersion and reduce the perceived significance of the main quest's ideological stakes.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Audit faction dialogue and quest text for internal consistency.</li><li>Surface counterarguments to each faction's core doctrine through NPC interaction, environmental storytelling, and optional questlines.</li><li>The Synth Question should be formalized as a branching decision tree visible to the player — identification, permissibility, and autonomy as separable axes — with each major faction holding a documented, defensible position.</li></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Raider Faction Architecture &amp; Behavioral Design</span>
+                  <span class="finding-impact">World Believability &amp; Emergent Narrative</span>
+                  <span class="risk-badge risk-high">High</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <ul class="finding-bullets"><li>The Commonwealth presents a homogenized Raider faction with no differentiated sub-groups, cultural identity, or internal hierarchy in the base game (Rust Devils and Nuka-World gangs exist behind DLC paywalls, creating consistency breaks in the loot and encounter tables).</li><li>Raider behavioral scripting does not reflect survival-driven outlaw logic — enemies do not react to power imbalances, pursue negotiation at low health thresholds, or exhibit distinct territorial culture.</li><li>Fan-produced lore maps demonstrate that the raw material for distinct Raider factions exists in the world's geography and was not surfaced.</li></ul>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <ul class="finding-bullets"><li>Undifferentiated enemy factions reduce emergent narrative potential and flatten late-game encounter variety.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Introduce named Raider sub-factions with distinct visual language, territorial claims, and behavioral profiles.</li><li>At low health thresholds, surviving Raiders should trigger surrender or negotiation states, opening potential questlines.</li><li>DLC faction behaviors and loot tables should be normalized into base world encounter logic to eliminate consistency breaks.</li></ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2163,11 +2227,16 @@
                 <div class="finding-body">
                   <div class="finding-col">
                     <div class="finding-label">Analysis</div>
-                    <p class="detail-text">Faction-controlled spaces exhibit limited organic evolution outside scripted events. Territorial presence does not dynamically scale in visibility or systemic behavior relative to player-aligned activity.</p>
+                    <ul class="finding-bullets"><li>Faction-controlled spaces exhibit limited organic evolution outside scripted events.</li><li>Territorial boundaries are implicit and non-communicated to the player.</li><li>Hostile factions do not dynamically claim or contest locations based on relative strength, resource need, or player-aligned activity.</li><li>Settlement infrastructure built by the player is not subject to credible faction pressure without scripted triggers.</li><li>Constructive world-state feedback — the sense that player actions reshape territorial ownership — is absent outside main quest milestones.</li></ul>
                   </div>
                   <div class="finding-col">
                     <div class="finding-label">Forward Risk</div>
-                    <p class="detail-text">Static environmental feedback may weaken the illusion of systemic world progression and reduce perceived impact of strategic alignment.</p>
+                    <ul class="finding-bullets"><li>Static environmental feedback weakens the illusion of systemic world progression and reduces the perceived impact of strategic alignment.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Implement a dynamic territory system where hostile factions claim and lose locations based on faction strength and proximity logic.</li><li>Player-owned settlements should be vulnerable to contested takeover without active defense or Minutemen support.</li><li>Visual and audio cues should demarcate territorial transitions.</li><li>Minutemen radiant squads (modeled on Metal Gear Solid V's FOB or Dragon Age: Inquisition's agent system) should be deployable to manage radiant objectives, defend settlements, and contest hostile expansion with variable success outcomes.</li></ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2180,28 +2249,104 @@
                 <div class="finding-body">
                   <div class="finding-col">
                     <div class="finding-label">Analysis</div>
-                    <p class="detail-text">Radiant objectives demonstrate structural repetition with minimal narrative or mechanical variance over time. Reward scaling does not sufficiently evolve to counter repetition fatigue.</p>
+                    <ul class="finding-bullets"><li>Radiant objectives demonstrate structural repetition with minimal narrative or mechanical variance over extended play.</li><li>XP rewards are not level-scaled.</li><li>Milestone rewards are sparse or absent without external wiki reference (e.g., Aeternus in Nuka-World requires six completions with no in-game signal).</li><li>The system does not produce emergent narrative events — unique NPCs, faction story moments, or player-choice reward branches — that could sustain engagement across dozens of completions.</li></ul>
                   </div>
                   <div class="finding-col">
                     <div class="finding-label">Forward Risk</div>
-                    <p class="detail-text">Diminishing incentive variance may accelerate engagement drop-off in extended play sessions.</p>
+                    <ul class="finding-bullets"><li>Diminishing incentive variance accelerates engagement drop-off in extended play sessions and devalues faction alignment as a long-term system.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Scale XP rewards to player level.</li><li>Implement generous milestone unlocks at regular intervals: unique NPCs offering services (e.g., a Veteran joining after second Minutemen quest), faction morale consequences for rivals, Legendary item drops, and single-choice reward menus after select completions.</li><li>Milestone events should be surfaced in-game without requiring wiki consultation.</li><li>Minutemen-specific milestones could include settler recruitment bonuses, settlement happiness buffs, and antagonist faction morale penalties.</li></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Character Arc Design &amp; Companion Reactivity</span>
+                  <span class="finding-impact">Narrative Depth &amp; Player Consequence Weight</span>
+                  <span class="risk-badge risk-moderate">Moderate</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <ul class="finding-bullets"><li>Companion arcs are limited to a small subset (Travis, Cait, MacCready) and resolve exclusively toward positive character outcomes.</li><li>The design space for morally complex, player-driven companion consequences — including negative outcomes, failure states, or affinity-driven divergence — is unexplored.</li><li>Companion visibility on the world map is absent, creating a tracking inconvenience that reduces practical usability.</li><li>Affinity milestone rewards beyond dialogue unlocks are minimal.</li></ul>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <ul class="finding-bullets"><li>Constrained companion arc design reduces perceived player consequence in long-term relationship mechanics.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Expand companion arc design to include negative outcome branches where player decisions meaningfully affect companion trajectory.</li><li>Introduce affinity milestone rewards: cosmetic options (haircuts, face reconstruction surgery) unlocked at positive affinity thresholds.</li><li>Add companion map visibility toggle as a baseline quality-of-life feature.</li></ul>
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
                 <div class="finding-header">
                   <span class="finding-category">Settlement Progression Integration</span>
-                  <span class="finding-impact">System Cohesion</span>
+                  <span class="finding-impact">System Cohesion &amp; Late-Game Depth</span>
                   <span class="risk-badge risk-moderate">Moderate</span>
                 </div>
                 <div class="finding-body">
                   <div class="finding-col">
                     <div class="finding-label">Analysis</div>
-                    <p class="detail-text">Settlement mechanics function independently from faction reputation depth in most scenarios. Cross-system reinforcement between settlement growth and faction influence is limited.</p>
+                    <ul class="finding-bullets"><li>Settlement mechanics function independently from faction reputation depth in most scenarios.</li><li>Cross-system reinforcement between settlement growth and faction influence is limited.</li><li>Build mode operates without a schematic or blueprint system, removing the grounded logic of construction knowledge acquisition.</li><li>Building and scrapping are instantaneous rather than time-simulated, breaking physical believability.</li><li>Settlers are anonymous with no observable SPECIAL attribution, preventing meaningful role assignment.</li><li>High-level settlement output does not escalate to match late-game player investment.</li></ul>
                   </div>
                   <div class="finding-col">
                     <div class="finding-label">Forward Risk</div>
-                    <p class="detail-text">Reduced cross-system coupling may fragment long-term strategic engagement.</p>
+                    <ul class="finding-bullets"><li>Reduced cross-system coupling fragments long-term strategic engagement and causes the settlement system to feel decorative rather than mechanically meaningful.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Zone-based settlement layout (residential, agricultural, manufacturing, command) with settler SPECIAL-based role assignment.</li><li>Schematics earned through exploration and settlement favor should gate construction options, rewarding world engagement.</li><li>Building and scrapping should pass in-world time with audio/visual feedback, or allow settler assignment as construction workers.</li><li>Multi-select prefab saving should be supported.</li><li>High-level settlements should yield legendary items, rare schematics, and pristine goods as output.</li><li>Settlers should receive names, specialization nicknames, visible levels, and observable perks that evolve with role history (Scrapper boosts scavenging, Guards develop combat perks, etc.).</li><li>Farming perks at full unlock should prevent crop withering.</li><li>Destructible environment systems should allow structures to collapse under sustained damage.</li></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Schematic &amp; Crafting Discovery Systems</span>
+                  <span class="finding-impact">World Integration &amp; Pacing</span>
+                  <span class="risk-badge risk-moderate">Moderate</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <ul class="finding-bullets"><li>Crafting recipes are made immediately available without a discovery or acquisition layer.</li><li>The world offers natural vectors for schematic distribution — containers, corpses, campfires, terminals, specialist NPCs, and books — that are not utilized to gate or reward recipe knowledge.</li><li>Early-game recipe availability (e.g., bloatfly steak within five minutes of play) bypasses the organic world introduction that pacing design requires.</li><li>DLC-introduced crafting items (Automatron robots) do not share loot table logic with base-game equivalents, creating systemic inconsistency.</li></ul>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <ul class="finding-bullets"><li>Absence of discovery-gated crafting reduces exploration incentive and flattens the mid-game reward curve.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Gate crafting recipes behind world-distributed schematics discoverable through exploration, NPC interaction, and settlement progression.</li><li>Introduce recipe knowledge gradually to match environmental pacing.</li><li>Normalize DLC crafting item behavior into base-game loot table logic to eliminate consistency breaks.</li></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Narrative Infrastructure &amp; World Density Calibration</span>
+                  <span class="finding-impact">Tonal Coherence &amp; Immersion</span>
+                  <span class="risk-badge risk-low">Low</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <ul class="finding-bullets"><li>Point-of-interest density in the Commonwealth exceeds what the post-apocalyptic tone supports.</li><li>Encounter and landmark frequency reduces the perceived hostility and isolation of the wasteland setting.</li><li>Narrative text and world-building lack consistency with established Fallout lore continuity — a gap more consequential given the franchise's now five-title continuity requirement.</li><li>The voiced protagonist reduces narrative flexibility, increases data overhead (estimated savings of up to two-thirds of dialogue data with a silent protagonist model), and limits player projection into the role.</li></ul>
+                  </div>
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    <ul class="finding-bullets"><li>Tonal inconsistency and overcrowded world design reduce the credibility of the setting's core tension.</li></ul>
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>Recalibrate point-of-interest distribution to support tonal pacing — stretches of genuine environmental hostility should precede high-density encounter zones.</li><li>Conduct lore audit against established franchise continuity.</li><li>Evaluate silent protagonist model for future iterations on data efficiency and narrative flexibility grounds.</li></ul>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -2210,11 +2355,11 @@
           <div class="cs-footer-grid">
             <div>
               <div class="finding-label" style="margin-top:20px">Conclusion</div>
-              <p class="detail-text">While core gameplay systems remain mechanically stable and environmentally immersive, faction reactivity depth and radiant loop variance present measurable long-term engagement risks. Future iterations could benefit from expanded gradient reputation modeling, dynamic territorial state simulation, and adaptive incentive scaling mechanisms.</p>
+              <p class="detail-text">Fallout 4&#x27;s core gameplay systems remain mechanically stable and environmentally immersive. However, faction reactivity depth, radiant loop variance, world-state simulation, and cross-system integration present measurable long-term engagement risks that are addressable within remaster or sequel scope. The design critique and implementation proposals documented here reflect a forward-development posture: each identified gap is paired with a concrete systemic recommendation grounded in genre precedent and player retention modeling.</p>
             </div>
             <div>
               <div class="finding-label" style="margin-top:20px">Methodology Note</div>
-              <p class="detail-text" style="font-style:italic; color:var(--text-dim)">This evaluation reflects systems-level QA methodology focused on incentive architecture, reactive modeling depth, and retention risk analysis rather than isolated defect detection.</p>
+              <p class="detail-text" style="font-style:italic; color:var(--text-dim)">This evaluation reflects systems-level QA methodology focused on incentive architecture, reactive modeling depth, narrative consistency, and retention risk analysis rather than isolated defect detection. Source material includes structured playthrough data, authored design critique, and supplementary lore research. All forward-facing recommendations are scoped for practical implementation feasibility.</p>
             </div>
           </div>
         </div>
@@ -2287,9 +2432,9 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["dqxi", "ds3", "cp77", "spiderman", "rdr2", "gtav", "wolf", "the_invincible", "rdr1", "fallout76", "fallout4", "eldenring", "witcher3"];
+    const gameKeys = ["rdr2", "cp77", "the_invincible", "fallout4", "fallout76", "wolf", "gtav", "dqxi", "witcher3", "eldenring", "spiderman", "rdr1", "ds3"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["physics", "rendering", "spawning", "animation", "ai", "collision"];
+    const typeKeys = ["collision", "physics", "animation", "rendering", "ai", "spawning"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
