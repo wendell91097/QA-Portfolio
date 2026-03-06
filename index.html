@@ -422,6 +422,92 @@
   }
 
   .hidden { display: none !important; }
+
+  /* GAME CONCEPT DOCS */
+  .gc-list { display: flex; flex-direction: column; gap: 2px; padding-bottom: 40px; }
+
+  .gc-doc {
+    background: var(--panel); border: 1px solid var(--border);
+    border-radius: 6px; overflow: hidden;
+    cursor: pointer; transition: border-color 0.2s, transform 0.15s;
+    animation: slideIn 0.3s ease both;
+  }
+  .gc-doc:hover { border-color: var(--border-bright); transform: translateX(3px); }
+  .gc-doc.gc-expanded { border-color: var(--accent); }
+  .gc-flagship { border-color: rgba(232,255,71,0.25); }
+  .gc-flagship:hover, .gc-flagship.gc-expanded { border-color: var(--accent); }
+
+  .gc-doc-header {
+    display: grid;
+    grid-template-columns: 68px 1fr 160px;
+    align-items: center; padding: 14px 18px; gap: 16px;
+  }
+  .gc-doc-col-id { display: flex; flex-direction: column; gap: 4px; }
+  .gc-index { font-size: 10px; color: var(--text-dim); letter-spacing: 0.08em; }
+  .gc-expand-hint { font-size: 9px; color: var(--text-dim); opacity: 0.5; transition: opacity 0.15s; }
+  .gc-doc:hover .gc-expand-hint { opacity: 1; color: var(--accent); }
+  .gc-doc.gc-expanded .gc-expand-hint { opacity: 0; }
+
+  .gc-doc-col-main { display: flex; flex-direction: column; gap: 4px; }
+  .gc-title {
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px;
+    color: var(--text); line-height: 1.2;
+  }
+  .gc-flagship .gc-title { color: var(--accent); }
+  .gc-subtitle { font-size: 10px; color: var(--text-dim); letter-spacing: 0.04em; }
+
+  .gc-doc-col-meta { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .gc-discipline-tags { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+  .gc-disc-tag {
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; padding: 3px 7px; border-radius: 3px;
+  }
+  .gc-disc-systems  { background: rgba(232,255,71,0.1);  color: var(--accent);  border: 1px solid rgba(232,255,71,0.2); }
+  .gc-disc-narrative{ background: rgba(77,171,247,0.1);  color: var(--blue);    border: 1px solid rgba(77,171,247,0.2); }
+  .gc-disc-mechanics{ background: rgba(255,140,66,0.1);  color: var(--orange);  border: 1px solid rgba(255,140,66,0.2); }
+  .gc-disc-ux       { background: rgba(6,214,160,0.1);   color: var(--green);   border: 1px solid rgba(6,214,160,0.2); }
+  .gc-disc-world    { background: rgba(180,100,255,0.1); color: #c87fff;        border: 1px solid rgba(180,100,255,0.2); }
+  .gc-disc-level    { background: rgba(255,209,102,0.1); color: var(--minor);   border: 1px solid rgba(255,209,102,0.2); }
+
+  .gc-flagship-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 9px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--accent);
+    background: rgba(232,255,71,0.1); border: 1px solid rgba(232,255,71,0.25);
+    padding: 3px 8px; border-radius: 3px;
+  }
+
+  /* EXPANDED BODY */
+  .gc-doc-body {
+    display: none; border-top: 1px solid var(--border);
+    padding: 20px 18px 24px; background: var(--bg3);
+  }
+  .gc-doc.gc-expanded .gc-doc-body { display: block; }
+
+  .gc-doc-pitch {
+    font-size: 13px; color: var(--text); line-height: 1.8;
+    margin-bottom: 20px; font-style: italic;
+    border-left: 2px solid var(--border-bright); padding-left: 14px;
+  }
+  .gc-flagship .gc-doc-pitch { border-left-color: var(--accent); color: var(--text); }
+
+  .gc-doc-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 20px; margin-bottom: 20px;
+  }
+  .gc-doc-section {}
+
+  .gc-vibe {
+    font-size: 12px; color: var(--accent); opacity: 0.9;
+    border-top: 1px solid var(--border); padding-top: 14px;
+    line-height: 1.7; font-style: italic;
+  }
+
+  .gc-concepts-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  .gc-concepts-note { font-size: 11px; color: var(--text-dim); font-style: italic; }
 </style>
 </head>
 <body>
@@ -434,7 +520,7 @@
     <div class="header-role">QA Tester &amp; Game Developer</div>
   </div>
   <div class="header-right">
-    <a href="mailto:wendell91097@gmail.com" class="header-contact">wendell91097@gmail.com</a>
+    <a href="/cdn-cgi/l/email-protection#88ffede6ecede4e4b1b9b8b1bfc8efe5e9e1e4a6ebe7e5" class="header-contact"><span class="__cf_email__" data-cfemail="3344565d57565f5f0a02030a0473545e525a5f1d505c5e">[email&#160;protected]</span></a>
     <a href="tel:2282376193" class="header-contact">(228) 237-6193</a>
     <a href="https://sovereigndev.itch.io" target="_blank" class="header-contact">sovereigndev.itch.io</a>
     <div style="font-size:11px; color: var(--green);">
@@ -585,6 +671,7 @@
     <!-- TABS -->
     <div class="tab-bar">
       <button class="tab-btn active" data-tab="bugs" onclick="switchTab('bugs')">// Bug Reports</button>
+      <button class="tab-btn" data-tab="game-concepts" onclick="switchTab('game-concepts')">// Game Concepts <span style="font-size:10px; opacity:0.6">(6)</span></button>
       <button class="tab-btn" data-tab="case-studies" onclick="switchTab('case-studies')">// Case Studies <span style="font-size:10px; opacity:0.6">(1)</span></button>
     </div>
 
@@ -2367,6 +2454,347 @@
       </div>
     </div>
 
+    <!-- GAME CONCEPTS PANEL -->
+    <div class="tab-panel hidden" id="panel-game-concepts">
+      <div class="gc-concepts-header">
+        <div class="content-title">// Game Concepts</div>
+        <div class="gc-concepts-note">Click any concept to expand full design document</div>
+      </div>
+
+      <div class="gc-list">
+
+        <!-- GC-006: IMMORTAL COIL — FLAGSHIP -->
+        <div class="gc-doc gc-flagship" onclick="toggleGcCard(this)" style="animation-delay:0.05s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id">
+              <div class="gc-index">GC-006</div>
+              <div class="gc-expand-hint">&#9658; expand</div>
+            </div>
+            <div class="gc-doc-col-main">
+              <div class="gc-title">Immortal Coil</div>
+              <div class="gc-subtitle">Isometric Boxing &middot; Dystopian Arena Drama &middot; Transhumanist Horror</div>
+            </div>
+            <div class="gc-doc-col-meta">
+              <span class="gc-flagship-badge">&#9733; Flagship</span>
+              <span class="gc-stage-badge gc-stage-prototype" style="margin-top:4px">Prototype-Ready</span>
+            </div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">All humans are immortal. The worst criminals are made to fight in arenas for public amusement. Win five championships and you earn the only thing anyone in this society still wants: the right to die.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section">
+                <div class="finding-label">Core Premise</div>
+                <ul class="finding-bullets">
+                  <li>A technologically immortal society has eliminated death &mdash; except as a prize. The arena system exists not merely as punishment but as the only culturally sanctioned exit from existence.</li>
+                  <li>The player character is a convicted criminal assigned to the Neo-Gladiator circuit. Bodies heal between bouts. Mental deterioration does not.</li>
+                  <li>The champion is treated near-royally and must defend their title annually. Only a champion of sufficient consecutive years earns &#x201C;retirement&#x201D; &mdash; self-euthanasia, the most coveted right in the world.</li>
+                  <li>Spectators in the stands are prisoners of a different kind: trapped in a system their forebears created, unable to dismantle it, watching because the alternative is confronting what they&#x2019;ve built.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Mechanics</div>
+                <ul class="finding-bullets">
+                  <li>Isometric / 2.5D top-down perspective. Full kinetic movement vocabulary: dodge, duck, sidestep, backpedal, close in, hook, jab, uppercut, feint.</li>
+                  <li>Cyberarm augmentations upgradeable between bouts &mdash; the tension between augmenting the body and losing what remains of selfhood is mechanical, not just thematic.</li>
+                  <li>Massive prison transportation system as the connective tissue between fights: the world seen through convoy windows, loading docks, holding cells.</li>
+                  <li>Mental degradation modeled over time &mdash; early fights feel sharp; later fights feel like swimming through static.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Thematic DNA</div>
+                <ul class="finding-bullets">
+                  <li>Post-modernist collapse of meaning: when death is abolished, what does life cost? The entire moral economy of society dissolves and has to be rebuilt around the arena.</li>
+                  <li>Dehumanization through spectacle &mdash; gladiatorial Rome refracted through transhumanist tech. The crowd isn&#x2019;t villainous; they&#x2019;re people who inherited an unfixable machine.</li>
+                  <li>The apocalypse framework applied inward: not a ruined world but a ruined selfhood. Survival and identity in direct opposition.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Influences</div>
+                <ul class="finding-bullets">
+                  <li>Fallout: New Vegas &mdash; factions with genuine philosophical stakes, not just might-makes-right.</li>
+                  <li>Disco Elysium &mdash; the collapse of a moral framework as both world-building and gameplay.</li>
+                  <li>Rollerball (1975) &mdash; sport as a tool of systemic dehumanization.</li>
+                  <li>Neon Genesis Evangelion &mdash; the psychic cost of doing the thing the machine requires of you.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="gc-vibe">This is the one. The mechanical loop is there. The theme is there. The scope is achievable. Everything else in the slate exists partly to prove this one deserves to get made.</div>
+          </div>
+        </div>
+
+        <!-- GC-002: MANIFEST -->
+        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.08s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id">
+              <div class="gc-index">GC-002</div>
+              <div class="gc-expand-hint">&#9658; expand</div>
+            </div>
+            <div class="gc-doc-col-main">
+              <div class="gc-title">Manifest</div>
+              <div class="gc-subtitle">Branching Narrative &middot; Frontier Waystation &middot; You Shape What America Becomes</div>
+            </div>
+            <div class="gc-doc-col-meta">
+              <span class="gc-stage-badge gc-stage-specced">Specced</span>
+            </div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">You run a waystation at the edge of the frontier. Every night someone new comes through the door. Some are running from something. Some are running toward something worth dying for. What you give each of them &mdash; a bed, a secret kept, a door pointed the right direction &mdash; ripples outward into the country being built around you.</div>
+
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section">
+                <div class="finding-label">Core Premise</div>
+                <ul class="finding-bullets">
+                  <li>The player is stationary while history moves through them. The frontier is being made in real time &mdash; by the railroad crew sleeping in your barn, the wanted man you didn&#x2019;t turn in, the family you let pay in labor instead of coin.</li>
+                  <li>Your choices compound across years. The town that grows up around your waystation reflects who you helped and who you turned away. The newspaper mechanic: weeks later, the penny press brings word. Some made it. Some are on wanted posters. Some send money back. Some names appear in obituaries.</li>
+                  <li>This was a deeply Christian nation. The moral vocabulary of the era is scripture &mdash; charity, sanctuary, bearing false witness, rendering unto Caesar. The player&#x2019;s choices are framed in that language whether they want them to be or not. Turning away the fugitive isn&#x2019;t just pragmatic; it&#x2019;s a confession.</li>
+                  <li>Not a management game. The inn&#x2019;s decay or flourishing shows in ambient detail &mdash; a cracked window that stays cracked, fewer horses at the post, a Bible left open on the bar. No economy meters.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">The Guests Who Matter Most</div>
+                <ul class="finding-bullets">
+                  <li><strong>The Comanche escapee</strong> &mdash; quiet, watchful, traveling under a false name. His sister was taken by a reservation camp administrator. He knows where the man is. He needs one night&#x2019;s shelter and your silence. Do you give it? Do you ask questions? What do you do when the marshal comes asking the next morning?</li>
+                  <li><strong>The conductor</strong> &mdash; a freed Black man who speaks like an educated minister, which is exactly what he is. He&#x2019;s moving people north. He needs to know if your waystation is safe. This is the moment the Underground Railroad either routes through you or doesn&#x2019;t &mdash; and that choice echoes through every Black traveler who comes to your door for the rest of the game.</li>
+                  <li><strong>The schoolteacher</strong> &mdash; young, underpaid, heading to a mining town that doesn&#x2019;t know it needs her yet. She carries a crate of books and more faith in people than the frontier has earned. She&#x2019;s the kind of person who changes a place quietly, without glory. Whether she makes it there depends partly on what you tell her about the road ahead.</li>
+                  <li><strong>The circuit preacher</strong> &mdash; road-worn, theologically complicated, genuinely kind. He&#x2019;ll take a free night&#x2019;s stay and leave you something worth more. He&#x2019;s also the one guest who will tell you, plainly, what he thinks you&#x2019;re doing wrong with your life. He&#x2019;s usually right.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">The Fuller Roster</div>
+                <ul class="finding-bullets">
+                  <li>Outlaws and the lawmen hunting them &mdash; shelter and betrayal both have prices.</li>
+                  <li>Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators &mdash; each with a different relationship to what America is supposed to mean.</li>
+                  <li>The missionary heading into territory everyone else is heading out of. The frontier doctor who&#x2019;s seen worse than he&#x2019;ll say. The Army deserter who saw something he won&#x2019;t describe.</li>
+                  <li>The Mexican family the law doesn&#x2019;t recognize as having rights. The journalist writing the myth while it&#x2019;s still wet. The Pinkerton who isn&#x2019;t here by accident.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Thematic DNA &amp; Influences</div>
+                <ul class="finding-bullets">
+                  <li>Manifest Destiny as the game&#x2019;s central tension: a national ideology written in scripture and enacted in blood, with the heroic and the self-interested in constant friction at your door.</li>
+                  <li>The question underneath every interaction: whose America are you building? And: does God have an opinion about that?</li>
+                  <li>Red Dead Redemption 2 &mdash; the frontier as a world in the process of being lost, populated with people who don&#x2019;t know it yet.</li>
+                  <li>Papers, Please &mdash; moral weight concentrated into a constrained loop at a threshold. Deadwood (HBO) &mdash; multilingual, violent, commercial, building itself out of nothing.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="gc-vibe">The Comanche looking for his sister. The conductor asking if your door is safe. The schoolteacher with a crate of books and too much faith in the road ahead. These aren&#x2019;t supporting characters &mdash; they&#x2019;re the game. The outlaws and the drifters are just the world they&#x2019;re moving through.</div>
+          </div>
+        </div>
+
+        <!-- GC-004: PLAYGROUND NOIR -->
+        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.11s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id">
+              <div class="gc-index">GC-004</div>
+              <div class="gc-expand-hint">&#9658; expand</div>
+            </div>
+            <div class="gc-doc-col-main">
+              <div class="gc-title">Playground Noir</div>
+              <div class="gc-subtitle">Mystery Visual Novel &middot; Kindergarten Ace Attorney &middot; Unreliable Witnesses</div>
+            </div>
+            <div class="gc-doc-col-meta">
+              <span class="gc-stage-badge gc-stage-prototype">Prototype-Ready</span>
+            </div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">The last cookie has been eaten. The daycare is in crisis. You are the investigator. Every witness is five years old and completely unreliable. The truth, when you find it, will be wholesome.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section">
+                <div class="finding-label">Core Premise</div>
+                <ul class="finding-bullets">
+                  <li>A mystery visual novel applying full noir investigation structure &mdash; evidence, cross-examination, witness contradiction &mdash; to playground-scale crimes.</li>
+                  <li>The cast is built from archetypes: the Bookworm, the Wrestler, the Baseball Kid, the Theatre Kid. Each has its own testimony style, blindspots, and agenda.</li>
+                  <li>The specimen case: two kids have cookie crumbs on their shirts. The answer: they shared it. Both guilty. Both innocent. Wholesome resolution mandatory.</li>
+                  <li>Every case resolves without permanent harm. The noir trappings are the comedy &mdash; the darkness is borrowed, the warmth is earned.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Mechanics</div>
+                <ul class="finding-bullets">
+                  <li>Ace Attorney investigation and cross-examination loop adapted for an audience-appropriate tone.</li>
+                  <li>Unreliable witness system: children misremember, exaggerate, lie to protect friends, and confabulate entirely. The challenge isn&#x2019;t finding the guilty party &mdash; it&#x2019;s figuring out which truth is true.</li>
+                  <li>Scalable case structure: each case functions as a standalone episode.</li>
+                  <li>Red herrings are mechanically embedded &mdash; evidence that looks damning leads to a different, more innocent explanation.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Thematic DNA</div>
+                <ul class="finding-bullets">
+                  <li>The comedy of applied seriousness: treating missing cookies with investigative gravity produces the game&#x2019;s entire tonal register.</li>
+                  <li>Childhood moral reasoning &mdash; sharing as absolution, honesty without cruelty, guilt without shame.</li>
+                  <li>The subversion of noir cynicism: here, truth is sweet and people are trying their best.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Influences</div>
+                <ul class="finding-bullets">
+                  <li>Ace Attorney series &mdash; investigation loop, testimony contradiction, high drama low stakes.</li>
+                  <li>Danganronpa &mdash; stylized cast of archetypes, structured mystery resolution.</li>
+                  <li>Bluey &mdash; the comedy of treating children&#x2019;s problems with adult seriousness without condescension.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="gc-vibe">Highest commercial viability in the slate. Proven genre, clear execution path. The critical unlock is writing samples &mdash; the concept lives or dies on whether the dialogue register hits.</div>
+          </div>
+        </div>
+
+        <!-- GC-005: SWAN MARRIAGE COUNSELOR -->
+        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.14s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id">
+              <div class="gc-index">GC-005</div>
+              <div class="gc-expand-hint">&#9658; expand</div>
+            </div>
+            <div class="gc-doc-col-main">
+              <div class="gc-title">Swan Marriage Counselor</div>
+              <div class="gc-subtitle">Therapy Visual Novel &middot; Lifelong Commitment &middot; Determinism vs. Choice</div>
+            </div>
+            <div class="gc-doc-col-meta">
+              <span class="gc-stage-badge gc-stage-specced">Specced</span>
+            </div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">Swans mate for life. Some of them are not handling it well. You are their counselor. The sessions that follow are about commitment, compromise, aging, and whether the promises we make when young should bind the people we become.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section">
+                <div class="finding-label">Core Premise</div>
+                <ul class="finding-bullets">
+                  <li>The player is a marriage counselor to swan couples &mdash; literal swans, with the biology of lifelong monogamy built in. These animals have no choice about who they&#x2019;re bound to.</li>
+                  <li>Sessions explore the fault lines of long commitment: the distance that opens between people who grow in different directions; the resentment of a promise made without full information.</li>
+                  <li>The subversion of the dating sim: dating sims are about the beginning of love. This game is about what happens after the win, when the romance has become a life and the life has become complicated.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Thematic DNA</div>
+                <ul class="finding-bullets">
+                  <li>Determinism vs. choice: swans are biologically determined to stay. Humans choose to. What does that difference mean for the moral weight of commitment?</li>
+                  <li>The problem of the self over time: the person you promised yourself to at 22 is not the person in front of you at 47.</li>
+                  <li>Aging as a theme rather than a backdrop &mdash; the game is explicitly about couples who have been together long enough to become strangers to each other.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Influences</div>
+                <ul class="finding-bullets">
+                  <li>Florence &mdash; visual novel about the emotional reality of a relationship over time, not just its peak.</li>
+                  <li>Richard Linklater&#x2019;s Before trilogy &mdash; the weight of two people talking honestly over years.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Commercial Note</div>
+                <ul class="finding-bullets">
+                  <li>Niche audience but a devoted one. Strong festival circuit potential &mdash; Indiecade, IGF.</li>
+                  <li>Low asset requirement. The game lives in session dialogue. A small team with one strong writer could complete this.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="gc-vibe">Most emotionally resonant idea in the slate. A game about something most games won&#x2019;t touch &mdash; not the beginning of love but its long middle.</div>
+          </div>
+        </div>
+
+        <!-- GC-001: WINTER STORM -->
+        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.17s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id">
+              <div class="gc-index">GC-001</div>
+              <div class="gc-expand-hint">&#9658; expand</div>
+            </div>
+            <div class="gc-doc-col-main">
+              <div class="gc-title">Winter Storm</div>
+              <div class="gc-subtitle">Tactical Stealth Action &middot; Arctic Espionage &middot; MGS Framework</div>
+            </div>
+            <div class="gc-doc-col-meta">
+              <span class="gc-stage-badge gc-stage-concept">Concept</span>
+            </div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">Tactical stealth action in Arctic blizzards. Snowmobile exfiltration. Thermals and heartbeat sensors cut through whiteout conditions. Every footprint you leave can be tracked.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section">
+                <div class="finding-label">Core Systems</div>
+                <ul class="finding-bullets">
+                  <li>The blizzard is not a hazard &mdash; it is cover. Whiteout conditions that blind the enemy also blind sensors, create acoustic interference, and mask heat signatures.</li>
+                  <li>Snowmobile exfiltration as a set-piece mechanic: the stealth infiltration ends; the high-speed extraction begins.</li>
+                  <li>Thermal imaging and heartbeat sensors as detection tools &mdash; enemy counters to the blizzard cover create cat-and-mouse between environmental concealment and technological detection.</li>
+                  <li>Footprint persistence: snow records movement. Players must plan routes considering what evidence they leave behind.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Design Gap</div>
+                <ul class="finding-bullets">
+                  <li>The aesthetic is fully realized. The setting is evocative. The mechanical hooks are genuinely interesting.</li>
+                  <li>Missing: a narrative reason to care. Metal Gear works not because of its stealth mechanics but because Kojima built a mythology around them.</li>
+                  <li>Current status: shelved pending a narrative hook that elevates it from &#x201C;cool aesthetic game&#x201D; to a game with something to say.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Influences</div>
+                <ul class="finding-bullets">
+                  <li>Metal Gear Solid series &mdash; tactical espionage, gadget economy, environmental stealth.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="gc-vibe">The world it lives in is genuinely evocative. Waiting for the story to catch up with the setting.</div>
+          </div>
+        </div>
+
+        <!-- GC-003: CONQUISTADOR SIM -->
+        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.20s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id">
+              <div class="gc-index">GC-003</div>
+              <div class="gc-expand-hint">&#9658; expand</div>
+            </div>
+            <div class="gc-doc-col-main">
+              <div class="gc-title">Conquistador Sim</div>
+              <div class="gc-subtitle">Political Simulation &middot; New World Exploration &middot; God &middot; Guns &middot; Gold</div>
+            </div>
+            <div class="gc-doc-col-meta">
+              <span class="gc-stage-badge gc-stage-concept">Concept</span>
+            </div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">You are a Spanish explorer in the New World. Work for the Crown, defect and lead a revolution like Cort&#xe9;s, or go native and become a warlord &mdash; navigating tribal politics, language barriers, shifting allegiances, and a continent that is trying to kill you.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section">
+                <div class="finding-label">Core Factions / Paths</div>
+                <ul class="finding-bullets">
+                  <li>Crown Loyalist: high demand, high reward. The institutional path &mdash; supplied, supported, and expendable.</li>
+                  <li>Renegade Revolutionary (the Cort&#xe9;s path): defection and conquest on personal terms. No supply lines, no safety net.</li>
+                  <li>Gone Native / Warlord (the Kurtz path): abandon European frameworks entirely. The most dangerous and the most interesting endpoint.</li>
+                  <li>Transient phases: paths are not locked. If your rogue power grows sufficient, the Crown must negotiate with you rather than hunt you.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Core Systems</div>
+                <ul class="finding-bullets">
+                  <li>Translation as a mechanic &mdash; language barriers are real and consequential. Miscommunication with tribes produces outcomes the player did not intend.</li>
+                  <li>Tribal politics with genuine complexity: alliances, rivalries, territorial conflicts. The player enters a political environment that predates them and will outlast them.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Design Problem</div>
+                <ul class="finding-bullets">
+                  <li>This concept is enormous. Translation systems, tribal relationship graphs, three divergent path structures &mdash; any one of these would be a major system in another game.</li>
+                  <li>Needs a version that is 80% smaller &mdash; a proof of concept, not a full simulation.</li>
+                  <li>The Conquista is genuinely underexplored in games. This deserves to exist. The question is when and at what scale.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Influences</div>
+                <ul class="finding-bullets">
+                  <li>Apocalypse Now / Heart of Darkness &mdash; the gone-native path&#x2019;s psychological architecture.</li>
+                  <li>Crusader Kings III &mdash; faction diplomacy, shifting allegiances, personal ambition.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="gc-vibe">Love the setting. Hate the scope problem. Shelved, not cancelled.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
     <!-- ABOUT PANEL -->
     <div class="about-panel">
       <div class="about-header">// About This Portfolio</div>
@@ -2411,10 +2839,10 @@
 
 <footer>
   <div>Wendell Lancaster — QA Portfolio // Built with precision</div>
-  <div>Boston, MA &nbsp;·&nbsp; wendell91097@gmail.com &nbsp;·&nbsp; (228) 237-6193</div>
+  <div>Boston, MA &nbsp;·&nbsp; <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee998b808a8b8282d7dfded7d9ae89838f8782c08d8183">[email&#160;protected]</a> &nbsp;·&nbsp; (228) 237-6193</div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
   function toggleCard(card) {
     const wasExpanded = card.classList.contains('expanded');
@@ -2457,12 +2885,25 @@
     document.getElementById('count').textContent = visible;
   }
 
+  function toggleGcCard(card) {
+    const wasExpanded = card.classList.contains('gc-expanded');
+    document.querySelectorAll('.gc-doc').forEach(c => c.classList.remove('gc-expanded'));
+    if (!wasExpanded) card.classList.add('gc-expanded');
+  }
+
   // Tab switching
   function switchTab(tab) {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-    document.querySelector('.tab-btn[data-tab="' + tab + '"]').classList.add('active');
-    document.getElementById('panel-' + tab).classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === tab);
+    });
+    document.querySelectorAll('.tab-panel').forEach(p => {
+      p.classList.toggle('hidden', p.id !== 'panel-' + tab);
+    });
+    // Show/hide sidebar depending on tab
+    const sidebar = document.querySelector('.sidebar');
+    sidebar.style.display = tab === 'bugs' ? '' : 'none';
+    const mainGrid = document.querySelector('.main');
+    mainGrid.style.gridTemplateColumns = tab === 'bugs' ? '220px 1fr' : '1fr';
   }
 
 </script>
