@@ -698,7 +698,7 @@
     "Reflection displays Trevor as beardless despite beard being applied to the active model"
   ],
   "video_url": "",
-  "video_text": "Add YouTube link here"
+  "video_text": "Clip lost — believed patched in a subsequent update. Reproduction unsuccessful after 1hr of attempts."
 },
 {
   "id": "027",
@@ -754,5 +754,88 @@
   ],
   "video_url": "https://www.youtube.com/watch?v=w1D3_8iXW1Y",
   "video_text": "Add YouTube link here"
-}
+},
+  {
+    "id": "029",
+    "game": "dave_diver",
+    "game_name": "Dave the Diver",
+    "title": "Seahorse Race — NPC Racers Halt on Player Finish & No Auto-Resolve on Last Place",
+    "severity": "minor",
+    "type": "ai",
+    "type_display": "AI / Race State",
+    "description": "Two distinct behavioral defects in the seahorse racing minigame. (A) NPC competitor seahorses immediately cease all movement and freeze in place the moment the player crosses the finish line, regardless of their current race position. Racers that should logically continue competing for 2nd and 3rd place are instead fully deactivated by the player's finish event — indicating the race simulation is entirely player-state-driven with no independent NPC continuation logic. (B) If the player finishes in last place, the game does not trigger an automatic loss or end-race resolution. The player is left stationary at the finish line while the race remains in an unresolved state, requiring manual input to exit.",
+    "tags": [
+      "AI",
+      "Race State",
+      "NPC",
+      "State Management",
+      "Loss Condition",
+      "Multi-Bug"
+    ],
+    "reproduction_steps": [
+      "Enter a seahorse race minigame",
+      "Path A — Finish in any non-last position: observe NPC racers freeze immediately on player crossing the finish line despite being mid-race",
+      "NPC seahorses have no continuation logic — they are fully deactivated by the player finish event",
+      "Path B — Finish in last place: observe that no automatic loss condition or end-race sequence triggers",
+      "Player remains at finish line in unresolved race state — manual input required to exit"
+    ],
+    "video_url": "",
+    "video_text": "Clip pending upload"
+  },
+  {
+    "id": "030",
+    "game": "dave_diver",
+    "game_name": "Dave the Diver",
+    "title": "Ellie Dialogue Reappearance — Orphaned Script Continuation Outside Call UI",
+    "severity": "visual",
+    "type": "ai",
+    "type_display": "AI / Dialogue State",
+    "description": "Following a multi-call dialogue chain — Dave calls Ellie for stingray bait ingredients, receives the list, hangs up; calls again to confirm he has the ingredients, receives the bait, hangs up; calls Udo to relay the acquisition — Ellie reappears on screen without a phone call UI wrapper to deliver additional dialogue about a baby whale sighting. The content and delivery timing suggest this is a continuation of Ellie's original call script that lost its UI context during the call chain rather than a discrete new interaction. Root cause is likely a queued dialogue trigger that fired correctly but failed to instantiate the associated phone call interface, leaving the script contents surfaced without a UI container. Note: classified as inconclusive pending further reproduction — the sequence may be intentional scripting that bypasses the call UI by design.",
+    "tags": [
+      "AI",
+      "Dialogue State",
+      "UI",
+      "Script Trigger",
+      "Call Chain",
+      "Inconclusive"
+    ],
+    "reproduction_steps": [
+      "Initiate Dave's call to Ellie regarding stingray bait — receive ingredient list, call ends",
+      "Acquire the listed ingredients",
+      "Call Ellie again to confirm acquisition — receive stingray bait, call ends",
+      "Call Udo to relay stingray bait acquisition — call ends",
+      "Observe Ellie reappearing on screen without a phone call UI to deliver baby whale sighting dialogue",
+      "Note whether content appears to be a continuation of the original stingray call script"
+    ],
+    "video_url": "",
+    "video_text": "Clip pending upload"
+  },
+  {
+    "id": "031",
+    "game": "days_gone",
+    "game_name": "Days Gone",
+    "title": "Bird Loot Prompt — Deacon Clips Through Truck Bed Geometry",
+    "severity": "visual",
+    "type": "collision",
+    "type_display": "Collision / Animation",
+    "description": "After using a melee attack to kill a bird that had landed on a pickup truck, the bird's corpse fell into the truck bed. Initiating the loot prompt while standing at the rear of the truck caused Deacon to clip partially through the truck bed geometry during the looting animation. The loot anchor point appears to have been placed at the bird's position inside the truck bed without checking for intervening geometry between the player and the item, causing the character model to phase through the truck's rear panel to reach it.",
+    "tags": [
+      "Collision",
+      "Animation",
+      "Loot Anchor",
+      "Character Clip",
+      "Geometry",
+      "Deacon"
+    ],
+    "reproduction_steps": [
+      "Locate a bird that has landed on a pickup truck",
+      "Kill the bird using a melee attack — bird corpse falls into truck bed",
+      "Position player at the rear of the truck",
+      "Initiate loot prompt on the bird corpse",
+      "Deacon's model clips through the truck bed rear panel during the looting animation",
+      "Loot anchor resolves to the bird's in-bed position without geometry collision check between player and item"
+    ],
+    "video_url": "",
+    "video_text": "Clip pending upload"
+  }
 ]

@@ -257,6 +257,8 @@
   .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }
   .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }
   .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }
+  .game-dave-diver{ background: rgba(0,200,220,0.1);    color: #00c8dc; }
+  .game-days-gone { background: rgba(180,120,40,0.15);  color: #c8902a; }
 
   /* EXPANDED DETAIL — BUG */
   .bug-detail {
@@ -450,8 +452,8 @@
 
   .gc-doc-col-main { display: flex; flex-direction: column; gap: 4px; }
   .gc-title {
-    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px;
-    color: var(--text); line-height: 1.2;
+    font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px;
+    color: var(--text); line-height: 1.2; letter-spacing: 0.02em;
   }
   .gc-flagship .gc-title { color: var(--accent); }
   .gc-subtitle { font-size: 10px; color: var(--text-dim); letter-spacing: 0.04em; }
@@ -518,6 +520,13 @@
   .gc-link-btn:hover { color: var(--accent); border-color: var(--accent); }
   .gc-link-btn.gc-link-primary { color: var(--accent); border-color: rgba(232,255,71,0.4); }
   .gc-link-btn.gc-link-primary:hover { border-color: var(--accent); }
+  .gc-roster-toggle {
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    background: none; border: 1px solid var(--border-bright); color: var(--text-dim);
+    padding: 2px 8px; border-radius: 3px; cursor: pointer; margin-left: 8px;
+    vertical-align: middle; transition: color 0.15s, border-color 0.15s;
+  }
+  .gc-roster-toggle:hover { color: var(--accent); border-color: var(--accent); }
   .gc-vibe {
     font-size: 12px; color: var(--accent); opacity: 0.9;
     border-top: 1px solid var(--border); padding-top: 14px;
@@ -553,12 +562,12 @@
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item">
-    <div class="stat-value">28</div>
+    <div class="stat-value">31</div>
     <div class="stat-label">Documented Bugs</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">12</div>
-    <div class="stat-label">AAA Titles Tested</div>
+    <div class="stat-value">15</div>
+    <div class="stat-label">Titles Tested</div>
   </div>
   <div class="stat-item">
     <div class="stat-value">100+</div>
@@ -583,7 +592,7 @@
     <div class="sidebar-section">
       <div class="sidebar-label">Filter by Game</div>
       <button class="filter-btn active" onclick="filterBugs('all', this)">
-        All Bugs <span class="filter-count">28</span>
+        All Bugs <span class="filter-count">31</span>
       </button>
       <button class="filter-btn" onclick="filterBugs('ds3', this)">
         <span>Dark Souls III</span>
@@ -637,6 +646,14 @@
         <span>The Invincible</span>
         <span class="filter-count">1</span>
       </button>
+      <button class="filter-btn" onclick="filterBugs('dave_diver', this)">
+        <span>Dave the Diver</span>
+        <span class="filter-count">2</span>
+      </button>
+      <button class="filter-btn" onclick="filterBugs('days_gone', this)">
+        <span>Days Gone</span>
+        <span class="filter-count">1</span>
+      </button>
     </div>
 
     <div class="sidebar-section">
@@ -667,7 +684,7 @@
       </button>
       <button class="filter-btn" onclick="filterBugs('collision', this)">
         Collision / Physics
-        <span class="filter-count">6</span>
+        <span class="filter-count">7</span>
       </button>
       <button class="filter-btn" onclick="filterBugs('rendering', this)">
         Rendering / LOD
@@ -675,7 +692,7 @@
       </button>
       <button class="filter-btn" onclick="filterBugs('ai', this)">
         AI / Pathing
-        <span class="filter-count">5</span>
+        <span class="filter-count">7</span>
       </button>
       <button class="filter-btn" onclick="filterBugs('physics', this)">
         Physics
@@ -694,14 +711,14 @@
     <!-- TABS -->
     <div class="tab-bar">
       <button class="tab-btn active" data-tab="bugs" onclick="switchTab('bugs')">// Bug Reports</button>
-      <button class="tab-btn" data-tab="game-concepts" onclick="switchTab('game-concepts')">// Game Concepts <span style="font-size:10px; opacity:0.6">(6)</span></button>
+      <button class="tab-btn" data-tab="game-concepts" onclick="switchTab('game-concepts')">// Game Concepts <span style="font-size:10px; opacity:0.6">(7)</span></button>
       <button class="tab-btn" data-tab="case-studies" onclick="switchTab('case-studies')">// Case Studies <span style="font-size:10px; opacity:0.6">(1)</span></button>
     </div>
 
     <!-- BUG REPORTS PANEL -->
     <div class="tab-panel" id="panel-bugs">
       <div class="content-header">
-        <div class="result-count">Showing <span id="count">28</span> of 28 reports</div>
+        <div class="result-count">Showing <span id="count">31</span> of 31 reports</div>
       </div>
       <div class="bug-list" id="bugList">
 
@@ -2109,8 +2126,7 @@
           
           <div class="video-placeholder">
             <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">Add YouTube link here</a>
+            <span style="color:var(--text-dim); font-size:11px; line-height:1.7;">Clip lost — believed patched in a subsequent update.<br>Reproduction unsuccessful after 1hr of attempts.</span>
           </div>
         </div>
       </div>
@@ -2224,6 +2240,113 @@
           </div>
         </div>
       </div>
+
+      <div class="bug-card" data-game="dave_diver" data-severity="minor" data-type="ai" onclick="toggleCard(this)" style="animation-delay:0.05s">
+        <div class="bug-card-header">
+          <div class="bug-id">#029</div>
+          <div class="game-tag game-dave-diver">Dave the Diver</div>
+          <div class="bug-title-text">Seahorse Race — NPC Racers Halt on Player Finish &amp; No Auto-Resolve on Last Place</div>
+          <div class="bug-type">AI / Race State</div>
+          <div class="severity-badge sev-minor">Minor</div>
+        </div>
+        <div class="bug-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-section-title">Description</div>
+              <p class="detail-text">Two distinct behavioral defects in the seahorse racing minigame. (A) NPC competitor seahorses immediately cease all movement and freeze in place the moment the player crosses the finish line, regardless of their current race position. Racers that should logically continue competing for 2nd and 3rd place are instead fully deactivated by the player's finish event — indicating the race simulation is entirely player-state-driven with no independent NPC continuation logic. (B) If the player finishes in last place, the game does not trigger an automatic loss or end-race resolution. The player is left stationary at the finish line while the race remains in an unresolved state, requiring manual input to exit.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Race State</span><span class="chip">NPC</span><span class="chip">State Management</span><span class="chip">Loss Condition</span><span class="chip">Multi-Bug</span></div>
+            </div>
+            <div>
+              <div class="detail-section-title">Reproduction Steps</div>
+              <ul class="repro-steps">
+                <li class="repro-step"><span class="step-num">01</span><span>Enter a seahorse race minigame</span></li>
+                <li class="repro-step"><span class="step-num">02</span><span>Path A — Finish in any non-last position: observe NPC racers freeze immediately on player crossing the finish line despite being mid-race</span></li>
+                <li class="repro-step"><span class="step-num">03</span><span>NPC seahorses have no continuation logic — they are fully deactivated by the player finish event</span></li>
+                <li class="repro-step"><span class="step-num">04</span><span>Path B — Finish in last place: observe that no automatic loss condition or end-race sequence triggers</span></li>
+                <li class="repro-step"><span class="step-num">05</span><span>Player remains at finish line in unresolved race state — manual input required to exit</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-section-title">Clip</div>
+          <div class="video-placeholder">
+            <div class="video-icon">▶</div>
+            <span>Clip pending upload</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bug-card" data-game="dave_diver" data-severity="visual" data-type="ai" onclick="toggleCard(this)" style="animation-delay:0.10s">
+        <div class="bug-card-header">
+          <div class="bug-id">#030</div>
+          <div class="game-tag game-dave-diver">Dave the Diver</div>
+          <div class="bug-title-text">Ellie Dialogue Reappearance — Orphaned Script Continuation Outside Call UI</div>
+          <div class="bug-type">AI / Dialogue State</div>
+          <div class="severity-badge sev-visual">Visual</div>
+        </div>
+        <div class="bug-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-section-title">Description</div>
+              <p class="detail-text">Following a multi-call dialogue chain — Dave calls Ellie for stingray bait ingredients, receives the list, hangs up; calls again to confirm he has the ingredients, receives the bait, hangs up; calls Udo to relay the acquisition — Ellie reappears on screen without a phone call UI wrapper to deliver additional dialogue about a baby whale sighting. The content and delivery timing suggest this is a continuation of Ellie's original call script that lost its UI context during the call chain rather than a discrete new interaction. Root cause is likely a queued dialogue trigger that fired correctly but failed to instantiate the associated phone call interface, leaving the script contents surfaced without a UI container. Note: classified as inconclusive pending further reproduction — the sequence may be intentional scripting that bypasses the call UI by design.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Dialogue State</span><span class="chip">UI</span><span class="chip">Script Trigger</span><span class="chip">Call Chain</span><span class="chip">Inconclusive</span></div>
+            </div>
+            <div>
+              <div class="detail-section-title">Reproduction Steps</div>
+              <ul class="repro-steps">
+                <li class="repro-step"><span class="step-num">01</span><span>Initiate Dave's call to Ellie regarding stingray bait — receive ingredient list, call ends</span></li>
+                <li class="repro-step"><span class="step-num">02</span><span>Acquire the listed ingredients</span></li>
+                <li class="repro-step"><span class="step-num">03</span><span>Call Ellie again to confirm acquisition — receive stingray bait, call ends</span></li>
+                <li class="repro-step"><span class="step-num">04</span><span>Call Udo to relay stingray bait acquisition — call ends</span></li>
+                <li class="repro-step"><span class="step-num">05</span><span>Observe Ellie reappearing on screen without a phone call UI to deliver baby whale sighting dialogue</span></li>
+                <li class="repro-step"><span class="step-num">06</span><span>Note whether content appears to be a continuation of the original stingray call script</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-section-title">Clip</div>
+          <div class="video-placeholder">
+            <div class="video-icon">▶</div>
+            <span>Clip pending upload</span>
+          </div>
+        </div>
+      </div>
+
+      </div>
+
+      <div class="bug-card" data-game="days_gone" data-severity="visual" data-type="collision" onclick="toggleCard(this)" style="animation-delay:0.15s">
+        <div class="bug-card-header">
+          <div class="bug-id">#031</div>
+          <div class="game-tag game-days-gone">Days Gone</div>
+          <div class="bug-title-text">Bird Loot Prompt — Deacon Clips Through Truck Bed Geometry</div>
+          <div class="bug-type">Collision / Animation</div>
+          <div class="severity-badge sev-visual">Visual</div>
+        </div>
+        <div class="bug-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-section-title">Description</div>
+              <p class="detail-text">After using a melee attack to kill a bird that had landed on a pickup truck, the bird's corpse fell into the truck bed. Initiating the loot prompt while standing at the rear of the truck caused Deacon to clip partially through the truck bed geometry during the looting animation. The loot anchor point appears to have been placed at the bird's position inside the truck bed without checking for intervening geometry between the player and the item, causing the character model to phase through the truck's rear panel to reach it.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">Collision</span><span class="chip">Animation</span><span class="chip">Loot Anchor</span><span class="chip">Character Clip</span><span class="chip">Geometry</span><span class="chip">Deacon</span></div>
+            </div>
+            <div>
+              <div class="detail-section-title">Reproduction Steps</div>
+              <ul class="repro-steps">
+                <li class="repro-step"><span class="step-num">01</span><span>Locate a bird that has landed on a pickup truck</span></li>
+                <li class="repro-step"><span class="step-num">02</span><span>Kill the bird using a melee attack — bird corpse falls into truck bed</span></li>
+                <li class="repro-step"><span class="step-num">03</span><span>Position player at the rear of the truck</span></li>
+                <li class="repro-step"><span class="step-num">04</span><span>Initiate loot prompt on the bird corpse</span></li>
+                <li class="repro-step"><span class="step-num">05</span><span>Deacon's model clips through the truck bed rear panel during the looting animation</span></li>
+                <li class="repro-step"><span class="step-num">06</span><span>Loot anchor resolves to the bird's in-bed position without geometry collision check between player and item</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-section-title">Clip</div>
+          <div class="video-placeholder">
+            <div class="video-icon">▶</div>
+            <span>Clip pending upload</span>
+          </div>
+        </div>
+      </div>
+
       </div>
     </div>
 
@@ -2486,15 +2609,15 @@
 
       <div class="gc-list">
 
-        <!-- GC-007: WORDSMITH -->
+        <!-- GC-001: WORDSMITH -->
         <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.02s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id">
-              <div class="gc-index">GC-007</div>
+              <div class="gc-index">GC-001</div>
               <div class="gc-expand-hint">&#9658; expand</div>
             </div>
             <div class="gc-doc-col-main">
-              <div class="gc-title">Wordsmith</div>
+              <div class="gc-title">WordSmith</div>
               <div class="gc-subtitle">Word Puzzle &middot; Letter Grid &middot; Pure Systems</div>
             </div>
             <div class="gc-doc-col-meta">
@@ -2511,8 +2634,8 @@
               <div class="gc-doc-section">
                 <div class="finding-label">Core Loop</div>
                 <ul class="finding-bullets">
-                  <li>The player navigates a letter grid ranging from 4&times;4 to 8&times;8 and traces valid words in any direction &mdash; horizontal, vertical, diagonal &mdash; without reusing the same letter twice per word.</li>
-                  <li>Valid words remove their letters from the grid. The tiles above cascade down to fill the gap, Tetris-style. New letters generate from the top to keep the grid full at all times &mdash; the player never sees a half-empty board.</li>
+                  <li>The player navigates a letter grid ranging from 4&times;4 to 8&times;8 and traces valid words in any direction (horizontal, vertical, diagonal) without reusing the same letter twice per word.</li>
+                  <li>Valid words remove their letters from the grid. The tiles above cascade down to fill the gap, Tetris-style. New letters generate from the top to keep the grid full. The player never sees a half-empty board.</li>
                   <li>The Wordsmith hammer is a targeted tool: the player can use it to remove specific letters from the grid independently of word-making, creating space or breaking up bad distributions.</li>
                   <li>Shuffle resets the grid entirely when the current layout is unworkable.</li>
                 </ul>
@@ -2531,7 +2654,7 @@
                   <li>Retro pixel art aesthetic throughout, with parallax backgrounds sourced from open licensed assets with attribution. Settings allow music, SFX, and background swaps from the start screen.</li>
                   <li>Built in Godot. Released August 22, 2024. Windows desktop download, no installation required.</li>
                   <li>The cascade mechanic changes the strategic calculus compared to static-grid word games: clearing a cluster reshapes the board, creating new adjacencies and new problems simultaneously.</li>
-                  <li>The hammer gives the player agency over board state without requiring a full shuffle &mdash; a small tool that adds meaningful tactical decision-making without complicating the core loop.</li>
+                  <li>The hammer gives the player agency over board state without requiring a full shuffle. It adds meaningful tactical decision-making without complicating the core loop.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
@@ -2547,16 +2670,16 @@
           </div>
         </div>
 
-        <!-- GC-006: IMMORTAL COIL — FLAGSHIP -->
+        <!-- GC-002: IMMORTAL COIL — FLAGSHIP -->
         <div class="gc-doc gc-flagship" onclick="toggleGcCard(this)" style="animation-delay:0.05s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id">
-              <div class="gc-index">GC-006</div>
+              <div class="gc-index">GC-002</div>
               <div class="gc-expand-hint">&#9658; expand</div>
             </div>
             <div class="gc-doc-col-main">
               <div class="gc-title">Immortal Coil</div>
-              <div class="gc-subtitle">Isometric Boxing &middot; Dystopian Arena Drama &middot; Transhumanist Horror</div>
+              <div class="gc-subtitle">Pattern-Recognition Combat &middot; Dystopian Arena Drama &middot; Transhumanist Horror</div>
             </div>
             <div class="gc-doc-col-meta">
               <span class="gc-flagship-badge">&#9733; Flagship</span>
@@ -2564,55 +2687,55 @@
             </div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">All humans are immortal. The worst criminals are made to fight in arenas for public amusement. Win five championships and you earn the only thing anyone in this society still wants: the right to die.</div>
-
+            <div class="gc-doc-pitch">All humans are immortal. The worst criminals fight in arenas for public amusement. Win five championships and earn the only thing anyone in this society still wants: the right to die. You see it all through your own eyes &mdash; what&#x2019;s left of them.</div>
             <div class="gc-doc-grid">
               <div class="gc-doc-section">
                 <div class="finding-label">Core Premise</div>
                 <ul class="finding-bullets">
-                  <li>A technologically immortal society has eliminated death &mdash; except as a prize. The arena system exists not merely as punishment but as the only culturally sanctioned exit from existence.</li>
-                  <li>The player character is a convicted criminal assigned to the Neo-Gladiator circuit. Bodies heal between bouts. Mental deterioration does not.</li>
-                  <li>The champion is treated near-royally and must defend their title annually. Only a champion of sufficient consecutive victories earns the most coveted right in the world: self-euthanasia.</li>
-                  <li>Spectators in the stands are prisoners of a different kind &mdash; trapped in a system so ancient and so technically incomprehensible that no one alive knows how to dismantle it. They watch because the alternative is confronting something they did not build and cannot unmake.</li>
+                  <li>A technologically immortal society has eliminated death &mdash; except as a prize. The arena system is the only culturally sanctioned exit from existence. Spectators are prisoners of a different kind, trapped in a system so ancient and technically incomprehensible that no one alive knows how to dismantle it.</li>
+                  <li>The player is a convicted criminal in the Neo-Gladiator circuit. Bodies heal between bouts. Mental deterioration does not. Every augmentation you accept makes you more competitive and less yourself. You feel that erosion from the inside.</li>
+                  <li>Win five championships and earn the most coveted right in the world: self-euthanasia. The circuit runs through three tiers (Minor, Major, World), each escalating in opponent complexity, augmentation density, and what it costs to keep winning.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">Mechanics</div>
                 <ul class="finding-bullets">
-                  <li>Isometric / 2.5D top-down perspective. Full kinetic movement vocabulary: dodge, duck, sidestep, backpedal, close in, hook, jab, uppercut, feint.</li>
-                  <li>Cybernetic augmentations upgradeable between bouts &mdash; the tension between optimizing the body and losing what remains of selfhood is mechanical, not just thematic.</li>
-                  <li>Massive prison transportation system as the connective tissue between fights: the world seen through convoy windows, loading docks, holding cells.</li>
-                  <li>Mental degradation modeled over time &mdash; early fights feel sharp; later fights feel like swimming through static.</li>
+                  <li>First-person, optionally VR. You look out through eyes that used to be yours. Your hands in front of you are chrome. You cannot look away from what you&#x2019;ve become.</li>
+                  <li>Full ring mobility: sidestep, backpedal, close distance, cut angles. Not a fixed-position fighter. Footwork is tactical and positioning creates the windows the pattern system requires.</li>
+                  <li>Punch-Out DNA: opponents run on readable, repeatable patterns. The game is a puzzle. Each fighter is a cypher with a solution. Cybernetic augmentations are the tell system: a HUD ping reading TARGET LOCKED, steam venting from a joint before a power strike, an arm morphing visibly into a new attack configuration. The visual language is the gameplay.</li>
+                  <li>Player augmentations unlock between bouts, each a genuine tradeoff. Better reach, faster counters, harder hits. And each one another step toward the thing you&#x2019;re fighting to escape.</li>
+                  <li>Mental degradation modeled over time: early fights feel sharp and readable. Later fights accumulate visual noise, input lag on the HUD, tells that flicker rather than hold. The machine is winning even when you are.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">Thematic DNA</div>
                 <ul class="finding-bullets">
-                  <li>Post-modernist collapse of meaning: when death is abolished, what does life cost? The entire moral economy of society dissolves and has to be rebuilt around the arena.</li>
-                  <li>Dehumanization through spectacle &mdash; gladiatorial Rome refracted through transhumanist technology so advanced it has become indistinguishable from nature. No one built this world; it simply is.</li>
-                  <li>The apocalypse framework applied inward: not a ruined world but a ruined selfhood. Survival and identity in direct opposition.</li>
+                  <li>The complicity trap: every augmentation you accept is a vote for the system. The player is not a rebel. They are a product of the arena, becoming more legible to it with every upgrade.</li>
+                  <li>First person as horror: you cannot cut away from the hands. The detachment from your own body is not a cutscene &mdash; it is the camera.</li>
+                  <li>Post-modernist collapse of meaning: when death is abolished, what does life cost? The arena answers that question every night in front of a crowd that has nowhere else to be.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">Influences</div>
                 <ul class="finding-bullets">
-                  <li>Dark Souls &mdash; immortality as a curse rather than a gift; the hollow mechanic as a model for what repeated death costs the self over time.</li>
-                  <li>Disco Elysium &mdash; the collapse of a moral framework as both world-building and gameplay.</li>
-                  <li>Rollerball (1975) &mdash; sport as a tool of systemic dehumanization.</li>
-                  <li>Warhammer 40,000 &mdash; civilization sustained by technology so ancient and complex that maintaining it has become religious ritual; understanding it is no longer possible.</li>
-                  <li>Neon Genesis Evangelion &mdash; the psychic cost of doing what the machine requires of you.</li>
+                  <li>Punch-Out!! &mdash; pattern recognition as the entire design; opponents as puzzles with tells, not health bars to deplete.</li>
+                  <li>Dark Souls &mdash; immortality as a curse; the hollow mechanic as a model for what repeated survival costs the self over time.</li>
+                  <li>Disco Elysium &mdash; the collapse of a moral framework as both world-building and moment-to-moment gameplay.</li>
+                  <li>Rollerball (1975) &mdash; sport as a tool of systemic dehumanization; the crowd as the real antagonist.</li>
+                  <li>Warhammer 40,000 &mdash; civilization sustained by technology so ancient that maintaining it has become religious ritual; understanding it is no longer possible.</li>
+                  <li>Neon Genesis Evangelion &mdash; the psychic cost of doing what the machine requires; the body as something that happens to you.</li>
                 </ul>
               </div>
             </div>
-            <div class="gc-vibe">The arena combat loop gives QA something concrete to test against: does augmentation feel like a tradeoff or just a power increase? Does the mental decay mechanic actually change how the player fights, or is it cosmetic? Those are real design questions with answers, which means this is a real game. The 40K comparison is intentional &mdash; the point is that the horror comes from normalcy, not from anyone being a villain. That&#x2019;s a harder thing to get right, and I know it.</div>
+            <div class="gc-vibe">The arena combat loop gives QA something concrete to test against: does augmentation feel like a tradeoff or just a power increase? Does the mental decay mechanic actually change how the player reads tells, or is it cosmetic? Those are real design questions with answers, which means this is a real game. The first-person frame is not an aesthetic choice &mdash; it is the argument.</div>
           </div>
         </div>
 
-        <!-- GC-002: MANIFEST -->
+        <!-- GC-003: MANIFEST -->
         <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.08s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id">
-              <div class="gc-index">GC-002</div>
+              <div class="gc-index">GC-003</div>
               <div class="gc-expand-hint">&#9658; expand</div>
             </div>
             <div class="gc-doc-col-main">
@@ -2624,35 +2747,39 @@
             </div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">You have staked a claim on the frontier &mdash; a homestead at the crossroads of everything America is becoming. Every week someone new comes through. Some are running from something. Some are running toward something worth dying for. Every choice you make compounds. The country being built around you will remember what you did here.</div>
-
+            <div class="gc-doc-pitch">You have staked a claim on the frontier. A homestead at the crossroads of everything America is becoming. Every week someone new comes through. Some are running from something. Some are running toward something worth dying for. Every choice you make compounds. The country being built around you will remember what you did here.</div>
             <div class="gc-doc-grid">
               <div class="gc-doc-section">
                 <div class="finding-label">Core Premise &amp; Choice Architecture</div>
                 <ul class="finding-bullets">
-                  <li>The player is a fixed point while history moves through them. Choices are not isolated &mdash; they establish reputation, close doors, open others, and reshape the settlement growing around you over years of play. Think Fallout 1 and 2: decisions made in Act One are still paying out in Act Three.</li>
-                  <li>Factions accumulate organically. Side with the railroad and the town booms but the families who were here first get pushed out. Harbor the outlaw and the law stops cooperating; harbor too many and you have a different problem. Help the Underground Railroad and certain guests start arriving who would not otherwise trust you.</li>
-                  <li>This was a deeply Christian nation. The moral vocabulary of the era is scripture &mdash; charity, sanctuary, bearing false witness, rendering unto Caesar. The player&#x2019;s choices are framed in that language whether they want them to be or not. Turning someone away is not a neutral act.</li>
+                  <li>The player is a fixed point while history moves through them. Choices are not isolated events. They establish reputation, close doors, open others, and reshape the settlement growing around you over years of play. Think Fallout 1 and 2: decisions made in Act One are still paying out in Act Three.</li>
+                  <li>Factions accumulate organically. Side with the railroad and the town booms but the families who were here first get pushed out. Harbor the outlaw and the law stops cooperating; harbor too many and you have a different problem. Help the Underground Railroad and certain guests start arriving who would not otherwise trust you. But so will people who want to know who you&#x2019;ve been helping.</li>
                   <li>The newspaper mechanic: weeks and months later, the penny press brings word of people who passed through. Some made it. Some are on wanted posters. Some founded towns. Some names appear in obituaries with no next of kin listed.</li>
+                  <li>This was a deeply Christian nation. The moral vocabulary of the era is scripture: charity, sanctuary, bearing false witness, rendering unto Caesar. The player&#x2019;s choices are framed in that language whether they want them to be or not. Turning someone away is not a neutral act.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">The Guests Who Matter Most</div>
                 <ul class="finding-bullets">
-                  <li><strong>The Comanche</strong> &mdash; quiet, watchful, traveling under a name that is not his. His sister is missing &mdash; taken from her people, though whether she ran or was taken he does not know for certain. He knows the name of the man responsible. He needs one night&#x2019;s shelter and your silence. What do you do when the marshal comes asking the next morning?</li>
-                  <li><strong>The conductor</strong> &mdash; a freed Black man who speaks like an educated minister, which is exactly what he is. He is moving people north and needs to know if your homestead is safe. This is the moment the Underground Railroad either routes through you or does not &mdash; and that decision echoes through every Black traveler who arrives at your door for the rest of the game.</li>
-                  <li><strong>The teacher</strong> &mdash; heading to a mining camp that does not know it needs her yet. She carries a crate of books and more faith in people than the frontier has earned. Whether she makes it depends partly on what you tell her about the road ahead.</li>
+                  <li><strong>The Comanche</strong> &mdash; quiet, watchful, traveling under a name that is not his. His sister is missing, taken from her people, though whether she ran or was taken he does not know for certain. He needs one night&#x2019;s shelter and your silence. What do you do when the marshal comes asking the next morning?</li>
+                  <li><strong>The conductor</strong> &mdash; a freed Black man who speaks like an educated minister, which is exactly what he is. He is moving people north and needs to know if your homestead is safe. This is the moment the Underground Railroad either routes through you or does not. Route it through, and weeks later a rider comes at night with different intentions. Help enough people and the wrong people take notice.</li>
+                  <li><strong>The teacher</strong> &mdash; heading to a mining camp that does not know it needs her. She carries a crate of books and more faith in people than the frontier has earned. Whether she makes it depends partly on what you tell her about the road ahead.</li>
                   <li><strong>The pastor</strong> &mdash; road-worn, theologically complicated, genuinely kind. He will accept a free night&#x2019;s stay and leave something worth considerably more. He is also the one guest who will tell you, plainly, what he thinks you are doing wrong with your life. He is usually right.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
-                <div class="finding-label">The Fuller Roster</div>
-                <ul class="finding-bullets">
-                  <li>Outlaws and the lawmen hunting them &mdash; shelter and betrayal each carry a price, and the law is not always the more trustworthy of the two.</li>
-                  <li>Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators &mdash; each carrying a different idea of what America is supposed to mean and who it is supposed to be for.</li>
-                  <li>The missionary heading into territory everyone else is heading out of. The Army deserter who saw something he will not describe. The Pinkerton who is not here by accident.</li>
-                  <li>The Mexican family the law does not recognize as having rights to land they have worked for thirty years. The journalist writing the myth of the frontier while it is still being made.</li>
-                </ul>
+                <div class="finding-label">
+                  The Fuller Roster
+                  <button class="gc-roster-toggle" onclick="event.stopPropagation(); toggleRoster(this)" aria-expanded="false">&#9658; show</button>
+                </div>
+                <div class="gc-roster-body" style="display:none">
+                  <ul class="finding-bullets">
+                    <li>Outlaws and the lawmen hunting them &mdash; shelter and betrayal each carry a price, and the law is not always the more trustworthy of the two.</li>
+                    <li>Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators &mdash; each carrying a different idea of what America is supposed to mean and who it is supposed to be for.</li>
+                    <li>The missionary heading into territory everyone else is heading out of. The Army deserter who saw something he will not describe. The Pinkerton who is not here by accident.</li>
+                    <li>The Mexican family the law does not recognize as having rights to land they have worked for thirty years. The journalist writing the myth of the frontier while it is still being made.</li>
+                  </ul>
+                </div>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">Thematic DNA &amp; Influences</div>
@@ -2660,11 +2787,11 @@
                   <li>Manifest Destiny as the central tension: a national ideology written in scripture and enacted in blood, with the heroic and the self-interested arriving at your door in no particular order.</li>
                   <li>The question underneath every interaction: whose America are you building? And: does God have an opinion about that?</li>
                   <li>Fallout 1 &amp; 2, Fallout: New Vegas &mdash; long-consequence choice architecture, faction reputation, a world that changes shape around your decisions.</li>
-                  <li>Papers, Please &mdash; moral weight concentrated into a constrained interaction at a threshold. Red Dead Redemption 2 &mdash; the frontier as a world in the process of being lost. Deadwood (HBO) &mdash; the actual texture of frontier society: multilingual, violent, commercial, funny, and building itself from nothing.</li>
+                  <li>Papers, Please &mdash; moral weight at a threshold. Red Dead Redemption 2 &mdash; the frontier being lost. Deadwood (HBO) &mdash; multilingual, violent, commercial, funny, building itself from nothing.</li>
                 </ul>
               </div>
             </div>
-            <div class="gc-vibe">The gap this fills is pretty straightforward: faction reputation systems in games like New Vegas are excellent, but you&#x2019;re always the one moving through the world. Flipping that &mdash; you&#x2019;re stationary, the world moves through you &mdash; is a structural difference that changes what choices mean. Papers Please proved the threshold mechanic works. This is what happens when you build a whole world around it instead of a border checkpoint.</div>
+            <div class="gc-vibe">The gap this fills is pretty straightforward: faction reputation systems in games like New Vegas are excellent, but you&#x2019;re always the one moving through the world. Flip it and you&#x2019;re stationary while the world moves through you. That&#x2019;s a structural difference that changes what choices mean. Papers Please proved the threshold mechanic works. This is what happens when you build a whole world around it instead of a border checkpoint.</div>
           </div>
         </div>
 
@@ -2689,26 +2816,26 @@
               <div class="gc-doc-section">
                 <div class="finding-label">Core Premise</div>
                 <ul class="finding-bullets">
-                  <li>A mystery visual novel applying full noir investigation structure &mdash; evidence, cross-examination, witness contradiction &mdash; to playground-scale crimes.</li>
+                  <li>A mystery visual novel applying full noir investigation structure (evidence, cross-examination, witness contradiction) to playground-scale crimes.</li>
                   <li>The cast is built from archetypes: the Bookworm, the Wrestler, the Baseball Kid, the Theatre Kid. Each has its own testimony style, blind spots, and agenda.</li>
                   <li>The specimen case: two kids have cookie crumbs on their shirts. The answer: they shared it. Both guilty. Both innocent. Wholesome resolution mandatory.</li>
-                  <li>Every case resolves without permanent harm. The noir trappings are the comedy &mdash; the darkness is borrowed, the warmth is earned.</li>
+                  <li>Every case resolves without permanent harm. The noir trappings are the comedy. The darkness is borrowed, the warmth is earned.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">Mechanics</div>
                 <ul class="finding-bullets">
                   <li>Ace Attorney investigation and cross-examination loop adapted for an audience-appropriate tone.</li>
-                  <li>Unreliable witness system: children misremember, exaggerate, lie to protect friends, and confabulate entirely. The challenge isn&#x2019;t finding the guilty party &mdash; it&#x2019;s figuring out which truth is true.</li>
+                  <li>Unreliable witness system: children misremember, exaggerate, lie to protect friends, and confabulate entirely. The challenge isn&#x2019;t finding the guilty party. It&#x2019;s figuring out which truth is true.</li>
                   <li>Scalable case structure: each case functions as a standalone episode.</li>
-                  <li>Red herrings are mechanically embedded &mdash; evidence that looks damning leads to a different, more innocent explanation.</li>
+                  <li>Red herrings are mechanically embedded: evidence that looks damning leads to a different, more innocent explanation.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">Thematic DNA</div>
                 <ul class="finding-bullets">
                   <li>The comedy of applied seriousness: treating missing cookies with investigative gravity produces the game&#x2019;s entire tonal register.</li>
-                  <li>Childhood moral reasoning &mdash; sharing as absolution, honesty without cruelty, guilt without shame.</li>
+                  <li>Childhood moral reasoning: sharing as absolution, honesty without cruelty, guilt without shame.</li>
                   <li>The subversion of noir cynicism: here, truth is sweet and people are trying their best.</li>
                 </ul>
               </div>
@@ -2721,7 +2848,7 @@
                 </ul>
               </div>
             </div>
-            <div class="gc-vibe">Ace Attorney is 22 years old and nobody has made a wholesome version for a younger audience. That&#x2019;s a gap. The unreliable witness system isn&#x2019;t just a gimmick &mdash; it&#x2019;s the entire design. Children don&#x2019;t lie the way adults lie; they misremember, they protect people, they confabulate completely. Building an investigation loop around that specific truth is what separates this from a reskin.</div>
+            <div class="gc-vibe">Ace Attorney is 22 years old and nobody has made a wholesome version for a younger audience. That&#x2019;s a gap. The unreliable witness system isn&#x2019;t a gimmick. It&#x2019;s the entire design. Children don&#x2019;t lie the way adults lie; they misremember, they protect people, they confabulate completely. Building an investigation loop around that specific truth is what separates this from a reskin.</div>
           </div>
         </div>
 
@@ -2746,7 +2873,7 @@
               <div class="gc-doc-section">
                 <div class="finding-label">Core Premise</div>
                 <ul class="finding-bullets">
-                  <li>The player is a marriage counselor to swan couples &mdash; literal swans, with the biology of lifelong monogamy built in. These animals have no choice about who they&#x2019;re bound to.</li>
+                  <li>The player is a marriage counselor to swan couples. Literal swans, with the biology of lifelong monogamy built in. These animals have no choice about who they&#x2019;re bound to.</li>
                   <li>Sessions explore the fault lines of long commitment: the distance that opens between people who grow in different directions; the resentment of a promise made without full information.</li>
                   <li>The subversion of the dating sim: dating sims are about the beginning of love. This game is about what happens after the win, when the romance has become a life and the life has become complicated.</li>
                 </ul>
@@ -2756,14 +2883,14 @@
                 <ul class="finding-bullets">
                   <li>Determinism vs. choice: swans are biologically determined to stay. Humans choose to. What does that difference mean for the moral weight of commitment?</li>
                   <li>The problem of the self over time: the person you promised yourself to at 22 is not the person in front of you at 47.</li>
-                  <li>Aging as a theme rather than a backdrop &mdash; the game is explicitly about couples who have been together long enough to become strangers to each other.</li>
+                  <li>Aging as a theme rather than a backdrop. The game is explicitly about couples who have been together long enough to become strangers to each other.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">Influences</div>
                 <ul class="finding-bullets">
                   <li>Florence &mdash; visual novel about the emotional reality of a relationship over time, not just its peak.</li>
-                  <li>Richard Linklater&#x2019;s Before trilogy &mdash; the weight of two people talking honestly over years.</li>
+                  <li>The Sopranos &mdash; therapy as a tool for self-reflection, metamorphosis, ideation, and sometimes delusion. Tony Soprano did not want to get better; he wanted permission to stay the same. Some of these swans have the same problem.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
@@ -2774,34 +2901,34 @@
                 </ul>
               </div>
             </div>
-            <div class="gc-vibe">Low asset count, strong festival profile, and a demographic &mdash; people in long relationships &mdash; that games mostly ignore. The swan framing isn&#x2019;t cute window dressing; it&#x2019;s the central mechanical question. Swans don&#x2019;t choose to stay. The player&#x2019;s job is to help couples who do choose work through what that costs. That&#x2019;s a different emotional register than anything currently in the visual novel space.</div>
+            <div class="gc-vibe">Low asset count, strong festival profile, and a demographic that games mostly ignore: people in long relationships. The swan framing isn&#x2019;t cute window dressing; it&#x2019;s the central mechanical question. Swans don&#x2019;t choose to stay. The player&#x2019;s job is to help couples who do choose work through what that costs. That&#x2019;s a different emotional register than anything currently in the visual novel space.</div>
           </div>
         </div>
 
-        <!-- GC-001: WINTER STORM -->
+        <!-- GC-006: WINTER STORM -->
         <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.17s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id">
-              <div class="gc-index">GC-001</div>
+              <div class="gc-index">GC-006</div>
               <div class="gc-expand-hint">&#9658; expand</div>
             </div>
             <div class="gc-doc-col-main">
               <div class="gc-title">Winter Storm</div>
-              <div class="gc-subtitle">Tactical Stealth Action &middot; Arctic Espionage &middot; MGS Framework</div>
+              <div class="gc-subtitle">PVP Extraction Shooter &middot; Arctic Blizzard &middot; Strategic Infiltration &amp; Exfiltration</div>
             </div>
             <div class="gc-doc-col-meta">
               <span class="gc-stage-badge gc-stage-concept">Concept</span>
             </div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">Tactical stealth action in Arctic blizzards. Snowmobile exfiltration. Thermals and heartbeat sensors cut through whiteout conditions. Every footprint you leave can be tracked.</div>
+            <div class="gc-doc-pitch">A PVP extraction shooter set in Arctic blizzards. Squads infiltrate, locate the objective, and fight their way out. The storm is not the enemy &mdash; the other team is. Every footprint you leave can be tracked. Every footprint they leave can too.</div>
             <div class="gc-doc-grid">
               <div class="gc-doc-section">
                 <div class="finding-label">Core Systems</div>
                 <ul class="finding-bullets">
                   <li>The blizzard is not a hazard &mdash; it is cover. Whiteout conditions that blind the enemy also blind sensors, create acoustic interference, and mask heat signatures.</li>
                   <li>Snowmobile exfiltration as a set-piece mechanic: the stealth infiltration ends; the high-speed extraction begins.</li>
-                  <li>Thermal imaging and heartbeat sensors as detection tools &mdash; enemy counters to the blizzard cover create cat-and-mouse between environmental concealment and technological detection.</li>
+                  <li>Thermal imaging and heartbeat sensors as detection tools. Enemy use of them forces cat-and-mouse between environmental concealment and technological detection.</li>
                   <li>Footprint persistence: snow records movement. Players must plan routes considering what evidence they leave behind.</li>
                 </ul>
               </div>
@@ -2810,25 +2937,27 @@
                 <ul class="finding-bullets">
                   <li>The aesthetic is fully realized. The setting is evocative. The mechanical hooks are genuinely interesting.</li>
                   <li>Missing: a narrative reason to care. Metal Gear works not because of its stealth mechanics but because Kojima built a mythology around them.</li>
-                  <li>Current status: shelved pending a narrative hook that elevates it from &#x201C;cool aesthetic game&#x201D; to a game with something to say.</li>
+                  <li>Current status: the PVP extraction framing solves the original narrative problem: the other squad is the story. Revisiting.</li>
                 </ul>
               </div>
               <div class="gc-doc-section">
                 <div class="finding-label">Influences</div>
                 <ul class="finding-bullets">
-                  <li>Metal Gear Solid series &mdash; tactical espionage, gadget economy, environmental stealth.</li>
+                  <li>Metal Gear Solid series &mdash; gadget economy, environmental stealth, the idea that preparation is half the mission.</li>
+                  <li>Call of Duty: MW2 &mdash; the snowmobile chase and Cliffhanger mission specifically; proof that an arctic infiltration set piece can be genuinely cinematic without sacrificing player agency.</li>
+                  <li>Escape from Tarkov &mdash; the tension architecture of extraction: you brought good gear in, now you have to get it out.</li>
                 </ul>
               </div>
             </div>
-            <div class="gc-vibe">The environmental stealth systems are solid and the footprint mechanic is genuinely underused in the genre. Shelved because mechanics without a reason to care are just a tech demo. Will revisit when the narrative hook shows up.</div>
+            <div class="gc-vibe">The extraction shooter market is crowded but nobody has committed to a full blizzard environment as a core design pillar, not a weather effect. It is the entire tactical premise. The footprint mechanic alone differentiates this from Tarkov. Revisiting with the PVP frame.</div>
           </div>
         </div>
 
-        <!-- GC-003: CONQUISTADOR SIM -->
+        <!-- GC-007: CONQUISTADOR SIM -->
         <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.20s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id">
-              <div class="gc-index">GC-003</div>
+              <div class="gc-index">GC-007</div>
               <div class="gc-expand-hint">&#9658; expand</div>
             </div>
             <div class="gc-doc-col-main">
@@ -2840,12 +2969,12 @@
             </div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">You are a Spanish explorer in the New World. Work for the Crown, defect and lead a revolution like Cort&#xe9;s, or go native and become a warlord &mdash; navigating tribal politics, language barriers, shifting allegiances, and a continent that is trying to kill you.</div>
+            <div class="gc-doc-pitch">You are a Spanish explorer in the New World. Work for the Crown, defect and lead a revolution like Cort&#xe9;s, or go native and become a warlord, navigating tribal politics, language barriers, shifting allegiances, and a continent that is trying to kill you.</div>
             <div class="gc-doc-grid">
               <div class="gc-doc-section">
                 <div class="finding-label">Core Factions / Paths</div>
                 <ul class="finding-bullets">
-                  <li>Crown Loyalist: high demand, high reward. The institutional path &mdash; supplied, supported, and expendable.</li>
+                  <li>Crown Loyalist: high demand, high reward. The institutional path: supplied, supported, and expendable.</li>
                   <li>Renegade Revolutionary (the Cort&#xe9;s path): defection and conquest on personal terms. No supply lines, no safety net.</li>
                   <li>Gone Native / Warlord (the Kurtz path): abandon European frameworks entirely. The most dangerous and the most interesting endpoint.</li>
                   <li>Transient phases: paths are not locked. If your rogue power grows sufficient, the Crown must negotiate with you rather than hunt you.</li>
@@ -2870,11 +2999,60 @@
                 <div class="finding-label">Influences</div>
                 <ul class="finding-bullets">
                   <li>Apocalypse Now / Heart of Darkness &mdash; the gone-native path&#x2019;s psychological architecture.</li>
-                  <li>Crusader Kings III &mdash; faction diplomacy, shifting allegiances, personal ambition.</li>
+                  <li>Crusader Kings III &mdash; faction diplomacy, shifting allegiances, personal ambition at the expense of the institution.</li>
+                  <li>Civilization series &mdash; the 4X framework for expansion, city management, and nation-building; the gone-native path is essentially a Civ game played from inside one of the civilizations you're supposed to be conquering.</li>
                 </ul>
               </div>
             </div>
             <div class="gc-vibe">The translation mechanic and the three-path structure are both worth building. Just not at the same time, at full scale, as a first project. Needs a proof-of-concept version that is roughly 20% of this scope. The setting is too underrepresented in games to abandon entirely.</div>
+          </div>
+        </div>
+
+        <!-- GC-008: WARP GUN -->
+        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.23s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id">
+              <div class="gc-index">GC-008</div>
+              <div class="gc-expand-hint">&#9658; expand</div>
+            </div>
+            <div class="gc-doc-col-main">
+              <div class="gc-title">Warp Gun</div>
+              <div class="gc-subtitle">First-Person Puzzle &middot; Spacetime Distortion &middot; Light &amp; Traversal</div>
+            </div>
+            <div class="gc-doc-col-meta">
+              <span class="gc-stage-badge gc-stage-specced">Specced</span>
+            </div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">Instead of a portal gun, a warp gun. Two modes: contraction and expansion. Spacetime bends around your shots. Light curves. Distances collapse or stretch. Puzzles are solved not by placing doors in walls, but by reshaping the space between you and the solution.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section">
+                <div class="finding-label">Core Mechanics</div>
+                <ul class="finding-bullets">
+                  <li><strong>Contraction shots</strong> behave like localized gravity wells: space folds inward, pulling objects and the player toward the distortion point, bending light paths, and collapsing distances that would otherwise be impassable.</li>
+                  <li><strong>Expansion shots</strong> push space outward from the impact point, stretching geometry perceived distances, deflecting projectiles and light beams along new paths, and creating traversable volumes from previously solid areas.</li>
+                  <li>Light bending is not cosmetic &mdash; it is a puzzle input. Beams that need to hit targets must be routed through warp fields. The curvature is the mechanic.</li>
+                  <li>Traversal puzzles built around two warp types interacting: a contraction pulling you toward a platform that an expansion has moved into range, or a light beam bent by contraction through a gap that expansion has opened.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Design Space</div>
+                <ul class="finding-bullets">
+                  <li>The distortion fields have a visual presence &mdash; space visibly shimmers, geometry warps at the field boundary, light halos around the contraction point. The world communicates the physics before the player tests it.</li>
+                  <li>Puzzle difficulty scales by stacking warp interactions: early puzzles use one shot type in isolation; later puzzles require both simultaneously, with each distortion field affecting the other's geometry.</li>
+                  <li>The setting can leverage the visual language directly: environments where geometry and perspective are already disorienting make warp distortion feel native rather than intrusive.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Influences</div>
+                <ul class="finding-bullets">
+                  <li>Portal &mdash; the single-tool puzzle design philosophy; the tool is the world's grammar, not a power layered on top of it.</li>
+                  <li>Antichamber &mdash; non-Euclidean space as a puzzle medium; the willingness to let perception be wrong and make that wrongness mechanical.</li>
+                  <li>Interstellar / actual gravitational lensing &mdash; the visual reference for what a real contraction field would look like to someone standing inside the light path.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="gc-vibe">Portal works because the portal gun is a spatial language, not just a tool. The warp gun needs the same thing: every puzzle is a sentence written in distortion. The light-bending mechanic is the element that separates this from Portal reskin territory &mdash; routing light is a fundamentally different cognitive task than routing a player. That distinction is the design.</div>
           </div>
         </div>
 
@@ -2915,6 +3093,8 @@
             <div class="skill-item">GTA V</div>
             <div class="skill-item">Dragon Quest XI</div>
             <div class="skill-item">The Invincible</div>
+            <div class="skill-item">Dave the Diver</div>
+            <div class="skill-item">Days Gone</div>
           </div>
         </div>
       </div>
@@ -2946,7 +3126,7 @@
     document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["rdr2", "cp77", "the_invincible", "fallout4", "fallout76", "wolf", "gtav", "dqxi", "witcher3", "eldenring", "spiderman", "rdr1", "ds3"];
+    const gameKeys = ["rdr2", "cp77", "the_invincible", "fallout4", "fallout76", "wolf", "gtav", "dqxi", "witcher3", "eldenring", "spiderman", "rdr1", "ds3", "dave_diver", "days_gone"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
     const typeKeys = ["collision", "physics", "animation", "rendering", "ai", "spawning"];
 

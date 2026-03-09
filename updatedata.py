@@ -830,7 +830,7 @@ CSS = """
   .gc-doc:hover .gc-expand-hint { opacity: 1; color: var(--accent); }
   .gc-doc.gc-expanded .gc-expand-hint { opacity: 0; }
   .gc-doc-col-main { display: flex; flex-direction: column; gap: 4px; }
-  .gc-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 14px; color: var(--text); }
+  .gc-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--text); letter-spacing: 0.02em; }
   .gc-flagship .gc-title { color: var(--accent); }
   .gc-subtitle { font-size: 10px; color: var(--text-dim); letter-spacing: 0.04em; }
   .gc-doc-col-meta { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
@@ -871,6 +871,13 @@ CSS = """
   .gc-link-btn:hover { color: var(--accent); border-color: var(--accent); }
   .gc-link-btn.gc-link-primary { color: var(--accent); border-color: rgba(232,255,71,0.4); }
   .gc-link-btn.gc-link-primary:hover { border-color: var(--accent); }
+  .gc-roster-toggle {
+    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+    background: none; border: 1px solid var(--border-bright); color: var(--text-dim);
+    padding: 2px 8px; border-radius: 3px; cursor: pointer; margin-left: 8px;
+    vertical-align: middle; transition: color 0.15s, border-color 0.15s;
+  }
+  .gc-roster-toggle:hover { color: var(--accent); border-color: var(--accent); }
   .gc-vibe {
     font-size: 12px; color: var(--accent); opacity: 0.9;
     border-top: 1px solid var(--border); padding-top: 14px; line-height: 1.7; font-style: italic;
@@ -994,11 +1001,11 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
       </div>
       <div class="gc-list">
 
-        <!-- GC-007: WORDSMITH -->
+        <!-- GC-001: WORDSMITH -->
         <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.02s">
           <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-007</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Wordsmith</div><div class="gc-subtitle">Word Puzzle &middot; Letter Grid &middot; Pure Systems</div></div>
+            <div class="gc-doc-col-id"><div class="gc-index">GC-001</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">WordSmith</div><div class="gc-subtitle">Word Puzzle &middot; Letter Grid &middot; Pure Systems</div></div>
             <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-shipped">Shipped</span></div>
           </div>
           <div class="gc-doc-body">
@@ -1008,9 +1015,9 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
               <a class="gc-link-btn" href="https://youtu.be/MCcAFdG_dV4" target="_blank" onclick="event.stopPropagation()">&#9654; Gameplay Video</a>
             </div>
             <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Loop</div><ul class="finding-bullets"><li>The player navigates a letter grid ranging from 4&times;4 to 8&times;8 and traces valid words in any direction &mdash; horizontal, vertical, diagonal &mdash; without reusing the same letter twice per word.</li><li>Valid words remove their letters from the grid. The tiles above cascade down to fill the gap, Tetris-style. New letters generate from the top to keep the grid full at all times &mdash; the player never sees a half-empty board.</li><li>The Wordsmith hammer is a targeted tool: the player can use it to remove specific letters from the grid independently of word-making, creating space or breaking up bad distributions.</li><li>Shuffle resets the grid entirely when the current layout is unworkable.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Core Loop</div><ul class="finding-bullets"><li>The player navigates a letter grid ranging from 4&times;4 to 8&times;8 and traces valid words in any direction (horizontal, vertical, diagonal) without reusing the same letter twice per word.</li><li>Valid words remove their letters from the grid. The tiles above cascade down to fill the gap, Tetris-style. New letters generate from the top to keep the grid full. The player never sees a half-empty board.</li><li>The Wordsmith hammer is a targeted tool: the player can use it to remove specific letters from the grid independently of word-making, creating space or breaking up bad distributions.</li><li>Shuffle resets the grid entirely when the current layout is unworkable.</li></ul></div>
               <div class="gc-doc-section"><div class="finding-label">Game Modes</div><ul class="finding-bullets"><li><strong>Classic</strong> &mdash; a set number of letters can be used before the round ends. The constraint is total throughput, not time. Rewards deliberate play.</li><li><strong>Timed</strong> &mdash; a player-set time limit. Same grid, different pressure. Rewards fast pattern recognition over optimization.</li><li><strong>Endless</strong> &mdash; no win condition, no loss condition. The grid runs indefinitely. Chill by design.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Design Notes</div><ul class="finding-bullets"><li>Retro pixel art aesthetic throughout, with parallax backgrounds sourced from open licensed assets with attribution. Settings allow music, SFX, and background swaps from the start screen.</li><li>Built in Godot. Released August 22, 2024. Windows desktop download, no installation required.</li><li>The cascade mechanic changes the strategic calculus compared to static-grid word games: clearing a cluster of letters reshapes the board, which creates new adjacencies and new problems simultaneously.</li><li>The hammer gives the player agency over the board state without requiring a full shuffle &mdash; a small tool that adds meaningful tactical decision-making without complicating the core loop.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Design Notes</div><ul class="finding-bullets"><li>Retro pixel art aesthetic throughout, with parallax backgrounds sourced from open licensed assets with attribution. Settings allow music, SFX, and background swaps from the start screen.</li><li>Built in Godot. Released August 22, 2024. Windows desktop download, no installation required.</li><li>The cascade mechanic changes the strategic calculus compared to static-grid word games: clearing a cluster of letters reshapes the board, which creates new adjacencies and new problems simultaneously.</li><li>The hammer gives the player agency over the board state without requiring a full shuffle. It adds meaningful tactical decision-making without complicating the core loop.</li></ul></div>
               <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Boggle &mdash; directional letter adjacency as the core word-finding structure.</li><li>Bookworm (PopCap) &mdash; tiles cleared on valid word submission, board management as an emergent challenge.</li><li>Tetris &mdash; gravity-based cascade as the feedback mechanism for clearing; the board as a living system rather than a static puzzle.</li></ul></div>
             </div>
             <div class="gc-vibe">This is the one card on the slate where the design question is already answered. It shipped. The rest of the concepts are documented to show how I think; this one is here to show that the thinking goes somewhere.</div>
@@ -1019,176 +1026,39 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
 
         <div class="gc-doc gc-flagship" onclick="toggleGcCard(this)" style="animation-delay:0.05s">
           <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-006</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Immortal Coil</div><div class="gc-subtitle">Isometric Boxing &middot; Dystopian Arena Drama &middot; Transhumanist Horror</div></div>
+            <div class="gc-doc-col-id"><div class="gc-index">GC-002</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Immortal Coil</div><div class="gc-subtitle">Pattern-Recognition Combat &middot; Dystopian Arena Drama &middot; Transhumanist Horror</div></div>
             <div class="gc-doc-col-meta"><span class="gc-flagship-badge">&#9733; Flagship</span><span class="gc-stage-badge gc-stage-prototype" style="margin-top:4px">Prototype-Ready</span></div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">All humans are immortal. The worst criminals are made to fight in arenas for public amusement. Win five championships and you earn the only thing anyone in this society still wants: the right to die.</div>
+            <div class="gc-doc-pitch">All humans are immortal. The worst criminals fight in arenas for public amusement. Win five championships and earn the only thing anyone in this society still wants: the right to die. You see it all through your own eyes &mdash; what&#x2019;s left of them.</div>
             <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>A technologically immortal society has eliminated death &mdash; except as a prize. The arena system exists not merely as punishment but as the only culturally sanctioned exit from existence.</li><li>The player character is a convicted criminal assigned to the Neo-Gladiator circuit. Bodies heal between bouts. Mental deterioration does not.</li><li>The champion is treated near-royally and must defend their title annually. Only a champion of sufficient consecutive victories earns the most coveted right in the world: self-euthanasia.</li><li>Spectators in the stands are prisoners of a different kind &mdash; trapped in a system so ancient and so technically incomprehensible that no one alive knows how to dismantle it. They watch because the alternative is confronting something they did not build and cannot unmake.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Mechanics</div><ul class="finding-bullets"><li>Isometric / 2.5D top-down perspective. Full kinetic movement vocabulary: dodge, duck, sidestep, backpedal, close in, hook, jab, uppercut, feint.</li><li>Cybernetic augmentations upgradeable between bouts &mdash; the tension between optimizing the body and losing what remains of selfhood is mechanical, not just thematic.</li><li>Massive prison transportation system as connective tissue between fights: the world seen through convoy windows, loading docks, holding cells.</li><li>Mental degradation modeled over time &mdash; early fights feel sharp; later fights feel like swimming through static.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>Post-modernist collapse of meaning: when death is abolished, what does life cost?</li><li>Dehumanization through spectacle &mdash; gladiatorial Rome refracted through transhumanist technology so advanced it has become indistinguishable from nature. No one built this world; it simply is.</li><li>The apocalypse framework applied inward: not a ruined world but a ruined selfhood. Survival and identity in direct opposition.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Dark Souls &mdash; immortality as a curse rather than a gift; the hollow mechanic as a model for what repeated death costs the self over time.</li><li>Disco Elysium &mdash; the collapse of a moral framework as both world-building and gameplay.</li><li>Rollerball (1975) &mdash; sport as a tool of systemic dehumanization.</li><li>Warhammer 40,000 &mdash; civilization sustained by technology so ancient that maintaining it has become religious ritual; understanding it is no longer possible.</li><li>Neon Genesis Evangelion &mdash; the psychic cost of doing what the machine requires of you.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>A technologically immortal society has eliminated death &mdash; except as a prize. The arena is the only culturally sanctioned exit. Spectators are trapped in a system so ancient no one knows how to dismantle it.</li><li>The player is a convicted criminal in the Neo-Gladiator circuit. Bodies heal between bouts. Mental deterioration does not. Every augmentation makes you more competitive and less yourself &mdash; felt from the inside.</li><li>Win five championships across three tiers &mdash; Minor, Major, World &mdash; and earn the most coveted right in the world: self-euthanasia.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Mechanics</div><ul class="finding-bullets"><li>First-person perspective, optionally VR. You look out through eyes that used to be yours. Your hands in front of you are chrome. You cannot look away from what you&#x2019;ve become.</li><li>Full ring mobility: sidestep, backpedal, close distance, cut angles. Footwork is tactical; positioning creates the windows the pattern system requires.</li><li>Punch-Out DNA: opponents run on readable, repeatable patterns. Cybernetic augmentations are the tell system: a HUD ping reading TARGET LOCKED, steam venting from a joint, an arm morphing into a new attack mode. The visual language is the gameplay.</li><li>Player augmentations unlock between bouts &mdash; each a genuine tradeoff. Better reach, faster counters, harder hits. Each one another step toward what you&#x2019;re fighting to escape.</li><li>Mental degradation modeled over time: early fights feel sharp. Later fights accumulate visual noise, flickering tells, HUD lag. The machine is winning even when you are.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>The complicity trap: every augmentation is a vote for the system. The player is not a rebel &mdash; they are a product of the arena.</li><li>First person as horror: you cannot cut away from the hands. The detachment from your own body is not a cutscene &mdash; it is the camera.</li><li>Post-modernist collapse of meaning: when death is abolished, what does life cost?</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Punch-Out!! &mdash; pattern recognition as the entire design; opponents as puzzles with tells, not health bars to deplete.</li><li>Dark Souls &mdash; immortality as a curse; the hollow mechanic as a model for what repeated survival costs the self.</li><li>Disco Elysium &mdash; the collapse of a moral framework as both world-building and gameplay.</li><li>Rollerball (1975) &mdash; sport as systemic dehumanization; the crowd as the real antagonist.</li><li>Warhammer 40,000 &mdash; technology so ancient maintaining it has become religious ritual.</li><li>Neon Genesis Evangelion &mdash; the psychic cost of doing what the machine requires; the body as something that happens to you.</li></ul></div>
             </div>
-            <div class="gc-vibe">The arena combat loop gives QA something concrete to test against: does augmentation feel like a tradeoff or just a power increase? Does the mental decay mechanic actually change how the player fights, or is it cosmetic? Those are real design questions with answers, which means this is a real game. The 40K comparison is intentional &mdash; the point is that the horror comes from normalcy, not from anyone being a villain. That&#x2019;s a harder thing to get right, and I know it.</div>
+            <div class="gc-vibe">The arena combat loop gives QA something concrete to test against: does augmentation feel like a tradeoff or just a power increase? Does the mental decay mechanic actually change how the player reads tells, or is it cosmetic? Those are real design questions with answers, which means this is a real game. The first-person frame is not an aesthetic choice &mdash; it is the argument.</div>
           </div>
         </div>
 
+        <!-- GC-003: MANIFEST -->
         <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.08s">
           <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-002</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-id"><div class="gc-index">GC-003</div><div class="gc-expand-hint">&#9658; expand</div></div>
             <div class="gc-doc-col-main"><div class="gc-title">Manifest</div><div class="gc-subtitle">Branching Narrative &middot; Frontier Homestead &middot; You Shape What America Becomes</div></div>
             <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-specced">Specced</span></div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">You have staked a claim on the frontier &mdash; a homestead at the crossroads of everything America is becoming. Every week someone new comes through. Some are running from something. Some are running toward something worth dying for. Every choice compounds. The country being built around you will remember what you did here.</div>
+            <div class="gc-doc-pitch">You have staked a claim on the frontier. A homestead at the crossroads of everything America is becoming. Every week someone new comes through. Some are running from something. Some are running toward something worth dying for. Every choice compounds. The country being built around you will remember what you did here.</div>
             <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Premise &amp; Choice Architecture</div><ul class="finding-bullets"><li>The player is a fixed point while history moves through them. Choices are not isolated &mdash; they establish reputation, close doors, open others, and reshape the settlement growing around you over years of play. Think Fallout 1 and 2: decisions made in Act One are still paying out in Act Three.</li><li>Factions accumulate organically. Side with the railroad and the town booms but the families who were here first get pushed out. Harbor the outlaw and the law stops cooperating. Help the Underground Railroad and certain guests start arriving who would not otherwise trust you.</li><li>This was a deeply Christian nation. The moral vocabulary of the era is scripture &mdash; charity, sanctuary, bearing false witness. Turning someone away is not a neutral act.</li><li>The newspaper mechanic: weeks later, the penny press brings word. Some made it. Some are on wanted posters. Some names appear in obituaries with no next of kin listed.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">The Guests Who Matter Most</div><ul class="finding-bullets"><li><strong>The Comanche</strong> &mdash; traveling under a name that is not his. His sister is missing &mdash; taken from her people, though whether she ran or was taken he does not know. He needs one night&#x2019;s shelter and your silence. What do you do when the marshal comes asking the next morning?</li><li><strong>The conductor</strong> &mdash; a freed Black man who speaks like an educated minister, which is exactly what he is. Moving people north, he needs to know if your homestead is safe. This is the moment the Underground Railroad either routes through you or does not.</li><li><strong>The teacher</strong> &mdash; heading to a mining camp that does not know it needs her. She carries a crate of books and more faith in people than the frontier has earned. Whether she makes it depends partly on what you tell her about the road ahead.</li><li><strong>The pastor</strong> &mdash; road-worn, theologically complicated, genuinely kind. He will accept a free night&#x2019;s stay and leave something worth considerably more. He is also the one guest who will tell you plainly what he thinks you are doing wrong with your life. He is usually right.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">The Fuller Roster</div><ul class="finding-bullets"><li>Outlaws and the lawmen hunting them &mdash; shelter and betrayal each carry a price, and the law is not always the more trustworthy of the two.</li><li>Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators &mdash; each carrying a different idea of what America is supposed to mean.</li><li>The missionary heading into territory everyone else is heading out of. The Army deserter who saw something he will not describe. The Pinkerton who is not here by accident.</li><li>The Mexican family the law does not recognize as having rights to land they have worked for thirty years. The journalist writing the myth while it is still being made.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Thematic DNA &amp; Influences</div><ul class="finding-bullets"><li>Manifest Destiny written in scripture and enacted in blood &mdash; the heroic and the self-interested arriving at your door in no particular order.</li><li>The question underneath every interaction: whose America are you building? And: does God have an opinion about that?</li><li>Fallout 1 &amp; 2, Fallout: New Vegas &mdash; long-consequence choice architecture, faction reputation, a world that changes shape around your decisions. Papers, Please, Red Dead Redemption 2, Deadwood (HBO).</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Core Premise &amp; Choice Architecture</div><ul class="finding-bullets"><li>The player is a fixed point while history moves through them. Choices establish reputation, close doors, open others, reshape the settlement over years. Think Fallout 1 and 2: decisions made in Act One are still paying out in Act Three.</li><li>Factions accumulate organically. Side with the railroad and the town booms but the families who were here first get pushed out. Help the Underground Railroad and certain guests start arriving who would not otherwise trust you. But so will people who want to know who you&#x2019;ve been helping.</li><li>The newspaper mechanic: weeks later, the penny press brings word. Some made it. Some are on wanted posters. Some names appear in obituaries with no next of kin listed.</li><li>This was a deeply Christian nation. The moral vocabulary of the era is scripture: charity, sanctuary, bearing false witness, rendering unto Caesar. Turning someone away is not a neutral act.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">The Guests Who Matter Most</div><ul class="finding-bullets"><li><strong>The Comanche</strong> &mdash; traveling under a name that is not his. His sister is missing. He needs one night&#x2019;s shelter and your silence. What do you do when the marshal comes asking the next morning?</li><li><strong>The conductor</strong> &mdash; a freed Black man, educated minister, moving people north. Route the Underground Railroad through your homestead and weeks later a rider comes at night with different intentions. Help enough people and the wrong people take notice.</li><li><strong>The teacher</strong> &mdash; heading to a mining camp that does not know it needs her. Whether she makes it depends partly on what you tell her about the road ahead.</li><li><strong>The pastor</strong> &mdash; road-worn, theologically complicated, genuinely kind. He will tell you plainly what he thinks you are doing wrong with your life. He is usually right.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">The Fuller Roster <button class="gc-roster-toggle" onclick="event.stopPropagation(); toggleRoster(this)" aria-expanded="false">&#9658; show</button></div><div class="gc-roster-body" style="display:none"><ul class="finding-bullets"><li>Outlaws and the lawmen hunting them &mdash; shelter and betrayal each carry a price, and the law is not always the more trustworthy of the two.</li><li>Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators &mdash; each carrying a different idea of what America is supposed to mean.</li><li>The missionary heading into territory everyone else is heading out of. The Army deserter. The Pinkerton who is not here by accident.</li><li>The Mexican family the law does not recognize as having rights to land they have worked for thirty years. The journalist writing the myth while it is still being made.</li></ul></div></div>
+              <div class="gc-doc-section"><div class="finding-label">Thematic DNA &amp; Influences</div><ul class="finding-bullets"><li>Manifest Destiny written in scripture and enacted in blood &mdash; the heroic and the self-interested arriving in no particular order.</li><li>Fallout 1 &amp; 2, Fallout: New Vegas &mdash; long-consequence choice architecture, faction reputation, a world that changes shape around your decisions.</li><li>Papers, Please, Red Dead Redemption 2, Deadwood (HBO).</li></ul></div>
             </div>
-            <div class="gc-vibe">The gap this fills is pretty straightforward: faction reputation systems in games like New Vegas are excellent, but you&#x2019;re always the one moving through the world. Flipping that &mdash; you&#x2019;re stationary, the world moves through you &mdash; is a structural difference that changes what choices mean. Papers Please proved the threshold mechanic works. This is what happens when you build a whole world around it instead of a border checkpoint.</div>
+            <div class="gc-vibe">The gap this fills is pretty straightforward: faction reputation systems in games like New Vegas are excellent, but you&#x2019;re always the one moving through the world. Flip it and you&#x2019;re stationary while the world moves through you. That&#x2019;s a structural difference that changes what choices mean. Papers Please proved the threshold mechanic works. This is what happens when you build a whole world around it instead of a border checkpoint.</div>
           </div>
         </div>
 
-        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.11s">
-          <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-004</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Playground Noir</div><div class="gc-subtitle">Mystery Visual Novel &middot; Kindergarten Ace Attorney &middot; Unreliable Witnesses</div></div>
-            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-prototype">Prototype-Ready</span></div>
-          </div>
-          <div class="gc-doc-body">
-            <div class="gc-doc-pitch">The last cookie has been eaten. The daycare is in crisis. Every witness is five years old and completely unreliable. The truth, when you find it, will be wholesome.</div>
-            <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>Full noir investigation structure applied to playground-scale crimes.</li><li>The specimen case: two kids have cookie crumbs on their shirts. The answer: they shared it. Both guilty. Both innocent. Wholesome resolution mandatory.</li><li>Scalable case structure &mdash; each case functions as a standalone episode.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Mechanics</div><ul class="finding-bullets"><li>Ace Attorney investigation and cross-examination loop adapted for an appropriate tone.</li><li>Unreliable witness system: children misremember, exaggerate, lie to protect friends.</li><li>Red herrings mechanically embedded &mdash; damning evidence leads to innocent explanations.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>The comedy of applied seriousness: treating missing cookies with investigative gravity.</li><li>The subversion of noir cynicism: here, truth is sweet and people are trying their best.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Ace Attorney series &mdash; investigation loop, testimony contradiction.</li><li>Professor Layton &mdash; episodic puzzle mysteries, gentle tone, standalone cases that work for a mixed-age audience.</li><li>Bluey &mdash; the comedy of treating children&#x2019;s problems with adult seriousness.</li></ul></div>
-            </div>
-            <div class="gc-vibe">Ace Attorney is 22 years old and nobody has made a wholesome version for a younger audience. That&#x2019;s a gap. The unreliable witness system isn&#x2019;t just a gimmick &mdash; it&#x2019;s the entire design. Children don&#x2019;t lie the way adults lie; they misremember, they protect people, they confabulate completely. Building an investigation loop around that specific truth is what separates this from a reskin.</div>
-          </div>
-        </div>
 
-        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.14s">
-          <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-005</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Swan Marriage Counselor</div><div class="gc-subtitle">Therapy Visual Novel &middot; Lifelong Commitment &middot; Determinism vs. Choice</div></div>
-            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-specced">Specced</span></div>
-          </div>
-          <div class="gc-doc-body">
-            <div class="gc-doc-pitch">Swans mate for life. Some of them are not handling it well. You are their counselor. The sessions are about commitment, compromise, aging, and whether promises made when young should bind the people we become.</div>
-            <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>The player counsels swan couples &mdash; literal swans, with the biology of lifelong monogamy built in.</li><li>Sessions explore the fault lines of long commitment: growing in different directions, the resentment of promises made without full information.</li><li>Anti-dating-sim by design: rewards sitting with difficulty rather than resolving it cheaply.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>Determinism vs. choice: swans are biologically determined to stay. Humans choose to.</li><li>The problem of the self over time: the person you promised yourself to at 22 is not the person in front of you at 47.</li><li>Aging as a theme rather than a backdrop.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Florence &mdash; the emotional reality of a relationship over time, not just its peak.</li><li>Richard Linklater&#x2019;s Before trilogy &mdash; the weight of two people talking honestly over years.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Commercial Note</div><ul class="finding-bullets"><li>Niche audience, strong festival circuit potential &mdash; Indiecade, IGF.</li><li>Low asset requirement. A small team with one strong writer could complete this.</li></ul></div>
-            </div>
-            <div class="gc-vibe">Low asset count, strong festival profile, and a demographic &mdash; people in long relationships &mdash; that games mostly ignore. The swan framing isn&#x2019;t cute window dressing; it&#x2019;s the central mechanical question. Swans don&#x2019;t choose to stay. The player&#x2019;s job is to help couples who do choose work through what that costs. That&#x2019;s a different emotional register than anything currently in the visual novel space.</div>
-          </div>
-        </div>
-
-        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.17s">
-          <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-001</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Winter Storm</div><div class="gc-subtitle">Tactical Stealth Action &middot; Arctic Espionage &middot; MGS Framework</div></div>
-            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-concept">Concept</span></div>
-          </div>
-          <div class="gc-doc-body">
-            <div class="gc-doc-pitch">Tactical stealth action in Arctic blizzards. Snowmobile exfiltration. Thermals and heartbeat sensors cut through whiteout conditions. Every footprint you leave can be tracked.</div>
-            <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Systems</div><ul class="finding-bullets"><li>The blizzard is not a hazard &mdash; it is cover. Whiteout conditions mask heat signatures and create acoustic interference.</li><li>Snowmobile exfiltration as a set-piece mechanic: the stealth infiltration ends; the high-speed extraction begins.</li><li>Footprint persistence: snow records movement. Players must plan routes considering what evidence they leave behind.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Design Gap</div><ul class="finding-bullets"><li>The aesthetic is fully realized. The mechanical hooks are genuinely interesting.</li><li>Missing: a narrative reason to care. Metal Gear works because Kojima built a mythology around the mechanics.</li><li>Shelved pending a narrative hook that elevates it from cool aesthetic to a game with something to say.</li></ul></div>
-            </div>
-            <div class="gc-vibe">The environmental stealth systems are solid and the footprint mechanic is genuinely underused in the genre. Shelved because mechanics without a reason to care are just a tech demo. Will revisit when the narrative hook shows up.</div>
-          </div>
-        </div>
-
-        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.20s">
-          <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-003</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Conquistador Sim</div><div class="gc-subtitle">Political Simulation &middot; New World Exploration &middot; God &middot; Guns &middot; Gold</div></div>
-            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-concept">Concept</span></div>
-          </div>
-          <div class="gc-doc-body">
-            <div class="gc-doc-pitch">You are a Spanish explorer in the New World. Work for the Crown, defect and lead a revolution, or go native and become a warlord &mdash; navigating tribal politics, language barriers, shifting allegiances, and a continent that is trying to kill you.</div>
-            <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Paths</div><ul class="finding-bullets"><li>Crown Loyalist: high demand, high reward &mdash; supplied, supported, and expendable.</li><li>Renegade Revolutionary (the Cort&#xe9;s path): defection and conquest on personal terms.</li><li>Gone Native / Warlord (the Kurtz path): abandon European frameworks entirely.</li><li>Transient phases: paths not locked. Sufficient rogue power forces the Crown to negotiate.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Design Problem</div><ul class="finding-bullets"><li>This concept is enormous. Translation systems, tribal relationship graphs, three divergent path structures &mdash; any one would be a major system in another game.</li><li>Needs a version that is 80% smaller and 20% as interesting &mdash; a proof of concept, not a simulation.</li></ul></div>
-            </div>
-            <div class="gc-vibe">The translation mechanic and the three-path structure are both worth building. Just not at the same time, at full scale, as a first project. Needs a proof-of-concept version that is roughly 20% of this scope. The setting is too underrepresented in games to abandon entirely.</div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-    <!-- ABOUT PANEL -->
-    <div class="about-panel">
-      <div class="about-header">// About This Portfolio &amp; Design Work</div>
-      <div class="about-body">
-        <div class="about-col">
-          <div class="about-col-title">Background</div>
-          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 100+ hours of paid user testing, and self-directed bug documentation across {unique_games} AAA titles. Open to remote entry-level QA roles.</p>
-        </div>
-        <div class="about-col">
-          <div class="about-col-title">QA Skills</div>
-          <div class="skill-list-single">
-            <div class="skill-item">Bug documentation &amp; reproduction steps</div>
-            <div class="skill-item">Defect classification &amp; severity rating</div>
-            <div class="skill-item">Screen capture &amp; video evidence</div>
-            <div class="skill-item">Edge case &amp; boundary testing</div>
-            <div class="skill-item">Cross-title regression awareness</div>
-          </div>
-        </div>
-        <div class="about-col">
-          <div class="about-col-title">Titles Tested</div>
-          <div class="skill-list">
-{titles_html}
-          </div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<footer>
-  <div>Wendell Lancaster — QA Portfolio &amp; Game Design // Built with precision</div>
-  <div>Boston, MA &nbsp;·&nbsp; wendell91097@gmail.com &nbsp;·&nbsp; (228) 237-6193</div>
-</footer>
-
-<script>
-{filter_js}
-</script>
-</body>
-</html>"""
-
-    with open(output_path, "w", encoding="utf-8") as f:
-        f.write(html)
-
-    print(f"  Dashboard written to {output_path}")
-    print(f"  Stats: {total_bugs} bugs across {unique_games} titles, {cs_count} case studies")
-
-
-# ── ENTRY POINT ────────────────────────────────────────────────────────────────
-
-def main():
-    script_dir          = os.path.dirname(os.path.abspath(__file__))
-    bugs_json_path      = os.path.join(script_dir, "bugs.json")
-    case_studies_path   = os.path.join(script_dir, "case_studies.json")
-    output_path         = os.path.join(script_dir, "index.html")
-
-    if not os.path.exists(bugs_json_path):
-        print(f"ERROR: Could not find {bugs_json_path}")
-        print("Make sure bugs.json is in the same folder as this script.")
-        return
-
-    print("Building QA dashboard...")
-    build_dashboard(bugs_json_path, case_studies_path, output_path)
-    print("Done.")
-
-
-if __name__ == "__main__":
-    main()
