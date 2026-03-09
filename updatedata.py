@@ -21,6 +21,8 @@ GAME_CONFIG = {
     "gtav":           {"label": "GTA V",                    "css_class": "game-gtav",       "tier": "AAA"},
     "dqxi":           {"label": "Dragon Quest XI",          "css_class": "game-dqxi",       "tier": "AAA"},
     "the_invincible": {"label": "The Invincible",           "css_class": "game-invincible", "tier": "AA"},
+    "dave_diver":     {"label": "Dave the Diver",           "css_class": "game-dave-diver", "tier": "indie"},
+    "days_gone":      {"label": "Days Gone",                "css_class": "game-days-gone",  "tier": "AAA"},
 }
 
 # ── SEVERITY CONFIG ────────────────────────────────────────────────────────────
@@ -35,7 +37,7 @@ SEVERITY_CONFIG = {
 TYPE_CONFIG = {
     "animation": {"label": "Animation / Model"},
     "ai":        {"label": "AI / Pathing"},
-    "collision":  {"label": "Collision / Physics"},
+    "collision": {"label": "Collision / Physics"},
     "physics":   {"label": "Physics"},
     "rendering": {"label": "Rendering / LOD"},
     "spawning":  {"label": "Spawning / Placement"},
@@ -47,22 +49,23 @@ RISK_CONFIG = {
     "Moderate":     {"css_class": "risk-moderate"},
     "Low":          {"css_class": "risk-low"},
     "Low-Moderate": {"css_class": "risk-low-moderate"},
+    "Strength":     {"css_class": "risk-strength"},
 }
 
 
 # ── HTML GENERATORS — BUG REPORTS ─────────────────────────────────────────────
 
 def make_video_embed(bug: dict) -> str:
-    url = bug.get("video_url", "").strip()
-    text = bug.get("video_text", "Add YouTube link here")
+    url  = bug.get("video_url", "").strip()
+    text = bug.get("video_text", "").strip()
 
     if url:
         embed_url = url
         if "youtube.com/watch?v=" in url:
-            vid_id = url.split("watch?v=")[-1].split("&")[0]
+            vid_id    = url.split("watch?v=")[-1].split("&")[0]
             embed_url = f"https://www.youtube.com/embed/{vid_id}"
         elif "youtu.be/" in url:
-            vid_id = url.split("youtu.be/")[-1].split("?")[0]
+            vid_id    = url.split("youtu.be/")[-1].split("?")[0]
             embed_url = f"https://www.youtube.com/embed/{vid_id}"
 
         return f"""
@@ -75,19 +78,20 @@ def make_video_embed(bug: dict) -> str:
               allowfullscreen>
             </iframe>
           </div>"""
-    else:
-        return f"""
+
+    # No URL — show status note as plain text, or generic pending message
+    placeholder_body = text if text else "Clip pending upload"
+    return f"""
           <div class="video-placeholder">
-            <div class="video-icon">▶</div>
-            <span>Clip pending upload</span>
-            <a href="https://youtube.com" target="_blank">{escape(text)}</a>
+            <div class="video-icon">&#9654;</div>
+            <span style="color:var(--text-dim); font-size:11px; line-height:1.7; text-align:center; max-width:320px;">{escape(placeholder_body)}</span>
           </div>"""
 
 
 def make_repro_steps(steps: list) -> str:
     items = ""
     for i, step in enumerate(steps, 1):
-        num = str(i).zfill(2)
+        num    = str(i).zfill(2)
         items += f"""
                 <li class="repro-step">
                   <span class="step-num">{num}</span>
@@ -139,13 +143,15 @@ def make_bug_card(bug: dict) -> str:
 # ── HTML GENERATORS — CASE STUDIES ────────────────────────────────────────────
 
 def make_bullet_list(text: str) -> str:
+    if not text or not text.strip():
+        return '<ul class="finding-bullets"></ul>'
     sentences = [s.strip() for s in re.split(r"(?<=[.!?])\s+", text.strip()) if s.strip()]
-    items = "".join(f"<li>{s}</li>" for s in sentences)
+    items     = "".join(f"<li>{s}</li>" for s in sentences)
     return f'<ul class="finding-bullets">{items}</ul>'
 
 
 def make_finding_row(finding: dict) -> str:
-    risk = finding.get("risk_level", "Low")
+    risk     = finding.get("risk_level", "Low")
     risk_cfg = RISK_CONFIG.get(risk, {"css_class": "risk-low"})
     rec_html = ""
     if finding.get("recommendation"):
@@ -154,6 +160,20 @@ def make_finding_row(finding: dict) -> str:
                       <div class="finding-label">Recommendation</div>
                       {make_bullet_list(finding.get('recommendation', ''))}
                     </div>"""
+    fwd_risk_html = ""
+    if finding.get("forward_risk"):
+        fwd_risk_html = f"""
+                  <div class="finding-col">
+                    <div class="finding-label">Forward Risk</div>
+                    {make_bullet_list(finding.get('forward_risk', ''))}
+                    {rec_html}
+                  </div>"""
+    else:
+        fwd_risk_html = f"""
+                  <div class="finding-col">
+                    {rec_html}
+                  </div>"""
+
     return f"""
               <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
                 <div class="finding-header">
@@ -165,30 +185,35 @@ def make_finding_row(finding: dict) -> str:
                   <div class="finding-col">
                     <div class="finding-label">Analysis</div>
                     {make_bullet_list(finding.get('analysis', ''))}
-                  </div>
-                  <div class="finding-col">
-                    <div class="finding-label">Forward Risk</div>
-                    {make_bullet_list(finding.get('forward_risk', ''))}
-                    {rec_html}
-                  </div>
+                  </div>{fwd_risk_html}
                 </div>
               </div>"""
 
 
 def make_case_study_card(cs: dict) -> str:
-    findings_html = "".join(make_finding_row(f) for f in cs.get("findings", []))
-    high_count = sum(1 for f in cs.get("findings", []) if f.get("risk_level") == "High")
-    mod_count  = sum(1 for f in cs.get("findings", []) if f.get("risk_level") == "Moderate")
+    cs_id          = cs.get("id", "")
+    findings       = cs.get("findings", [])
+    findings_html  = "".join(make_finding_row(f) for f in findings)
+    high_count     = sum(1 for f in findings if f.get("risk_level") == "High")
+    mod_count      = sum(1 for f in findings if f.get("risk_level") == "Moderate")
+    strength_count = sum(1 for f in findings if f.get("risk_level") == "Strength")
+
+    strength_badge = ""
+    if strength_count:
+        strength_badge = f'<span class="risk-badge risk-strength">{strength_count} Strength</span>'
+
+    card_id = f' id="{escape(cs_id.lower())}"' if cs_id else ""
 
     return f"""
-      <div class="cs-card" onclick="toggleCsCard(this)">
+      <div class="cs-card"{card_id} onclick="toggleCsCard(this)">
         <div class="cs-card-header">
-          <div class="bug-id">{escape(cs.get('id', ''))}</div>
+          <div class="bug-id">{escape(cs_id)}</div>
           <div class="cs-classification">{escape(cs.get('classification', ''))}</div>
           <div class="cs-title">{escape(cs.get('title', ''))}</div>
           <div class="cs-meta">
             <span class="risk-badge risk-high">{high_count} High</span>
             <span class="risk-badge risk-moderate">{mod_count} Moderate</span>
+            {strength_badge}
           </div>
         </div>
         <div class="cs-detail">
@@ -225,67 +250,147 @@ def make_case_study_card(cs: dict) -> str:
       </div>"""
 
 
-def make_sidebar(bugs: list) -> str:
+# ── HTML GENERATORS — SIDEBAR ──────────────────────────────────────────────────
+
+def make_sidebar_html(bugs: list, case_studies: list) -> str:
     game_counts = Counter(b["game"] for b in bugs)
     sev_counts  = Counter(b["severity"] for b in bugs)
     type_counts = Counter(b["type"] for b in bugs)
     total       = len(bugs)
 
+    # Bug filters — game
     game_btns = ""
     for game_key, cfg in GAME_CONFIG.items():
         count = game_counts.get(game_key, 0)
         if count == 0:
             continue
         game_btns += f"""
-      <button class="filter-btn" onclick="filterBugs('{game_key}', this)">
-        <span>{escape(cfg['label'])}</span>
-        <span class="filter-count">{count}</span>
-      </button>"""
+        <button class="filter-btn" onclick="filterBugs('{game_key}', this)">
+          <span>{escape(cfg['label'])}</span>
+          <span class="filter-count">{count}</span>
+        </button>"""
 
+    # Bug filters — severity
     sev_btns = ""
     for sev_key, cfg in SEVERITY_CONFIG.items():
         count = sev_counts.get(sev_key, 0)
         if count == 0:
             continue
         sev_btns += f"""
-      <button class="filter-btn" onclick="filterBugs('{sev_key}', this)">
-        <span><span class="severity-dot" style="background:var({cfg['dot_var']})"></span>{cfg['label']}</span>
-        <span class="filter-count">{count}</span>
-      </button>"""
+        <button class="filter-btn" onclick="filterBugs('{sev_key}', this)">
+          <span><span class="severity-dot" style="background:var({cfg['dot_var']})"></span>{cfg['label']}</span>
+          <span class="filter-count">{count}</span>
+        </button>"""
 
+    # Bug filters — type
     type_btns = ""
     for type_key, count in sorted(type_counts.items(), key=lambda x: -x[1]):
-        label = TYPE_CONFIG.get(type_key, {}).get("label", type_key.title())
+        label     = TYPE_CONFIG.get(type_key, {}).get("label", type_key.title())
         type_btns += f"""
-      <button class="filter-btn" onclick="filterBugs('{type_key}', this)">
-        {escape(label)}
-        <span class="filter-count">{count}</span>
-      </button>"""
+        <button class="filter-btn" onclick="filterBugs('{type_key}', this)">
+          {escape(label)}
+          <span class="filter-count">{count}</span>
+        </button>"""
+
+    # Case studies — jump links + aggregate risk summary
+    cs_jump_btns = ""
+    for cs in case_studies:
+        cs_id    = cs.get("id", "")
+        cs_game  = cs.get("game", cs.get("title", cs_id))
+        cs_jump_btns += f"""
+        <button class="filter-btn" onclick="jumpTo('{escape(cs_id.lower())}')">{escape(cs_id)} &mdash; {escape(cs_game)}</button>"""
+
+    all_findings   = [f for cs in case_studies for f in cs.get("findings", [])]
+    agg_high       = sum(1 for f in all_findings if f.get("risk_level") == "High")
+    agg_mod        = sum(1 for f in all_findings if f.get("risk_level") == "Moderate")
+    agg_strength   = sum(1 for f in all_findings if f.get("risk_level") == "Strength")
+
+    cs_risk_summary = f"""
+      <div class="sidebar-section">
+        <div class="sidebar-label">Risk Summary</div>
+        <div style="padding:4px 0; display:flex; flex-direction:column; gap:6px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
+            <span style="color:var(--text-dim)">High Risk</span>
+            <span class="risk-badge risk-high" style="font-size:9px; padding:2px 7px;">{agg_high}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
+            <span style="color:var(--text-dim)">Moderate Risk</span>
+            <span class="risk-badge risk-moderate" style="font-size:9px; padding:2px 7px;">{agg_mod}</span>
+          </div>
+          <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
+            <span style="color:var(--text-dim)">Strength</span>
+            <span class="risk-badge risk-strength" style="font-size:9px; padding:2px 7px;">{agg_strength}</span>
+          </div>
+        </div>
+      </div>""" if case_studies else ""
 
     return f"""  <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Filter by Game</div>
-      <button class="filter-btn active" onclick="filterBugs('all', this)">
-        All Bugs <span class="filter-count">{total}</span>
-      </button>{game_btns}
+
+    <!-- BUG REPORTS SIDEBAR -->
+    <div class="sidebar-panel" id="sidebar-bugs">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Filter by Game</div>
+        <button class="filter-btn active" onclick="filterBugs('all', this)">
+          All Bugs <span class="filter-count">{total}</span>
+        </button>{game_btns}
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Filter by Severity</div>{sev_btns}
+      </div>
+
+      <div class="sidebar-section">
+        <div class="sidebar-label">Filter by Type</div>{type_btns}
+      </div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-label">Filter by Severity</div>{sev_btns}
+    <!-- GAME CONCEPTS SIDEBAR -->
+    <div class="sidebar-panel hidden" id="sidebar-game-concepts">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Filter by Stage</div>
+        <button class="filter-btn active" onclick="filterConcepts('all', this)">
+          All Concepts <span class="filter-count">8</span>
+        </button>
+        <button class="filter-btn" onclick="filterConcepts('shipped', this)">
+          Shipped <span class="filter-count">1</span>
+        </button>
+        <button class="filter-btn" onclick="filterConcepts('prototype', this)">
+          Prototype-Ready <span class="filter-count">2</span>
+        </button>
+        <button class="filter-btn" onclick="filterConcepts('specced', this)">
+          Specced <span class="filter-count">3</span>
+        </button>
+        <button class="filter-btn" onclick="filterConcepts('concept', this)">
+          Concept <span class="filter-count">2</span>
+        </button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-label">Jump To</div>
+        <button class="filter-btn" onclick="jumpTo('gc-001')">GC-001 &mdash; WordSmith</button>
+        <button class="filter-btn" onclick="jumpTo('gc-002')">GC-002 &mdash; Immortal Coil</button>
+        <button class="filter-btn" onclick="jumpTo('gc-003')">GC-003 &mdash; Manifest</button>
+        <button class="filter-btn" onclick="jumpTo('gc-004')">GC-004 &mdash; Playground Noir</button>
+        <button class="filter-btn" onclick="jumpTo('gc-005')">GC-005 &mdash; Swan Marriage</button>
+        <button class="filter-btn" onclick="jumpTo('gc-006')">GC-006 &mdash; Winter Storm</button>
+        <button class="filter-btn" onclick="jumpTo('gc-007')">GC-007 &mdash; Conquistador</button>
+        <button class="filter-btn" onclick="jumpTo('gc-008')">GC-008 &mdash; Warp Gun</button>
+      </div>
     </div>
 
-    <div class="sidebar-section">
-      <div class="sidebar-label">Filter by Type</div>{type_btns}
+    <!-- CASE STUDIES SIDEBAR -->
+    <div class="sidebar-panel hidden" id="sidebar-case-studies">
+      <div class="sidebar-section">
+        <div class="sidebar-label">Evaluations</div>{cs_jump_btns}
+      </div>
+      {cs_risk_summary}
     </div>
+
   </aside>"""
 
 
 def make_stats_bar(bugs: list) -> str:
     total_bugs   = len(bugs)
-    unique_games = len({
-        gk for gk in set(b["game"] for b in bugs)
-        if GAME_CONFIG.get(gk, {}).get("tier") == "AAA"
-    })
+    total_titles = len({b["game"] for b in bugs})
 
     return f"""<div class="stats-bar">
   <div class="stat-item">
@@ -293,11 +398,11 @@ def make_stats_bar(bugs: list) -> str:
     <div class="stat-label">Documented Bugs</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">{unique_games}</div>
-    <div class="stat-label">AAA Titles Tested</div>
+    <div class="stat-value">{total_titles}</div>
+    <div class="stat-label">Titles Tested</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">100+</div>
+    <div class="stat-value">1,300+</div>
     <div class="stat-label">Hrs User Testing</div>
   </div>
   <div class="stat-item">
@@ -308,7 +413,7 @@ def make_stats_bar(bugs: list) -> str:
   </div>
   <div class="open-to-work">
     <span class="status-dot"></span>
-    Available — Remote
+    Available &mdash; Remote
   </div>
 </div>"""
 
@@ -336,7 +441,7 @@ def make_filter_js(bugs: list) -> str:
   }}
 
   function filterBugs(filter, btn) {{
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('#sidebar-bugs .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
     const gameKeys = {game_list};
@@ -347,12 +452,12 @@ def make_filter_js(bugs: list) -> str:
     let visible = 0;
 
     cards.forEach(card => {{
-      const game = card.dataset.game;
+      const game     = card.dataset.game;
       const severity = card.dataset.severity;
-      const type = card.dataset.type;
+      const type     = card.dataset.type;
 
       let show = false;
-      if (filter === 'all')              show = true;
+      if (filter === 'all')               show = true;
       else if (gameKeys.includes(filter)) show = game === filter;
       else if (sevKeys.includes(filter))  show = severity === filter;
       else if (typeKeys.includes(filter)) show = type === filter;
@@ -370,21 +475,40 @@ def make_filter_js(bugs: list) -> str:
     if (!wasExpanded) card.classList.add('gc-expanded');
   }}
 
-  // Tab switching
+  function filterConcepts(stage, btn) {{
+    document.querySelectorAll('#sidebar-game-concepts .filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.gc-doc').forEach(card => {{
+      const show = stage === 'all' || card.dataset.stage === stage;
+      card.classList.toggle('hidden', !show);
+    }});
+  }}
+
+  function jumpTo(id) {{
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+  }}
+
+  function toggleRoster(btn) {{
+    const body = btn.closest('.gc-doc-section').querySelector('.gc-roster-body');
+    if (!body) return;
+    const open = body.style.display !== 'none';
+    body.style.display = open ? 'none' : 'block';
+    btn.setAttribute('aria-expanded', String(!open));
+    btn.textContent = (!open ? '&#9660; hide' : '&#9658; show');
+    btn.innerHTML   = !open ? '&#9660; hide' : '&#9658; show';
+  }}
+
   function switchTab(tab) {{
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-    document.querySelector('.tab-btn[data-tab="' + tab + '"]').classList.add('active');
-    document.getElementById('panel-' + tab).classList.remove('hidden');
-    const sidebar = document.querySelector('.sidebar');
-    const mainGrid = document.querySelector('.main');
-    if (tab === 'bugs') {{
-      sidebar.style.display = '';
-      mainGrid.style.gridTemplateColumns = '220px 1fr';
-    }} else {{
-      sidebar.style.display = 'none';
-      mainGrid.style.gridTemplateColumns = '1fr';
-    }}
+    document.querySelectorAll('.tab-btn').forEach(b => {{
+      b.classList.toggle('active', b.dataset.tab === tab);
+    }});
+    document.querySelectorAll('.tab-panel').forEach(p => {{
+      p.classList.toggle('hidden', p.id !== 'panel-' + tab);
+    }});
+    document.querySelectorAll('.sidebar-panel').forEach(p => p.classList.add('hidden'));
+    const sp = document.getElementById('sidebar-' + tab);
+    if (sp) sp.classList.remove('hidden');
   }}
 """
 
@@ -642,6 +766,8 @@ CSS = """
   .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }
   .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }
   .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }
+  .game-dave-diver{ background: rgba(0,200,220,0.1);    color: #00c8dc; }
+  .game-days-gone { background: rgba(180,120,40,0.15);  color: #c8902a; }
 
   /* EXPANDED DETAIL — BUG */
   .bug-detail {
@@ -673,7 +799,7 @@ CSS = """
     display: flex; gap: 10px; align-items: baseline;
   }
   .finding-bullets li::before {
-    content: "▸"; color: var(--accent); font-size: 9px;
+    content: "\\25B8"; color: var(--accent); font-size: 9px;
     flex-shrink: 0; margin-top: 2px;
   }
   .detail-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
@@ -690,8 +816,6 @@ CSS = """
     justify-content: center; gap: 8px;
     color: var(--text-dim); font-size: 11px;
   }
-  .video-placeholder a { color: var(--accent); text-decoration: none; font-size: 12px; font-weight: 600; }
-  .video-placeholder a:hover { text-decoration: underline; }
   .video-icon {
     width: 32px; height: 32px; border: 1.5px solid var(--border-bright);
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -734,7 +858,6 @@ CSS = """
 
   .cs-meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .cs-meta-item {}
-
   .cs-footer-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
   /* FINDINGS */
@@ -763,7 +886,7 @@ CSS = """
     color: var(--text-dim); margin-bottom: 6px;
   }
 
-  /* RISK BADGES — fit to content, no min-width */
+  /* RISK BADGES */
   .risk-badge {
     font-size: 10px; font-weight: 700; padding: 3px 10px;
     border-radius: 3px; text-align: center; text-transform: uppercase;
@@ -773,6 +896,7 @@ CSS = """
   .risk-moderate      { background: rgba(255,140,66,0.15);   color: var(--major);    border: 1px solid rgba(255,140,66,0.3); }
   .risk-low           { background: rgba(77,171,247,0.15);   color: var(--visual);   border: 1px solid rgba(77,171,247,0.3); }
   .risk-low-moderate  { background: rgba(255,209,102,0.15);  color: var(--minor);    border: 1px solid rgba(255,209,102,0.3); }
+  .risk-strength      { background: rgba(6,214,160,0.12);    color: var(--green);    border: 1px solid rgba(6,214,160,0.3); }
 
   /* ABOUT */
   .about-panel { margin-top: 36px; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
@@ -792,7 +916,7 @@ CSS = """
   .skill-list-single { display: flex; flex-direction: column; gap: 4px; }
   .skill-item { font-size: 11px; color: var(--text-mid); display: flex; align-items: center; gap: 8px; }
   .skill-list .skill-item::before,
-  .skill-list-single .skill-item::before { content: '▸'; color: var(--accent); font-size: 9px; }
+  .skill-list-single .skill-item::before { content: '\\25B8'; color: var(--accent); font-size: 9px; }
 
   /* SCROLLBAR */
   ::-webkit-scrollbar { width: 4px; height: 4px; }
@@ -841,7 +965,7 @@ CSS = """
   .gc-stage-concept   { background: rgba(77,171,247,0.12);  color: var(--visual); border: 1px solid rgba(77,171,247,0.25); }
   .gc-stage-specced   { background: rgba(255,209,102,0.12); color: var(--minor);  border: 1px solid rgba(255,209,102,0.25); }
   .gc-stage-prototype { background: rgba(6,214,160,0.12);   color: var(--green);  border: 1px solid rgba(6,214,160,0.25); }
-  .gc-stage-shipped   { background: rgba(255,165,0,0.15);   color: #ffaa33;        border: 1px solid rgba(255,165,0,0.35); }
+  .gc-stage-shipped   { background: rgba(255,165,0,0.15);   color: #ffaa33;       border: 1px solid rgba(255,165,0,0.35); }
   .gc-flagship-badge {
     display: inline-flex; align-items: center; gap: 5px;
     font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
@@ -857,11 +981,10 @@ CSS = """
     font-size: 13px; color: var(--text); line-height: 1.8; margin-bottom: 20px;
     font-style: italic; border-left: 2px solid var(--border-bright); padding-left: 14px;
   }
-  .gc-flagship .gc-doc-pitch { border-left-color: var(--accent); }
+  .gc-flagship .gc-doc-pitch { border-left-color: var(--accent); color: var(--text); }
   .gc-doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-  .gc-links {
-    display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap;
-  }
+  .gc-doc-section { display: flex; flex-direction: column; gap: 8px; }
+  .gc-links { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
   .gc-link-btn {
     font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
     padding: 5px 12px; border-radius: 3px; text-decoration: none;
@@ -903,36 +1026,33 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
 
     print(f"  Loaded {len(bugs)} bug reports from {bugs_json_path}")
 
-    stats_bar   = make_stats_bar(bugs)
-    sidebar     = make_sidebar(bugs)
-    bug_cards   = "\n".join(make_bug_card(b) for b in bugs)
-    filter_js   = make_filter_js(bugs)
-    total_bugs  = len(bugs)
-    unique_games = len({
-        gk for gk in set(b["game"] for b in bugs)
-        if GAME_CONFIG.get(gk, {}).get("tier") == "AAA"
-    })
+    stats_bar  = make_stats_bar(bugs)
+    sidebar    = make_sidebar_html(bugs, case_studies)
+    bug_cards  = "\n".join(make_bug_card(b) for b in bugs)
+    filter_js  = make_filter_js(bugs)
+    total_bugs = len(bugs)
 
-    cs_cards    = "\n".join(make_case_study_card(cs) for cs in case_studies)
-    cs_count    = len(case_studies)
+    cs_cards = "\n".join(make_case_study_card(cs) for cs in case_studies)
+    cs_count = len(case_studies)
 
-    all_games = []
-    seen = set()
+    # Titles Tested list (unique games in bug order)
+    all_games, seen = [], set()
     for b in bugs:
         gk = b["game"]
         if gk not in seen:
             seen.add(gk)
-            label = GAME_CONFIG.get(gk, {}).get("label", b.get("game_name", gk))
-            all_games.append(label)
+            all_games.append(GAME_CONFIG.get(gk, {}).get("label", b.get("game_name", gk)))
 
-    titles_html = "\n".join(f'            <div class="skill-item">{escape(g)}</div>' for g in all_games)
+    titles_html = "\n".join(
+        f'            <div class="skill-item">{escape(g)}</div>' for g in all_games
+    )
 
     html = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wendell Lancaster — QA Portfolio &amp; Game Design</title>
+<title>Wendell Lancaster &mdash; QA Portfolio &amp; Game Design</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
 <style>{CSS}</style>
 </head>
@@ -943,7 +1063,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
   <div class="header-left">
     <div class="logo-mark">WL</div>
     <div class="header-name">WENDELL LANCASTER</div>
-    <div class="header-role">QA Tester &nbsp;·&nbsp; Game Developer &nbsp;·&nbsp; Designer</div>
+    <div class="header-role">QA Tester &nbsp;&middot;&nbsp; Game Developer &nbsp;&middot;&nbsp; Designer</div>
   </div>
   <div class="header-right">
     <a href="mailto:wendell91097@gmail.com" class="header-contact">wendell91097@gmail.com</a>
@@ -969,7 +1089,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
     <!-- TABS -->
     <div class="tab-bar">
       <button class="tab-btn active" data-tab="bugs" onclick="switchTab('bugs')">// Bug Reports</button>
-      <button class="tab-btn" data-tab="game-concepts" onclick="switchTab('game-concepts')">// Game Concepts <span style="font-size:10px; opacity:0.6">(6)</span></button>
+      <button class="tab-btn" data-tab="game-concepts" onclick="switchTab('game-concepts')">// Game Concepts <span style="font-size:10px; opacity:0.6">(8)</span></button>
       <button class="tab-btn" data-tab="case-studies" onclick="switchTab('case-studies')">// Case Studies <span style="font-size:10px; opacity:0.6">({cs_count})</span></button>
     </div>
 
@@ -986,7 +1106,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
     <!-- CASE STUDIES PANEL -->
     <div class="tab-panel hidden" id="panel-case-studies">
       <div class="content-header">
-        <div class="result-count"><span>{cs_count}</span> evaluation{'' if cs_count == 1 else 's'}</div>
+        <div class="result-count"><span>{cs_count}</span> evaluation{'s' if cs_count != 1 else ''}</div>
       </div>
       <div class="cs-list">
 {cs_cards}
@@ -1002,7 +1122,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
       <div class="gc-list">
 
         <!-- GC-001: WORDSMITH -->
-        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.02s">
+        <div class="gc-doc" id="gc-001" data-stage="shipped" onclick="toggleGcCard(this)" style="animation-delay:0.02s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id"><div class="gc-index">GC-001</div><div class="gc-expand-hint">&#9658; expand</div></div>
             <div class="gc-doc-col-main"><div class="gc-title">WordSmith</div><div class="gc-subtitle">Word Puzzle &middot; Letter Grid &middot; Pure Systems</div></div>
@@ -1024,7 +1144,8 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
           </div>
         </div>
 
-        <div class="gc-doc gc-flagship" onclick="toggleGcCard(this)" style="animation-delay:0.05s">
+        <!-- GC-002: IMMORTAL COIL -->
+        <div class="gc-doc gc-flagship" id="gc-002" data-stage="prototype" onclick="toggleGcCard(this)" style="animation-delay:0.05s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id"><div class="gc-index">GC-002</div><div class="gc-expand-hint">&#9658; expand</div></div>
             <div class="gc-doc-col-main"><div class="gc-title">Immortal Coil</div><div class="gc-subtitle">Pattern-Recognition Combat &middot; Dystopian Arena Drama &middot; Transhumanist Horror</div></div>
@@ -1043,7 +1164,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
         </div>
 
         <!-- GC-003: MANIFEST -->
-        <div class="gc-doc" onclick="toggleGcCard(this)" style="animation-delay:0.08s">
+        <div class="gc-doc" id="gc-003" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.08s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id"><div class="gc-index">GC-003</div><div class="gc-expand-hint">&#9658; expand</div></div>
             <div class="gc-doc-col-main"><div class="gc-title">Manifest</div><div class="gc-subtitle">Branching Narrative &middot; Frontier Homestead &middot; You Shape What America Becomes</div></div>
@@ -1061,4 +1182,154 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
           </div>
         </div>
 
+        <!-- GC-004: PLAYGROUND NOIR -->
+        <div class="gc-doc" id="gc-004" data-stage="prototype" onclick="toggleGcCard(this)" style="animation-delay:0.11s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id"><div class="gc-index">GC-004</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Playground Noir</div><div class="gc-subtitle">Mystery Visual Novel &middot; Kindergarten Ace Attorney &middot; Unreliable Witnesses</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-prototype">Prototype-Ready</span></div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">The last cookie has been eaten. The daycare is in crisis. You are the investigator. Every witness is five years old and completely unreliable. The truth, when you find it, will be wholesome.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>A mystery visual novel applying full noir investigation structure (evidence, cross-examination, witness contradiction) to playground-scale crimes.</li><li>The cast is built from archetypes: the Bookworm, the Wrestler, the Baseball Kid, the Theatre Kid. Each has its own testimony style, blind spots, and agenda.</li><li>The specimen case: two kids have cookie crumbs on their shirts. The answer: they shared it. Both guilty. Both innocent. Wholesome resolution mandatory.</li><li>Every case resolves without permanent harm. The noir trappings are the comedy. The darkness is borrowed, the warmth is earned.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Mechanics</div><ul class="finding-bullets"><li>Ace Attorney investigation and cross-examination loop adapted for an audience-appropriate tone.</li><li>Unreliable witness system: children misremember, exaggerate, lie to protect friends, and confabulate entirely. The challenge isn&#x2019;t finding the guilty party. It&#x2019;s figuring out which truth is true.</li><li>Scalable case structure: each case functions as a standalone episode.</li><li>Red herrings are mechanically embedded: evidence that looks damning leads to a different, more innocent explanation.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>The comedy of applied seriousness: treating missing cookies with investigative gravity produces the game&#x2019;s entire tonal register.</li><li>Childhood moral reasoning: sharing as absolution, honesty without cruelty, guilt without shame.</li><li>The subversion of noir cynicism: here, truth is sweet and people are trying their best.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Ace Attorney series &mdash; investigation loop, testimony contradiction, high drama, low stakes.</li><li>Professor Layton &mdash; episodic puzzle mysteries, gentle tone, standalone cases that work for a mixed-age audience.</li><li>Bluey &mdash; the comedy of treating children&#x2019;s problems with adult seriousness without condescension.</li></ul></div>
+            </div>
+            <div class="gc-vibe">Ace Attorney is 22 years old and nobody has made a wholesome version for a younger audience. That&#x2019;s a gap. The unreliable witness system isn&#x2019;t a gimmick. It&#x2019;s the entire design. Children don&#x2019;t lie the way adults lie; they misremember, they protect people, they confabulate completely. Building an investigation loop around that specific truth is what separates this from a reskin.</div>
+          </div>
+        </div>
 
+        <!-- GC-005: SWAN MARRIAGE COUNSELOR -->
+        <div class="gc-doc" id="gc-005" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.14s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id"><div class="gc-index">GC-005</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Swan Marriage Counselor</div><div class="gc-subtitle">Therapy Visual Novel &middot; Lifelong Commitment &middot; Determinism vs. Choice</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-specced">Specced</span></div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">Swans mate for life. Some of them are not handling it well. You are their counselor. The sessions that follow are about commitment, compromise, aging, and whether the promises we make when young should bind the people we become.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>The player is a marriage counselor to swan couples. Literal swans, with the biology of lifelong monogamy built in. These animals have no choice about who they&#x2019;re bound to.</li><li>Sessions explore the fault lines of long commitment: the distance that opens between people who grow in different directions; the resentment of a promise made without full information.</li><li>The subversion of the dating sim: dating sims are about the beginning of love. This game is about what happens after the win, when the romance has become a life and the life has become complicated.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>Determinism vs. choice: swans are biologically determined to stay. Humans choose to. What does that difference mean for the moral weight of commitment?</li><li>The problem of the self over time: the person you promised yourself to at 22 is not the person in front of you at 47.</li><li>Aging as a theme rather than a backdrop. The game is explicitly about couples who have been together long enough to become strangers to each other.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Florence &mdash; visual novel about the emotional reality of a relationship over time, not just its peak.</li><li>The Sopranos &mdash; therapy as a tool for self-reflection, metamorphosis, ideation, and sometimes delusion. Tony Soprano did not want to get better; he wanted permission to stay the same. Some of these swans have the same problem.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Commercial Note</div><ul class="finding-bullets"><li>Niche audience but a devoted one. Strong festival circuit potential &mdash; Indiecade, IGF.</li><li>Low asset requirement. The game lives in session dialogue. A small team with one strong writer could complete this.</li></ul></div>
+            </div>
+            <div class="gc-vibe">Low asset count, strong festival profile, and a demographic that games mostly ignore: people in long relationships. The swan framing isn&#x2019;t cute window dressing; it&#x2019;s the central mechanical question. Swans don&#x2019;t choose to stay. The player&#x2019;s job is to help couples who do choose work through what that costs. That&#x2019;s a different emotional register than anything currently in the visual novel space.</div>
+          </div>
+        </div>
+
+        <!-- GC-006: WINTER STORM -->
+        <div class="gc-doc" id="gc-006" data-stage="concept" onclick="toggleGcCard(this)" style="animation-delay:0.17s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id"><div class="gc-index">GC-006</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Winter Storm</div><div class="gc-subtitle">PVP Extraction Shooter &middot; Arctic Blizzard &middot; Strategic Infiltration &amp; Exfiltration</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-concept">Concept</span></div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">A PVP extraction shooter set in Arctic blizzards. Squads infiltrate, locate the objective, and fight their way out. The storm is not the enemy &mdash; the other team is. Every footprint you leave can be tracked. Every footprint they leave can too.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section"><div class="finding-label">Core Systems</div><ul class="finding-bullets"><li>The blizzard is not a hazard &mdash; it is cover. Whiteout conditions that blind the enemy also blind sensors, create acoustic interference, and mask heat signatures.</li><li>Snowmobile exfiltration as a set-piece mechanic: the stealth infiltration ends; the high-speed extraction begins.</li><li>Thermal imaging and heartbeat sensors as detection tools. Enemy use of them forces cat-and-mouse between environmental concealment and technological detection.</li><li>Footprint persistence: snow records movement. Players must plan routes considering what evidence they leave behind.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Design Gap</div><ul class="finding-bullets"><li>The aesthetic is fully realized. The setting is evocative. The mechanical hooks are genuinely interesting.</li><li>Missing: a narrative reason to care. Metal Gear works not because of its stealth mechanics but because Kojima built a mythology around them.</li><li>Current status: the PVP extraction framing solves the original narrative problem: the other squad is the story. Revisiting.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Metal Gear Solid series &mdash; gadget economy, environmental stealth, the idea that preparation is half the mission.</li><li>Call of Duty: MW2 &mdash; the snowmobile chase and Cliffhanger mission specifically; proof that an arctic infiltration set piece can be genuinely cinematic without sacrificing player agency.</li><li>Escape from Tarkov &mdash; the tension architecture of extraction: you brought good gear in, now you have to get it out.</li></ul></div>
+            </div>
+            <div class="gc-vibe">The extraction shooter market is crowded but nobody has committed to a full blizzard environment as a core design pillar, not a weather effect. It is the entire tactical premise. The footprint mechanic alone differentiates this from Tarkov. Revisiting with the PVP frame.</div>
+          </div>
+        </div>
+
+        <!-- GC-007: CONQUISTADOR SIM -->
+        <div class="gc-doc" id="gc-007" data-stage="concept" onclick="toggleGcCard(this)" style="animation-delay:0.20s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id"><div class="gc-index">GC-007</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Conquistador Sim</div><div class="gc-subtitle">Political Simulation &middot; New World Exploration &middot; God &middot; Guns &middot; Gold</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-concept">Concept</span></div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">You are a Spanish explorer in the New World. Work for the Crown, defect and lead a revolution like Cort&#xe9;s, or go native and become a warlord, navigating tribal politics, language barriers, shifting allegiances, and a continent that is trying to kill you.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section"><div class="finding-label">Core Factions / Paths</div><ul class="finding-bullets"><li>Crown Loyalist: high demand, high reward. The institutional path: supplied, supported, and expendable.</li><li>Renegade Revolutionary (the Cort&#xe9;s path): defection and conquest on personal terms. No supply lines, no safety net.</li><li>Gone Native / Warlord (the Kurtz path): abandon European frameworks entirely. The most dangerous and the most interesting endpoint.</li><li>Transient phases: paths are not locked. If your rogue power grows sufficient, the Crown must negotiate with you rather than hunt you.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Core Systems</div><ul class="finding-bullets"><li>Translation as a mechanic &mdash; language barriers are real and consequential. Miscommunication with tribes produces outcomes the player did not intend.</li><li>Tribal politics with genuine complexity: alliances, rivalries, territorial conflicts. The player enters a political environment that predates them and will outlast them.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Design Problem</div><ul class="finding-bullets"><li>This concept is enormous. Translation systems, tribal relationship graphs, three divergent path structures &mdash; any one of these would be a major system in another game.</li><li>Needs a version that is 80% smaller &mdash; a proof of concept, not a full simulation.</li><li>The Conquista is genuinely underexplored in games. This deserves to exist. The question is when and at what scale.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Apocalypse Now / Heart of Darkness &mdash; the gone-native path&#x2019;s psychological architecture.</li><li>Crusader Kings III &mdash; faction diplomacy, shifting allegiances, personal ambition at the expense of the institution.</li><li>Civilization series &mdash; the 4X framework for expansion, city management, and nation-building.</li></ul></div>
+            </div>
+            <div class="gc-vibe">The translation mechanic and the three-path structure are both worth building. Just not at the same time, at full scale, as a first project. Needs a proof-of-concept version that is roughly 20% of this scope. The setting is too underrepresented in games to abandon entirely.</div>
+          </div>
+        </div>
+
+        <!-- GC-008: WARP GUN -->
+        <div class="gc-doc" id="gc-008" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.23s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id"><div class="gc-index">GC-008</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Warp Gun</div><div class="gc-subtitle">First-Person Puzzle &middot; Spacetime Distortion &middot; Light &amp; Traversal</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-specced">Specced</span></div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">Instead of a portal gun, a warp gun. Two modes: contraction and expansion. Spacetime bends around your shots. Light curves. Distances collapse or stretch. Puzzles are solved not by placing doors in walls, but by reshaping the space between you and the solution.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section"><div class="finding-label">Core Mechanics</div><ul class="finding-bullets"><li><strong>Contraction shots</strong> behave like localized gravity wells: space folds inward, pulling objects and the player toward the distortion point, bending light paths, and collapsing distances that would otherwise be impassable.</li><li><strong>Expansion shots</strong> push space outward from the impact point, stretching geometry and perceived distances, deflecting projectiles and light beams along new paths, and creating traversable volumes from previously solid areas.</li><li>Light bending is not cosmetic &mdash; it is a puzzle input. Beams that need to hit targets must be routed through warp fields. The curvature is the mechanic.</li><li>Traversal puzzles built around two warp types interacting: a contraction pulling you toward a platform that an expansion has moved into range, or a light beam bent by contraction through a gap that expansion has opened.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Design Space</div><ul class="finding-bullets"><li>The distortion fields have a visual presence &mdash; space visibly shimmers, geometry warps at the field boundary, light halos around the contraction point. The world communicates the physics before the player tests it.</li><li>Puzzle difficulty scales by stacking warp interactions: early puzzles use one shot type in isolation; later puzzles require both simultaneously, with each distortion field affecting the other&#x2019;s geometry.</li><li>The setting can leverage the visual language directly: environments where geometry and perspective are already disorienting make warp distortion feel native rather than intrusive.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Portal &mdash; the single-tool puzzle design philosophy; the tool is the world&#x2019;s grammar, not a power layered on top of it.</li><li>Antichamber &mdash; non-Euclidean space as a puzzle medium; the willingness to let perception be wrong and make that wrongness mechanical.</li><li>Interstellar / actual gravitational lensing &mdash; the visual reference for what a real contraction field would look like to someone standing inside the light path.</li></ul></div>
+            </div>
+            <div class="gc-vibe">Portal works because the portal gun is a spatial language, not just a tool. The warp gun needs the same thing: every puzzle is a sentence written in distortion. The light-bending mechanic is the element that separates this from Portal reskin territory &mdash; routing light is a fundamentally different cognitive task than routing a player. That distinction is the design.</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ABOUT PANEL -->
+    <div class="about-panel">
+      <div class="about-header">// About This Portfolio &amp; Design Work</div>
+      <div class="about-body">
+        <div class="about-col">
+          <div class="about-col-title">Background</div>
+          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,300+ hours of paid user testing, and self-directed bug documentation across 15 titles. Open to remote entry-level QA roles.</p>
+        </div>
+        <div class="about-col">
+          <div class="about-col-title">QA Skills</div>
+          <div class="skill-list-single">
+            <div class="skill-item">Bug documentation &amp; reproduction steps</div>
+            <div class="skill-item">Defect classification &amp; severity rating</div>
+            <div class="skill-item">Screen capture &amp; video evidence</div>
+            <div class="skill-item">Edge case &amp; boundary testing</div>
+            <div class="skill-item">Cross-title regression awareness</div>
+          </div>
+        </div>
+        <div class="about-col">
+          <div class="about-col-title">Titles Tested</div>
+          <div class="skill-list">
+{titles_html}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<footer>
+  <div>Wendell Lancaster &mdash; QA Portfolio &amp; Game Design // Built with precision</div>
+  <div>Boston, MA &nbsp;&middot;&nbsp; wendell91097@gmail.com &nbsp;&middot;&nbsp; (228) 237-6193</div>
+</footer>
+
+<script>
+{filter_js}
+</script>
+</body>
+</html>"""
+
+    with open(output_path, "w", encoding="utf-8") as f:
+        f.write(html)
+
+    print(f"  Output written to {output_path}")
+    print(f"  {total_bugs} bugs | {len(case_studies)} case studies | 8 game concepts")
+
+
+if __name__ == "__main__":
+    base = os.path.dirname(os.path.abspath(__file__))
+    build_dashboard(
+        bugs_json_path        = os.path.join(base, "bugs.json"),
+        case_studies_json_path= os.path.join(base, "case_studies.json"),
+        output_path           = os.path.join(base, "index.html"),
+    )
