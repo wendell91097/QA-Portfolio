@@ -433,8 +433,6 @@
   }
   .gc-doc:hover { border-color: var(--border-bright); transform: translateX(3px); }
   .gc-doc.gc-expanded { border-color: var(--accent); }
-  .gc-flagship { border-color: rgba(232,255,71,0.25); }
-  .gc-flagship:hover, .gc-flagship.gc-expanded { border-color: var(--accent); }
   .gc-doc-header {
     display: grid; grid-template-columns: 68px 1fr 160px;
     align-items: center; padding: 14px 18px; gap: 16px;
@@ -446,7 +444,6 @@
   .gc-doc.gc-expanded .gc-expand-hint { opacity: 0; }
   .gc-doc-col-main { display: flex; flex-direction: column; gap: 4px; }
   .gc-title { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 13px; color: var(--text); letter-spacing: 0.02em; }
-  .gc-flagship .gc-title { color: var(--accent); }
   .gc-subtitle { font-size: 10px; color: var(--text-dim); letter-spacing: 0.04em; }
   .gc-doc-col-meta { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
   .gc-stage-badge {
@@ -457,12 +454,6 @@
   .gc-stage-specced   { background: rgba(255,209,102,0.12); color: var(--minor);  border: 1px solid rgba(255,209,102,0.25); }
   .gc-stage-prototype { background: rgba(6,214,160,0.12);   color: var(--green);  border: 1px solid rgba(6,214,160,0.25); }
   .gc-stage-shipped   { background: rgba(255,165,0,0.15);   color: #ffaa33;       border: 1px solid rgba(255,165,0,0.35); }
-  .gc-flagship-badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
-    color: var(--accent); background: rgba(232,255,71,0.1); border: 1px solid rgba(232,255,71,0.25);
-    padding: 3px 8px; border-radius: 3px;
-  }
   .gc-doc-body {
     display: none; border-top: 1px solid var(--border);
     padding: 20px 18px 24px; background: var(--bg3);
@@ -472,7 +463,6 @@
     font-size: 13px; color: var(--text); line-height: 1.8; margin-bottom: 20px;
     font-style: italic; border-left: 2px solid var(--border-bright); padding-left: 14px;
   }
-  .gc-flagship .gc-doc-pitch { border-left-color: var(--accent); color: var(--text); }
   .gc-doc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
   .gc-doc-section { display: flex; flex-direction: column; gap: 8px; }
   .gc-links { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
@@ -673,7 +663,7 @@
       <div class="sidebar-section">
         <div class="sidebar-label">Filter by Stage</div>
         <button class="filter-btn active" onclick="filterConcepts('all', this)">
-          All Concepts <span class="filter-count">8</span>
+          All Concepts <span class="filter-count">9</span>
         </button>
         <button class="filter-btn" onclick="filterConcepts('shipped', this)">
           Shipped <span class="filter-count">1</span>
@@ -682,7 +672,7 @@
           Prototype-Ready <span class="filter-count">2</span>
         </button>
         <button class="filter-btn" onclick="filterConcepts('specced', this)">
-          Specced <span class="filter-count">3</span>
+          Specced <span class="filter-count">4</span>
         </button>
         <button class="filter-btn" onclick="filterConcepts('concept', this)">
           Concept <span class="filter-count">2</span>
@@ -690,14 +680,15 @@
       </div>
       <div class="sidebar-section">
         <div class="sidebar-label">Jump To</div>
-        <button class="filter-btn" onclick="jumpTo('gc-001')">GC-001 &mdash; WordSmith</button>
-        <button class="filter-btn" onclick="jumpTo('gc-002')">GC-002 &mdash; Immortal Coil</button>
-        <button class="filter-btn" onclick="jumpTo('gc-003')">GC-003 &mdash; Manifest</button>
-        <button class="filter-btn" onclick="jumpTo('gc-004')">GC-004 &mdash; Playground Noir</button>
-        <button class="filter-btn" onclick="jumpTo('gc-005')">GC-005 &mdash; Swan Marriage</button>
-        <button class="filter-btn" onclick="jumpTo('gc-006')">GC-006 &mdash; Winter Storm</button>
-        <button class="filter-btn" onclick="jumpTo('gc-007')">GC-007 &mdash; Conquistador</button>
-        <button class="filter-btn" onclick="jumpTo('gc-008')">GC-008 &mdash; Warp Gun</button>
+        <button class="filter-btn" onclick="jumpTo('gc-001')">WordSmith</button>
+        <button class="filter-btn" onclick="jumpTo('gc-004')">Playground Noir</button>
+        <button class="filter-btn" onclick="jumpTo('gc-002')">Immortal Coil</button>
+        <button class="filter-btn" onclick="jumpTo('gc-003')">Manifest</button>
+        <button class="filter-btn" onclick="jumpTo('gc-009')">Bear&#x27;s Blooming Forest</button>
+        <button class="filter-btn" onclick="jumpTo('gc-005')">Swan Marriage Counselor</button>
+        <button class="filter-btn" onclick="jumpTo('gc-008')">Warp Gun</button>
+        <button class="filter-btn" onclick="jumpTo('gc-006')">Winter Storm</button>
+        <button class="filter-btn" onclick="jumpTo('gc-007')">Conquistador Sim</button>
       </div>
     </div>
 
@@ -736,7 +727,7 @@
     <!-- TABS -->
     <div class="tab-bar">
       <button class="tab-btn active" data-tab="bugs" onclick="switchTab('bugs')">// Bug Reports</button>
-      <button class="tab-btn" data-tab="game-concepts" onclick="switchTab('game-concepts')">// Game Concepts <span style="font-size:10px; opacity:0.6">(8)</span></button>
+      <button class="tab-btn" data-tab="game-concepts" onclick="switchTab('game-concepts')">// Game Concepts <span style="font-size:10px; opacity:0.6">(9)</span></button>
       <button class="tab-btn" data-tab="case-studies" onclick="switchTab('case-studies')">// Case Studies <span style="font-size:10px; opacity:0.6">(2)</span></button>
     </div>
 
@@ -2933,7 +2924,22 @@
             </div>
             <div class="gc-doc-grid">
               <div class="gc-doc-section"><div class="finding-label">Core Loop</div><ul class="finding-bullets"><li>The player navigates a letter grid ranging from 4&times;4 to 8&times;8 and traces valid words in any direction (horizontal, vertical, diagonal) without reusing the same letter twice per word.</li><li>Valid words remove their letters from the grid. The tiles above cascade down to fill the gap, Tetris-style. New letters generate from the top to keep the grid full. The player never sees a half-empty board.</li><li>The Wordsmith hammer is a targeted tool: the player can use it to remove specific letters from the grid independently of word-making, creating space or breaking up bad distributions.</li><li>Shuffle resets the grid entirely when the current layout is unworkable.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Game Modes</div><ul class="finding-bullets"><li><strong>Classic</strong> &mdash; a set number of letters can be used before the round ends. The constraint is total throughput, not time. Rewards deliberate play.</li><li><strong>Timed</strong> &mdash; a player-set time limit. Same grid, different pressure. Rewards fast pattern recognition over optimization.</li><li><strong>Endless</strong> &mdash; no win condition, no loss condition. The grid runs indefinitely. Chill by design.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Game Modes</div>
+                <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;">
+                  <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Classic</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">A set number of letters can be used before the round ends. The constraint is total throughput, not time. Rewards deliberate, high-value word selection over speed.</p>
+                  </div>
+                  <div style="background:rgba(255,77,77,0.07); border:1px solid rgba(255,77,77,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Timed</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">A player-set time limit. Same grid, different pressure. Rewards fast pattern recognition over optimization. The clock changes what kind of player wins.</p>
+                  </div>
+                  <div style="background:rgba(6,214,160,0.07); border:1px solid rgba(6,214,160,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Endless</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">No win condition, no loss condition. The grid runs indefinitely. Chill by design.</p>
+                  </div>
+                </div>
+              </div>
               <div class="gc-doc-section"><div class="finding-label">Design Notes</div><ul class="finding-bullets"><li>Retro pixel art aesthetic throughout, with parallax backgrounds sourced from open licensed assets with attribution. Settings allow music, SFX, and background swaps from the start screen.</li><li>Built in Godot. Released August 22, 2024. Windows desktop download, no installation required.</li><li>The cascade mechanic changes the strategic calculus compared to static-grid word games: clearing a cluster of letters reshapes the board, which creates new adjacencies and new problems simultaneously.</li><li>The hammer gives the player agency over the board state without requiring a full shuffle. It adds meaningful tactical decision-making without complicating the core loop.</li></ul></div>
               <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Boggle &mdash; directional letter adjacency as the core word-finding structure.</li><li>Bookworm (PopCap) &mdash; tiles cleared on valid word submission, board management as an emergent challenge.</li><li>Tetris &mdash; gravity-based cascade as the feedback mechanism for clearing; the board as a living system rather than a static puzzle.</li></ul></div>
             </div>
@@ -2941,27 +2947,88 @@
           </div>
         </div>
 
-        <!-- GC-002: IMMORTAL COIL -->
-        <div class="gc-doc gc-flagship" id="gc-002" data-stage="prototype" onclick="toggleGcCard(this)" style="animation-delay:0.05s">
+        <!-- GC-002: PLAYGROUND NOIR -->
+        <div class="gc-doc" id="gc-004" data-stage="prototype" onclick="toggleGcCard(this)" style="animation-delay:0.05s">
           <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-002</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Immortal Coil</div><div class="gc-subtitle">Pattern-Recognition Combat &middot; Dystopian Arena Drama &middot; Transhumanist Horror</div></div>
-            <div class="gc-doc-col-meta"><span class="gc-flagship-badge">&#9733; Flagship</span><span class="gc-stage-badge gc-stage-prototype" style="margin-top:4px">Prototype-Ready</span></div>
+            <div class="gc-doc-col-id"><div class="gc-index">GC-004</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Playground Noir</div><div class="gc-subtitle">Mystery Visual Novel &middot; Kindergarten Ace Attorney &middot; Unreliable Witnesses</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-prototype">Prototype-Ready</span></div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">All humans are immortal. The worst criminals fight in arenas for public amusement. Win five championships and earn the only thing anyone in this society still wants: the right to die. You see it all through your own eyes &mdash; what&#x2019;s left of them.</div>
+            <div class="gc-doc-pitch">The last cookie has been eaten. The daycare is in crisis. You are the investigator. Every witness is five years old, completely unreliable, and in the middle of something more important than your case.</div>
             <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>A technologically immortal society has eliminated death &mdash; except as a prize. The arena is the only culturally sanctioned exit. Spectators are trapped in a system so ancient no one knows how to dismantle it.</li><li>The player is a convicted criminal in the Neo-Gladiator circuit. Bodies heal between bouts. Mental deterioration does not. Every augmentation makes you more competitive and less yourself &mdash; felt from the inside.</li><li>Win five championships across three tiers &mdash; Minor, Major, World &mdash; and earn the most coveted right in the world: self-euthanasia.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Mechanics</div><ul class="finding-bullets"><li>First-person perspective, optionally VR. You look out through eyes that used to be yours. Your hands in front of you are chrome. You cannot look away from what you&#x2019;ve become.</li><li>Full ring mobility: sidestep, backpedal, close distance, cut angles. Footwork is tactical; positioning creates the windows the pattern system requires.</li><li>Punch-Out DNA: opponents run on readable, repeatable patterns. Cybernetic augmentations are the tell system: a HUD ping reading TARGET LOCKED, steam venting from a joint, an arm morphing into a new attack mode. The visual language is the gameplay.</li><li>Player augmentations unlock between bouts &mdash; each a genuine tradeoff. Better reach, faster counters, harder hits. Each one another step toward what you&#x2019;re fighting to escape.</li><li>Mental degradation modeled over time: early fights feel sharp. Later fights accumulate visual noise, flickering tells, HUD lag. The machine is winning even when you are.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>The complicity trap: every augmentation is a vote for the system. The player is not a rebel &mdash; they are a product of the arena.</li><li>First person as horror: you cannot cut away from the hands. The detachment from your own body is not a cutscene &mdash; it is the camera.</li><li>Post-modernist collapse of meaning: when death is abolished, what does life cost?</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Punch-Out!! &mdash; pattern recognition as the entire design; opponents as puzzles with tells, not health bars to deplete.</li><li>Dark Souls &mdash; immortality as a curse; the hollow mechanic as a model for what repeated survival costs the self.</li><li>Disco Elysium &mdash; the collapse of a moral framework as both world-building and gameplay.</li><li>Rollerball (1975) &mdash; sport as systemic dehumanization; the crowd as the real antagonist.</li><li>Warhammer 40,000 &mdash; technology so ancient maintaining it has become religious ritual.</li><li>Neon Genesis Evangelion &mdash; the psychic cost of doing what the machine requires; the body as something that happens to you.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>A mystery visual novel applying full noir investigation structure &mdash; evidence, cross-examination, witness contradiction &mdash; to playground-scale crimes.</li><li>Children do not stop their world for your questions. Testimony happens mid-activity: mid-jump, mid-drawing, mid-game. The investigator enters the child&#x2019;s frame, not the reverse. You want information from the Baseball Kid, you talk baseball first.</li><li>Simple motivations mean simple solutions. A child took the cookie because they were hungry. A child lied to protect their friend. The solution is always obvious in retrospect and always wholesome. The noir structure is borrowed; the darkness never is.</li><li>The specimen case: two kids have crumbs on their shirts. The answer: they shared it. Both guilty. Both innocent. The resolution is mandatory warmth.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">The Cast</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px;">
+                  <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.25); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The &ldquo;Librarian&rdquo;</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.6;">Anxious about being correct. Remembers details with precision and loses context entirely. Will correct your phrasing mid-sentence. Mid-chapter of a book when you arrive.</p>
+                  </div>
+                  <div style="background:rgba(255,77,77,0.07); border:1px solid rgba(255,77,77,0.25); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Dinosaur Kid</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.6;">Confident. Exaggerates scale automatically. Simple motivations: they did it because it seemed fun, or they were hungry. Currently stomping around making T-Rex sounds at no one in particular.</p>
+                  </div>
+                  <div style="background:rgba(6,214,160,0.07); border:1px solid rgba(6,214,160,0.25); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Baseball Kid</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.6;">Perpetually mid-game in their head. Will not stop throwing an imaginary ball. Useful testimony only comes after you demonstrate baseline baseball knowledge. Worth it.</p>
+                  </div>
+                  <div style="background:rgba(180,100,255,0.07); border:1px solid rgba(180,100,255,0.25); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:#c87fff; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Animal Friend</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.6;">Loves animals with total sincerity. Confabulates for their benefit &mdash; her version of events is whatever kept the animals safest. Currently giving a checkup to every stuffed animal she owns.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gc-doc-section"><div class="finding-label">Mechanics</div><ul class="finding-bullets"><li>Ace Attorney investigation and cross-examination loop adapted for a younger audience. The challenge isn&#x2019;t finding the guilty party &mdash; it&#x2019;s figuring out which truth is true, given that every witness is telling you their truth sincerely.</li><li>The play-along mechanic: some testimony is only unlocked by entering the witness&#x2019;s current activity. You cannot interrupt the Dinosaur Kid mid-hunt. You can join it.</li><li>Red herrings are structurally embedded: evidence that looks damning leads to a different, more innocent explanation. The guilt in this world is the kind that can be forgiven in the same afternoon.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Ace Attorney series &mdash; investigation loop, testimony contradiction, high drama applied to low stakes.</li><li>Professor Layton &mdash; episodic puzzle mysteries, gentle tone, standalone cases that work for mixed-age audiences.</li><li>Bluey &mdash; the comedy of treating children&#x2019;s problems with adult seriousness, without condescension. The children are the straight faces; the adult register is the joke.</li></ul></div>
             </div>
-            <div class="gc-vibe">The arena combat loop gives QA something concrete to test against: does augmentation feel like a tradeoff or just a power increase? Does the mental decay mechanic actually change how the player reads tells, or is it cosmetic? Those are real design questions with answers, which means this is a real game. The first-person frame is not an aesthetic choice &mdash; it is the argument.</div>
+            <div class="gc-vibe">Ace Attorney is 22 years old and nobody has made a wholesome version for a younger audience. The unreliable witness system isn&#x2019;t a gimmick &mdash; it&#x2019;s the entire design. Children don&#x2019;t lie the way adults lie. They misremember, protect people they love, and confabulate completely. The play-along mechanic puts that at the center: you cannot extract testimony from a child who doesn&#x2019;t want to give it. You have to go where they are. That&#x2019;s the adult layer: the game is easy for a child to play because it asks nothing more than what children already know. For an adult, it&#x2019;s a mirror &mdash; a reminder that the best way to connect with a kid is not to get them to stop what they&#x2019;re doing, but to understand why they can&#x2019;t. That&#x2019;s the message underneath the mystery structure &mdash; aimed at the adult holding the controller. The game is a gentle reminder that children don&#x2019;t stop their world for you. The better move has always been to enter theirs.</div>
           </div>
         </div>
 
-        <!-- GC-003: MANIFEST -->
-        <div class="gc-doc" id="gc-003" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.08s">
+        <!-- GC-003: IMMORTAL COIL -->
+        <div class="gc-doc" id="gc-002" data-stage="prototype" onclick="toggleGcCard(this)" style="animation-delay:0.08s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id"><div class="gc-index">GC-002</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Immortal Coil</div><div class="gc-subtitle">Pattern-Recognition Combat &middot; Dystopian Arena Drama &middot; Transhumanist Horror</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-prototype">Prototype-Ready</span></div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">All criminals are immortal. They fight in arenas year-round for public amusement. Win five championships and earn the only thing anyone in this society still wants: the right to die. The problem is that by the time you&#x2019;ve won five championships, the elite have made sure you don&#x2019;t want it anymore. You see it all through your own eyes &mdash; what&#x2019;s left of them.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>Immortality is not biological &mdash; it is infrastructural. When the body sustains brain death, the state restores the individual from a prior neural save state: a snapshot of the mind taken at regular intervals, patched over the corrupted data. Resurrection is a government process. You do not consent to it. You do not own your continuity.</li><li>Each restoration is lossy. Like a file recompressed too many times, fidelity degrades. Memories blur at the edges. Personality flattens. The mental deterioration the player feels across a run is not damage &mdash; it is accumulated restoration artifact. The machine keeps bringing you back. It keeps bringing back slightly less of you.</li><li>Three tiers: the underclass fights, the middle class watches but does not participate, the elite never sets foot in the arena. The arena is a management tool aimed at the bottom tier. The middle class watching the underclass fight keeps both groups pointed sideways instead of upward &mdash; Roman bread-and-circus logic applied to a transhumanist dystopia.</li><li>Fights run year-round. The main championship tournament is the marquee spectacle, but losers&#x2019; brackets, exhibition bouts, and consolation tournaments fill the calendar continuously. There is always something to watch. There is always someone losing.</li><li>Five championships is the official threshold for earned euthanasia. The number is arbitrary &mdash; bureaucratic tradition so old its origin is propaganda &mdash; but it doesn&#x2019;t matter, because the euthanasia was never real. A champion is too valuable to the system to release.</li><li>Instead, the elite make death seem terrible and life as a champion seem extraordinary. Prize wealth, status, comfort, celebrity &mdash; enough that most champions never invoke the clause. The few who do discover the offer was a lie dressed up as a right: mind-wipe, reprogramming, blackmail, torture, or worse &mdash; consciousness trapped in a dead signal, a fuzzier version of yourself fading slowly in a loop, no exit. There are no happy endings. There is only a signal degrading until there is nothing left to degrade.</li><li>The player is a convicted criminal entering unseeded at the bottom of the bracket. Bodies heal between bouts. Mental fidelity does not. Every augmentation makes you more competitive and less yourself &mdash; felt from the inside.</li><li>Roguelite structure: each run is a full tournament season. Augmentation combinations, opponent loadouts, and new attack patterns vary between runs. You learn the system across deaths. The tournament remembers you. You have to remember it faster.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Mechanics</div><ul class="finding-bullets"><li>First-person perspective, optionally VR. You look out through eyes that used to be yours. Your hands in front of you are chrome. You cannot look away from what you&#x2019;ve become.</li><li>Full ring mobility: sidestep, backpedal, close distance, cut angles. Footwork is tactical; positioning creates the windows the pattern system requires.</li><li>Punch-Out DNA: opponents run on readable, repeatable patterns. Cybernetic augmentations are the tell system: a HUD ping reading TARGET LOCKED, steam venting from a joint, an arm morphing into a new attack mode. The visual language is the gameplay.</li><li>Player augmentations unlock between bouts &mdash; each a genuine tradeoff. Better reach, faster counters, harder hits. Each one another step toward what you&#x2019;re fighting to escape.</li><li>Mental degradation modeled over time: early fights feel sharp. Later fights accumulate visual noise, flickering tells, HUD lag. The machine is winning even when you are.</li><li>End of fight rituals: mandatory, performed for the crowd, choreographed by the arena. The form of commemoration without the substance &mdash; a sacred gesture co-opted into spectacle. The player performs them whether they want to or not. Over time, what they mean to the player and what they mean to the crowd become two entirely different things.</li><li>Trophy system: a component stripped from a defeated opponent &mdash; a chrome piece, a lens, a joint casing. The only objects in the game that belong to the player rather than the system. Displayed in the fighter&#x2019;s cell. The one act of curation the arena cannot script.</li><li>Opponent relationships: fighters you&#x2019;ve beaten reappear across seasons. Fighters who have beaten you may carry a trophy from that encounter &mdash; something of yours, displayed in their own cell. Lose to someone and they own a piece of you. Beat them later and you can take it back, or leave it. The arena insists these are enemies. The trophies tell a different story.</li><li>Some opponents become something closer to rivals, then something closer to the only people who understand what this is. The relationship system is not social &mdash; it is purely environmental. You learn each other through the fight. There is no dialogue. There does not need to be.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div>
+                <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;">
+                  <div style="background:rgba(255,77,77,0.07); border:1px solid rgba(255,77,77,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Complicity Trap</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Every augmentation is a vote for the system. The player is not a rebel &mdash; they are a product of the arena. Winning requires becoming what the arena needs you to be.</p>
+                  </div>
+                  <div style="background:rgba(180,100,255,0.07); border:1px solid rgba(180,100,255,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:#c87fff; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">First Person as Horror</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">You cannot cut away from the hands. The detachment from your own body is not a cutscene &mdash; it is the camera. Chrome where skin used to be, in every frame, for the whole game.</p>
+                  </div>
+                  <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The False Exit</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Immortality is a government service. The euthanasia clause exists to motivate fighters, not to be exercised. Champions who try to claim it find out what the state does to tools that try to retire: mind-wipe, reprogramming, or worse &mdash; consciousness isolated in a dead signal, a fuzzier version of yourself fading slowly with no exit. The offer was always a lie. Five championships was never the price of death. It was the price of finding that out.</p>
+                  </div>
+                  <div style="background:rgba(255,140,66,0.07); border:1px solid rgba(255,140,66,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--orange); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Only Canvas Left</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">The arena permits one form of self-expression: the fight. Your augmentation choices are the only aesthetic decisions you&#x2019;re allowed. The opponent is the only relationship the system sanctions. Destruction of others is the sole creative act available. The trophies are the exception &mdash; the one thing the player curates that the system did not script. A cell full of chrome pieces from people you&#x2019;ve beaten, or been beaten by, is the closest thing to an autobiography this world allows.</p>
+                  </div>
+                  <div style="background:rgba(6,214,160,0.07); border:1px solid rgba(6,214,160,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Resistance Has Always Existed</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">There is a faction that knows the truth: about the save-state infrastructure, the euthanasia clause, what the elite actually are. They have been here for generations. The system has always known about them. The system has always been fine with that. A rebellion that cannot reach the puppeteers, that cannot dismantle what no one fully controls anymore &mdash; that rebellion is not a threat. It is another spectacle. The most dangerous thing the player can discover is not how to fight the system. It is that the system anticipated that too.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Punch-Out!! &mdash; pattern recognition as the entire design; opponents as puzzles with tells, not health bars to deplete.</li><li>Dark Souls &mdash; immortality as a curse; the hollow mechanic as a model for what repeated survival costs the self.</li><li>Disco Elysium &mdash; the collapse of a moral framework as both world-building and gameplay.</li><li>Rollerball (1975) &mdash; sport as systemic dehumanization; the crowd as the real antagonist.</li><li>Warhammer 40,000 &mdash; technology so ancient maintaining it has become religious ritual.</li><li>Cyberpunk 2077 / the Chrome aesthetic &mdash; transhumanism as ubiquity rather than novelty; a world where body modification is so normalized it has stopped being a choice and started being an expectation.</li><li>Neon Genesis Evangelion &mdash; the psychic cost of doing what the machine requires; the body as something that happens to you.</li></ul></div>
+            </div>
+            <div class="gc-vibe">The euthanasia clause is the game&#x2019;s central trap. You spend the whole run fighting toward something the system never intended to give you. By the time you&#x2019;ve won five championships, the elite have spent five runs making you too rich, too famous, and too degraded to want it. The trophies are the counter-argument the game makes quietly: the only objects that belong to the player, the only history the system cannot rewrite. Lose to someone and they own a piece of you. Beat them later and you decide what that means. The arena calls them enemies. The trophies call them the only people who know what you are. The bread-and-circus layer is what makes the world coherent: the middle class watches the underclass fight, which keeps both groups pointed sideways. No one looks up. The arena combat loop gives QA something concrete to test: does augmentation feel like a tradeoff or just a power increase? Does mental decay change how the player reads tells, or is it cosmetic? Do the opponent relationships actually shift how the player approaches a rematch, or are they just flavor? Those are real questions with testable answers. The first-person frame is not an aesthetic choice &mdash; it is the argument.</div>
+          </div>
+        </div>
+
+        <!-- GC-004: MANIFEST -->
+        <div class="gc-doc" id="gc-003" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.11s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id"><div class="gc-index">GC-003</div><div class="gc-expand-hint">&#9658; expand</div></div>
             <div class="gc-doc-col-main"><div class="gc-title">Manifest</div><div class="gc-subtitle">Branching Narrative &middot; Frontier Homestead &middot; You Shape What America Becomes</div></div>
@@ -2970,36 +3037,194 @@
           <div class="gc-doc-body">
             <div class="gc-doc-pitch">You have staked a claim on the frontier. A homestead at the crossroads of everything America is becoming. Every week someone new comes through. Some are running from something. Some are running toward something worth dying for. Every choice compounds. The country being built around you will remember what you did here.</div>
             <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Premise &amp; Choice Architecture</div><ul class="finding-bullets"><li>The player is a fixed point while history moves through them. Choices establish reputation, close doors, open others, reshape the settlement over years. Think Fallout 1 and 2: decisions made in Act One are still paying out in Act Three.</li><li>Factions accumulate organically. Side with the railroad and the town booms but the families who were here first get pushed out. Help the Underground Railroad and certain guests start arriving who would not otherwise trust you. But so will people who want to know who you&#x2019;ve been helping.</li><li>The newspaper mechanic: weeks later, the penny press brings word. Some made it. Some are on wanted posters. Some names appear in obituaries with no next of kin listed.</li><li>This was a deeply Christian nation. The moral vocabulary of the era is scripture: charity, sanctuary, bearing false witness, rendering unto Caesar. Turning someone away is not a neutral act.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">The Guests Who Matter Most</div><ul class="finding-bullets"><li><strong>The Comanche</strong> &mdash; traveling under a name that is not his. His sister is missing. He needs one night&#x2019;s shelter and your silence. What do you do when the marshal comes asking the next morning?</li><li><strong>The conductor</strong> &mdash; a freed Black man, educated minister, moving people north. Route the Underground Railroad through your homestead and weeks later a rider comes at night with different intentions. Help enough people and the wrong people take notice.</li><li><strong>The teacher</strong> &mdash; heading to a mining camp that does not know it needs her. Whether she makes it depends partly on what you tell her about the road ahead.</li><li><strong>The pastor</strong> &mdash; road-worn, theologically complicated, genuinely kind. He will tell you plainly what he thinks you are doing wrong with your life. He is usually right.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">The Fuller Roster <button class="gc-roster-toggle" onclick="event.stopPropagation(); toggleRoster(this)" aria-expanded="false">&#9658; show</button></div><div class="gc-roster-body" style="display:none"><ul class="finding-bullets"><li>Outlaws and the lawmen hunting them &mdash; shelter and betrayal each carry a price, and the law is not always the more trustworthy of the two.</li><li>Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators &mdash; each carrying a different idea of what America is supposed to mean.</li><li>The missionary heading into territory everyone else is heading out of. The Army deserter. The Pinkerton who is not here by accident.</li><li>The Mexican family the law does not recognize as having rights to land they have worked for thirty years. The journalist writing the myth while it is still being made.</li></ul></div></div>
-              <div class="gc-doc-section"><div class="finding-label">Thematic DNA &amp; Influences</div><ul class="finding-bullets"><li>Manifest Destiny written in scripture and enacted in blood &mdash; the heroic and the self-interested arriving in no particular order.</li><li>Fallout 1 &amp; 2, Fallout: New Vegas &mdash; long-consequence choice architecture, faction reputation, a world that changes shape around your decisions.</li><li>Papers, Please, Red Dead Redemption 2, Deadwood (HBO).</li></ul></div>
+              <div class="gc-doc-section" style="grid-column: 1 / -1"><div class="finding-label">Core Premise &amp; Choice Architecture</div><ul class="finding-bullets"><li>1850 to 1900. Fifty years. A visual choose-your-own-adventure spanning the full arc of the American frontier era, ending at the turn of the century. The player is a fixed point while half a century moves through them.</li><li>Choices establish reputation, close doors, open others, reshape the settlement over decades. Decisions made in the 1850s are still paying out in the 1890s. One wrong move and your entire herd of cattle is gone. A wrong guest sheltered at the wrong time and the Pinkertons know your name. The stakes are permanent and quiet until they aren&#x2019;t.</li><li>The newspaper mechanic starts slow: a single regional paper arrives monthly in the early years, carrying word of people who passed through. Some made it. Some are on wanted posters. Some names appear in obituaries with no next of kin listed. As decades pass, the papers multiply &mdash; the Denver Rocky Mountain News, the Chicago Tribune, the San Francisco Chronicle, the Atlanta Constitution, dispatches from New Orleans and St. Louis, occasional pages from Tijuana and Ciudad Ju&#xe1;rez carried by traders coming north. The homestead is not a waypoint on a one-way road west. It sits at a crossroads. People pass through heading every direction &mdash; north to the railroad camps, south across the border, east back to cities they left, west toward something they haven&#x2019;t named yet. By the 1890s the player is reading competing accounts of the same events from a dozen cities, and they know which version is true because they were there.</li><li>This was a deeply Christian nation. The moral vocabulary of the era is scripture: charity, sanctuary, bearing false witness, rendering unto Caesar. Turning someone away is not a neutral act.</li><li>The game can end early. Catastrophic choices compound into ruin &mdash; a lost herd, a burned homestead, a reputation that closes every door in the territory. It is possible to not make it to 1900. That is the point.</li></ul></div>
+              <div class="gc-doc-section" style="grid-column: 1 / -1"><div class="finding-label">The Guests Who Matter Most</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px;">
+                  <div style="background:rgba(255,77,77,0.07); border:1px solid rgba(255,77,77,0.25); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Comanche</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Traveling under a name that is not his. His sister is missing. He needs one night&#x2019;s shelter and your silence. What do you do when the marshal comes asking the next morning?</p>
+                  </div>
+                  <div style="background:rgba(6,214,160,0.07); border:1px solid rgba(6,214,160,0.25); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Conductor</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">A freed Black man, educated minister, moving people north. Route the Underground Railroad through your homestead and weeks later a rider comes at night with different intentions. Help enough people and the wrong people take notice.</p>
+                  </div>
+                  <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.25); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Teacher</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Heading to a mining camp that does not know it needs her. Whether she makes it depends partly on what you tell her about the road ahead.</p>
+                  </div>
+                  <div style="background:rgba(220,220,220,0.05); border:1px solid rgba(220,220,220,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:#d0d0d0; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Pastor</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Road-worn, theologically complicated, genuinely kind. He will tell you plainly what he thinks you are doing wrong with your life. He is usually right.</p>
+                  </div>
+                </div>
+                <div style="margin-top:8px;"><div class="finding-label" style="margin-bottom:6px;">The Fuller Roster <button class="gc-roster-toggle" onclick="event.stopPropagation(); toggleRoster(this)" aria-expanded="false">&#9658; show</button></div><div class="gc-roster-body" style="display:none"><ul class="finding-bullets"><li>Outlaws and the lawmen hunting them &mdash; shelter and betrayal each carry a price, and the law is not always the more trustworthy of the two.</li><li>Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators &mdash; each carrying a different idea of what America is supposed to mean.</li><li>The missionary heading into territory everyone else is heading out of. The Army deserter. The Pinkerton who is not here by accident.</li><li>The Mexican family the law does not recognize as having rights to land they have worked for thirty years. The journalist writing the myth while it is still being made.</li></ul></div></div>
+              </div>
+              <div class="gc-doc-section" style="grid-column: 1 / -1"><div class="finding-label">Thematic DNA &amp; Influences</div><ul class="finding-bullets"><li>The title is not a historical reference. It is a design statement. Manifest Destiny as philosophy: the belief that will, applied with enough conviction, bends reality to match the picture in your head. The game is named after that idea because the game is that idea &mdash; fifty years of a single consciousness shaping what America becomes, one choice at a time. That is not a metaphor. That is the mechanic.</li><li>Manifest Destiny written in scripture and enacted in blood &mdash; the heroic and the self-interested arriving in no particular order.</li><li>Fallout 1 &amp; 2, Fallout: New Vegas &mdash; long-consequence choice architecture, faction reputation, a world that changes shape around your decisions.</li><li>Papers, Please, Red Dead Redemption 2, Deadwood (HBO).</li></ul></div>
             </div>
-            <div class="gc-vibe">The gap this fills is pretty straightforward: faction reputation systems in games like New Vegas are excellent, but you&#x2019;re always the one moving through the world. Flip it and you&#x2019;re stationary while the world moves through you. That&#x2019;s a structural difference that changes what choices mean. Papers Please proved the threshold mechanic works. This is what happens when you build a whole world around it instead of a border checkpoint.</div>
+            <div class="gc-vibe">Fifty years is the right scope because it lets consequence breathe. A guest you helped in 1858 sends their daughter to your door in 1871. A reputation you built in the 1860s opens or closes the 1880s. The newspaper mechanic earns its complexity over time &mdash; what starts as a single monthly paper from one town becomes a chorus of competing accounts by the 1890s, and the player knows which version is true because they were there. Papers Please proved the threshold mechanic works. This is what happens when you build a whole life around it instead of a border checkpoint &mdash; and give it fifty years to settle. The title does all of that work in one word. To manifest something is to create reality from will &mdash; to bend the world to match the picture in your consciousness. That is exactly what the player does. That is exactly what the settlers believed they were doing. The game does not judge that. It just shows you what it costs and what it builds and lets the fifty years speak for themselves.</div>
           </div>
         </div>
 
-        <!-- GC-004: PLAYGROUND NOIR -->
-        <div class="gc-doc" id="gc-004" data-stage="prototype" onclick="toggleGcCard(this)" style="animation-delay:0.11s">
+        <!-- GC-005: BEAR'S BLOOMING FOREST -->
+        <div class="gc-doc" id="gc-009" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.14s">
           <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-004</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Playground Noir</div><div class="gc-subtitle">Mystery Visual Novel &middot; Kindergarten Ace Attorney &middot; Unreliable Witnesses</div></div>
-            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-prototype">Prototype-Ready</span></div>
+            <div class="gc-doc-col-id"><div class="gc-index">GC-009</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Bear&#x2019;s Blooming Forest</div><div class="gc-subtitle">Cozy Exploration &middot; Botanical Terraforming &middot; A Little Bear and a Very Large Plan</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-specced">Specced</span></div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">The last cookie has been eaten. The daycare is in crisis. You are the investigator. Every witness is five years old and completely unreliable. The truth, when you find it, will be wholesome.</div>
+            <div class="gc-doc-pitch">Little Bear has a plan. The forest could be so full of flowers that the bees build a hive the size of a village, and the honey would just come to him. No fishing. No waiting. Just flowers, and then honey. He&#x2019;s going to need a lot of flowers. He should probably be back for dinner.</div>
             <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>A mystery visual novel applying full noir investigation structure (evidence, cross-examination, witness contradiction) to playground-scale crimes.</li><li>The cast is built from archetypes: the Bookworm, the Wrestler, the Baseball Kid, the Theatre Kid. Each has its own testimony style, blind spots, and agenda.</li><li>The specimen case: two kids have cookie crumbs on their shirts. The answer: they shared it. Both guilty. Both innocent. Wholesome resolution mandatory.</li><li>Every case resolves without permanent harm. The noir trappings are the comedy. The darkness is borrowed, the warmth is earned.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Mechanics</div><ul class="finding-bullets"><li>Ace Attorney investigation and cross-examination loop adapted for an audience-appropriate tone.</li><li>Unreliable witness system: children misremember, exaggerate, lie to protect friends, and confabulate entirely. The challenge isn&#x2019;t finding the guilty party. It&#x2019;s figuring out which truth is true.</li><li>Scalable case structure: each case functions as a standalone episode.</li><li>Red herrings are mechanically embedded: evidence that looks damning leads to a different, more innocent explanation.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>The comedy of applied seriousness: treating missing cookies with investigative gravity produces the game&#x2019;s entire tonal register.</li><li>Childhood moral reasoning: sharing as absolution, honesty without cruelty, guilt without shame.</li><li>The subversion of noir cynicism: here, truth is sweet and people are trying their best.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Ace Attorney series &mdash; investigation loop, testimony contradiction, high drama, low stakes.</li><li>Professor Layton &mdash; episodic puzzle mysteries, gentle tone, standalone cases that work for a mixed-age audience.</li><li>Bluey &mdash; the comedy of treating children&#x2019;s problems with adult seriousness without condescension.</li></ul></div>
+              <div class="gc-doc-section">
+                <div class="finding-label">The Two Halves</div>
+                <div style="display:flex; flex-direction:column; gap:10px; margin-top:4px;">
+                  <div style="background:rgba(6,214,160,0.07); border:1px solid rgba(6,214,160,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Gathering &mdash; the Zelda half</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Third-person exploration of biomes, each with its own puzzle logic, hazards, and feel. Flowers don&#x2019;t grow in safe places. Getting to them is the game.</p>
+                  </div>
+                  <div style="background:rgba(232,255,71,0.05); border:1px solid rgba(232,255,71,0.15); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Tending &mdash; the Harvest Moon half</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Planting, watering, maintaining, and expanding the garden back home. Healthy patches attract more bees. The hive grows one comb at a time until it becomes a village.</p>
+                  </div>
+                  <p style="font-size:11px; color:var(--text-dim); line-height:1.7; font-style:italic; padding-left:2px;">The tutorial ends with Little Bear placing a small jar beneath the hive. One drop falls. Everything else is the consequence of making that drop into a river.</p>
+                </div>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Gathering Mechanics</div>
+                <ul class="finding-bullets">
+                  <li>Early biomes are gentle puzzles &mdash; a wolf sleeping across the path, distracted by bait; a hawk circling a meadow, driven off by a friend with a loud bell. Solutions are obvious, tools are few, stakes are low.</li>
+                  <li>Later biomes stack hazards and introduce timing &mdash; a mountain pass where the bait needs to reach the eagle before the wind window closes, or a desert where the rare bloom only opens at dawn and a scorpion guards the only route.</li>
+                  <li>Animal companions change the calculus: a recruited bear friend acts as a presence deterrent, a fox can negotiate passage, a deer creates a distraction by existing somewhere interesting. You never fight. You redirect.</li>
+                  <li>Some flowers require multiple trips to understand &mdash; the puzzle is figuring out the pattern before you attempt the collect.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section" style="grid-column: 1 / -1">
+                <div class="finding-label">Little Bear&#x2019;s Toolkit</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:4px;">
+                  <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Slingshot &mdash; ranged</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Two ammo types: bait draws animals toward the impact point; pebbles create noise without attracting anything. Both too small to hurt anything. He&#x2019;s not throwing rocks at a wolf &mdash; he&#x2019;s throwing a rock at a bush near a wolf.</p>
+                  </div>
+                  <div style="background:rgba(255,140,66,0.07); border:1px solid rgba(255,140,66,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--orange); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Garden Trowel &mdash; primary</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Planting, transplanting, and soil preparation. The first tool Little Bear owns and the one he&#x2019;s never without. Upgrades let him work faster and handle tougher terrain, but it&#x2019;s always just a trowel.</p>
+                  </div>
+                  <div style="background:rgba(180,100,255,0.07); border:1px solid rgba(180,100,255,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:#c87fff; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Fox&#x2019;s Network &mdash; unlockables</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">A bell on a string for sustained noise; a hollow reed that mimics bird calls; a small lantern for bloom-window timing in dark caves. Each solves a class of puzzle the slingshot alone cannot. All sourced through Fox.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Seasons &amp; Time</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px;">
+                  <div style="background:rgba(255,180,200,0.07); border:1px solid rgba(255,180,200,0.25); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:#ffb0c8; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Spring</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.6;">Peak rare blooms. Two-week windows that won&#x2019;t come again for a year. Cherry trees planted in year one finally matter. Miss spring and you plan around it until next spring.</p>
+                  </div>
+                  <div style="background:rgba(232,255,71,0.05); border:1px solid rgba(232,255,71,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Summer</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.6;">Peak bee activity. Maximum honey production. The garden is loudest here. The best time for long gathering runs before the year turns.</p>
+                  </div>
+                  <div style="background:rgba(255,140,66,0.07); border:1px solid rgba(255,140,66,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--orange); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Autumn</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.6;">Preparation and late-blooming trees. Save seeds from annuals. Plan what changes before winter closes the routes. The garden is winding down, not stopping.</p>
+                  </div>
+                  <div style="background:rgba(160,200,255,0.06); border:1px solid rgba(160,200,255,0.18); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:#a0c8ff; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Winter</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.6;">Quiet maintenance. A few hardy trees hold the bees over. Planning time: what biome next, which flowers, which companions to deploy when thaw comes.</p>
+                  </div>
+                </div>
+                <p style="font-size:11px; color:var(--text-dim); line-height:1.7; margin-top:10px; font-style:italic;">Perennials regrow reliably, annuals must be replanted, and flowering trees planted early become significant bloom sources years later.</p>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Biomes &amp; Progression</div>
+                <div style="display:flex; flex-direction:column; gap:6px; margin-top:4px;">
+                  <div style="background:rgba(6,214,160,0.07); border:1px solid rgba(6,214,160,0.25); border-radius:4px; padding:8px 12px; display:flex; align-items:baseline; gap:10px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap; min-width:110px;">Home Forest</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.5; margin:0;">Tutorial. Familiar and forgiving. The hive starts here.</p>
+                  </div>
+                  <div style="background:rgba(232,255,71,0.05); border:1px solid rgba(232,255,71,0.2); border-radius:4px; padding:8px 12px; display:flex; align-items:baseline; gap:10px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--accent); text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap; min-width:110px;">Grasslands</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.5; margin:0;">Open space, seasonal wind. The game breathes here. Wide puzzles, room to experiment.</p>
+                  </div>
+                  <div style="background:rgba(200,200,220,0.06); border:1px solid rgba(200,200,220,0.18); border-radius:4px; padding:8px 12px; display:flex; align-items:baseline; gap:10px;">
+                    <div style="font-size:10px; font-weight:700; color:#c8c8dc; text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap; min-width:110px;">Mountain</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.5; margin:0;">Altitude, narrow paths, territorial birds. Vertical traversal puzzles.</p>
+                  </div>
+                  <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.25); border-radius:4px; padding:8px 12px; display:flex; align-items:baseline; gap:10px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap; min-width:110px;">Subtropical Coast</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.5; margin:0;">Tide timing, crabs, mangrove tangles. Flowers at the waterline only.</p>
+                  </div>
+                  <div style="background:rgba(255,140,66,0.07); border:1px solid rgba(255,140,66,0.25); border-radius:4px; padding:8px 12px; display:flex; align-items:baseline; gap:10px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--orange); text-transform:uppercase; letter-spacing:0.1em; white-space:nowrap; min-width:110px;">Desert</div>
+                    <p style="font-size:11px; color:var(--text-mid); line-height:1.5; margin:0;">Heat management, nocturnal hazards, bloom windows. The hardest flowers. Unlocks last.</p>
+                  </div>
+                </div>
+                <p style="font-size:11px; color:var(--text-dim); line-height:1.7; margin-top:10px; font-style:italic;">Each biome unlocks a bee variety the hive needs for its next tier. Biomes are progression gates &mdash; not level numbers.</p>
+              </div>
+              <div class="gc-doc-section" style="grid-column: 1 / -1">
+                <div class="finding-label">Animal Companions</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px;">
+                  <div>
+                    <div class="finding-label" style="margin-bottom: 6px; font-size: 8px;">Specialists &mdash; permanent, passive world changes</div>
+                    <ul class="finding-bullets">
+                      <li><strong>Deer</strong>
+                        <div style="padding-left:10px; margin-top:2px; color:var(--text-dim); font-size:11px; line-height:1.6;">Clears bramble and opens new territory passively while grazing.</div>
+                      </li>
+                      <li><strong>Beaver</strong>
+                        <div style="padding-left:10px; margin-top:2px; color:var(--text-dim); font-size:11px; line-height:1.6;">Builds irrigation channels, unlocking flower beds that need constant water.</div>
+                      </li>
+                      <li><strong>Fox</strong>
+                        <div style="padding-left:10px; margin-top:2px; color:var(--text-dim); font-size:11px; line-height:1.6;">Negotiates with animals who won&#x2019;t be bribed; unlocks the later companion roster and the toolkit upgrade chain.</div>
+                      </li>
+                      <li><strong>Other Bears</strong>
+                        <div style="padding-left:10px; margin-top:2px; color:var(--text-dim); font-size:11px; line-height:1.6;">Recruited one by one, each with a personality. The only ones who can fully substitute for Little Bear on harder gathering runs. His father never finds out they exist.</div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div>
+                    <div class="finding-label" style="margin-bottom: 6px; font-size: 8px;">Crew &mdash; deployed daily on maintenance &amp; support</div>
+                    <ul class="finding-bullets">
+                      <li><strong>Rabbit</strong>
+                        <div style="padding-left:10px; margin-top:2px; color:var(--text-dim); font-size:11px; line-height:1.6;">Watering. Fast, covers multiple patches per cycle and scales well as the garden grows.</div>
+                      </li>
+                      <li><strong>Owl</strong>
+                        <div style="padding-left:10px; margin-top:2px; color:var(--text-dim); font-size:11px; line-height:1.6;">Scouting. Surveys new territory and flower locations before Little Bear commits to traveling there.</div>
+                      </li>
+                      <li><strong>Hedgehog</strong>
+                        <div style="padding-left:10px; margin-top:2px; color:var(--text-dim); font-size:11px; line-height:1.6;">Pest control. Protects patches from aphids, slugs, and herbivores that damage bloom yield.</div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Narrative Arc &amp; Tone</div>
+                <ul class="finding-bullets">
+                  <li>Little Bear is not sneaking. He&#x2019;s just very busy and hasn&#x2019;t quite explained it yet. The register is Winnie the Pooh: solo, whimsical, entirely sincere, driven by one very specific and honey-related goal. No responsibilities. No drama. Just a small bear who has a plan and is working on it.</li>
+                  <li>Dad is flavor, not threat. He shows up occasionally &mdash; calling Little Bear in for dinner, suggesting they go fishing Sunday, cheerfully oblivious to the scale of what&#x2019;s happening in the forest. These moments create soft daily rhythm without pressure. Be back for dinner. Sunday is fishing. The rest of the day is yours.</li>
+                  <li>Dad doesn&#x2019;t find out until the story reaches it naturally. The reveal isn&#x2019;t a confrontation &mdash; it&#x2019;s a father standing at the edge of a bee village, not entirely sure when this happened, watching honey drip into a jar below a hive the size of a house. He doesn&#x2019;t say anything for a long time. Then: &ldquo;You could have just asked me to fish more.&rdquo; Little Bear hands him the jar.</li>
+                  <li>Scope: one bear, one valley, five biomes, three in-game years. Keep it small. Make it land.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section">
+                <div class="finding-label">Influences</div>
+                <ul class="finding-bullets">
+                  <li>The Legend of Zelda: Breath of the Wild &mdash; the gathering half; biome-specific puzzle logic; the joy of approaching a problem from an unexpected angle.</li>
+                  <li>Stardew Valley &mdash; seasonal tending rhythm; the satisfying accumulation of a garden over years.</li>
+                  <li>Pikmin &mdash; the deploy-and-multiply companion loop; small friends with distinct, complementary abilities.</li>
+                  <li>Winnie the Pooh &mdash; the emotional register and the bear&#x2019;s relationship with honey. Gentle, single-minded, entirely sincere.</li>
+                  <li>Pixar&#x2019;s Brave / Over the Hedge &mdash; the family tension structure: a child doing something the parent can&#x2019;t understand until the moment they finally see it.</li>
+                </ul>
+              </div>
             </div>
-            <div class="gc-vibe">Ace Attorney is 22 years old and nobody has made a wholesome version for a younger audience. That&#x2019;s a gap. The unreliable witness system isn&#x2019;t a gimmick. It&#x2019;s the entire design. Children don&#x2019;t lie the way adults lie; they misremember, they protect people, they confabulate completely. Building an investigation loop around that specific truth is what separates this from a reskin.</div>
+            <div class="gc-vibe">The emotional register is Winnie the Pooh, not Pixar. Little Bear isn&#x2019;t processing anything. He just wants honey and has a very reasonable theory about how flowers and bees work. Dad is there because Dad is always there &mdash; fishing, calling him in for dinner, suggesting Sunday plans. The family structure creates a gentle daily rhythm without stakes. There is no suspicion meter. There is no secret to manage. There is just a small bear with a large project and a soft deadline of dinnertime. The game is a cozy thing. It should feel like one.</div>
           </div>
         </div>
 
-        <!-- GC-005: SWAN MARRIAGE COUNSELOR -->
-        <div class="gc-doc" id="gc-005" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.14s">
+        <!-- GC-006: SWAN MARRIAGE COUNSELOR -->
+        <div class="gc-doc" id="gc-005" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.17s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id"><div class="gc-index">GC-005</div><div class="gc-expand-hint">&#9658; expand</div></div>
             <div class="gc-doc-col-main"><div class="gc-title">Swan Marriage Counselor</div><div class="gc-subtitle">Therapy Visual Novel &middot; Lifelong Commitment &middot; Determinism vs. Choice</div></div>
@@ -3009,53 +3234,31 @@
             <div class="gc-doc-pitch">Swans mate for life. Some of them are not handling it well. You are their counselor. The sessions that follow are about commitment, compromise, aging, and whether the promises we make when young should bind the people we become.</div>
             <div class="gc-doc-grid">
               <div class="gc-doc-section"><div class="finding-label">Core Premise</div><ul class="finding-bullets"><li>The player is a marriage counselor to swan couples. Literal swans, with the biology of lifelong monogamy built in. These animals have no choice about who they&#x2019;re bound to.</li><li>Sessions explore the fault lines of long commitment: the distance that opens between people who grow in different directions; the resentment of a promise made without full information.</li><li>The subversion of the dating sim: dating sims are about the beginning of love. This game is about what happens after the win, when the romance has become a life and the life has become complicated.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div><ul class="finding-bullets"><li>Determinism vs. choice: swans are biologically determined to stay. Humans choose to. What does that difference mean for the moral weight of commitment?</li><li>The problem of the self over time: the person you promised yourself to at 22 is not the person in front of you at 47.</li><li>Aging as a theme rather than a backdrop. The game is explicitly about couples who have been together long enough to become strangers to each other.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Thematic DNA</div>
+                <div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;">
+                  <div style="background:rgba(255,140,66,0.07); border:1px solid rgba(255,140,66,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--orange); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Determinism vs. Choice</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Swans are biologically determined to stay. Humans choose to. The game asks what that difference means for the moral weight of commitment &mdash; and whether the players in these sessions understand which one they are.</p>
+                  </div>
+                  <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">The Problem of the Self Over Time</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">The person you promised yourself to at 22 is not the person in front of you at 47. The sessions don&#x2019;t ask whether the promise was sincere. They ask whether sincerity is enough.</p>
+                  </div>
+                  <div style="background:rgba(180,100,255,0.07); border:1px solid rgba(180,100,255,0.2); border-radius:4px; padding:10px 12px;">
+                    <div style="font-size:10px; font-weight:700; color:#c87fff; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Aging as Theme, Not Backdrop</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Explicitly about couples who have been together long enough to become strangers. Not a game about falling in love. A game about what happens when the love has become a life and the life has become complicated.</p>
+                  </div>
+                </div>
+              </div>
               <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Florence &mdash; visual novel about the emotional reality of a relationship over time, not just its peak.</li><li>The Sopranos &mdash; therapy as a tool for self-reflection, metamorphosis, ideation, and sometimes delusion. Tony Soprano did not want to get better; he wanted permission to stay the same. Some of these swans have the same problem.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Commercial Note</div><ul class="finding-bullets"><li>Niche audience but a devoted one. Strong festival circuit potential &mdash; Indiecade, IGF.</li><li>Low asset requirement. The game lives in session dialogue. A small team with one strong writer could complete this.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Commercial Note</div><ul class="finding-bullets"><li>Niche audience but a devoted one. Strong festival circuit potential &mdash; Indiecade, IGF.</li><li>Low asset requirement. The game lives in session dialogue. A small team with one strong writer could complete this.</li><li>Replayability is intentionally limited per couple &mdash; each pair&#x2019;s story is a fixed arc, like a short film. The replay value comes from the roster: multiple couples, each with distinct dynamics, fault lines, and endpoints. A player who finishes one couple&#x2019;s sessions picks up the next and finds a structurally different emotional problem. The game is a collection of short films, not a single long one.</li><li>Counselor choices carry weight across couples &mdash; a reputation for bluntness, warmth, or detachment can subtly shift how later clients open up. This creates a soft meta-layer without undermining each couple&#x2019;s standalone integrity.</li></ul></div>
             </div>
             <div class="gc-vibe">Low asset count, strong festival profile, and a demographic that games mostly ignore: people in long relationships. The swan framing isn&#x2019;t cute window dressing; it&#x2019;s the central mechanical question. Swans don&#x2019;t choose to stay. The player&#x2019;s job is to help couples who do choose work through what that costs. That&#x2019;s a different emotional register than anything currently in the visual novel space.</div>
           </div>
         </div>
 
-        <!-- GC-006: WINTER STORM -->
-        <div class="gc-doc" id="gc-006" data-stage="concept" onclick="toggleGcCard(this)" style="animation-delay:0.17s">
-          <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-006</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Winter Storm</div><div class="gc-subtitle">PVP Extraction Shooter &middot; Arctic Blizzard &middot; Strategic Infiltration &amp; Exfiltration</div></div>
-            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-concept">Concept</span></div>
-          </div>
-          <div class="gc-doc-body">
-            <div class="gc-doc-pitch">A PVP extraction shooter set in Arctic blizzards. Squads infiltrate, locate the objective, and fight their way out. The storm is not the enemy &mdash; the other team is. Every footprint you leave can be tracked. Every footprint they leave can too.</div>
-            <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Systems</div><ul class="finding-bullets"><li>The blizzard is not a hazard &mdash; it is cover. Whiteout conditions that blind the enemy also blind sensors, create acoustic interference, and mask heat signatures.</li><li>Snowmobile exfiltration as a set-piece mechanic: the stealth infiltration ends; the high-speed extraction begins.</li><li>Thermal imaging and heartbeat sensors as detection tools. Enemy use of them forces cat-and-mouse between environmental concealment and technological detection.</li><li>Footprint persistence: snow records movement. Players must plan routes considering what evidence they leave behind.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Design Gap</div><ul class="finding-bullets"><li>The aesthetic is fully realized. The setting is evocative. The mechanical hooks are genuinely interesting.</li><li>Missing: a narrative reason to care. Metal Gear works not because of its stealth mechanics but because Kojima built a mythology around them.</li><li>Current status: the PVP extraction framing solves the original narrative problem: the other squad is the story. Revisiting.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Metal Gear Solid series &mdash; gadget economy, environmental stealth, the idea that preparation is half the mission.</li><li>Call of Duty: MW2 &mdash; the snowmobile chase and Cliffhanger mission specifically; proof that an arctic infiltration set piece can be genuinely cinematic without sacrificing player agency.</li><li>Escape from Tarkov &mdash; the tension architecture of extraction: you brought good gear in, now you have to get it out.</li></ul></div>
-            </div>
-            <div class="gc-vibe">The extraction shooter market is crowded but nobody has committed to a full blizzard environment as a core design pillar, not a weather effect. It is the entire tactical premise. The footprint mechanic alone differentiates this from Tarkov. Revisiting with the PVP frame.</div>
-          </div>
-        </div>
-
-        <!-- GC-007: CONQUISTADOR SIM -->
-        <div class="gc-doc" id="gc-007" data-stage="concept" onclick="toggleGcCard(this)" style="animation-delay:0.20s">
-          <div class="gc-doc-header">
-            <div class="gc-doc-col-id"><div class="gc-index">GC-007</div><div class="gc-expand-hint">&#9658; expand</div></div>
-            <div class="gc-doc-col-main"><div class="gc-title">Conquistador Sim</div><div class="gc-subtitle">Political Simulation &middot; New World Exploration &middot; God &middot; Guns &middot; Gold</div></div>
-            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-concept">Concept</span></div>
-          </div>
-          <div class="gc-doc-body">
-            <div class="gc-doc-pitch">You are a Spanish explorer in the New World. Work for the Crown, defect and lead a revolution like Cort&#xe9;s, or go native and become a warlord, navigating tribal politics, language barriers, shifting allegiances, and a continent that is trying to kill you.</div>
-            <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Factions / Paths</div><ul class="finding-bullets"><li>Crown Loyalist: high demand, high reward. The institutional path: supplied, supported, and expendable.</li><li>Renegade Revolutionary (the Cort&#xe9;s path): defection and conquest on personal terms. No supply lines, no safety net.</li><li>Gone Native / Warlord (the Kurtz path): abandon European frameworks entirely. The most dangerous and the most interesting endpoint.</li><li>Transient phases: paths are not locked. If your rogue power grows sufficient, the Crown must negotiate with you rather than hunt you.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Core Systems</div><ul class="finding-bullets"><li>Translation as a mechanic &mdash; language barriers are real and consequential. Miscommunication with tribes produces outcomes the player did not intend.</li><li>Tribal politics with genuine complexity: alliances, rivalries, territorial conflicts. The player enters a political environment that predates them and will outlast them.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Design Problem</div><ul class="finding-bullets"><li>This concept is enormous. Translation systems, tribal relationship graphs, three divergent path structures &mdash; any one of these would be a major system in another game.</li><li>Needs a version that is 80% smaller &mdash; a proof of concept, not a full simulation.</li><li>The Conquista is genuinely underexplored in games. This deserves to exist. The question is when and at what scale.</li></ul></div>
-              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Apocalypse Now / Heart of Darkness &mdash; the gone-native path&#x2019;s psychological architecture.</li><li>Crusader Kings III &mdash; faction diplomacy, shifting allegiances, personal ambition at the expense of the institution.</li><li>Civilization series &mdash; the 4X framework for expansion, city management, and nation-building.</li></ul></div>
-            </div>
-            <div class="gc-vibe">The translation mechanic and the three-path structure are both worth building. Just not at the same time, at full scale, as a first project. Needs a proof-of-concept version that is roughly 20% of this scope. The setting is too underrepresented in games to abandon entirely.</div>
-          </div>
-        </div>
-
-        <!-- GC-008: WARP GUN -->
-        <div class="gc-doc" id="gc-008" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.23s">
+        <!-- GC-007: WARP GUN -->
+        <div class="gc-doc" id="gc-008" data-stage="specced" onclick="toggleGcCard(this)" style="animation-delay:0.20s">
           <div class="gc-doc-header">
             <div class="gc-doc-col-id"><div class="gc-index">GC-008</div><div class="gc-expand-hint">&#9658; expand</div></div>
             <div class="gc-doc-col-main"><div class="gc-title">Warp Gun</div><div class="gc-subtitle">First-Person Puzzle &middot; Spacetime Distortion &middot; Light &amp; Traversal</div></div>
@@ -3064,15 +3267,96 @@
           <div class="gc-doc-body">
             <div class="gc-doc-pitch">Instead of a portal gun, a warp gun. Two modes: contraction and expansion. Spacetime bends around your shots. Light curves. Distances collapse or stretch. Puzzles are solved not by placing doors in walls, but by reshaping the space between you and the solution.</div>
             <div class="gc-doc-grid">
-              <div class="gc-doc-section"><div class="finding-label">Core Mechanics</div><ul class="finding-bullets"><li><strong>Contraction shots</strong> behave like localized gravity wells: space folds inward, pulling objects and the player toward the distortion point, bending light paths, and collapsing distances that would otherwise be impassable.</li><li><strong>Expansion shots</strong> push space outward from the impact point, stretching geometry and perceived distances, deflecting projectiles and light beams along new paths, and creating traversable volumes from previously solid areas.</li><li>Light bending is not cosmetic &mdash; it is a puzzle input. Beams that need to hit targets must be routed through warp fields. The curvature is the mechanic.</li><li>Traversal puzzles built around two warp types interacting: a contraction pulling you toward a platform that an expansion has moved into range, or a light beam bent by contraction through a gap that expansion has opened.</li></ul></div>
+              <div class="gc-doc-section" style="grid-column: 1 / -1"><div class="finding-label">Core Mechanics</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; margin-bottom:10px;">
+                  <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.25); border-radius:4px; padding:12px 14px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Contraction</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Localized gravity well. Space folds inward, pulling objects and the player toward the distortion point. Distances collapse. Light paths curve toward the impact. The slingshot technique: jump into the well&#x2019;s pull at the right angle, then deactivate the field before it draws you back &mdash; the arrested momentum launches you across distances no normal jump could reach. Impassable gaps become traversable. The tool is the launch pad.</p>
+                  </div>
+                  <div style="background:rgba(255,140,66,0.07); border:1px solid rgba(255,140,66,0.25); border-radius:4px; padding:12px 14px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--orange); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Expansion</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Space pushed outward from the impact point. Geometry stretches and reshapes around the distortion &mdash; a flat wall hit at an angle warps into a curved ramp; a floor expands into a traversable slope. Perceived distances grow. Projectiles and light beams deflect along new paths. The environment is not fixed; it is a variable the player sets.</p>
+                  </div>
+                </div>
+                <ul class="finding-bullets">
+                  <li>Light bending is not cosmetic &mdash; it is a puzzle input. Beams that need to hit targets must be routed through warp fields. The curvature is the mechanic.</li>
+                  <li>Traversal puzzles emerge from two warp types interacting: a contraction slingshot launches you across a gap that an expansion has reshaped into a landing surface, or a light beam bent by contraction threads through a gap that expansion has opened.</li>
+                  <li>The slingshot is a skill move, not just a technique: timing the deactivation of a contraction field at peak pull velocity gives the player momentum that compounds with expansion geometry &mdash; the two modes create movement freedom that neither produces alone.</li>
+                </ul>
+              </div>
               <div class="gc-doc-section"><div class="finding-label">Design Space</div><ul class="finding-bullets"><li>The distortion fields have a visual presence &mdash; space visibly shimmers, geometry warps at the field boundary, light halos around the contraction point. The world communicates the physics before the player tests it.</li><li>Puzzle difficulty scales by stacking warp interactions: early puzzles use one shot type in isolation; later puzzles require both simultaneously, with each distortion field affecting the other&#x2019;s geometry.</li><li>The setting can leverage the visual language directly: environments where geometry and perspective are already disorienting make warp distortion feel native rather than intrusive.</li></ul></div>
               <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Portal &mdash; the single-tool puzzle design philosophy; the tool is the world&#x2019;s grammar, not a power layered on top of it.</li><li>Antichamber &mdash; non-Euclidean space as a puzzle medium; the willingness to let perception be wrong and make that wrongness mechanical.</li><li>Interstellar / actual gravitational lensing &mdash; the visual reference for what a real contraction field would look like to someone standing inside the light path.</li></ul></div>
             </div>
-            <div class="gc-vibe">Portal works because the portal gun is a spatial language, not just a tool. The warp gun needs the same thing: every puzzle is a sentence written in distortion. The light-bending mechanic is the element that separates this from Portal reskin territory &mdash; routing light is a fundamentally different cognitive task than routing a player. That distinction is the design.</div>
+            <div class="gc-vibe">Portal works because the portal gun is a spatial language, not just a tool. The warp gun needs the same thing: every puzzle is a sentence written in distortion. The light-bending mechanic is the element that separates this from Portal reskin territory &mdash; routing light is a fundamentally different cognitive task than routing a player. The slingshot technique is where the movement ceiling lives: players who understand contraction timing and expansion geometry get traversal freedom that the puzzle design doesn&#x2019;t require but rewards. That emergent skill ceiling is what makes a tool feel like a language.</div>
           </div>
         </div>
 
-      </div>
+        <!-- GC-008: WINTER STORM -->
+        <div class="gc-doc" id="gc-006" data-stage="concept" onclick="toggleGcCard(this)" style="animation-delay:0.23s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id"><div class="gc-index">GC-006</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Winter Storm</div><div class="gc-subtitle">PVP Extraction Shooter &middot; Arctic Blizzard &middot; Strategic Infiltration &amp; Exfiltration</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-concept">Concept</span></div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">A PVP extraction shooter set in Arctic blizzards. Squads infiltrate, locate the objective, and fight their way out. The storm is not the enemy &mdash; the other team is. Every footprint you leave can be tracked. Every footprint they leave can too.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section" style="grid-column: 1 / -1"><div class="finding-label">Core Systems</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:4px; margin-bottom:10px;">
+                  <div style="background:rgba(160,200,255,0.06); border:1px solid rgba(160,200,255,0.18); border-radius:4px; padding:12px 14px;">
+                    <div style="font-size:10px; font-weight:700; color:#a0c8ff; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Infiltration &mdash; the Blizzard Is Cover</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Whiteout conditions blind the enemy but also blind sensors, create acoustic interference, and mask heat signatures. The storm isn&#x2019;t fighting you &mdash; it&#x2019;s the best tool you have. Every footprint you leave can be tracked. Every footprint they leave can too.</p>
+                  </div>
+                  <div style="background:rgba(255,77,77,0.07); border:1px solid rgba(255,77,77,0.2); border-radius:4px; padding:12px 14px;">
+                    <div style="font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:6px;">Exfiltration &mdash; Snowmobile Set Piece</div>
+                    <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">The stealth phase ends. The extraction begins. High-speed snowmobile exfiltration as a structural gear shift: you came in quiet, you leave fast, and the other squad knows exactly where you are.</p>
+                  </div>
+                </div>
+                <ul class="finding-bullets">
+                  <li>Thermal imaging and heartbeat sensors as detection tools. Enemy use of them forces cat-and-mouse between environmental concealment and technological detection.</li>
+                  <li>Footprint persistence: snow records movement. Players must plan routes considering what evidence they leave behind.</li>
+                </ul>
+              </div>
+              <div class="gc-doc-section"><div class="finding-label">Design Gap</div><ul class="finding-bullets"><li>The aesthetic is fully realized. The setting is evocative. The mechanical hooks are genuinely interesting.</li><li>Missing: a narrative reason to care. Metal Gear works not because of its stealth mechanics but because Kojima built a mythology around them.</li><li>Current status: the PVP extraction framing solves the original narrative problem: the other squad is the story. Revisiting.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Metal Gear Solid series &mdash; gadget economy, environmental stealth, the idea that preparation is half the mission.</li><li>Call of Duty: MW2 &mdash; the snowmobile chase and Cliffhanger mission specifically; proof that an arctic infiltration set piece can be genuinely cinematic without sacrificing player agency.</li><li>Escape from Tarkov &mdash; the tension architecture of extraction: you brought good gear in, now you have to get it out.</li></ul></div>
+            </div>
+            <div class="gc-vibe">The extraction shooter market is crowded but nobody has committed to a full blizzard environment as a core design pillar &mdash; not as a weather effect, as the entire tactical premise. The footprint mechanic alone differentiates this from Tarkov: every route is a decision about what you leave behind, and the other squad is reading the same snow. The narrative gap is acknowledged and being addressed. The PVP frame solves it cleanly &mdash; the other squad is the story, the blizzard is the referee, and the snowmobile is the gear shift that ends every match with momentum. The bones are strong. This one needs a mythology built around them.</div>
+          </div>
+        </div>
+
+        <!-- GC-009: CONQUISTADOR SIM -->
+        <div class="gc-doc" id="gc-007" data-stage="concept" onclick="toggleGcCard(this)" style="animation-delay:0.26s">
+          <div class="gc-doc-header">
+            <div class="gc-doc-col-id"><div class="gc-index">GC-007</div><div class="gc-expand-hint">&#9658; expand</div></div>
+            <div class="gc-doc-col-main"><div class="gc-title">Conquistador Sim</div><div class="gc-subtitle">Political Simulation &middot; New World Exploration &middot; God &middot; Guns &middot; Gold</div></div>
+            <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-concept">Concept</span></div>
+          </div>
+          <div class="gc-doc-body">
+            <div class="gc-doc-pitch">You are a Spanish explorer in the New World. Work for the Crown, defect and conquer on your own terms like Cort&#xe9;s, or abandon Europe entirely and disappear into a continent that has been here ten thousand years longer than your maps. Three paths. Only one of them requires you to stop seeing the land as something to be taken.</div>
+            <div class="gc-doc-grid">
+              <div class="gc-doc-section" style="grid-column: 1 / -1"><div class="finding-label">Core Factions / Paths</div><div style="display:flex; flex-direction:column; gap:8px; margin-top:4px;">
+                <div style="background:rgba(77,171,247,0.07); border:1px solid rgba(77,171,247,0.2); border-radius:4px; padding:10px 12px;">
+                  <div style="font-size:10px; font-weight:700; color:var(--blue); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Crown Loyalist</div>
+                  <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">The institutional path. Supplied, supported, and expendable. High demand, high reward. The Crown owns your success.</p>
+                </div>
+                <div style="background:rgba(255,77,77,0.07); border:1px solid rgba(255,77,77,0.2); border-radius:4px; padding:10px 12px;">
+                  <div style="font-size:10px; font-weight:700; color:var(--red); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Renegade &mdash; the Cort&#xe9;s Path</div>
+                  <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Defection and conquest on personal terms. No supply lines, no safety net. If the Crown must negotiate with you, you&#x2019;ve won.</p>
+                </div>
+                <div style="background:rgba(6,214,160,0.07); border:1px solid rgba(6,214,160,0.2); border-radius:4px; padding:10px 12px;">
+                  <div style="font-size:10px; font-weight:700; color:var(--green); text-transform:uppercase; letter-spacing:0.1em; margin-bottom:4px;">Gone Native &mdash; the Kurtz Path</div>
+                  <p style="font-size:12px; color:var(--text-mid); line-height:1.7;">Abandon European frameworks entirely &mdash; not just politically, epistemologically. The most demanding path. The only one where the continent stops trying to kill you.</p>
+                </div>
+              </div></div>
+              <div class="gc-doc-section"><div class="finding-label">Core Systems</div><ul class="finding-bullets"><li>Translation as a mechanic &mdash; language barriers are real and consequential. Miscommunication with tribes produces outcomes the player did not intend.</li><li>Tribal politics with genuine complexity: alliances, rivalries, territorial conflicts. The player enters a political environment that predates them and will outlast them.</li><li>The Gone Native path requires operating inside a worldview where the land is not a resource, where balance and reciprocity govern every action, where the cycle of life and death demands acknowledgment. It asks the player to unlearn what the other two paths treat as obvious. That is the design challenge and the point.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Design Problem</div><ul class="finding-bullets"><li>This concept is enormous. Translation systems, tribal relationship graphs, three divergent path structures &mdash; any one of these would be a major system in another game.</li><li>Needs a version that is 80% smaller &mdash; a proof of concept, not a full simulation.</li><li>The Conquista is genuinely underexplored in games. This deserves to exist. The question is when and at what scale.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Apocalypse Now / Heart of Darkness &mdash; the gone-native path&#x2019;s psychological architecture.</li><li>Crusader Kings III &mdash; faction diplomacy, shifting allegiances, personal ambition at the expense of the institution.</li><li>Civilization series &mdash; the 4X framework for expansion, city management, and nation-building.</li></ul></div>
+            </div>
+            <div class="gc-vibe">The translation mechanic and the three-path structure are both worth building. Just not at the same time, at full scale, as a first project. Needs a proof-of-concept version that is roughly 20% of this scope. The setting is too underrepresented in games to abandon entirely.</div>
+          </div>
+        </div>
+
+            </div>
     </div>
 
     <!-- ABOUT PANEL -->
@@ -3127,12 +3411,14 @@
 <script>
 
   function toggleCard(card) {
+    if (event.target.closest('.bug-detail')) return;
     const wasExpanded = card.classList.contains('expanded');
     document.querySelectorAll('.bug-card').forEach(c => c.classList.remove('expanded'));
     if (!wasExpanded) card.classList.add('expanded');
   }
 
   function toggleCsCard(card) {
+    if (event.target.closest('.cs-detail')) return;
     const wasExpanded = card.classList.contains('expanded');
     document.querySelectorAll('.cs-card').forEach(c => c.classList.remove('expanded'));
     if (!wasExpanded) card.classList.add('expanded');
@@ -3142,9 +3428,9 @@
     document.querySelectorAll('#sidebar-bugs .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["gtav", "dave_diver", "days_gone", "fallout76", "rdr2", "wolf", "spiderman", "the_invincible", "dqxi", "rdr1", "witcher3", "eldenring", "ds3", "cp77", "fallout4"];
+    const gameKeys = ["fallout4", "wolf", "witcher3", "eldenring", "dqxi", "dave_diver", "rdr2", "ds3", "fallout76", "spiderman", "rdr1", "days_gone", "gtav", "the_invincible", "cp77"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["collision", "rendering", "spawning", "animation", "ai", "physics"];
+    const typeKeys = ["collision", "physics", "animation", "spawning", "rendering", "ai"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
@@ -3168,6 +3454,7 @@
   }
 
   function toggleGcCard(card) {
+    if (event.target.closest('.gc-doc-body')) return;
     const wasExpanded = card.classList.contains('gc-expanded');
     document.querySelectorAll('.gc-doc').forEach(c => c.classList.remove('gc-expanded'));
     if (!wasExpanded) card.classList.add('gc-expanded');
