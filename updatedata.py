@@ -1061,7 +1061,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
   </div>
   <div class="header-right">
     <a href="mailto:wendell91097@gmail.com" class="header-contact">wendell91097@gmail.com</a>
-    <a href="tel:2282376193" class="header-contact">(228) 237-6193</a>
+
     <a href="https://sovereigndev.itch.io" target="_blank" class="header-contact">sovereigndev.itch.io</a>
     <div style="font-size:11px; color: var(--green);">
       <span class="status-dot"></span>Open to Work
@@ -1123,7 +1123,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
             <div class="gc-doc-col-meta"><span class="gc-stage-badge gc-stage-shipped">Shipped</span></div>
           </div>
           <div class="gc-doc-body">
-            <div class="gc-doc-pitch">A word-finding puzzle game with no story, no characters, and no win condition you didn&#x2019;t set yourself. Grid of letters, three game modes, two tools. Find words, clear tiles, keep the grid alive.</div>
+            <div class="gc-doc-pitch">A word-finding puzzle game with no story, no characters, and no win condition you didn&#x2019;t set yourself. Grid of letters, three game modes, & two tools. Find words, clear tiles, keep the grid alive.</div>
             <div class="gc-links">
               <a class="gc-link-btn gc-link-primary" href="https://sovereigndev.itch.io/wordsmith" target="_blank" onclick="event.stopPropagation()">&#9660; Play on itch.io</a>
               <a class="gc-link-btn" href="https://youtu.be/MCcAFdG_dV4" target="_blank" onclick="event.stopPropagation()">&#9654; Gameplay Video</a>
@@ -1146,7 +1146,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
                   </div>
                 </div>
               </div>
-              <div class="gc-doc-section"><div class="finding-label">Design Notes</div><ul class="finding-bullets"><li>Retro pixel art aesthetic throughout, with parallax backgrounds sourced from open licensed assets with attribution. Settings allow music, SFX, and background swaps from the start screen.</li><li>Built in Godot. Released August 22, 2024. Windows desktop download, no installation required.</li><li>The cascade mechanic changes the strategic calculus compared to static-grid word games: clearing a cluster of letters reshapes the board, which creates new adjacencies and new problems simultaneously.</li><li>The hammer gives the player agency over the board state without requiring a full shuffle. It adds meaningful tactical decision-making without complicating the core loop.</li></ul></div>
+              <div class="gc-doc-section"><div class="finding-label">Design Notes</div><ul class="finding-bullets"><li>Retro pixel art aesthetic throughout, with parallax backgrounds sourced from open licensed assets with attribution. Settings allow music, SFX, and background swaps from the start screen.</li><li>Built in Godot. Released August 22, 2024. Available versions include HTML or Windows desktop download, no installation required.</li><li>The cascade mechanic changes the strategic calculus compared to static-grid word games: clearing a cluster of letters reshapes the board, which creates new adjacencies and new problems simultaneously.</li><li>The hammer gives the player agency over the board state without requiring a full shuffle. It adds meaningful tactical decision-making without complicating the core loop.</li></ul></div>
               <div class="gc-doc-section"><div class="finding-label">Influences</div><ul class="finding-bullets"><li>Boggle &mdash; directional letter adjacency as the core word-finding structure.</li><li>Bookworm (PopCap) &mdash; tiles cleared on valid word submission, board management as an emergent challenge.</li><li>Tetris &mdash; gravity-based cascade as the feedback mechanism for clearing; the board as a living system rather than a static puzzle.</li></ul></div>
             </div>
             <div class="gc-vibe">This is the one card on the slate where the design question is already answered. It shipped. The rest of the concepts are documented to show how I think; this one is here to show that the thinking goes somewhere.</div>
@@ -1597,7 +1597,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, output_pat
 
 <footer>
   <div>Wendell Lancaster &mdash; QA Portfolio &amp; Game Design // Built with precision</div>
-  <div>Boston, MA &nbsp;&middot;&nbsp; wendell91097@gmail.com &nbsp;&middot;&nbsp; (228) 237-6193</div>
+  <div>Boston, MA &nbsp;&middot;&nbsp; wendell91097@gmail.com</div>
 </footer>
 
 <script>
