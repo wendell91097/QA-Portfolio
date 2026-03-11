@@ -713,7 +713,7 @@
           </div>
           <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px;">
             <span style="color:var(--text-dim)">Strength</span>
-            <span class="risk-badge risk-strength" style="font-size:9px; padding:2px 7px;">1</span>
+            <span class="risk-badge risk-strength" style="font-size:9px; padding:2px 7px;">2</span>
           </div>
         </div>
       </div>
@@ -2447,7 +2447,7 @@
           <div class="cs-meta">
             <span class="risk-badge risk-high">5 High</span>
             <span class="risk-badge risk-moderate">3 Moderate</span>
-            
+            <span class="risk-badge risk-strength">1 Strength</span>
           </div>
         </div>
         <div class="cs-detail">
@@ -2468,6 +2468,26 @@
           <div class="detail-section-title">Findings</div>
           <div class="findings-list">
 
+              <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
+                <div class="finding-header">
+                  <span class="finding-category">Combat &amp; Exploration Loop Architecture</span>
+                  <span class="finding-impact">Retention &amp; Player Motivation</span>
+                  <span class="risk-badge risk-strength">Strength</span>
+                </div>
+                <div class="finding-body">
+                  <div class="finding-col">
+                    <div class="finding-label">Analysis</div>
+                    <ul class="finding-bullets"><li>Fallout 4 represents a genuine technical evolution of first-person combat in the franchise.</li><li>Weapon handling is the most responsive in the series.</li><li>Enemy variety prevents encounter repetition from flattening exploration value across the Commonwealth’s runtime.</li><li>The kinetic quality of individual combat encounters is not in dispute.</li><li>What the game does not do is treat those encounters as events with consequences.</li><li>A Raider dies.</li><li>The fight ends.</li><li>The world does not register it.</li><li>There is no territorial logic that redistributes control of the location, no faction response to the player’s accumulating presence, no behavioral shift in surviving enemies that reflects survival instinct over suicidal aggression.</li><li>The combat encounter is a closed system when the architecture surrounding it — faction reputation depth, territorial simulation, dynamic world state — would have made it an open one.</li><li>The combat is not the problem.</li><li>It is the only part of the game that was unambiguously made better.</li></ul>
+                  </div>
+                  <div class="finding-col">
+                    
+                    <div style="margin-top:12px">
+                      <div class="finding-label">Recommendation</div>
+                      <ul class="finding-bullets"><li>The combat foundation does not require redesign.</li><li>The surrounding architecture does.</li><li>Faction encounters need territorial consequence.</li><li>Enemy behavioral scripting needs survival logic — surrender states, negotiation thresholds, recruitment branches — that reflects outlaw motivation rather than uniform aggression.</li><li>World state needs to register combat outcomes as causes with visible downstream effects on faction strength, location ownership, and quest availability.</li><li>The combat already generates the stone.</li><li>The design work is building the pond.</li></ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div class="finding-row" onclick="event.stopPropagation(); this.classList.toggle('finding-expanded')">
                 <div class="finding-header">
                   <span class="finding-category">Faction Reputation Modeling</span>
@@ -3428,9 +3448,9 @@
     document.querySelectorAll('#sidebar-bugs .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["days_gone", "cp77", "fallout76", "witcher3", "wolf", "rdr1", "dqxi", "fallout4", "ds3", "the_invincible", "eldenring", "dave_diver", "rdr2", "gtav", "spiderman"];
+    const gameKeys = ["fallout76", "gtav", "dqxi", "days_gone", "fallout4", "cp77", "wolf", "eldenring", "rdr1", "the_invincible", "ds3", "dave_diver", "witcher3", "rdr2", "spiderman"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["ai", "physics", "rendering", "animation", "spawning", "collision"];
+    const typeKeys = ["ai", "physics", "animation", "collision", "rendering", "spawning"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
