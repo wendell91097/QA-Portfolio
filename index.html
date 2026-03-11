@@ -2477,7 +2477,7 @@
                 <div class="finding-body">
                   <div class="finding-col">
                     <div class="finding-label">Analysis</div>
-                    <ul class="finding-bullets"><li>Fallout 4 represents a genuine technical evolution of first-person combat in the franchise.</li><li>Weapon handling is the most responsive in the series.</li><li>Enemy variety prevents encounter repetition from flattening exploration value across the Commonwealth’s runtime.</li><li>The kinetic quality of individual combat encounters is not in dispute.</li><li>What the game does not do is treat those encounters as events with consequences.</li><li>A Raider dies.</li><li>The fight ends.</li><li>The world does not register it.</li><li>There is no territorial logic that redistributes control of the location, no faction response to the player’s accumulating presence, no behavioral shift in surviving enemies that reflects survival instinct over suicidal aggression.</li><li>The combat encounter is a closed system when the architecture surrounding it — faction reputation depth, territorial simulation, dynamic world state — would have made it an open one.</li><li>The combat is not the problem.</li><li>It is the only part of the game that was unambiguously made better.</li></ul>
+                    <ul class="finding-bullets"><li>Fallout 4 represents a genuine technical evolution of first-person combat in the franchise.</li><li>Weapon handling is the most responsive in the series.</li><li>Enemy variety prevents encounter repetition from flattening exploration value across the Commonwealth’s runtime.</li><li>The kinetic quality of individual combat encounters is not in dispute.</li><li>What the game does not do is treat those encounters as events with consequences.</li><li>The hostiles die, and the fight ends.</li><li>The world does not register it.</li><li>There is no territorial logic that redistributes control of the location.</li><li>No faction response to the player’s accumulating presence or a behavioral shift in surviving enemies that reflects survival instinct over suicidal aggression.</li><li>The combat encounter is a closed system when the architecture surrounding it — faction reputation depth, territorial simulation, dynamic world state — would have made it an open one.</li><li>The combat is not the problem.</li><li>It is the only part of the game that was unambiguously made better.</li></ul>
                   </div>
                   <div class="finding-col">
                     
@@ -3448,9 +3448,9 @@
     document.querySelectorAll('#sidebar-bugs .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["eldenring", "witcher3", "days_gone", "rdr2", "cp77", "fallout4", "rdr1", "gtav", "spiderman", "wolf", "fallout76", "dqxi", "the_invincible", "ds3", "dave_diver"];
+    const gameKeys = ["witcher3", "wolf", "gtav", "fallout4", "eldenring", "rdr1", "days_gone", "ds3", "cp77", "dqxi", "dave_diver", "the_invincible", "spiderman", "rdr2", "fallout76"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["ai", "animation", "physics", "rendering", "collision", "spawning"];
+    const typeKeys = ["rendering", "spawning", "collision", "animation", "physics", "ai"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
