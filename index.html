@@ -2477,13 +2477,13 @@
                 <div class="finding-body">
                   <div class="finding-col">
                     <div class="finding-label">Analysis</div>
-                    <ul class="finding-bullets"><li>Fallout 4 represents a genuine technical evolution of first-person combat in the franchise.</li><li>Weapon handling is the most responsive in the series.</li><li>Enemy variety prevents encounter repetition from flattening exploration value across the Commonwealth’s runtime.</li><li>The kinetic quality of individual combat encounters is not in dispute.</li><li>What the game does not do is treat those encounters as events with consequences.</li><li>The hostiles die, and the fight ends.</li><li>The world does not register it.</li><li>There is no territorial logic that redistributes control of the location.</li><li>No faction response to the player’s accumulating presence or a behavioral shift in surviving enemies that reflects survival instinct over suicidal aggression.</li><li>The combat encounter is a closed system when the architecture surrounding it — faction reputation depth, territorial simulation, dynamic world state — would have made it an open one.</li><li>The combat is not the problem.</li><li>It is the only part of the game that was unambiguously made better.</li></ul>
+                    <ul class="finding-bullets"><li>Critic Joseph Anderson identifies three phases at the core of Fallout 4’s engagement structure: Exploration, Combat, and Looting.</li><li>This evaluation adds a fourth: Upgrading.</li><li>It is the beat that closes the loop.</li><li>Exploration surfaces new locations and enemy types.</li><li>Combat consumes resources and generates risk.</li><li>Looting recovers materials, ammunition, weapons, and gear.</li><li>Upgrading converts those materials into expanded capability — new weapon configurations, improved armor, perk investments — that makes the next exploration push more viable and opens previously hostile territory.</li><li>Without upgrading, the loop is a cycle with no forward trajectory, but with it, each iteration compounds.</li><li>The player is materially and strategically different after ten hours than after one, and the world responds to that difference.</li><li>Enemy variety and crafting depth sustain this across the full runtime — loot retains meaningful upgrade potential late into the game, and new territory consistently presents novel combat problems worth preparing for.</li><li>This four-beat loop is the reason the game holds player attention despite the systemic failures documented elsewhere in this evaluation.</li></ul>
                   </div>
                   <div class="finding-col">
                     
                     <div style="margin-top:12px">
                       <div class="finding-label">Recommendation</div>
-                      <ul class="finding-bullets"><li>The combat foundation does not require redesign.</li><li>The surrounding architecture does.</li><li>Faction encounters need territorial consequence.</li><li>Enemy behavioral scripting needs survival logic — surrender states, negotiation thresholds, recruitment branches — that reflects outlaw motivation rather than uniform aggression.</li><li>World state needs to register combat outcomes as causes with visible downstream effects on faction strength, location ownership, and quest availability.</li><li>The combat already generates the stone.</li><li>The design work is building the pond.</li></ul>
+                      <ul class="finding-bullets"><li>No structural intervention required.</li><li>Every satellite system in the game should be evaluated against one question: does it deepen or extend the Exploration → Combat → Looting → Upgrading loop?</li><li>The systems documented in this evaluation are the ones that do not.</li></ul>
                     </div>
                   </div>
                 </div>
@@ -3448,9 +3448,9 @@
     document.querySelectorAll('#sidebar-bugs .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["witcher3", "wolf", "gtav", "fallout4", "eldenring", "rdr1", "days_gone", "ds3", "cp77", "dqxi", "dave_diver", "the_invincible", "spiderman", "rdr2", "fallout76"];
+    const gameKeys = ["rdr2", "witcher3", "fallout76", "the_invincible", "dave_diver", "rdr1", "ds3", "dqxi", "wolf", "fallout4", "days_gone", "cp77", "spiderman", "gtav", "eldenring"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["rendering", "spawning", "collision", "animation", "physics", "ai"];
+    const typeKeys = ["ai", "rendering", "spawning", "animation", "collision", "physics"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
