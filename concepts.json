@@ -1,0 +1,541 @@
+[
+  {
+    "id": "gc-001",
+    "index": "GC-001",
+    "stage": "shipped",
+    "animation_delay": 0.02,
+    "title": "WordSmith",
+    "subtitle": "Word Puzzle · Letter Grid · Pure Systems",
+    "pitch": "A word-finding puzzle game with no story, no characters, and no win condition you didn't set yourself. Grid of letters, three game modes, & two tools. Find words, clear tiles, keep the grid alive.",
+    "links": [
+      { "label": "▼ Play on itch.io", "url": "https://sovereigndev.itch.io/wordsmith", "primary": true },
+      { "label": "▶ Gameplay Video", "url": "https://youtu.be/MCcAFdG_dV4" }
+    ],
+    "sections": [
+      {
+        "label": "Core Loop",
+        "type": "bullets",
+        "items": [
+          "The player navigates a letter grid ranging from 4×4 to 8×8 and traces valid words in any direction (horizontal, vertical, diagonal) without reusing the same letter twice per word.",
+          "Valid words remove their letters from the grid. The tiles above cascade down to fill the gap, Tetris-style. New letters generate from the top to keep the grid full. The player never sees a half-empty board.",
+          "The Wordsmith hammer is a targeted tool: the player can use it to remove specific letters from the grid independently of word-making, creating space or breaking up bad distributions.",
+          "Shuffle resets the grid entirely when the current layout is unworkable."
+        ]
+      },
+      {
+        "label": "Game Modes",
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          { "label": "Classic", "color": "blue", "text": "A set number of letters can be used before the round ends. The constraint is total throughput, not time. Rewards deliberate, high-value word selection over speed." },
+          { "label": "Timed", "color": "red", "text": "A player-set time limit. Same grid, different pressure. Rewards fast pattern recognition over optimization. The clock changes what kind of player wins." },
+          { "label": "Endless", "color": "green", "text": "No win condition, no loss condition. The grid runs indefinitely. Chill by design." }
+        ]
+      },
+      {
+        "label": "Design Notes",
+        "type": "bullets",
+        "items": [
+          "Retro pixel art aesthetic throughout, with parallax backgrounds sourced from open licensed assets with attribution. Settings allow music, SFX, and background swaps from the start screen.",
+          "Built in Godot. Released August 22, 2024. Available versions include HTML or Windows desktop download, no installation required.",
+          "The cascade mechanic changes the strategic calculus compared to static-grid word games: clearing a cluster of letters reshapes the board, which creates new adjacencies and new problems simultaneously.",
+          "The hammer gives the player agency over the board state without requiring a full shuffle. It adds meaningful tactical decision-making without complicating the core loop."
+        ]
+      },
+      {
+        "label": "Influences",
+        "type": "bullets",
+        "items": [
+          "Boggle — directional letter adjacency as the core word-finding structure.",
+          "Bookworm (PopCap) — tiles cleared on valid word submission, board management as an emergent challenge.",
+          "Tetris — gravity-based cascade as the feedback mechanism for clearing; the board as a living system rather than a static puzzle."
+        ]
+      }
+    ],
+    "vibe": "This is the one card on the slate where the design question is already answered. It shipped. The rest of the concepts are documented to show how I think; this one is here to show that the thinking goes somewhere."
+  },
+
+  {
+    "id": "gc-004",
+    "index": "GC-004",
+    "stage": "prototype",
+    "animation_delay": 0.05,
+    "title": "Playground Noir",
+    "subtitle": "Mystery Visual Novel · Kindergarten Ace Attorney · Unreliable Witnesses",
+    "pitch": "The last cookie has been eaten. The daycare is in crisis. You are the investigator. Every witness is five years old, completely unreliable, and in the middle of something more important than your case.",
+    "sections": [
+      {
+        "label": "Core Premise",
+        "type": "bullets",
+        "items": [
+          "A mystery visual novel applying full noir investigation structure — evidence, cross-examination, witness contradiction — to playground-scale crimes.",
+          "Children do not stop their world for your questions. Testimony happens mid-activity: mid-jump, mid-drawing, mid-game. The investigator enters the child's frame, not the reverse. You want information from the Baseball Kid, you talk baseball first.",
+          "Simple motivations mean simple solutions. A child took the cookie because they were hungry. A child lied to protect their friend. The solution is always obvious in retrospect and always wholesome. The noir structure is borrowed; the darkness never is.",
+          "The specimen case: two kids have crumbs on their shirts. The answer: they shared it. Both guilty. Both innocent. The resolution is mandatory warmth."
+        ]
+      },
+      {
+        "label": "The Cast",
+        "type": "cards",
+        "columns": 2,
+        "items": [
+          { "label": "The \"Librarian\"", "color": "blue", "text": "Anxious about being correct. Remembers details with precision and loses context entirely. Will correct your phrasing mid-sentence. Mid-chapter of a book when you arrive." },
+          { "label": "The Dinosaur Kid", "color": "red", "text": "Confident. Exaggerates scale automatically. Simple motivations: they did it because it seemed fun, or they were hungry. Currently stomping around making T-Rex sounds at no one in particular." },
+          { "label": "The Baseball Kid", "color": "green", "text": "Perpetually mid-game in their head. Will not stop throwing an imaginary ball. Useful testimony only comes after you demonstrate baseline baseball knowledge. Worth it." },
+          { "label": "The Animal Friend", "color": "purple", "text": "Loves animals with total sincerity. Confabulates for their benefit — her version of events is whatever kept the animals safest. Currently giving a checkup to every stuffed animal she owns." }
+        ]
+      },
+      {
+        "label": "Mechanics",
+        "type": "bullets",
+        "items": [
+          "Ace Attorney investigation and cross-examination loop adapted for a younger audience. The challenge isn't finding the guilty party — it's figuring out which truth is true, given that every witness is telling you their truth sincerely.",
+          "The play-along mechanic: some testimony is only unlocked by entering the witness's current activity. You cannot interrupt the Dinosaur Kid mid-hunt. You can join it.",
+          "Red herrings are structurally embedded: evidence that looks damning leads to a different, more innocent explanation. The guilt in this world is the kind that can be forgiven in the same afternoon."
+        ]
+      },
+      {
+        "label": "Influences",
+        "type": "bullets",
+        "items": [
+          "Ace Attorney series — investigation loop, testimony contradiction, high drama applied to low stakes.",
+          "Professor Layton — episodic puzzle mysteries, gentle tone, standalone cases that work for mixed-age audiences.",
+          "Bluey — the comedy of treating children's problems with adult seriousness, without condescension. The children are the straight faces; the adult register is the joke."
+        ]
+      }
+    ],
+    "vibe": "Ace Attorney is 22 years old and nobody has made a wholesome version for a younger audience. The unreliable witness system isn't a gimmick — it's the entire design. Children don't lie the way adults lie. They misremember, protect people they love, and confabulate completely. The play-along mechanic puts that at the center: you cannot extract testimony from a child who doesn't want to give it. You have to go where they are. That's the adult layer: the game is easy for a child to play because it asks nothing more than what children already know. For an adult, it's a mirror — a reminder that the best way to connect with a kid is not to get them to stop what they're doing, but to understand why they can't. That's the message underneath the mystery structure — aimed at the adult holding the controller. The game is a gentle reminder that children don't stop their world for you. The better move has always been to enter theirs."
+  },
+
+  {
+    "id": "gc-002",
+    "index": "GC-002",
+    "stage": "prototype",
+    "animation_delay": 0.08,
+    "title": "Immortal Coil",
+    "subtitle": "Pattern-Recognition Combat · Dystopian Arena Drama · Transhumanist Horror",
+    "pitch": "All criminals are immortal. They fight in arenas year-round for public amusement. Win five championships and earn the only thing anyone in this society still wants: the right to die. The problem is that by the time you've won five championships, the elite have made sure you don't want it anymore. You see it all through your own eyes — what's left of them.",
+    "sections": [
+      {
+        "label": "Core Premise",
+        "type": "bullets",
+        "items": [
+          "Immortality is not biological — it is infrastructural. When the body sustains brain death, the state restores the individual from a prior neural save state: a snapshot of the mind taken at regular intervals, patched over the corrupted data. Resurrection is a government process. You do not consent to it. You do not own your continuity.",
+          "Each restoration is lossy. Like a file recompressed too many times, fidelity degrades. Memories blur at the edges. Personality flattens. The mental deterioration the player feels across a run is not damage — it is accumulated restoration artifact. The machine keeps bringing you back. It keeps bringing back slightly less of you.",
+          "Three tiers: the underclass fights, the middle class watches but does not participate, the elite never sets foot in the arena. The arena is a management tool aimed at the bottom tier. The middle class watching the underclass fight keeps both groups pointed sideways instead of upward — Roman bread-and-circus logic applied to a transhumanist dystopia.",
+          "Fights run year-round. The main championship tournament is the marquee spectacle, but losers' brackets, exhibition bouts, and consolation tournaments fill the calendar continuously. There is always something to watch. There is always someone losing.",
+          "Five championships is the official threshold for earned euthanasia. The number is arbitrary — bureaucratic tradition so old its origin is propaganda — but it doesn't matter, because the euthanasia was never real. A champion is too valuable to the system to release.",
+          "Instead, the elite make death seem terrible and life as a champion seem extraordinary. Prize wealth, status, comfort, celebrity — enough that most champions never invoke the clause. The few who do discover the offer was a lie dressed up as a right: mind-wipe, reprogramming, blackmail, torture, or worse — consciousness trapped in a dead signal, a fuzzier version of yourself fading slowly in a loop, no exit. There are no happy endings. There is only a signal degrading until there is nothing left to degrade.",
+          "The player is a convicted criminal entering unseeded at the bottom of the bracket. Bodies heal between bouts. Mental fidelity does not. Every augmentation makes you more competitive and less yourself — felt from the inside.",
+          "Roguelite structure: each run is a full tournament season. Augmentation combinations, opponent loadouts, and new attack patterns vary between runs. You learn the system across deaths. The tournament remembers you. You have to remember it faster."
+        ]
+      },
+      {
+        "label": "Mechanics",
+        "type": "bullets",
+        "items": [
+          "First-person perspective, optionally VR. You look out through eyes that used to be yours. Your hands in front of you are chrome. You cannot look away from what you've become.",
+          "Full ring mobility: sidestep, backpedal, close distance, cut angles. Footwork is tactical; positioning creates the windows the pattern system requires.",
+          "Punch-Out DNA: opponents run on readable, repeatable patterns. Cybernetic augmentations are the tell system: a HUD ping reading TARGET LOCKED, steam venting from a joint, an arm morphing into a new attack mode. The visual language is the gameplay.",
+          "Player augmentations unlock between bouts — each a genuine tradeoff. Better reach, faster counters, harder hits. Each one another step toward what you're fighting to escape.",
+          "Mental degradation modeled over time: early fights feel sharp. Later fights accumulate visual noise, flickering tells, HUD lag. The machine is winning even when you are.",
+          "End of fight rituals: mandatory, performed for the crowd, choreographed by the arena. The form of commemoration without the substance — a sacred gesture co-opted into spectacle. The player performs them whether they want to or not. Over time, what they mean to the player and what they mean to the crowd become two entirely different things.",
+          "Trophy system: a component stripped from a defeated opponent — a chrome piece, a lens, a joint casing. The only objects in the game that belong to the player rather than the system. Displayed in the fighter's cell. The one act of curation the arena cannot script.",
+          "Opponent relationships: fighters you've beaten reappear across seasons. Fighters who have beaten you may carry a trophy from that encounter — something of yours, displayed in their own cell. Lose to someone and they own a piece of you. Beat them later and you can take it back, or leave it. The arena insists these are enemies. The trophies tell a different story.",
+          "Some opponents become something closer to rivals, then something closer to the only people who understand what this is. The relationship system is not social — it is purely environmental. You learn each other through the fight. There is no dialogue. There does not need to be."
+        ]
+      },
+      {
+        "label": "Thematic DNA",
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          { "label": "The Complicity Trap", "color": "red", "text": "Every augmentation is a vote for the system. The player is not a rebel — they are a product of the arena. Winning requires becoming what the arena needs you to be." },
+          { "label": "First Person as Horror", "color": "purple", "text": "You cannot cut away from the hands. The detachment from your own body is not a cutscene — it is the camera. Chrome where skin used to be, in every frame, for the whole game." },
+          { "label": "The False Exit", "color": "blue", "text": "Immortality is a government service. The euthanasia clause exists to motivate fighters, not to be exercised. Champions who try to claim it find out what the state does to tools that try to retire: mind-wipe, reprogramming, or worse — consciousness isolated in a dead signal, a fuzzier version of yourself fading slowly with no exit. The offer was always a lie. Five championships was never the price of death. It was the price of finding that out." },
+          { "label": "The Only Canvas Left", "color": "orange", "text": "The arena permits one form of self-expression: the fight. Your augmentation choices are the only aesthetic decisions you're allowed. The opponent is the only relationship the system sanctions. Destruction of others is the sole creative act available. The trophies are the exception — the one thing the player curates that the system did not script. A cell full of chrome pieces from people you've beaten, or been beaten by, is the closest thing to an autobiography this world allows." },
+          { "label": "The Resistance Has Always Existed", "color": "green", "text": "There is a faction that knows the truth: about the save-state infrastructure, the euthanasia clause, what the elite actually are. They have been here for generations. The system has always known about them. The system has always been fine with that. A rebellion that cannot reach the puppeteers, that cannot dismantle what no one fully controls anymore — that rebellion is not a threat. It is another spectacle. The most dangerous thing the player can discover is not how to fight the system. It is that the system anticipated that too." }
+        ]
+      },
+      {
+        "label": "Influences",
+        "type": "bullets",
+        "items": [
+          "Punch-Out!! — pattern recognition as the entire design; opponents as puzzles with tells, not health bars to deplete.",
+          "Dark Souls — immortality as a curse; the hollow mechanic as a model for what repeated survival costs the self.",
+          "Disco Elysium — the collapse of a moral framework as both world-building and gameplay.",
+          "Rollerball (1975) — sport as systemic dehumanization; the crowd as the real antagonist.",
+          "Warhammer 40,000 — technology so ancient maintaining it has become religious ritual.",
+          "Cyberpunk 2077 / the Chrome aesthetic — transhumanism as ubiquity rather than novelty; a world where body modification is so normalized it has stopped being a choice and started being an expectation.",
+          "Neon Genesis Evangelion — the psychic cost of doing what the machine requires; the body as something that happens to you."
+        ]
+      }
+    ],
+    "vibe": "The euthanasia clause is the game's central trap. You spend the whole run fighting toward something the system never intended to give you. By the time you've won five championships, the elite have spent five runs making you too rich, too famous, and too degraded to want it. The trophies are the counter-argument the game makes quietly: the only objects that belong to the player, the only history the system cannot rewrite. Lose to someone and they own a piece of you. Beat them later and you decide what that means. The arena calls them enemies. The trophies call them the only people who know what you are. The bread-and-circus layer is what makes the world coherent: the middle class watches the underclass fight, which keeps both groups pointed sideways. No one looks up. The arena combat loop gives QA something concrete to test: does augmentation feel like a tradeoff or just a power increase? Does mental decay change how the player reads tells, or is it cosmetic? Do the opponent relationships actually shift how the player approaches a rematch, or are they just flavor? Those are real questions with testable answers. The first-person frame is not an aesthetic choice — it is the argument."
+  },
+
+  {
+    "id": "gc-003",
+    "index": "GC-003",
+    "stage": "specced",
+    "animation_delay": 0.11,
+    "title": "Manifest",
+    "subtitle": "Branching Narrative · Frontier Homestead · You Shape What America Becomes",
+    "pitch": "You have staked a claim on the frontier. A homestead at the crossroads of everything America is becoming. Every week someone new comes through. Some are running from something. Some are running toward something worth dying for. Every choice compounds. The country being built around you will remember what you did here.",
+    "sections": [
+      {
+        "label": "Core Premise & Choice Architecture",
+        "type": "bullets",
+        "full_width": true,
+        "items": [
+          "1810 to 1860. Fifty years. A visual choose-your-own-adventure spanning the full arc of the American frontier era, ending at the turn of the century. The player is a fixed point while half a century moves through them.",
+          "Choices establish reputation, close doors, open others, reshape the settlement over decades. Decisions made in the 1820s are still paying out in the 1840s. One wrong move and your entire herd of cattle is gone. A wrong guest sheltered at the wrong time and you make a enemy out of another. The stakes are permanent, quiet, and compounding.",
+          "The newspaper mechanic starts slow: a single regional paper arrives monthly in the early years, carrying word of people who passed through. Some made it. Some are on wanted posters. Some names appear in obituaries with no next of kin listed. As decades pass, the papers multiply — the Denver Rocky Mountain News, the Chicago Tribune, the San Francisco Chronicle, the Atlanta Constitution, dispatches from New Orleans and St. Louis, occasional pages from Tijuana and Ciudad Juárez carried by traders coming north. The homestead is not a waypoint on a one-way road west. It sits at a crossroads. People pass through heading every direction — north to the railroad camps, south across the border, east back to cities they left, west toward something they haven't named yet. By the 1890s the player is reading competing accounts of the same events from a dozen cities, and they know which version is true because they were there.",
+          "This was a deeply Christian nation. The moral vocabulary of the era is scripture: charity, sanctuary, bearing false witness, rendering unto Caesar. Turning someone away is not a neutral act.",
+          "The game can end early. Catastrophic choices compound into ruin — a lost herd, a burned homestead, a hangman's noose, or just a reputation that closes every door in the territory. It is possible to not make it to 1860."
+        ]
+      },
+      {
+        "label": "The Guests Who Matter Most",
+        "type": "roster",
+        "full_width": true,
+        "featured": [
+          { "label": "The Comanche", "color": "red", "text": "Traveling under a name that is not his. His sister is missing. He needs one night's shelter and your silence. What do you do when the marshal comes asking the next morning?" },
+          { "label": "The Conductor", "color": "green", "text": "A freed Black man, moving slaves out of the South. Will you route the Underground Railroad through your homestead?" },
+          { "label": "The Teacher", "color": "blue", "text": "Heading to a mining camp that does not know it needs her. Whether she makes it depends partly on what you tell her about the road ahead." },
+          { "label": "The Pastor", "color": "white", "text": "Road-worn, theologically complicated, genuinely kind. He will tell you plainly what he thinks you are doing wrong with your life. He is usually right." }
+        ],
+        "roster_label": "The Fuller Roster",
+        "roster_items": [
+          "Outlaws and the lawmen hunting them — shelter and betrayal each carry a price, and the law is not always the more trustworthy of the two.",
+          "Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators — each carrying a different idea of what America is supposed to mean.",
+          "The missionary heading into territory everyone else is heading out of. The Army deserter. The bounty hunter who is not here by accident.",
+          "The Mexican family escaping oppression. The journalist writing the myth while it is still being made."
+        ]
+      },
+      {
+        "label": "Thematic DNA & Influences",
+        "type": "bullets",
+        "full_width": true,
+        "items": [
+          "The title is not a historical reference. It is a design statement. Manifest Destiny as philosophy: the belief that will, applied with enough conviction, bends reality to match the picture in your head. The game is named after that idea because the game is that idea — fifty years of a single consciousness shaping what America becomes, one choice at a time. That is not a metaphor. That is the mechanic.",
+          "Manifest Destiny written in scripture and enacted in blood — the heroic and the self-interested arriving in no particular order.",
+          "Fallout 1 & 2, Fallout: New Vegas — long-consequence choice architecture, faction reputation, a world that changes shape around your decisions.",
+          "Papers, Please, Red Dead Redemption 2, Deadwood (HBO)."
+        ]
+      },
+      {
+        "label": "Narrative Architecture",
+        "type": "cards",
+        "columns": 1,
+        "full_width": true,
+        "items": [
+          { "label": "Guests are Stars", "color": "orange", "text": "Every major guest has a defining Passion that is transparent to the player. The Conductor is moving people north. The Comanche is protecting his sister. The Teacher is heading somewhere that needs her. You know what they want. The drama is whether you act on it — and what it costs you when you do." },
+          { "label": "Reputation is a Macropassion Bar", "color": "blue", "text": "Micro-actions accumulate toward thresholds that change what's available. Help the Conductor enough times and the wrong people take notice. Shelter the Comanche and the marshal comes asking the next morning. These aren't flavor consequences — they're threshold crossings that open and close the board." },
+          { "label": "Balancing Zero-Sum Motivations", "color": "red", "text": "Consider whether a commitment closes an opposing door. The same guest who needs shelter will cost you with someone else who matters. There is no path through fifty years that doesn't betray someone. The system is designed to prevent stable equilibrium — which is what makes the choices mean something." },
+          { "label": "The Newspaper is the Drone Layer", "color": "green", "text": "You don't have direct relationships with every person downstream from your choices. The papers are how the world's aggregate state stays legible — the population-level feeling of the system, rising and falling as your decisions compound across decades. The drone layer made spatial in Levine's model; made temporal here." },
+          { "label": "The Time Axis is the Differentiator", "color": "purple", "text": "Levine's architecture is spatial — Stars coexist on the same map, their tensions are simultaneous. Manifest makes these dynamics temporal. Consequences aren't always obvious. The butterfly effect can turn the acculation of even innocuous action into a disaster across the country, years down the line. That's what gives the system its weight." }
+        ]
+      }
+    ],
+    "vibe": "Fifty years is the right scope because it lets consequence breathe. A guest you helped in 1837 sends their daughter to your door in 1843. A reputation you built in the 1820s opens or closes the 1840s. The newspaper mechanic earns its complexity over time — what starts as a single monthly paper from one town becomes a chorus of competing accounts by the 1850s, and the player knows which version is true because they were there. Papers Please proved the threshold mechanic works. This is what happens when you build a whole life around it instead of a border checkpoint — and give it fifty years to settle. The title does all of that work in one word. To manifest something is to create reality from will — to bend the world to match the picture in your consciousness. That is exactly what the player does. That is exactly what the settlers believed they were doing. The game does not judge that. It just shows you what it costs and what it builds and lets the fifty years speak for themselves."
+  },
+
+  {
+    "id": "gc-009",
+    "index": "GC-009",
+    "stage": "specced",
+    "animation_delay": 0.14,
+    "title": "Bear's Blooming Forest",
+    "subtitle": "Cozy Exploration · Botanical Terraforming · A Little Bear and a Very Large Plan",
+    "pitch": "Little Bear has a plan. The forest could be so full of flowers that the bees build a hive the size of a village, and the honey would just come to him. No fishing. No waiting. Just flowers, and then honey. He's going to need a lot of flowers. He should probably be back for dinner.",
+    "sections": [
+      {
+        "label": "The Two Halves",
+        "type": "two_halves",
+        "halves": [
+          { "label": "Gathering — the Zelda half", "color": "green", "text": "Third-person exploration of biomes, each with its own puzzle logic, hazards, and feel. Flowers don't grow in safe places. Getting to them is the game." },
+          { "label": "Tending — the Harvest Moon half", "color": "accent", "text": "Planting, watering, maintaining, and expanding the garden back home. Healthy patches attract more bees. The hive grows one comb at a time until it becomes a village." }
+        ],
+        "note": "The tutorial ends with Little Bear placing a small jar beneath the hive. One drop falls. Everything else is the consequence of making that drop into a river."
+      },
+      {
+        "label": "Gathering Mechanics",
+        "type": "bullets",
+        "items": [
+          "Early biomes are gentle puzzles — a wolf sleeping across the path, distracted by bait; a hawk circling a meadow, driven off by a friend with a loud bell. Solutions are obvious, tools are few, stakes are low.",
+          "Later biomes stack hazards and introduce timing — a mountain pass where the bait needs to reach the eagle before the wind window closes, or a desert where the rare bloom only opens at dawn and a scorpion guards the only route.",
+          "Animal companions change the calculus: a recruited bear friend acts as a presence deterrent, a fox can negotiate passage, a deer creates a distraction by existing somewhere interesting. You never fight. You redirect.",
+          "Some flowers require multiple trips to understand — the puzzle is figuring out the pattern before you attempt the collect."
+        ]
+      },
+      {
+        "label": "Little Bear's Toolkit",
+        "type": "cards",
+        "columns": 3,
+        "full_width": true,
+        "items": [
+          { "label": "Slingshot — ranged", "color": "blue", "text": "Two ammo types: bait draws animals toward the impact point; pebbles create noise without attracting anything. Both too small to hurt anything. He's not throwing rocks at a wolf — he's throwing a rock at a bush near a wolf." },
+          { "label": "Garden Trowel — primary", "color": "orange", "text": "Planting, transplanting, and soil preparation. The first tool Little Bear owns and the one he's never without. Upgrades let him work faster and handle tougher terrain, but it's always just a trowel." },
+          { "label": "Fox's Network — unlockables", "color": "purple", "text": "A bell on a string for sustained noise; a hollow reed that mimics bird calls; a small lantern for bloom-window timing in dark caves. Each solves a class of puzzle the slingshot alone cannot. All sourced through Fox." }
+        ]
+      },
+      {
+        "label": "Seasons & Time",
+        "type": "cards",
+        "columns": 2,
+        "note": "Perennials regrow reliably, annuals must be replanted, and flowering trees planted early become significant bloom sources years later.",
+        "items": [
+          { "label": "Spring", "color": "spring", "text": "Peak rare blooms. Two-week windows that won't come again for a year. Cherry trees planted in year one finally matter. Miss spring and you plan around it until next spring." },
+          { "label": "Summer", "color": "accent", "text": "Peak bee activity. Maximum honey production. The garden is loudest here. The best time for long gathering runs before the year turns." },
+          { "label": "Autumn", "color": "orange", "text": "Preparation and late-blooming trees. Save seeds from annuals. Plan what changes before winter closes the routes. The garden is winding down, not stopping." },
+          { "label": "Winter", "color": "winter", "text": "Quiet maintenance. A few hardy trees hold the bees over. Planning time: what biome next, which flowers, which companions to deploy when thaw comes." }
+        ]
+      },
+      {
+        "label": "Biomes & Progression",
+        "type": "grid_rows",
+        "note": "Each biome unlocks a bee variety the hive needs for its next tier. Biomes are progression gates — not level numbers.",
+        "items": [
+          { "label": "Home Forest", "color": "green", "text": "Tutorial. Familiar and forgiving. The hive starts here." },
+          { "label": "Grasslands", "color": "accent", "text": "Open space, seasonal wind. The game breathes here. Wide puzzles, room to experiment." },
+          { "label": "Mountain", "color": "white", "text": "Altitude, narrow paths, territorial birds. Vertical traversal puzzles." },
+          { "label": "Subtropical Coast", "color": "blue", "text": "Tide timing, crabs, mangrove tangles. Flowers at the waterline only." },
+          { "label": "Desert", "color": "orange", "text": "Heat management, nocturnal hazards, bloom windows. The hardest flowers. Unlocks last." }
+        ]
+      },
+      {
+        "label": "Animal Companions",
+        "type": "companions",
+        "full_width": true,
+        "specialists_label": "Specialists — permanent, passive world changes",
+        "specialists": [
+          { "name": "Deer", "text": "Clears bramble and opens new territory passively while grazing." },
+          { "name": "Beaver", "text": "Builds irrigation channels, unlocking flower beds that need constant water." },
+          { "name": "Fox", "text": "Negotiates with animals who won't be bribed; unlocks the later companion roster and the toolkit upgrade chain." },
+          { "name": "Other Bears", "text": "Recruited one by one, each with a personality. The only ones who can fully substitute for Little Bear on harder gathering runs. His father never finds out they exist." }
+        ],
+        "crew_label": "Crew — deployed daily on maintenance & support",
+        "crew": [
+          { "name": "Rabbit", "text": "Watering. Fast, covers multiple patches per cycle and scales well as the garden grows." },
+          { "name": "Owl", "text": "Scouting. Surveys new territory and flower locations before Little Bear commits to traveling there." },
+          { "name": "Hedgehog", "text": "Pest control. Protects patches from aphids, slugs, and herbivores that damage bloom yield." }
+        ]
+      },
+      {
+        "label": "Narrative Arc & Tone",
+        "type": "bullets",
+        "items": [
+          "Little Bear is not sneaking. He's just very busy and hasn't quite explained it yet. The register is Winnie the Pooh: solo, whimsical, entirely sincere, driven by one very specific and honey-related goal. No responsibilities. No drama. Just a small bear who has a plan and is working on it.",
+          "Dad is flavor, not threat. He shows up occasionally — calling Little Bear in for dinner, suggesting they go fishing Sunday, cheerfully oblivious to the scale of what's happening in the forest. These moments create soft daily rhythm without pressure. Be back for dinner. Sunday is fishing. The rest of the day is yours.",
+          "Dad doesn't find out until the story reaches it naturally. The reveal isn't a confrontation — it's a father standing at the edge of a bee village, not entirely sure when this happened, watching honey drip into a jar below a hive the size of a house. He doesn't say anything for a long time. Then: 'You could have just asked me to fish more.' Little Bear hands him the jar.",
+          "Scope: one bear, one valley, five biomes, three in-game years. Keep it small. Make it land."
+        ]
+      },
+      {
+        "label": "Influences",
+        "type": "bullets",
+        "items": [
+          "The Legend of Zelda: Breath of the Wild — the gathering half; biome-specific puzzle logic; the joy of approaching a problem from an unexpected angle.",
+          "Stardew Valley — seasonal tending rhythm; the satisfying accumulation of a garden over years.",
+          "Pikmin — the deploy-and-multiply companion loop; small friends with distinct, complementary abilities.",
+          "Winnie the Pooh — the emotional register and the bear's relationship with honey. Gentle, single-minded, entirely sincere.",
+          "Pixar's Brave / Over the Hedge — the family tension structure: a child doing something the parent can't understand until the moment they finally see it."
+        ]
+      }
+    ],
+    "vibe": "The emotional register is Winnie the Pooh, not Pixar. Little Bear isn't processing anything. He just wants honey and has a very reasonable theory about how flowers and bees work. Dad is there because Dad is always there — fishing, calling him in for dinner, suggesting Sunday plans. The family structure creates a gentle daily rhythm without stakes. There is no suspicion meter. There is no secret to manage. There is just a small bear with a large project and a soft deadline of dinnertime. The game is a cozy thing. It should feel like one."
+  },
+
+  {
+    "id": "gc-005",
+    "index": "GC-005",
+    "stage": "specced",
+    "animation_delay": 0.17,
+    "title": "Swan Marriage Counselor",
+    "subtitle": "Therapy Visual Novel · Lifelong Commitment · Determinism vs. Choice",
+    "pitch": "Swans mate for life. Some of them are not handling it well. You are their counselor. The sessions that follow are about commitment, compromise, aging, and whether the promises we make when young should bind the people we become.",
+    "sections": [
+      {
+        "label": "Core Premise",
+        "type": "bullets",
+        "items": [
+          "The player is a marriage counselor to swan couples. Literal swans, with the biology of lifelong monogamy built in. These animals have no choice about who they're bound to.",
+          "Sessions explore the fault lines of long commitment: the distance that opens between people who grow in different directions; the resentment of a promise made without full information.",
+          "The subversion of the dating sim: dating sims are about the beginning of love. This game is about what happens after the win, when the romance has become a life and the life has become complicated."
+        ]
+      },
+      {
+        "label": "Thematic DNA",
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          { "label": "Determinism vs. Choice", "color": "orange", "text": "Swans are biologically determined to stay. Humans choose to. The game asks what that difference means for the moral weight of commitment — and whether the players in these sessions understand which one they are." },
+          { "label": "The Problem of the Self Over Time", "color": "blue", "text": "The person you promised yourself to at 22 is not the person in front of you at 47. The sessions don't ask whether the promise was sincere. They ask whether sincerity is enough." },
+          { "label": "Aging as Theme, Not Backdrop", "color": "purple", "text": "Explicitly about couples who have been together long enough to become strangers. Not a game about falling in love. A game about what happens when the love has become a life and the life has become complicated." }
+        ]
+      },
+      {
+        "label": "Influences",
+        "type": "bullets",
+        "items": [
+          "Florence — visual novel about the emotional reality of a relationship over time, not just its peak.",
+          "The Sopranos — therapy as a tool for self-reflection, metamorphosis, ideation, and sometimes delusion. Tony Soprano did not want to get better; he wanted permission to stay the same. Some of these swans have the same problem."
+        ]
+      },
+      {
+        "label": "Commercial Note",
+        "type": "bullets",
+        "items": [
+          "Niche audience but a devoted one. Strong festival circuit potential — Indiecade, IGF.",
+          "Low asset requirement. The game lives in session dialogue. A small team with one strong writer could complete this.",
+          "Replayability is intentionally limited per couple — each pair's story is a fixed arc, like a short film. The replay value comes from the roster: multiple couples, each with distinct dynamics, fault lines, and endpoints. A player who finishes one couple's sessions picks up the next and finds a structurally different emotional problem. The game is a collection of short films, not a single long one.",
+          "Counselor choices carry weight across couples — a reputation for bluntness, warmth, or detachment can subtly shift how later clients open up. This creates a soft meta-layer without undermining each couple's standalone integrity."
+        ]
+      }
+    ],
+    "vibe": "Low asset count, strong festival profile, and a demographic that games mostly ignore: people in long relationships. The swan framing isn't cute window dressing; it's the central mechanical question. Swans don't choose to stay. The player's job is to help couples who do choose work through what that costs. That's a different emotional register than anything currently in the visual novel space."
+  },
+
+  {
+    "id": "gc-008",
+    "index": "GC-008",
+    "stage": "specced",
+    "animation_delay": 0.20,
+    "title": "Warp Gun",
+    "subtitle": "First-Person Puzzle · Spacetime Distortion · Light & Traversal",
+    "pitch": "Instead of a portal gun, a warp gun. Two modes: contraction and expansion. Spacetime bends around your shots. Light curves. Distances collapse or stretch. Puzzles are solved not by placing doors in walls, but by reshaping the space between you and the solution.",
+    "sections": [
+      {
+        "label": "Core Mechanics",
+        "type": "cards",
+        "columns": 2,
+        "full_width": true,
+        "trailing_bullets": [
+          "Light bending is not cosmetic — it is a puzzle input. Beams that need to hit targets must be routed through warp fields. The curvature is the mechanic.",
+          "Traversal puzzles emerge from two warp types interacting: a contraction slingshot launches you across a gap that an expansion has reshaped into a landing surface, or a light beam bent by contraction threads through a gap that expansion has opened.",
+          "The slingshot is a skill move, not just a technique: timing the deactivation of a contraction field at peak pull velocity gives the player momentum that compounds with expansion geometry — the two modes create movement freedom that neither produces alone."
+        ],
+        "items": [
+          { "label": "Contraction", "color": "blue", "text": "Localized gravity well. Space folds inward, pulling objects and the player toward the distortion point. Distances collapse. Light paths curve toward the impact. The slingshot technique: jump into the well's pull at the right angle, then deactivate the field before it draws you back — the arrested momentum launches you across distances no normal jump could reach. Impassable gaps become traversable. The tool is the launch pad." },
+          { "label": "Expansion", "color": "orange", "text": "Space pushed outward from the impact point. Geometry stretches and reshapes around the distortion — a flat wall hit at an angle warps into a curved ramp; a floor expands into a traversable slope. Perceived distances grow. Projectiles and light beams deflect along new paths. The environment is not fixed; it is a variable the player sets." }
+        ]
+      },
+      {
+        "label": "Design Space",
+        "type": "bullets",
+        "items": [
+          "The distortion fields have a visual presence — space visibly shimmers, geometry warps at the field boundary, light halos around the contraction point. The world communicates the physics before the player tests it.",
+          "Puzzle difficulty scales by stacking warp interactions: early puzzles use one shot type in isolation; later puzzles require both simultaneously, with each distortion field affecting the other's geometry.",
+          "The setting can leverage the visual language directly: environments where geometry and perspective are already disorienting make warp distortion feel native rather than intrusive."
+        ]
+      },
+      {
+        "label": "Influences",
+        "type": "bullets",
+        "items": [
+          "Portal — the single-tool puzzle design philosophy; the tool is the world's grammar, not a power layered on top of it.",
+          "Antichamber — non-Euclidean space as a puzzle medium; the willingness to let perception be wrong and make that wrongness mechanical.",
+          "Interstellar / actual gravitational lensing — the visual reference for what a real contraction field would look like to someone standing inside the light path."
+        ]
+      }
+    ],
+    "vibe": "Portal works because the portal gun is a spatial language, not just a tool. The warp gun needs the same thing: every puzzle is a sentence written in distortion. The light-bending mechanic is the element that separates this from Portal reskin territory — routing light is a fundamentally different cognitive task than routing a player. The slingshot technique is where the movement ceiling lives: players who understand contraction timing and expansion geometry get traversal freedom that the puzzle design doesn't require but rewards. That emergent skill ceiling is what makes a tool feel like a language."
+  },
+
+  {
+    "id": "gc-006",
+    "index": "GC-006",
+    "stage": "concept",
+    "animation_delay": 0.23,
+    "title": "Winter Storm",
+    "subtitle": "PVP Extraction Shooter · Arctic Blizzard · Strategic Infiltration & Exfiltration",
+    "pitch": "A PVP extraction shooter set in Arctic blizzards. Squads infiltrate, locate the objective, and fight their way out. The storm is not the enemy — the other team is. Every footprint you leave can be tracked. Every footprint they leave can too.",
+    "sections": [
+      {
+        "label": "Core Systems",
+        "type": "cards",
+        "columns": 2,
+        "full_width": true,
+        "trailing_bullets": [
+          "Thermal imaging and heartbeat sensors as detection tools. Enemy use of them forces cat-and-mouse between environmental concealment and technological detection.",
+          "Footprint persistence: snow records movement. Players must plan routes considering what evidence they leave behind."
+        ],
+        "items": [
+          { "label": "Infiltration — the Blizzard Is Cover", "color": "winter", "text": "Whiteout conditions blind the enemy but also blind sensors, create acoustic interference, and mask heat signatures. The storm isn't fighting you — it's the best tool you have. Every footprint you leave can be tracked. Every footprint they leave can too." },
+          { "label": "Exfiltration — Snowmobile Set Piece", "color": "red", "text": "The stealth phase ends. The extraction begins. High-speed snowmobile exfiltration as a structural gear shift: you came in quiet, you leave fast, and the other squad knows exactly where you are." }
+        ]
+      },
+      {
+        "label": "Design Gap",
+        "type": "bullets",
+        "items": [
+          "The aesthetic is fully realized. The setting is evocative. The mechanical hooks are genuinely interesting.",
+          "Missing: a narrative reason to care. Metal Gear works not because of its stealth mechanics but because Kojima built a mythology around them.",
+          "Current status: the PVP extraction framing solves the original narrative problem: the other squad is the story. Revisiting."
+        ]
+      },
+      {
+        "label": "Influences",
+        "type": "bullets",
+        "items": [
+          "Metal Gear Solid series — gadget economy, environmental stealth, the idea that preparation is half the mission.",
+          "Call of Duty: MW2 — the snowmobile chase and Cliffhanger mission specifically; proof that an arctic infiltration set piece can be genuinely cinematic without sacrificing player agency.",
+          "Escape from Tarkov — the tension architecture of extraction: you brought good gear in, now you have to get it out."
+        ]
+      }
+    ],
+    "vibe": "The extraction shooter market is crowded but nobody has committed to a full blizzard environment as a core design pillar — not as a weather effect, as the entire tactical premise. The footprint mechanic alone differentiates this from Tarkov: every route is a decision about what you leave behind, and the other squad is reading the same snow. The narrative gap is acknowledged and being addressed. The PVP frame solves it cleanly — the other squad is the story, the blizzard is the referee, and the snowmobile is the gear shift that ends every match with momentum. The bones are strong. This one needs a mythology built around them."
+  },
+
+  {
+    "id": "gc-007",
+    "index": "GC-007",
+    "stage": "concept",
+    "animation_delay": 0.26,
+    "title": "Conquistador Sim",
+    "subtitle": "Political Simulation · New World Exploration · God · Guns · Gold",
+    "pitch": "You are a Spanish explorer in the New World. Work for the Crown, defect and conquer on your own terms like Cortés, or abandon Europe entirely and disappear into a continent that has been here ten thousand years longer than your maps. Three paths. Only one of them requires you to stop seeing the land as something to be taken.",
+    "sections": [
+      {
+        "label": "Core Factions / Paths",
+        "type": "cards",
+        "columns": 1,
+        "full_width": true,
+        "items": [
+          { "label": "Crown Loyalist", "color": "blue", "text": "The institutional path. Supplied, supported, and expendable. High demand, high reward. The Crown owns your success." },
+          { "label": "Renegade — the Cortés Path", "color": "red", "text": "Defection and conquest on personal terms. No supply lines, no safety net. If the Crown must negotiate with you, you've won." },
+          { "label": "Gone Native — the Kurtz Path", "color": "green", "text": "Abandon European frameworks entirely — not just politically, epistemologically. The most demanding path. The only one where the continent stops trying to kill you." }
+        ]
+      },
+      {
+        "label": "Core Systems",
+        "type": "bullets",
+        "items": [
+          "Translation as a mechanic — language barriers are real and consequential. Miscommunication with tribes produces outcomes the player did not intend.",
+          "Tribal politics with genuine complexity: alliances, rivalries, territorial conflicts. The player enters a political environment that predates them and will outlast them.",
+          "The Gone Native path requires operating inside a worldview where the land is not a resource, where balance and reciprocity govern every action, where the cycle of life and death demands acknowledgment. It asks the player to unlearn what the other two paths treat as obvious. That is the design challenge and the point."
+        ]
+      },
+      {
+        "label": "Design Problem",
+        "type": "bullets",
+        "items": [
+          "This concept is enormous. Translation systems, tribal relationship graphs, three divergent path structures — any one of these would be a major system in another game.",
+          "Needs a version that is 80% smaller — a proof of concept, not a full simulation.",
+          "The Conquista is genuinely underexplored in games. This deserves to exist. The question is when and at what scale."
+        ]
+      },
+      {
+        "label": "Influences",
+        "type": "bullets",
+        "items": [
+          "Apocalypse Now / Heart of Darkness — the gone-native path's psychological architecture.",
+          "Crusader Kings III — faction diplomacy, shifting allegiances, personal ambition at the expense of the institution.",
+          "Civilization series — the 4X framework for expansion, city management, and nation-building."
+        ]
+      }
+    ],
+    "vibe": "The translation mechanic and the three-path structure are both worth building. Just not at the same time, at full scale, as a first project. Needs a proof-of-concept version that is roughly 20% of this scope. The setting is too underrepresented in games to abandon entirely."
+  }
+]
