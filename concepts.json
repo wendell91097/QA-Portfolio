@@ -177,68 +177,56 @@
   {
     "id": "gc-003",
     "index": "GC-003",
-    "stage": "specced",
+    "stage": "prototype",
     "animation_delay": 0.11,
     "title": "Manifest",
-    "subtitle": "Branching Narrative · Frontier Homestead · You Shape What America Becomes",
-    "pitch": "You have staked a claim on the frontier. A homestead at the crossroads of everything America is becoming. Every week someone new comes through. Some are running from something. Some are running toward something worth dying for. Every choice compounds. The country being built around you will remember what you did here.",
+    "subtitle": "Narrative Strategy · 1800s American West · Reputation & Consequence",
+    "pitch": "A newspaper-desk strategy game set in the territorial American West. You are a landowner at the crossroads of everything America is becoming. Three people have noticed what you do with your leverage. Every season, you make decisions. Every decision lands somewhere on nine named bands — from Devoted to Irreconcilable — and stays there.",
+    "links": [
+      { "label": "▼ Play Prototype", "url": "https://manifest-henna.vercel.app/", "primary": true }
+    ],
     "sections": [
       {
-        "label": "Core Premise & Choice Architecture",
+        "label": "What the Prototype Proves",
         "type": "bullets",
         "full_width": true,
         "items": [
-          "1810 to 1860. Fifty years. A visual choose-your-own-adventure spanning the full arc of the American frontier era, ending at the turn of the century. The player is a fixed point while half a century moves through them.",
-          "Choices establish reputation, close doors, open others, reshape the settlement over decades. Decisions made in the 1820s are still paying out in the 1840s. One wrong move and your entire herd of cattle is gone. A wrong guest sheltered at the wrong time and you make a enemy out of another. The stakes are permanent, quiet, and compounding.",
-          "The newspaper mechanic starts slow: a single regional paper arrives monthly in the early years, carrying word of people who passed through. Some made it. Some are on wanted posters. Some names appear in obituaries with no next of kin listed. As decades pass, the papers multiply — the Denver Rocky Mountain News, the Chicago Tribune, the San Francisco Chronicle, the Atlanta Constitution, dispatches from New Orleans and St. Louis, occasional pages from Tijuana and Ciudad Juárez carried by traders coming north. The homestead is not a waypoint on a one-way road west. It sits at a crossroads. People pass through heading every direction — north to the railroad camps, south across the border, east back to cities they left, west toward something they haven't named yet. By the 1890s the player is reading competing accounts of the same events from a dozen cities, and they know which version is true because they were there.",
-          "This was a deeply Christian nation. The moral vocabulary of the era is scripture: charity, sanctuary, bearing false witness, rendering unto Caesar. Turning someone away is not a neutral act.",
-          "The game can end early. Catastrophic choices compound into ruin — a lost herd, a burned homestead, a hangman's noose, or just a reputation that closes every door in the territory. It is possible to not make it to 1860."
+          "The threshold system works. Passion values run from -100 to +100 across nine named bands: Neutral at center, then Favorable, Trusted, Steadfast, Devoted on the positive axis; Strained, Opposed, Hostile, Irreconcilable on the negative. Each band crossing is a behavioral state change, not a number. The prototype demonstrates this cleanly.",
+          "The newspaper framing earns its keep. The Chronicle — a period-voice log on the right column — writes the game's history as it happens. Every action lands in it. Every season adds to it. What starts as a sparse ledger becomes a record of the life you are building or destroying.",
+          "Three Stars, three communities, nine passions, one player. The tension between Stars is the design. Serving Esperanza's land interests can cost Solomon's independence. Backing Whitmore's institutional order costs both. No season is consequence-free."
         ]
       },
       {
-        "label": "The Guests Who Matter Most",
-        "type": "roster",
-        "full_width": true,
-        "featured": [
-          { "label": "The Comanche", "color": "red", "text": "Traveling under a name that is not his. His sister is missing. He needs one night's shelter and your silence. What do you do when the marshal comes asking the next morning?" },
-          { "label": "The Conductor", "color": "green", "text": "A freed Black man, moving slaves out of the South. Will you route the Underground Railroad through your homestead?" },
-          { "label": "The Teacher", "color": "blue", "text": "Heading to a mining camp that does not know it needs her. Whether she makes it depends partly on what you tell her about the road ahead." },
-          { "label": "The Pastor", "color": "white", "text": "Road-worn, theologically complicated, genuinely kind. He will tell you plainly what he thinks you are doing wrong with your life. He is usually right." }
-        ],
-        "roster_label": "The Fuller Roster",
-        "roster_items": [
-          "Outlaws and the lawmen hunting them — shelter and betrayal each carry a price, and the law is not always the more trustworthy of the two.",
-          "Chinese railroad laborers, Irish navvies, Scottish trappers, English land speculators — each carrying a different idea of what America is supposed to mean.",
-          "The missionary heading into territory everyone else is heading out of. The Army deserter. The bounty hunter who is not here by accident.",
-          "The Mexican family escaping oppression. The journalist writing the myth while it is still being made."
+        "label": "The Stars",
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          { "label": "Esperanza Vallejo — Land Grant Heir", "color": "orange", "text": "Passions: Land Security, Personal Trust, Coalition Strength. She represents 47 people whose livelihoods depend on the Vallejo grant. At Devoted she names you a public protector. At Irreconcilable she pursues you in court by name." },
+          { "label": "Solomon Reed — Freedman & Trader", "color": "green", "text": "Passions: Permanence, Independence, Network Reach. He built something in this valley with no safety net and remembers everyone who made that harder. At Devoted he lists you in territorial filings as a trusted partner. At Irreconcilable he relocates his most valuable operations beyond your reach." },
+          { "label": "Reverend Whitmore — Territorial Institutions", "color": "blue", "text": "Passions: Moral Authority, Federal Alignment, Settlement Order. The institutional face of the expanding American project. Useful. Expensive to cross. At Devoted he endorses your interests from the pulpit. At Irreconcilable he testifies against you in federal proceedings." }
+        ]
+      },
+      {
+        "label": "The Threshold System",
+        "type": "bullets",
+        "items": [
+          "Nine named bands per passion. Threshold crossings change what a Star does in the world — not what they feel about you abstractly, but concrete, legible behaviors with real downstream consequences.",
+          "Designed to prevent stable equilibrium. The system actively creates situations where serving one Star costs another. The player manages trajectories, not scores.",
+          "Ruin is possible. Enough crossings in the wrong direction and the game ends early — by court order, by abandonment, by a territory that has closed its doors."
         ]
       },
       {
         "label": "Thematic DNA & Influences",
         "type": "bullets",
-        "full_width": true,
         "items": [
-          "The title is not a historical reference. It is a design statement. Manifest Destiny as philosophy: the belief that will, applied with enough conviction, bends reality to match the picture in your head. The game is named after that idea because the game is that idea — fifty years of a single consciousness shaping what America becomes, one choice at a time. That is not a metaphor. That is the mechanic.",
-          "Manifest Destiny written in scripture and enacted in blood — the heroic and the self-interested arriving in no particular order.",
-          "Fallout 1 & 2, Fallout: New Vegas — long-consequence choice architecture, faction reputation, a world that changes shape around your decisions.",
-          "Papers, Please, Red Dead Redemption 2, Deadwood (HBO)."
-        ]
-      },
-      {
-        "label": "Narrative Architecture",
-        "type": "cards",
-        "columns": 1,
-        "full_width": true,
-        "items": [
-          { "label": "Guests are Stars", "color": "orange", "text": "Every major guest has a defining Passion that is transparent to the player. The Conductor is moving people north. The Comanche is protecting his sister. The Teacher is heading somewhere that needs her. You know what they want. The drama is whether you act on it — and what it costs you when you do." },
-          { "label": "Reputation is a Macropassion Bar", "color": "blue", "text": "Micro-actions accumulate toward thresholds that change what's available. Help the Conductor enough times and the wrong people take notice. Shelter the Comanche and the marshal comes asking the next morning. These aren't flavor consequences — they're threshold crossings that open and close the board." },
-          { "label": "Balancing Zero-Sum Motivations", "color": "red", "text": "Consider whether a commitment closes an opposing door. The same guest who needs shelter will cost you with someone else who matters. There is no path through fifty years that doesn't betray someone. The system is designed to prevent stable equilibrium — which is what makes the choices mean something." },
-          { "label": "The Newspaper is the Drone Layer", "color": "green", "text": "You don't have direct relationships with every person downstream from your choices. The papers are how the world's aggregate state stays legible — the population-level feeling of the system, rising and falling as your decisions compound across decades. The drone layer made spatial in Levine's model; made temporal here." },
-          { "label": "The Time Axis is the Differentiator", "color": "purple", "text": "Levine's architecture is spatial — Stars coexist on the same map, their tensions are simultaneous. Manifest makes these dynamics temporal. Consequences aren't always obvious. The butterfly effect can turn the acculation of even innocuous action into a disaster across the country, years down the line. That's what gives the system its weight." }
+          "The title is not a historical reference. Manifest Destiny as design statement: the belief that will, applied with enough conviction, bends reality to match the picture in your head. The game is named after that idea because the game is that idea.",
+          "Papers, Please — the threshold mechanic at a border checkpoint. Manifest is what happens when you build a whole life around it instead.",
+          "Fallout: New Vegas — long-consequence faction reputation, a world that changes shape around your decisions.",
+          "Red Dead Redemption 2, Deadwood (HBO) — period voice, moral weight without moral instruction."
         ]
       }
     ],
-    "vibe": "Fifty years is the right scope because it lets consequence breathe. A guest you helped in 1837 sends their daughter to your door in 1843. A reputation you built in the 1820s opens or closes the 1840s. The newspaper mechanic earns its complexity over time — what starts as a single monthly paper from one town becomes a chorus of competing accounts by the 1850s, and the player knows which version is true because they were there. Papers Please proved the threshold mechanic works. This is what happens when you build a whole life around it instead of a border checkpoint — and give it fifty years to settle. The title does all of that work in one word. To manifest something is to create reality from will — to bend the world to match the picture in your consciousness. That is exactly what the player does. That is exactly what the settlers believed they were doing. The game does not judge that. It just shows you what it costs and what it builds and lets the fifty years speak for themselves."
+    "vibe": "The prototype answers the first design question: does the threshold system produce meaningful decisions? It does. Crossing from Trusted into Steadfast with Esperanza while simultaneously sliding Solomon from Neutral toward Strained is exactly the kind of trade-off the design was built around. The newspaper Chronicle earns its period voice — it does not editorialize, it records. The full scope — fifty years, the guest roster, the compounding newspaper mechanic, the ruin conditions — is still ahead. But the bones that had to work are working."
   },
 
   {
