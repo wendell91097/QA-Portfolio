@@ -8,8 +8,15 @@
     "subtitle": "Word Puzzle · Letter Grid · Pure Systems",
     "pitch": "A word-finding puzzle game with no story, no characters, and no win condition you didn't set yourself. Grid of letters, three game modes, & two tools. Find words, clear tiles, keep the grid alive.",
     "links": [
-      { "label": "▼ Play on itch.io", "url": "https://sovereigndev.itch.io/wordsmith", "primary": true },
-      { "label": "▶ Gameplay Video", "url": "https://youtu.be/MCcAFdG_dV4" }
+      {
+        "label": "▼ Play on itch.io",
+        "url": "https://sovereigndev.itch.io/wordsmith",
+        "primary": true
+      },
+      {
+        "label": "▶ Gameplay Video",
+        "url": "https://youtu.be/MCcAFdG_dV4"
+      }
     ],
     "sections": [
       {
@@ -27,9 +34,21 @@
         "type": "cards",
         "columns": 1,
         "items": [
-          { "label": "Classic", "color": "blue", "text": "A set number of letters can be used before the round ends. The constraint is total throughput, not time. Rewards deliberate, high-value word selection over speed." },
-          { "label": "Timed", "color": "red", "text": "A player-set time limit. Same grid, different pressure. Rewards fast pattern recognition over optimization. The clock changes what kind of player wins." },
-          { "label": "Endless", "color": "green", "text": "No win condition, no loss condition. The grid runs indefinitely. Chill by design." }
+          {
+            "label": "Classic",
+            "color": "blue",
+            "text": "A set number of letters can be used before the round ends. The constraint is total throughput, not time. Rewards deliberate, high-value word selection over speed."
+          },
+          {
+            "label": "Timed",
+            "color": "red",
+            "text": "A player-set time limit. Same grid, different pressure. Rewards fast pattern recognition over optimization. The clock changes what kind of player wins."
+          },
+          {
+            "label": "Endless",
+            "color": "green",
+            "text": "No win condition, no loss condition. The grid runs indefinitely. Chill by design."
+          }
         ]
       },
       {
@@ -54,12 +73,85 @@
     ],
     "vibe": "This is the one card on the slate where the design question is already answered. It shipped. The rest of the concepts are documented to show how I think; this one is here to show that the thinking goes somewhere."
   },
-
+  {
+    "id": "gc-003",
+    "index": "GC-003",
+    "stage": "prototyped",
+    "animation_delay": 0.05,
+    "title": "Manifest",
+    "subtitle": "Consequence Management · 1800s American West · Who You Owe & What You've Done",
+    "pitch": "A game about who you owe and what you've done. You are a landowner at the crossroads of everything America is becoming. Three people are watching what you do. Every season you make decisions. Every decision moves something. Some of what you set in motion won't land for years — but it will arrive, in the Chronicle, with your name on it or conspicuously absent.",
+    "links": [
+      {
+        "label": "▼ Play Prototype",
+        "url": "https://manifest-henna.vercel.app/",
+        "primary": true
+      }
+    ],
+    "sections": [
+      {
+        "label": "What the Prototype Proves",
+        "type": "bullets",
+        "full_width": true,
+        "items": [
+          "The threshold system works. Passion values run from -100 to +100 across nine named bands — Devoted to Irreconcilable — with behavioral state changes at every crossing. Not numbers. Not scores. Concrete, legible changes in what a Star does in the world, with downstream consequences that fire years later.",
+          "The deferred consequence mechanic works. Every action plants a Chronicle entry that arrives on a fixed future date regardless of what the player does afterward. What you decided in 1812 is still in the newspaper in 1819. This is the original design contribution — Levine's Narrative Legos framework didn't address time-delayed outcomes.",
+          "The zero-sum tension works. Serving Esperanza's land interests costs Whitmore's corridor claim. Backing Solomon's independence costs Whitmore's standing with the company. No season is free. The Northern Boundary convergence event forces a direct confrontation where both can't be served simultaneously — exactly the Frank-and-Pete problem Levine describes."
+        ]
+      },
+      {
+        "label": "The Stars",
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          {
+            "label": "Esperanza Vallejo — Land Grant Heir",
+            "color": "orange",
+            "text": "Passions: Land Security, Anglo Distrust, Coalition Strength. She represents 47 people whose livelihoods depend on the Vallejo grant. At Devoted on Land Security she names you publicly as a protector of the old grants. At Devoted on Anglo Distrust she tells you things she tells no one else. At Irreconcilable she pursues you in court by name and tells people what you did."
+          },
+          {
+            "label": "Solomon Reed — Freedman & Trader",
+            "color": "green",
+            "text": "Passions: Permanence, Independence, Brotherhood (hidden until Macropassion reaches Cautious Friend). He built something in this valley with no safety net and no federal protection. At Devoted on Permanence he lists you as a trusted partner in territorial filings. At Devoted on Independence he shares routes and contacts he shares with very few. His search for his brother Caleb — missing since the Nevada silver rush — is invisible until the relationship is deep enough to reveal it."
+          },
+          {
+            "label": "J.T. Whitmore — Railroad Surveyor",
+            "color": "blue",
+            "text": "Passions: Corridor Claim, Company Standing, The Distance (hidden). Pacific Railroad's man in the valley, with 89 people's livelihoods running through the company. At Devoted on Company Standing he names you in his reports as instrumental. At Devoted on Corridor Claim he treats your land as an extension of the railroad's protected zone. The Distance — his marriage to Margaret in Cincinnati, strained by years in the field — is invisible until the relationship is deep enough to reveal it. At Irreconcilable he brings the full weight of Pacific Railroad's legal office against you."
+          }
+        ]
+      },
+      {
+        "label": "Systems",
+        "type": "bullets",
+        "items": [
+          "Fame & Infamy track independently per Star via a logarithmic compounding curve — gains accelerate as values rise, but both decay each season without active maintenance. High Infamy can be buffered by Fame: a Star who has publicly backed you won't move against you while that investment holds.",
+          "Reactive events fire automatically when a Passion crosses a threshold in either direction. Positive crossings unlock new actions; negative crossings fire consequences and raise Infamy. Seven reactive events in the prototype, each with secondary effects that ripple across multiple Stars.",
+          "Four convergence events — forced choices that fire when cross-Star conditions are simultaneously met. The Northern Boundary forces a direct confrontation between Esperanza's land claim and Whitmore's federal filing. Three Letters in One Week fires when all three relationships have moved significantly — and the choice text changes based on prior actions.",
+          "Hidden Passion reveals fire as dialogue modals when the Macropassion average crosses 15. The body text is time-aware: it calculates elapsed years from fixed historical anchors (Caleb left in 1809; Whitmore arrived in 1811) and writes the duration in natural language.",
+          "Transient guests — three one-off visitors with weighted moral choices that echo forward as deferred Chronicle entries, some arriving years later in period newspapers with attributed datelines.",
+          "Repair and Betrayal actions gate behind prior damage or prior trust. Repair is costly and never fully undoes the record. Betrayal is available once a Passion is high enough that there's something real to exploit.",
+          "Passion neglect decay — positive Passions drift down by 1 point per season if the last eight log entries include no interaction with that Star. Relationships require active maintenance."
+        ]
+      },
+      {
+        "label": "Thematic DNA & Influences",
+        "type": "bullets",
+        "items": [
+          "Ken Levine's Narrative Legos (GDC) — Stars, Passions, transparent triggers. The framework is implemented directly. Deferred consequences extend beyond the talk.",
+          "Papers, Please — threshold mechanics as lived pressure. Manifest is what happens when you build a whole life around it instead of a border checkpoint.",
+          "Fallout: New Vegas — long-consequence faction reputation; a world that changes shape around decisions made seasons ago.",
+          "Red Dead Redemption 2, Deadwood (HBO) — period voice, moral weight without moral instruction."
+        ]
+      }
+    ],
+    "vibe": "The prototype answers the design question: does the threshold system produce meaningful tension? It does. Crossing Esperanza from Trusted into Steadfast while simultaneously sliding Solomon toward Strained is exactly the trade-off the design was built around. The Chronicle records what happened in period voice — it does not editorialize, and it does not forget. The known gaps are documented: no resolution, action density collapses after 1824, The Distance lacks a quest chain, the fourth convergence event's trigger is invisible to the player. These are scope gaps, not design failures. The bones that had to work are working."
+  },
   {
     "id": "gc-004",
     "index": "GC-004",
     "stage": "prototype",
-    "animation_delay": 0.05,
+    "animation_delay": 0.08,
     "title": "Playground Noir",
     "subtitle": "Mystery Visual Novel · Kindergarten Ace Attorney · Unreliable Witnesses",
     "pitch": "The last cookie has been eaten. The daycare is in crisis. You are the investigator. Every witness is five years old, completely unreliable, and in the middle of something more important than your case.",
@@ -79,10 +171,26 @@
         "type": "cards",
         "columns": 2,
         "items": [
-          { "label": "The \"Librarian\"", "color": "blue", "text": "Anxious about being correct. Remembers details with precision and loses context entirely. Will correct your phrasing mid-sentence. Mid-chapter of a book when you arrive." },
-          { "label": "The Dinosaur Kid", "color": "red", "text": "Confident. Exaggerates scale automatically. Simple motivations: they did it because it seemed fun, or they were hungry. Currently stomping around making T-Rex sounds at no one in particular." },
-          { "label": "The Baseball Kid", "color": "green", "text": "Perpetually mid-game in their head. Will not stop throwing an imaginary ball. Useful testimony only comes after you demonstrate baseline baseball knowledge. Worth it." },
-          { "label": "The Animal Friend", "color": "purple", "text": "Loves animals with total sincerity. Confabulates for their benefit — her version of events is whatever kept the animals safest. Currently giving a checkup to every stuffed animal she owns." }
+          {
+            "label": "The \"Librarian\"",
+            "color": "blue",
+            "text": "Anxious about being correct. Remembers details with precision and loses context entirely. Will correct your phrasing mid-sentence. Mid-chapter of a book when you arrive."
+          },
+          {
+            "label": "The Dinosaur Kid",
+            "color": "red",
+            "text": "Confident. Exaggerates scale automatically. Simple motivations: they did it because it seemed fun, or they were hungry. Currently stomping around making T-Rex sounds at no one in particular."
+          },
+          {
+            "label": "The Baseball Kid",
+            "color": "green",
+            "text": "Perpetually mid-game in their head. Will not stop throwing an imaginary ball. Useful testimony only comes after you demonstrate baseline baseball knowledge. Worth it."
+          },
+          {
+            "label": "The Animal Friend",
+            "color": "purple",
+            "text": "Loves animals with total sincerity. Confabulates for their benefit — her version of events is whatever kept the animals safest. Currently giving a checkup to every stuffed animal she owns."
+          }
         ]
       },
       {
@@ -106,12 +214,11 @@
     ],
     "vibe": "Ace Attorney is 22 years old and nobody has made a wholesome version for a younger audience. The unreliable witness system isn't a gimmick — it's the entire design. Children don't lie the way adults lie. They misremember, protect people they love, and confabulate completely. The play-along mechanic puts that at the center: you cannot extract testimony from a child who doesn't want to give it. You have to go where they are. That's the adult layer: the game is easy for a child to play because it asks nothing more than what children already know. For an adult, it's a mirror — a reminder that the best way to connect with a kid is not to get them to stop what they're doing, but to understand why they can't. That's the message underneath the mystery structure — aimed at the adult holding the controller. The game is a gentle reminder that children don't stop their world for you. The better move has always been to enter theirs."
   },
-
   {
     "id": "gc-002",
     "index": "GC-002",
     "stage": "prototype",
-    "animation_delay": 0.08,
+    "animation_delay": 0.11,
     "title": "Immortal Coil",
     "subtitle": "Pattern-Recognition Combat · Dystopian Arena Drama · Transhumanist Horror",
     "pitch": "All criminals are immortal. They fight in arenas year-round for public amusement. Win five championships and earn the only thing anyone in this society still wants: the right to die. The problem is that by the time you've won five championships, the elite have made sure you don't want it anymore. You see it all through your own eyes — what's left of them.",
@@ -150,11 +257,31 @@
         "type": "cards",
         "columns": 1,
         "items": [
-          { "label": "The Complicity Trap", "color": "red", "text": "Every augmentation is a vote for the system. The player is not a rebel — they are a product of the arena. Winning requires becoming what the arena needs you to be." },
-          { "label": "First Person as Horror", "color": "purple", "text": "You cannot cut away from the hands. The detachment from your own body is not a cutscene — it is the camera. Chrome where skin used to be, in every frame, for the whole game." },
-          { "label": "The False Exit", "color": "blue", "text": "Immortality is a government service. The euthanasia clause exists to motivate fighters, not to be exercised. Champions who try to claim it find out what the state does to tools that try to retire: mind-wipe, reprogramming, or worse — consciousness isolated in a dead signal, a fuzzier version of yourself fading slowly with no exit. The offer was always a lie. Five championships was never the price of death. It was the price of finding that out." },
-          { "label": "The Only Canvas Left", "color": "orange", "text": "The arena permits one form of self-expression: the fight. Your augmentation choices are the only aesthetic decisions you're allowed. The opponent is the only relationship the system sanctions. Destruction of others is the sole creative act available. The trophies are the exception — the one thing the player curates that the system did not script. A cell full of chrome pieces from people you've beaten, or been beaten by, is the closest thing to an autobiography this world allows." },
-          { "label": "The Resistance Has Always Existed", "color": "green", "text": "There is a faction that knows the truth: about the save-state infrastructure, the euthanasia clause, what the elite actually are. They have been here for generations. The system has always known about them. The system has always been fine with that. A rebellion that cannot reach the puppeteers, that cannot dismantle what no one fully controls anymore — that rebellion is not a threat. It is another spectacle. The most dangerous thing the player can discover is not how to fight the system. It is that the system anticipated that too." }
+          {
+            "label": "The Complicity Trap",
+            "color": "red",
+            "text": "Every augmentation is a vote for the system. The player is not a rebel — they are a product of the arena. Winning requires becoming what the arena needs you to be."
+          },
+          {
+            "label": "First Person as Horror",
+            "color": "purple",
+            "text": "You cannot cut away from the hands. The detachment from your own body is not a cutscene — it is the camera. Chrome where skin used to be, in every frame, for the whole game."
+          },
+          {
+            "label": "The False Exit",
+            "color": "blue",
+            "text": "Immortality is a government service. The euthanasia clause exists to motivate fighters, not to be exercised. Champions who try to claim it find out what the state does to tools that try to retire: mind-wipe, reprogramming, or worse — consciousness isolated in a dead signal, a fuzzier version of yourself fading slowly with no exit. The offer was always a lie. Five championships was never the price of death. It was the price of finding that out."
+          },
+          {
+            "label": "The Only Canvas Left",
+            "color": "orange",
+            "text": "The arena permits one form of self-expression: the fight. Your augmentation choices are the only aesthetic decisions you're allowed. The opponent is the only relationship the system sanctions. Destruction of others is the sole creative act available. The trophies are the exception — the one thing the player curates that the system did not script. A cell full of chrome pieces from people you've beaten, or been beaten by, is the closest thing to an autobiography this world allows."
+          },
+          {
+            "label": "The Resistance Has Always Existed",
+            "color": "green",
+            "text": "There is a faction that knows the truth: about the save-state infrastructure, the euthanasia clause, what the elite actually are. They have been here for generations. The system has always known about them. The system has always been fine with that. A rebellion that cannot reach the puppeteers, that cannot dismantle what no one fully controls anymore — that rebellion is not a threat. It is another spectacle. The most dangerous thing the player can discover is not how to fight the system. It is that the system anticipated that too."
+          }
         ]
       },
       {
@@ -173,62 +300,6 @@
     ],
     "vibe": "The euthanasia clause is the game's central trap. You spend the whole run fighting toward something the system never intended to give you. By the time you've won five championships, the elite have spent five runs making you too rich, too famous, and too degraded to want it. The trophies are the counter-argument the game makes quietly: the only objects that belong to the player, the only history the system cannot rewrite. Lose to someone and they own a piece of you. Beat them later and you decide what that means. The arena calls them enemies. The trophies call them the only people who know what you are. The bread-and-circus layer is what makes the world coherent: the middle class watches the underclass fight, which keeps both groups pointed sideways. No one looks up. The arena combat loop gives QA something concrete to test: does augmentation feel like a tradeoff or just a power increase? Does mental decay change how the player reads tells, or is it cosmetic? Do the opponent relationships actually shift how the player approaches a rematch, or are they just flavor? Those are real questions with testable answers. The first-person frame is not an aesthetic choice — it is the argument."
   },
-
-  {
-    "id": "gc-003",
-    "index": "GC-003",
-    "stage": "prototype",
-    "animation_delay": 0.11,
-    "title": "Manifest",
-    "subtitle": "Narrative Strategy · 1800s American West · Reputation & Consequence",
-    "pitch": "A newspaper-desk strategy game set in the territorial American West. You are a landowner at the crossroads of everything America is becoming. Three people have noticed what you do with your leverage. Every season, you make decisions. Every decision lands somewhere on nine named bands — from Devoted to Irreconcilable — and stays there.",
-    "links": [
-      { "label": "▼ Play Prototype", "url": "https://manifest-henna.vercel.app/", "primary": true }
-    ],
-    "sections": [
-      {
-        "label": "What the Prototype Proves",
-        "type": "bullets",
-        "full_width": true,
-        "items": [
-          "The threshold system works. Passion values run from -100 to +100 across nine named bands: Neutral at center, then Favorable, Trusted, Steadfast, Devoted on the positive axis; Strained, Opposed, Hostile, Irreconcilable on the negative. Each band crossing is a behavioral state change, not a number. The prototype demonstrates this cleanly.",
-          "The newspaper framing earns its keep. The Chronicle — a period-voice log on the right column — writes the game's history as it happens. Every action lands in it. Every season adds to it. What starts as a sparse ledger becomes a record of the life you are building or destroying.",
-          "Three Stars, three communities, nine passions, one player. The tension between Stars is the design. Serving Esperanza's land interests can cost Solomon's independence. Backing Whitmore's institutional order costs both. No season is consequence-free."
-        ]
-      },
-      {
-        "label": "The Stars",
-        "type": "cards",
-        "columns": 1,
-        "items": [
-          { "label": "Esperanza Vallejo — Land Grant Heir", "color": "orange", "text": "Passions: Land Security, Personal Trust, Coalition Strength. She represents 47 people whose livelihoods depend on the Vallejo grant. At Devoted she names you a public protector. At Irreconcilable she pursues you in court by name." },
-          { "label": "Solomon Reed — Freedman & Trader", "color": "green", "text": "Passions: Permanence, Independence, Network Reach. He built something in this valley with no safety net and remembers everyone who made that harder. At Devoted he lists you in territorial filings as a trusted partner. At Irreconcilable he relocates his most valuable operations beyond your reach." },
-          { "label": "Reverend Whitmore — Territorial Institutions", "color": "blue", "text": "Passions: Moral Authority, Federal Alignment, Settlement Order. The institutional face of the expanding American project. Useful. Expensive to cross. At Devoted he endorses your interests from the pulpit. At Irreconcilable he testifies against you in federal proceedings." }
-        ]
-      },
-      {
-        "label": "The Threshold System",
-        "type": "bullets",
-        "items": [
-          "Nine named bands per passion. Threshold crossings change what a Star does in the world — not what they feel about you abstractly, but concrete, legible behaviors with real downstream consequences.",
-          "Designed to prevent stable equilibrium. The system actively creates situations where serving one Star costs another. The player manages trajectories, not scores.",
-          "Ruin is possible. Enough crossings in the wrong direction and the game ends early — by court order, by abandonment, by a territory that has closed its doors."
-        ]
-      },
-      {
-        "label": "Thematic DNA & Influences",
-        "type": "bullets",
-        "items": [
-          "The title is not a historical reference. Manifest Destiny as design statement: the belief that will, applied with enough conviction, bends reality to match the picture in your head. The game is named after that idea because the game is that idea.",
-          "Papers, Please — the threshold mechanic at a border checkpoint. Manifest is what happens when you build a whole life around it instead.",
-          "Fallout: New Vegas — long-consequence faction reputation, a world that changes shape around your decisions.",
-          "Red Dead Redemption 2, Deadwood (HBO) — period voice, moral weight without moral instruction."
-        ]
-      }
-    ],
-    "vibe": "The prototype answers the first design question: does the threshold system produce meaningful decisions? It does. Crossing from Trusted into Steadfast with Esperanza while simultaneously sliding Solomon from Neutral toward Strained is exactly the kind of trade-off the design was built around. The newspaper Chronicle earns its period voice — it does not editorialize, it records. The full scope — fifty years, the guest roster, the compounding newspaper mechanic, the ruin conditions — is still ahead. But the bones that had to work are working."
-  },
-
   {
     "id": "gc-009",
     "index": "GC-009",
@@ -242,8 +313,16 @@
         "label": "The Two Halves",
         "type": "two_halves",
         "halves": [
-          { "label": "Gathering — the Zelda half", "color": "green", "text": "Third-person exploration of biomes, each with its own puzzle logic, hazards, and feel. Flowers don't grow in safe places. Getting to them is the game." },
-          { "label": "Tending — the Harvest Moon half", "color": "accent", "text": "Planting, watering, maintaining, and expanding the garden back home. Healthy patches attract more bees. The hive grows one comb at a time until it becomes a village." }
+          {
+            "label": "Gathering — the Zelda half",
+            "color": "green",
+            "text": "Third-person exploration of biomes, each with its own puzzle logic, hazards, and feel. Flowers don't grow in safe places. Getting to them is the game."
+          },
+          {
+            "label": "Tending — the Harvest Moon half",
+            "color": "accent",
+            "text": "Planting, watering, maintaining, and expanding the garden back home. Healthy patches attract more bees. The hive grows one comb at a time until it becomes a village."
+          }
         ],
         "note": "The tutorial ends with Little Bear placing a small jar beneath the hive. One drop falls. Everything else is the consequence of making that drop into a river."
       },
@@ -263,9 +342,21 @@
         "columns": 3,
         "full_width": true,
         "items": [
-          { "label": "Slingshot — ranged", "color": "blue", "text": "Two ammo types: bait draws animals toward the impact point; pebbles create noise without attracting anything. Both too small to hurt anything. He's not throwing rocks at a wolf — he's throwing a rock at a bush near a wolf." },
-          { "label": "Garden Trowel — primary", "color": "orange", "text": "Planting, transplanting, and soil preparation. The first tool Little Bear owns and the one he's never without. Upgrades let him work faster and handle tougher terrain, but it's always just a trowel." },
-          { "label": "Fox's Network — unlockables", "color": "purple", "text": "A bell on a string for sustained noise; a hollow reed that mimics bird calls; a small lantern for bloom-window timing in dark caves. Each solves a class of puzzle the slingshot alone cannot. All sourced through Fox." }
+          {
+            "label": "Slingshot — ranged",
+            "color": "blue",
+            "text": "Two ammo types: bait draws animals toward the impact point; pebbles create noise without attracting anything. Both too small to hurt anything. He's not throwing rocks at a wolf — he's throwing a rock at a bush near a wolf."
+          },
+          {
+            "label": "Garden Trowel — primary",
+            "color": "orange",
+            "text": "Planting, transplanting, and soil preparation. The first tool Little Bear owns and the one he's never without. Upgrades let him work faster and handle tougher terrain, but it's always just a trowel."
+          },
+          {
+            "label": "Fox's Network — unlockables",
+            "color": "purple",
+            "text": "A bell on a string for sustained noise; a hollow reed that mimics bird calls; a small lantern for bloom-window timing in dark caves. Each solves a class of puzzle the slingshot alone cannot. All sourced through Fox."
+          }
         ]
       },
       {
@@ -274,10 +365,26 @@
         "columns": 2,
         "note": "Perennials regrow reliably, annuals must be replanted, and flowering trees planted early become significant bloom sources years later.",
         "items": [
-          { "label": "Spring", "color": "spring", "text": "Peak rare blooms. Two-week windows that won't come again for a year. Cherry trees planted in year one finally matter. Miss spring and you plan around it until next spring." },
-          { "label": "Summer", "color": "accent", "text": "Peak bee activity. Maximum honey production. The garden is loudest here. The best time for long gathering runs before the year turns." },
-          { "label": "Autumn", "color": "orange", "text": "Preparation and late-blooming trees. Save seeds from annuals. Plan what changes before winter closes the routes. The garden is winding down, not stopping." },
-          { "label": "Winter", "color": "winter", "text": "Quiet maintenance. A few hardy trees hold the bees over. Planning time: what biome next, which flowers, which companions to deploy when thaw comes." }
+          {
+            "label": "Spring",
+            "color": "spring",
+            "text": "Peak rare blooms. Two-week windows that won't come again for a year. Cherry trees planted in year one finally matter. Miss spring and you plan around it until next spring."
+          },
+          {
+            "label": "Summer",
+            "color": "accent",
+            "text": "Peak bee activity. Maximum honey production. The garden is loudest here. The best time for long gathering runs before the year turns."
+          },
+          {
+            "label": "Autumn",
+            "color": "orange",
+            "text": "Preparation and late-blooming trees. Save seeds from annuals. Plan what changes before winter closes the routes. The garden is winding down, not stopping."
+          },
+          {
+            "label": "Winter",
+            "color": "winter",
+            "text": "Quiet maintenance. A few hardy trees hold the bees over. Planning time: what biome next, which flowers, which companions to deploy when thaw comes."
+          }
         ]
       },
       {
@@ -285,11 +392,31 @@
         "type": "grid_rows",
         "note": "Each biome unlocks a bee variety the hive needs for its next tier. Biomes are progression gates — not level numbers.",
         "items": [
-          { "label": "Home Forest", "color": "green", "text": "Tutorial. Familiar and forgiving. The hive starts here." },
-          { "label": "Grasslands", "color": "accent", "text": "Open space, seasonal wind. The game breathes here. Wide puzzles, room to experiment." },
-          { "label": "Mountain", "color": "white", "text": "Altitude, narrow paths, territorial birds. Vertical traversal puzzles." },
-          { "label": "Subtropical Coast", "color": "blue", "text": "Tide timing, crabs, mangrove tangles. Flowers at the waterline only." },
-          { "label": "Desert", "color": "orange", "text": "Heat management, nocturnal hazards, bloom windows. The hardest flowers. Unlocks last." }
+          {
+            "label": "Home Forest",
+            "color": "green",
+            "text": "Tutorial. Familiar and forgiving. The hive starts here."
+          },
+          {
+            "label": "Grasslands",
+            "color": "accent",
+            "text": "Open space, seasonal wind. The game breathes here. Wide puzzles, room to experiment."
+          },
+          {
+            "label": "Mountain",
+            "color": "white",
+            "text": "Altitude, narrow paths, territorial birds. Vertical traversal puzzles."
+          },
+          {
+            "label": "Subtropical Coast",
+            "color": "blue",
+            "text": "Tide timing, crabs, mangrove tangles. Flowers at the waterline only."
+          },
+          {
+            "label": "Desert",
+            "color": "orange",
+            "text": "Heat management, nocturnal hazards, bloom windows. The hardest flowers. Unlocks last."
+          }
         ]
       },
       {
@@ -298,16 +425,37 @@
         "full_width": true,
         "specialists_label": "Specialists — permanent, passive world changes",
         "specialists": [
-          { "name": "Deer", "text": "Clears bramble and opens new territory passively while grazing." },
-          { "name": "Beaver", "text": "Builds irrigation channels, unlocking flower beds that need constant water." },
-          { "name": "Fox", "text": "Negotiates with animals who won't be bribed; unlocks the later companion roster and the toolkit upgrade chain." },
-          { "name": "Other Bears", "text": "Recruited one by one, each with a personality. The only ones who can fully substitute for Little Bear on harder gathering runs. His father never finds out they exist." }
+          {
+            "name": "Deer",
+            "text": "Clears bramble and opens new territory passively while grazing."
+          },
+          {
+            "name": "Beaver",
+            "text": "Builds irrigation channels, unlocking flower beds that need constant water."
+          },
+          {
+            "name": "Fox",
+            "text": "Negotiates with animals who won't be bribed; unlocks the later companion roster and the toolkit upgrade chain."
+          },
+          {
+            "name": "Other Bears",
+            "text": "Recruited one by one, each with a personality. The only ones who can fully substitute for Little Bear on harder gathering runs. His father never finds out they exist."
+          }
         ],
         "crew_label": "Crew — deployed daily on maintenance & support",
         "crew": [
-          { "name": "Rabbit", "text": "Watering. Fast, covers multiple patches per cycle and scales well as the garden grows." },
-          { "name": "Owl", "text": "Scouting. Surveys new territory and flower locations before Little Bear commits to traveling there." },
-          { "name": "Hedgehog", "text": "Pest control. Protects patches from aphids, slugs, and herbivores that damage bloom yield." }
+          {
+            "name": "Rabbit",
+            "text": "Watering. Fast, covers multiple patches per cycle and scales well as the garden grows."
+          },
+          {
+            "name": "Owl",
+            "text": "Scouting. Surveys new territory and flower locations before Little Bear commits to traveling there."
+          },
+          {
+            "name": "Hedgehog",
+            "text": "Pest control. Protects patches from aphids, slugs, and herbivores that damage bloom yield."
+          }
         ]
       },
       {
@@ -334,7 +482,6 @@
     ],
     "vibe": "The emotional register is Winnie the Pooh, not Pixar. Little Bear isn't processing anything. He just wants honey and has a very reasonable theory about how flowers and bees work. Dad is there because Dad is always there — fishing, calling him in for dinner, suggesting Sunday plans. The family structure creates a gentle daily rhythm without stakes. There is no suspicion meter. There is no secret to manage. There is just a small bear with a large project and a soft deadline of dinnertime. The game is a cozy thing. It should feel like one."
   },
-
   {
     "id": "gc-005",
     "index": "GC-005",
@@ -358,9 +505,21 @@
         "type": "cards",
         "columns": 1,
         "items": [
-          { "label": "Determinism vs. Choice", "color": "orange", "text": "Swans are biologically determined to stay. Humans choose to. The game asks what that difference means for the moral weight of commitment — and whether the players in these sessions understand which one they are." },
-          { "label": "The Problem of the Self Over Time", "color": "blue", "text": "The person you promised yourself to at 22 is not the person in front of you at 47. The sessions don't ask whether the promise was sincere. They ask whether sincerity is enough." },
-          { "label": "Aging as Theme, Not Backdrop", "color": "purple", "text": "Explicitly about couples who have been together long enough to become strangers. Not a game about falling in love. A game about what happens when the love has become a life and the life has become complicated." }
+          {
+            "label": "Determinism vs. Choice",
+            "color": "orange",
+            "text": "Swans are biologically determined to stay. Humans choose to. The game asks what that difference means for the moral weight of commitment — and whether the players in these sessions understand which one they are."
+          },
+          {
+            "label": "The Problem of the Self Over Time",
+            "color": "blue",
+            "text": "The person you promised yourself to at 22 is not the person in front of you at 47. The sessions don't ask whether the promise was sincere. They ask whether sincerity is enough."
+          },
+          {
+            "label": "Aging as Theme, Not Backdrop",
+            "color": "purple",
+            "text": "Explicitly about couples who have been together long enough to become strangers. Not a game about falling in love. A game about what happens when the love has become a life and the life has become complicated."
+          }
         ]
       },
       {
@@ -384,12 +543,11 @@
     ],
     "vibe": "Low asset count, strong festival profile, and a demographic that games mostly ignore: people in long relationships. The swan framing isn't cute window dressing; it's the central mechanical question. Swans don't choose to stay. The player's job is to help couples who do choose work through what that costs. That's a different emotional register than anything currently in the visual novel space."
   },
-
   {
     "id": "gc-008",
     "index": "GC-008",
     "stage": "specced",
-    "animation_delay": 0.20,
+    "animation_delay": 0.2,
     "title": "Warp Gun",
     "subtitle": "First-Person Puzzle · Spacetime Distortion · Light & Traversal",
     "pitch": "Instead of a portal gun, a warp gun. Two modes: contraction and expansion. Spacetime bends around your shots. Light curves. Distances collapse or stretch. Puzzles are solved not by placing doors in walls, but by reshaping the space between you and the solution.",
@@ -405,8 +563,16 @@
           "The slingshot is a skill move, not just a technique: timing the deactivation of a contraction field at peak pull velocity gives the player momentum that compounds with expansion geometry — the two modes create movement freedom that neither produces alone."
         ],
         "items": [
-          { "label": "Contraction", "color": "blue", "text": "Localized gravity well. Space folds inward, pulling objects and the player toward the distortion point. Distances collapse. Light paths curve toward the impact. The slingshot technique: jump into the well's pull at the right angle, then deactivate the field before it draws you back — the arrested momentum launches you across distances no normal jump could reach. Impassable gaps become traversable. The tool is the launch pad." },
-          { "label": "Expansion", "color": "orange", "text": "Space pushed outward from the impact point. Geometry stretches and reshapes around the distortion — a flat wall hit at an angle warps into a curved ramp; a floor expands into a traversable slope. Perceived distances grow. Projectiles and light beams deflect along new paths. The environment is not fixed; it is a variable the player sets." }
+          {
+            "label": "Contraction",
+            "color": "blue",
+            "text": "Localized gravity well. Space folds inward, pulling objects and the player toward the distortion point. Distances collapse. Light paths curve toward the impact. The slingshot technique: jump into the well's pull at the right angle, then deactivate the field before it draws you back — the arrested momentum launches you across distances no normal jump could reach. Impassable gaps become traversable. The tool is the launch pad."
+          },
+          {
+            "label": "Expansion",
+            "color": "orange",
+            "text": "Space pushed outward from the impact point. Geometry stretches and reshapes around the distortion — a flat wall hit at an angle warps into a curved ramp; a floor expands into a traversable slope. Perceived distances grow. Projectiles and light beams deflect along new paths. The environment is not fixed; it is a variable the player sets."
+          }
         ]
       },
       {
@@ -430,7 +596,6 @@
     ],
     "vibe": "Portal works because the portal gun is a spatial language, not just a tool. The warp gun needs the same thing: every puzzle is a sentence written in distortion. The light-bending mechanic is the element that separates this from Portal reskin territory — routing light is a fundamentally different cognitive task than routing a player. The slingshot technique is where the movement ceiling lives: players who understand contraction timing and expansion geometry get traversal freedom that the puzzle design doesn't require but rewards. That emergent skill ceiling is what makes a tool feel like a language."
   },
-
   {
     "id": "gc-006",
     "index": "GC-006",
@@ -450,8 +615,16 @@
           "Footprint persistence: snow records movement. Players must plan routes considering what evidence they leave behind."
         ],
         "items": [
-          { "label": "Infiltration — the Blizzard Is Cover", "color": "winter", "text": "Whiteout conditions blind the enemy but also blind sensors, create acoustic interference, and mask heat signatures. The storm isn't fighting you — it's the best tool you have. Every footprint you leave can be tracked. Every footprint they leave can too." },
-          { "label": "Exfiltration — Snowmobile Set Piece", "color": "red", "text": "The stealth phase ends. The extraction begins. High-speed snowmobile exfiltration as a structural gear shift: you came in quiet, you leave fast, and the other squad knows exactly where you are." }
+          {
+            "label": "Infiltration — the Blizzard Is Cover",
+            "color": "winter",
+            "text": "Whiteout conditions blind the enemy but also blind sensors, create acoustic interference, and mask heat signatures. The storm isn't fighting you — it's the best tool you have. Every footprint you leave can be tracked. Every footprint they leave can too."
+          },
+          {
+            "label": "Exfiltration — Snowmobile Set Piece",
+            "color": "red",
+            "text": "The stealth phase ends. The extraction begins. High-speed snowmobile exfiltration as a structural gear shift: you came in quiet, you leave fast, and the other squad knows exactly where you are."
+          }
         ]
       },
       {
@@ -475,7 +648,6 @@
     ],
     "vibe": "The extraction shooter market is crowded but nobody has committed to a full blizzard environment as a core design pillar — not as a weather effect, as the entire tactical premise. The footprint mechanic alone differentiates this from Tarkov: every route is a decision about what you leave behind, and the other squad is reading the same snow. The narrative gap is acknowledged and being addressed. The PVP frame solves it cleanly — the other squad is the story, the blizzard is the referee, and the snowmobile is the gear shift that ends every match with momentum. The bones are strong. This one needs a mythology built around them."
   },
-
   {
     "id": "gc-007",
     "index": "GC-007",
@@ -491,9 +663,21 @@
         "columns": 1,
         "full_width": true,
         "items": [
-          { "label": "Crown Loyalist", "color": "blue", "text": "The institutional path. Supplied, supported, and expendable. High demand, high reward. The Crown owns your success." },
-          { "label": "Renegade — the Cortés Path", "color": "red", "text": "Defection and conquest on personal terms. No supply lines, no safety net. If the Crown must negotiate with you, you've won." },
-          { "label": "Gone Native — the Kurtz Path", "color": "green", "text": "Abandon European frameworks entirely — not just politically, epistemologically. The most demanding path. The only one where the continent stops trying to kill you." }
+          {
+            "label": "Crown Loyalist",
+            "color": "blue",
+            "text": "The institutional path. Supplied, supported, and expendable. High demand, high reward. The Crown owns your success."
+          },
+          {
+            "label": "Renegade — the Cortés Path",
+            "color": "red",
+            "text": "Defection and conquest on personal terms. No supply lines, no safety net. If the Crown must negotiate with you, you've won."
+          },
+          {
+            "label": "Gone Native — the Kurtz Path",
+            "color": "green",
+            "text": "Abandon European frameworks entirely — not just politically, epistemologically. The most demanding path. The only one where the continent stops trying to kill you."
+          }
         ]
       },
       {

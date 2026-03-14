@@ -55,10 +55,11 @@ RISK_CONFIG = {
 
 # ── CONCEPT STAGE CONFIG ──────────────────────────────────────────────────────
 CONCEPT_STAGE_CONFIG = {
-    "shipped":   {"label": "Shipped",         "css_class": "gc-stage-shipped"},
-    "prototype": {"label": "Prototype-Ready", "css_class": "gc-stage-prototype"},
-    "specced":   {"label": "Specced",         "css_class": "gc-stage-specced"},
-    "concept":   {"label": "Concept",         "css_class": "gc-stage-concept"},
+    "shipped":    {"label": "Shipped",         "css_class": "gc-stage-shipped"},
+    "prototyped": {"label": "Prototyped",      "css_class": "gc-stage-prototyped"},
+    "prototype":  {"label": "Prototype-Ready", "css_class": "gc-stage-prototype"},
+    "specced":    {"label": "Specced",         "css_class": "gc-stage-specced"},
+    "concept":    {"label": "Concept",         "css_class": "gc-stage-concept"},
 }
 
 # ── COLOR MAP (for concept section cards) ─────────────────────────────────────
@@ -1173,10 +1174,11 @@ CSS = """
     font-size: 9px; font-weight: 700; text-transform: uppercase;
     letter-spacing: 0.12em; padding: 3px 8px; border-radius: 3px; white-space: nowrap;
   }
-  .gc-stage-concept   { background: rgba(77,171,247,0.12);  color: var(--visual); border: 1px solid rgba(77,171,247,0.25); }
-  .gc-stage-specced   { background: rgba(255,209,102,0.12); color: var(--minor);  border: 1px solid rgba(255,209,102,0.25); }
-  .gc-stage-prototype { background: rgba(6,214,160,0.12);   color: var(--green);  border: 1px solid rgba(6,214,160,0.25); }
-  .gc-stage-shipped   { background: rgba(255,165,0,0.15);   color: #ffaa33;       border: 1px solid rgba(255,165,0,0.35); }
+  .gc-stage-concept    { background: rgba(77,171,247,0.12);  color: var(--visual); border: 1px solid rgba(77,171,247,0.25); }
+  .gc-stage-specced    { background: rgba(255,209,102,0.12); color: var(--minor);  border: 1px solid rgba(255,209,102,0.25); }
+  .gc-stage-prototype  { background: rgba(6,214,160,0.12);   color: var(--green);  border: 1px solid rgba(6,214,160,0.25); }
+  .gc-stage-prototyped { background: rgba(6,214,160,0.18);   color: var(--green);  border: 1px solid rgba(6,214,160,0.4); }
+  .gc-stage-shipped    { background: rgba(255,165,0,0.15);   color: #ffaa33;       border: 1px solid rgba(255,165,0,0.35); }
   .gc-doc-body {
     display: none; border-top: 1px solid var(--border);
     padding: 20px 18px 24px; background: var(--bg3);

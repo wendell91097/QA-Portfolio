@@ -10,7 +10,7 @@ QA tester, game developer, designer. Greater Boston Metro. Open to remote entry-
 
 A self-maintained QA portfolio. Bug reports, case studies, and game design documents — all real, all mine, all pointing back at actual work rather than invented demos. The site is fully generated from structured data: editing any JSON file and running one script rebuilds the entire thing.
 
-The game concepts section documents how I think before I build. Immortal Coil is the thesis statement. WordSmith is the proof. Manifest is the current prototype — a narrative strategy game set in the 1800s American West, playable at [manifest-henna.vercel.app](https://manifest-henna.vercel.app/).
+The game concepts section documents how I think before I build. Immortal Coil is the thesis statement. WordSmith is the proof. Manifest is the current prototype — a consequence management game set in the 1800s American West, playable at [manifest-henna.vercel.app](https://manifest-henna.vercel.app/).
 
 ---
 
