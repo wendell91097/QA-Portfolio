@@ -76,10 +76,10 @@
   {
     "id": "gc-003",
     "index": "GC-003",
-    "stage": "prototyped",
+    "stage": "prototype",
     "animation_delay": 0.05,
     "title": "Manifest",
-    "subtitle": "Consequence Management · 1800s American West · Who You Owe & What You've Done",
+    "subtitle": "Consequence Management · 1810s California Territory · Passions, Deferred Consequences, Ruin",
     "pitch": "A game about who you owe and what you've done. You are a landowner at the crossroads of everything America is becoming. Three people are watching what you do. Every season you make decisions. Every decision moves something. Some of what you set in motion won't land for years — but it will arrive, in the Chronicle, with your name on it or conspicuously absent.",
     "links": [
       {
@@ -95,8 +95,10 @@
         "full_width": true,
         "items": [
           "The threshold system works. Passion values run from -100 to +100 across nine named bands — Devoted to Irreconcilable — with behavioral state changes at every crossing. Not numbers. Not scores. Concrete, legible changes in what a Star does in the world, with downstream consequences that fire years later.",
-          "The deferred consequence mechanic works. Every action plants a Chronicle entry that arrives on a fixed future date regardless of what the player does afterward. What you decided in 1812 is still in the newspaper in 1819. This is the original design contribution — Levine's Narrative Legos framework didn't address time-delayed outcomes.",
-          "The zero-sum tension works. Serving Esperanza's land interests costs Whitmore's corridor claim. Backing Solomon's independence costs Whitmore's standing with the company. No season is free. The Northern Boundary convergence event forces a direct confrontation where both can't be served simultaneously — exactly the Frank-and-Pete problem Levine describes."
+          "The deferred consequence mechanic works. Every action plants a Chronicle entry that arrives on a fixed future date regardless of what the player does afterward. What you decided in 1812 is still in the newspaper in 1819.",
+          "The zero-sum tension works. Serving Esperanza's land interests costs Whitmore's corridor claim. Backing Solomon's independence costs Whitmore's standing with the company. No season is free. The Northern Boundary convergence event forces a direct confrontation where both can't be served simultaneously.",
+          "Three win conditions fire dynamically based on cohesion math — Domination (allies lead enemies 2:1+), Leveraged Position (no enemies, real ally weight), and Balanced Dominance (active fight, ally lead). Win states are offered, not imposed: the player can decline and continue.",
+          "The Ally and Enemy Cohesion bars — effectiveMP averages across Stars — make the political stakes legible without describing them. The ruin check runs off the same bars. You see the pressure before it becomes terminal."
         ]
       },
       {
@@ -107,17 +109,17 @@
           {
             "label": "Esperanza Vallejo — Land Grant Heir",
             "color": "orange",
-            "text": "Passions: Land Security, Anglo Distrust, Coalition Strength. She represents 47 people whose livelihoods depend on the Vallejo grant. At Devoted on Land Security she names you publicly as a protector of the old grants. At Devoted on Anglo Distrust she tells you things she tells no one else. At Irreconcilable she pursues you in court by name and tells people what you did."
+            "text": "Passions: Land Security, Anglo Distrust, Coalition Strength. She represents 47 people whose livelihoods depend on the Vallejo grant. At Devoted on Land Security she names you publicly as a protector of the old grants. At Irreconcilable she pursues you in court by name."
           },
           {
             "label": "Solomon Reed — Freedman & Trader",
             "color": "green",
-            "text": "Passions: Permanence, Independence, Brotherhood (hidden until Macropassion reaches Cautious Friend). He built something in this valley with no safety net and no federal protection. At Devoted on Permanence he lists you as a trusted partner in territorial filings. At Devoted on Independence he shares routes and contacts he shares with very few. His search for his brother Caleb — missing since the Nevada silver rush — is invisible until the relationship is deep enough to reveal it."
+            "text": "Passions: Permanence, Independence, Brotherhood (hidden until Macropassion ≥ 15). He built something in this valley with no safety net and no federal protection. His search for his brother Caleb — missing since the Nevada silver rush — is invisible until the relationship is deep enough to reveal it. At Devoted on Permanence he lists you as a trusted partner in territorial filings."
           },
           {
             "label": "J.T. Whitmore — Railroad Surveyor",
             "color": "blue",
-            "text": "Passions: Corridor Claim, Company Standing, The Distance (hidden). Pacific Railroad's man in the valley, with 89 people's livelihoods running through the company. At Devoted on Company Standing he names you in his reports as instrumental. At Devoted on Corridor Claim he treats your land as an extension of the railroad's protected zone. The Distance — his marriage to Margaret in Cincinnati, strained by years in the field — is invisible until the relationship is deep enough to reveal it. At Irreconcilable he brings the full weight of Pacific Railroad's legal office against you."
+            "text": "Passions: Corridor Claim, Company Standing, The Distance (hidden). Pacific Railroad's man in the valley, with 89 people's livelihoods running through the company. The Distance — his marriage to Margaret in Cincinnati, strained by years in the field — is invisible until the relationship is deep enough to reveal it. At Irreconcilable he brings the full weight of Pacific Railroad's legal office against you."
           }
         ]
       },
@@ -125,27 +127,28 @@
         "label": "Systems",
         "type": "bullets",
         "items": [
-          "Fame & Infamy track independently per Star via a logarithmic compounding curve — gains accelerate as values rise, but both decay each season without active maintenance. High Infamy can be buffered by Fame: a Star who has publicly backed you won't move against you while that investment holds.",
-          "Reactive events fire automatically when a Passion crosses a threshold in either direction. Positive crossings unlock new actions; negative crossings fire consequences and raise Infamy. Seven reactive events in the prototype, each with secondary effects that ripple across multiple Stars.",
-          "Four convergence events — forced choices that fire when cross-Star conditions are simultaneously met. The Northern Boundary forces a direct confrontation between Esperanza's land claim and Whitmore's federal filing. Three Letters in One Week fires when all three relationships have moved significantly — and the choice text changes based on prior actions.",
-          "Hidden Passion reveals fire as dialogue modals when the Macropassion average crosses 15. The body text is time-aware: it calculates elapsed years from fixed historical anchors (Caleb left in 1809; Whitmore arrived in 1811) and writes the duration in natural language.",
-          "Transient guests — three one-off visitors with weighted moral choices that echo forward as deferred Chronicle entries, some arriving years later in period newspapers with attributed datelines.",
-          "Repair and Betrayal actions gate behind prior damage or prior trust. Repair is costly and never fully undoes the record. Betrayal is available once a Passion is high enough that there's something real to exploit.",
-          "Passion neglect decay — positive Passions drift down by 1 point per season if the last eight log entries include no interaction with that Star. Relationships require active maintenance."
+          "Fame & Infamy track independently per Star via a logarithmic compounding curve — gains accelerate as values rise, both decay seasonally without maintenance. Band-based decay is bidirectional: deep allies lock positive passions in place while healing minor negatives; deep enemies do the inverse.",
+          "Eight reactive events fire automatically when a Passion crosses a threshold. Positive crossings can unlock actions (archive_leverage, nevada_contacts); negative crossings fire consequences and raise Infamy. Each has optional macropassion gates so they only fire when the relationship context is right.",
+          "Four convergence events — forced choices that fire when cross-Star conditions are simultaneously met. Three Letters in One Week fires when all three relationships have significant weight, and its text changes based on whether lend_solomon was taken, declined, or never offered.",
+          "Eight transient guests drawn via Poisson probability — one visitor roughly every 3-5 years, each with weighted moral choices that echo forward as deferred Chronicle entries in period newspapers. Guest pool is macropassion-gated: some visitors only appear when the relevant relationship is warm enough.",
+          "Hidden Passion reveals fire as dialogue modals when Macropassion crosses 15. Body text is time-aware: elapsed years are calculated from fixed historical anchors and written in natural language.",
+          "Repair actions gate behind prior damage (requiresPassionBelow). Betrayal actions gate behind high positive passion (requiresPassionAbove). Both are expensive and consequential — repair never fully undoes the record, betrayal exploits what was real.",
+          "Seven historical World Dispatches arrive in the Chronicle — the War of 1812, Missouri Compromise, Jackson's election, Anti-Slavery Society founding, Texas independence, Mexican War, Gold Rush — grounding the personal stakes in the period's political reality.",
+          "Obscurity fires after 20 seasons without a player-driven decision if allies are insufficient to suppress it. Strong ally cohesion delays the clock indefinitely."
         ]
       },
       {
         "label": "Thematic DNA & Influences",
         "type": "bullets",
         "items": [
-          "Ken Levine's Narrative Legos (GDC) — Stars, Passions, transparent triggers. The framework is implemented directly. Deferred consequences extend beyond the talk.",
+          "Ken Levine's Narrative Legos (GDC) — Stars, Passions, transparent triggers. The framework is implemented directly. Deferred consequences and the cohesion system extend well beyond the talk.",
           "Papers, Please — threshold mechanics as lived pressure. Manifest is what happens when you build a whole life around it instead of a border checkpoint.",
           "Fallout: New Vegas — long-consequence faction reputation; a world that changes shape around decisions made seasons ago.",
           "Red Dead Redemption 2, Deadwood (HBO) — period voice, moral weight without moral instruction."
         ]
       }
     ],
-    "vibe": "The prototype answers the design question: does the threshold system produce meaningful tension? It does. Crossing Esperanza from Trusted into Steadfast while simultaneously sliding Solomon toward Strained is exactly the trade-off the design was built around. The Chronicle records what happened in period voice — it does not editorialize, and it does not forget. The known gaps are documented: no resolution, action density collapses after 1824, The Distance lacks a quest chain, the fourth convergence event's trigger is invisible to the player. These are scope gaps, not design failures. The bones that had to work are working."
+    "vibe": "The prototype is working. The cohesion bars tell you when you're winning and when you're not, without narrating it. The Chronicle records what happened in period voice and does not forget. The threshold system produces the exact tension the design was built around — Esperanza into Steadfast while Solomon slides toward Strained is the trade, and the system makes that trade legible. Win conditions fire when the math supports them and are offered, not imposed. The original design's known gaps — The Distance quest chain, action density after 1824, the Obscurity condition — have been addressed. The bones are working. The engine is now stable enough to be asked a harder question: what happens when you run the same system in a completely different setting."
   },
   {
     "id": "gc-004",
@@ -709,5 +712,81 @@
       }
     ],
     "vibe": "The translation mechanic and the three-path structure are both worth building. Just not at the same time, at full scale, as a first project. Needs a proof-of-concept version that is roughly 20% of this scope. The setting is too underrepresented in games to abandon entirely."
+  },
+  {
+    "id": "gc-010",
+    "index": "GC-010",
+    "stage": "specced",
+    "animation_delay": 0.18,
+    "title": "37 A.D.",
+    "subtitle": "Post-Apocalyptic RPG",
+    "pitch": "The same engine that runs Manifest — passions, deferred consequences, converging interests, ruin — dropped into a setting where the stakes aren't land and railroads but the collapse of civilization and what gets built in its place. Eight factions compete to become the new organizing mythology of a world whose old gods are dead. The player is positioned at the only point where all of them have to deal with you.",
+    "sections": [
+      {
+        "label": "The Setting",
+        "type": "bullets",
+        "full_width": true,
+        "items": [
+          "Year 37 A.D. — After Destruction. A global nuclear exchange in 2059 killed ten billion people in the first year. The Lake Michigan basin survived with 600,000-900,000 people out of a pre-war population of ten million. The acute nuclear winter is over. The sky is clear. The damage done in the first fifteen years is now the baseline condition.",
+          "Eight factions have organized the surviving population around eight different answers to the same question: what comes after the death of the old order. Each takes something true about human experience, magnifies it into an organizing principle, and defends it with everything available — because without the principle, the raw condition is what remains.",
+          "The Illinois River is the basin's spine. A fire is advancing from the west at two miles per year. A succession crisis is underway in three factions simultaneously. A pre-war data center run by a single man behind hardened doors is presenting itself as a rational governance AI. The player lives in the window where everything is still being decided."
+        ]
+      },
+      {
+        "label": "The Factions",
+        "type": "cards",
+        "columns": 1,
+        "items": [
+          {
+            "label": "The Luminaries — Chicago Loop",
+            "color": "accent",
+            "text": "~15,000-20,000 people. Keepers of the electrical grid, holders of the river mouth lock. Theology organized around light as sacred technology. Succession crisis in progress as the First Keeper dies."
+          },
+          {
+            "label": "The Algorithm — Channahon Confluence",
+            "color": "blue",
+            "text": "~8,000-12,000 direct plus 20,000-30,000 influenced. Pre-war data center running on fusion power with satellite uplink. Presents as rational governance AI. Actually one man behind hardened doors authoring outputs through terminals and synthesized voice."
+          },
+          {
+            "label": "The Green Hands — Sugar Grove",
+            "color": "green",
+            "text": "~25,000-35,000 people. Seed bank, underground greenhouses, expanding burn perimeter. Planning the Illinois River diversion. The fire is unchallenged, not inextinguishable."
+          },
+          {
+            "label": "The Watch, The Repentant, The Pax Mullebris, The Free Folk, The Merchants Union",
+            "color": "white",
+            "text": "Military order organized around a code. A penitent faction that walks the wasteland as navigation of deserved hell. A male-excluding medicine-and-intelligence network. River pirates and information traders organized around chosen bonds. The genuine neutral ground of the basin."
+          }
+        ]
+      },
+      {
+        "label": "The Design Question",
+        "type": "two_halves",
+        "halves": [
+          {
+            "label": "What the California Engine Proved",
+            "color": "green",
+            "text": "Three Stars. Two hidden passions. Four convergence events. Deferred consequences across a 25-year timeline. The system is legible, the stakes are personal, the ruin condition is emotionally earned."
+          },
+          {
+            "label": "What The Engine Asks",
+            "color": "accent",
+            "text": "Eight factions. Faction-scale passions. Consequences that unfold across a 10-year pressure window. A setting where the personal and the civilizational are inseparable. Can the same engine hold a larger world?"
+          }
+        ],
+        "note": "The architecture is the same. The content layer is swapped. The engine is designed to be scenario-agnostic — SCENARIO config, INITIAL_STARS, ACTIONS, CONVERGENCE_EVENTS, and WORLD_DISPATCHES are the only files that need to change."
+      },
+      {
+        "label": "Design Stage",
+        "type": "bullets",
+        "items": [
+          "World document complete to v12 — setting, faction architecture, geography, pre-war history, ecosystem recovery, and immediate pressure systems all specified.",
+          "Faction passions and internal tensions mapped. Each faction has an analog to the Whitmore/Esperanza/Solomon dynamic — a leader, a succession problem, and a relationship to the player's position at the crossroads.",
+          "Three immediate convergence pressures identified: the fire and river diversion, simultaneous faction succession crises, and the Algorithm's suppressed knowledge of the outside world.",
+          "Engine implementation pending"
+        ]
+      }
+    ],
+    "vibe": "The Post-Apocalyptic setting is the harder version of the same question. The California prototype asked whether a consequence management game could make three personal relationships feel politically consequential. The answer is yes. The Manifest Engine asks whether the same architecture can hold a civilization in collapse — eight factions competing to become the new organizing myth of a world that just had its old ones killed. The design document is v12 and the world is fully specified. The engine is waiting."
   }
 ]
