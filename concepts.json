@@ -73,19 +73,23 @@
     ],
     "vibe": "This is the one card on the slate where the design question is already answered. It shipped. The rest of the concepts are documented to show how I think; this one is here to show that the thinking goes somewhere."
   },
-  {
+    {
     "id": "gc-003",
     "index": "GC-003",
-    "stage": "prototype",
+    "stage": "shipped",
     "animation_delay": 0.05,
     "title": "Manifest",
     "subtitle": "Consequence Management · 1810s California Territory · Passions, Deferred Consequences, Ruin",
     "pitch": "A game about who you owe and what you've done. You are a landowner at the crossroads of everything America is becoming. Three people are watching what you do. Every season you make decisions. Every decision moves something. Some of what you set in motion won't land for years — but it will arrive, in the Chronicle, with your name on it or conspicuously absent.",
     "links": [
       {
-        "label": "▼ Play Prototype",
-        "url": "https://manifest-henna.vercel.app/",
+        "label": "▼ Play on itch.io",
+        "url": "https://sovereigndev.itch.io/manifest",
         "primary": true
+      },
+      {
+        "label": "▶ Play on Vercel",
+        "url": "https://manifest-henna.vercel.app/"
       }
     ],
     "sections": [
@@ -96,8 +100,8 @@
         "items": [
           "The threshold system works. Passion values run from -100 to +100 across nine named bands — Devoted to Irreconcilable — with behavioral state changes at every crossing. Not numbers. Not scores. Concrete, legible changes in what a Star does in the world, with downstream consequences that fire years later.",
           "The deferred consequence mechanic works. Every action plants a Chronicle entry that arrives on a fixed future date regardless of what the player does afterward. What you decided in 1812 is still in the newspaper in 1819.",
-          "The zero-sum tension works. Serving Esperanza's land interests costs Whitmore's corridor claim. Backing Solomon's independence costs Whitmore's standing with the company. No season is free. The Northern Boundary convergence event forces a direct confrontation where both can't be served simultaneously.",
-          "Three win conditions fire dynamically based on cohesion math — Domination (allies lead enemies 2:1+), Leveraged Position (no enemies, real ally weight), and Balanced Dominance (active fight, ally lead). Win states are offered, not imposed: the player can decline and continue.",
+          "The zero-sum tension works. Serving Esperanza's land interests costs Whitmore's corridor claim. Backing Solomon's independence costs Whitmore's standing with the company. No season is free. Three Letters in One Week — the primary convergence event — forces a tri-way forced choice with no neutral option: one of three people goes unanswered, and the Chronicle records who.",
+          "Three win conditions fire dynamically based on cohesion math — Domination (allies lead enemies 2:1+), Leveraged Position (no enemies, real ally weight), and Balanced Dominance (active fight, ally lead 3:1+). Win states are offered, not imposed: the player can decline and continue.",
           "The Ally and Enemy Cohesion bars — effectiveMP averages across Stars — make the political stakes legible without describing them. The ruin check runs off the same bars. You see the pressure before it becomes terminal."
         ]
       },
@@ -109,17 +113,17 @@
           {
             "label": "Esperanza Vallejo — Land Grant Heir",
             "color": "orange",
-            "text": "Passions: Land Security, Anglo Distrust, Coalition Strength. She represents 47 people whose livelihoods depend on the Vallejo grant. At Devoted on Land Security she names you publicly as a protector of the old grants. At Irreconcilable she pursues you in court by name."
+            "text": "Passions: Land Security, Anglo Distrust, Coalition Strength. She represents 47 people whose livelihoods depend on the Vallejo grant. At Devoted on Land Security she names you publicly as a protector of the old grants. At Irreconcilable she files against you in territorial court by name."
           },
           {
             "label": "Solomon Reed — Freedman & Trader",
             "color": "green",
-            "text": "Passions: Permanence, Independence, Brotherhood (hidden until Macropassion ≥ 15). He built something in this valley with no safety net and no federal protection. His search for his brother Caleb — missing since the Nevada silver rush — is invisible until the relationship is deep enough to reveal it. At Devoted on Permanence he lists you as a trusted partner in territorial filings."
+            "text": "Passions: Permanence, Independence, Brotherhood (hidden until Macropassion ≥ 15). His search for his brother Caleb — missing since the Nevada silver rush — is invisible until the relationship is deep enough to surface it. Brotherhood has a full quest chain: find_brother, find_brother deferred resolution, introduce_caleb, and the Reed Brothers incorporation four years later. The chain is the prototype's most complete example of multi-action arc design."
           },
           {
             "label": "J.T. Whitmore — Railroad Surveyor",
             "color": "blue",
-            "text": "Passions: Corridor Claim, Company Standing, The Distance (hidden). Pacific Railroad's man in the valley, with 89 people's livelihoods running through the company. The Distance — his marriage to Margaret in Cincinnati, strained by years in the field — is invisible until the relationship is deep enough to reveal it. At Irreconcilable he brings the full weight of Pacific Railroad's legal office against you."
+            "text": "Passions: Corridor Claim, Company Standing, The Distance (hidden until Macropassion ≥ 15). The Distance — his marriage to Margaret in Cincinnati, strained by years in the field — surfaces through a dialogue modal but has no quest chain. The passion appears and can move, but there are no actions authored around it. This is the build's clearest gap."
           }
         ]
       },
@@ -127,28 +131,42 @@
         "label": "Systems",
         "type": "bullets",
         "items": [
-          "Fame & Infamy track independently per Star via a logarithmic compounding curve — gains accelerate as values rise, both decay seasonally without maintenance. Band-based decay is bidirectional: deep allies lock positive passions in place while healing minor negatives; deep enemies do the inverse.",
-          "Eight reactive events fire automatically when a Passion crosses a threshold. Positive crossings can unlock actions (archive_leverage, nevada_contacts); negative crossings fire consequences and raise Infamy. Each has optional macropassion gates so they only fire when the relationship context is right.",
-          "Four convergence events — forced choices that fire when cross-Star conditions are simultaneously met. Three Letters in One Week fires when all three relationships have significant weight, and its text changes based on whether lend_solomon was taken, declined, or never offered.",
-          "Eight transient guests drawn via Poisson probability — one visitor roughly every 3-5 years, each with weighted moral choices that echo forward as deferred Chronicle entries in period newspapers. Guest pool is macropassion-gated: some visitors only appear when the relevant relationship is warm enough.",
-          "Hidden Passion reveals fire as dialogue modals when Macropassion crosses 15. Body text is time-aware: elapsed years are calculated from fixed historical anchors and written in natural language.",
-          "Repair actions gate behind prior damage (requiresPassionBelow). Betrayal actions gate behind high positive passion (requiresPassionAbove). Both are expensive and consequential — repair never fully undoes the record, betrayal exploits what was real.",
-          "Seven historical World Dispatches arrive in the Chronicle — the War of 1812, Missouri Compromise, Jackson's election, Anti-Slavery Society founding, Texas independence, Mexican War, Gold Rush — grounding the personal stakes in the period's political reality.",
-          "Obscurity fires after 20 seasons without a player-driven decision if allies are insufficient to suppress it. Strong ally cohesion delays the clock indefinitely."
+          "Fame & Infamy compound cross-directionally per Star — existing fame amplifies further fame gains and dampens infamy gains, and vice versa. Both decay seasonally at the same rate as the macropassion band's dominant direction, so they cannot outlast the relationship that generated them.",
+          "Six reactive events fire automatically when a Passion crosses a threshold, each with optional macropassion gates. Two positive crossings unlock new actions (archive_leverage and archive_share from Esperanza, nevada_contacts from Solomon). Four negative crossings fire consequences — public filings, auditor dispatches, unauthorized survey pushes — and raise the relevant Star's Infamy.",
+          "Four convergence events fire when cross-Star interest conditions are simultaneously met. The centerpiece — Three Letters in One Week — reads the history of lend_solomon and rewrites both the scenario description and Solomon's choice label based on whether the player backed his warehouse. The trigger condition is invisible to the player.",
+          "Eight transient guests drawn via a Poisson-style probability ramp — cooldown resets after each guest departs, probability climbs until the next fires. Each guest presents a weighted moral choice; most echo forward as deferred Chronicle entries in period-accurate newspaper datelines. Five guests are ungated; three require a Star's Macropassion to be above a threshold before they can appear.",
+          "Cohesion threshold modals fire the first time Ally or Enemy Cohesion crosses 10, 25, or 50 — six possible world-shift events in total, each with authored text describing how the valley's political balance has changed. Once a bar has appeared it stays visible permanently, even if cohesion returns to zero.",
+          "Repair actions gate behind prior damage (requiresPassionBelow). Betrayal actions gate behind high positive passion (requiresPassionAbove). Three repair actions and two betrayal actions are authored. Repair costs you with a third party and never fully undoes the Chronicle record; betrayal exploits what the relationship made possible.",
+          "Three unlockable actions — archive_leverage, archive_share, nevada_contacts — do not appear in the standard action pool and cannot be accessed without the reactive events that unlock them. Each has its own deferred consequence.",
+          "Delta visibility scales with macropassion depth: effect magnitudes are hidden below Cautious Friend, the source Star's own deltas unlock at Cautious Friend, all Stars' deltas on a source's actions unlock at Friendly Neighbor, full visibility at Steadfast Friend. The narrative why text is always visible regardless of band.",
+          "repBonus system: two authored actions carry macropassion-gated bonus effects that only fire if the relationship is in the right fame/infamy state (HH, HL, LH, LL) at the moment of resolution.",
+          "Seven World Dispatches arrive in the Chronicle — the War of 1812, Missouri Compromise, Jackson's election, Anti-Slavery Society founding, Texas independence, the Mexican War, the Gold Rush — grounding personal stakes in the period's actual political timeline.",
+          "Obscurity fires after 20 seasons without a player-driven decision. Suppressed if Ally Cohesion exceeds Enemy Cohesion; becomes Ruin instead if enemies already dominate when the timer expires.",
+          "Quiet season pools are authored per-season (Spring, Summer, Autumn, Winter) with gated entries that only surface when conditions are met — specific actions taken, Stars revealed, macropassion thresholds, or year gates. Gated entries fire before the generic fallback pool."
+        ]
+      },
+      {
+        "label": "Known Gaps",
+        "type": "bullets",
+        "items": [
+          "Action density collapses after 1824. The last authored core action is call_solomon_loan (1824). The obscurity timer provides a floor but there is no new player agency in the final decades of the timeline.",
+          "The Distance doesn't arc. Whitmore's hidden passion surfaces through a reveal modal and can be moved by existing actions, but there is no dedicated quest chain. Brotherhood has four linked actions across fifteen years; The Distance has none. The asymmetry is visible.",
+          "The Three Letters convergence trigger is invisible. The event fires when cross-Star conditions are simultaneously met, but the player has no UI indicator that a convergence threshold is approaching. The trigger fires when it fires.",
+          "Near-deterministic under fixed decisions. Simulation confirms that guest event timing is the primary stochastic input; cohesion variance at season 40 is low across seeds. The engine is not a simulation — it is a consequence machine — but the predictability is worth noting."
         ]
       },
       {
         "label": "Thematic DNA & Influences",
         "type": "bullets",
         "items": [
-          "Ken Levine's Narrative Legos (GDC) — Stars, Passions, transparent triggers. The framework is implemented directly. Deferred consequences and the cohesion system extend well beyond the talk.",
+          "Ken Levine's Narrative Legos (GDC) — Stars, Passions, transparent triggers. The framework is implemented directly. Deferred consequences, cohesion bars, fame/infamy compounding, and the macropassion-gated modifier system extend well beyond what the talk described.",
           "Papers, Please — threshold mechanics as lived pressure. Manifest is what happens when you build a whole life around it instead of a border checkpoint.",
           "Fallout: New Vegas — long-consequence faction reputation; a world that changes shape around decisions made seasons ago.",
           "Red Dead Redemption 2, Deadwood (HBO) — period voice, moral weight without moral instruction."
         ]
       }
     ],
-    "vibe": "The prototype is working. The cohesion bars tell you when you're winning and when you're not, without narrating it. The Chronicle records what happened in period voice and does not forget. The threshold system produces the exact tension the design was built around — Esperanza into Steadfast while Solomon slides toward Strained is the trade, and the system makes that trade legible. Win conditions fire when the math supports them and are offered, not imposed. The original design's known gaps — The Distance quest chain, action density after 1824, the Obscurity condition — have been addressed. The bones are working. The engine is now stable enough to be asked a harder question: what happens when you run the same system in a completely different setting."
+    "vibe": "The engine is working and the prototype is honest about where it isn't finished. The cohesion bars tell you when you're winning and when you're not, without narrating it. The Chronicle records what happened in period voice and does not forget. The threshold system produces the exact tension the design was built around — Esperanza into Steadfast while Solomon slides toward Strained is the trade, and the system makes that legible. Win conditions fire when the math supports them and are offered, not imposed. The Brotherhood quest chain — find the brother, wait three years, introduce him, watch the Reed company incorporate four years after that — is the build's best proof that the deferred consequence mechanic actually works as an arc, not just a newspaper headline. The Distance is the honest counterexample: the passion appears, the modal fires, and then nothing follows it. Action density collapses after 1824. These are real gaps, not polish items. The bones are working. The question the engine is now ready to answer is whether the same architecture holds when the setting is eight factions and a civilization in collapse instead of three people and a land dispute."
   },
   {
     "id": "gc-004",
@@ -719,8 +737,15 @@
     "stage": "specced",
     "animation_delay": 0.18,
     "title": "37 A.D.",
-    "subtitle": "Post-Apocalyptic RPG",
+    "subtitle": "Post-Apocalyptic RPG · Manifest Engine · Lake Michigan Basin",
     "pitch": "The same engine that runs Manifest — passions, deferred consequences, converging interests, ruin — dropped into a setting where the stakes aren't land and railroads but the collapse of civilization and what gets built in its place. Eight factions compete to become the new organizing mythology of a world whose old gods are dead. The player is positioned at the only point where all of them have to deal with you.",
+    "links": [
+      {
+        "label": "▼ Read the World Bible",
+        "url": "https://wendell91097.github.io/manifest-engine",
+        "primary": true
+      }
+    ],
     "sections": [
       {
         "label": "The Setting",
@@ -780,13 +805,14 @@
         "label": "Design Stage",
         "type": "bullets",
         "items": [
-          "World document complete to v12 — setting, faction architecture, geography, pre-war history, ecosystem recovery, and immediate pressure systems all specified.",
-          "Faction passions and internal tensions mapped. Each faction has an analog to the Whitmore/Esperanza/Solomon dynamic — a leader, a succession problem, and a relationship to the player's position at the crossroads.",
-          "Three immediate convergence pressures identified: the fire and river diversion, simultaneous faction succession crises, and the Algorithm's suppressed knowledge of the outside world.",
-          "Engine implementation pending"
+          "World document at v15 — setting, faction architecture, geography, pre-war history, ecosystem recovery, and immediate pressure systems fully specified. Full world bible available via the link above.",
+          "Five-layer character architecture complete: biological substrate, drives, axioms, beliefs, and passions — each layer moving at a different speed, each shaping and constraining the layers above it. Characters are configured, not written.",
+          "Eight Stars initialized with full substrate profiles, drive configurations, axiom maps, belief sets, and dominant passions. The grammar running forward from those initializations is what the player actually encounters.",
+          "Three immediate convergence pressures specified: the fire and river diversion, simultaneous faction succession crises, and the Algorithm's suppressed knowledge that the basin is not alone.",
+          "Tutorial area (Northshore landing zone) scoped. Engine implementation in progress."
         ]
       }
     ],
-    "vibe": "The Post-Apocalyptic setting is the harder version of the same question. The California prototype asked whether a consequence management game could make three personal relationships feel politically consequential. The answer is yes. The Manifest Engine asks whether the same architecture can hold a civilization in collapse — eight factions competing to become the new organizing myth of a world that just had its old ones killed. The design document is v12 and the world is fully specified. The engine is waiting."
+    "vibe": "The California prototype proved the engine works at personal scale. Three Stars, deferred consequences across 25 years, a ruin condition that lands because you felt it coming. 37 A.D. is the harder question: can the same architecture hold a civilization in collapse — eight factions competing to become the new organizing myth of a world that just had its old ones killed? The world document is at v15. The character architecture is complete. The five-layer system — substrate, drives, axioms, beliefs, passions — means no two playthroughs produce the same people. The engine is designed to be scenario-agnostic. The content layer is ready. Build is in progress."
   }
 ]
