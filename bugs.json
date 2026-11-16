@@ -837,5 +837,139 @@
     ],
     "video_url": "https://youtu.be/9fDMfH2Oiu0",
     "video_text": "Clip pending upload"
+  },
+  {
+    "id": "032",
+    "game": "rdr2",
+    "game_name": "Red Dead Redemption 2",
+    "title": "Train Transit — Following Horse Spawns on Active Track and Dies During Cinematic Lock",
+    "severity": "critical",
+    "type": "spawning",
+    "type_display": "Spawning / Cinematic Lock",
+    "description": "Initiating passenger train transit while a bonded horse is set to follow causes the horse's destination relocation logic to spawn it directly on the active rail line ahead of the moving train. Because player controls are locked during the unskippable arrival cinematic, the horse is fatally struck by the train with zero player agency to intervene.",
+    "tags": [
+      "Spawning",
+      "Cinematic Lock",
+      "Mount AI",
+      "Placement",
+      "Train",
+      "Critical"
+    ],
+    "reproduction_steps": [
+      "Command bonded horse to follow or leave it active near a train station platform",
+      "Purchase a train ticket and initiate transit to another station",
+      "Observe the rail line ahead of the locomotive during the unskippable arrival cinematic",
+      "Horse spawns directly on the active tracks in front of the train",
+      "Train collides with and kills the horse while player input remains locked"
+    ],
+    "video_url": "https://youtu.be/Q1XnWXtlMxE",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "033",
+    "game": "witcher3",
+    "game_name": "The Witcher 3: Wild Hunt",
+    "title": "Graveyard Quest With Regis — Hostile Archespore Respawns Into Active Cutscene",
+    "severity": "major",
+    "type": "spawning",
+    "type_display": "Spawning / Cutscene State",
+    "description": "Advancing in-game time by several hours during a quest wait sequence with Regis at a graveyard triggers a nearby Archespore monster spawner while the post-wait cutscene is active. The hostile creature spawns directly beside Regis and remains locked in an aggressive combat animation loop throughout dialogue, indicating cutscene trigger zones fail to suppress ambient monster respawn timers.",
+    "tags": [
+      "Spawning",
+      "Cutscene",
+      "AI",
+      "Animation",
+      "Time Skip",
+      "State Management"
+    ],
+    "reproduction_steps": [
+      "Clear hostile Archespore enemies near the graveyard prior to advancing the quest with Regis",
+      "Initiate the quest dialogue/waiting sequence with Regis that advances in-game time by several hours",
+      "Observe the background immediately beside Regis as the post-wait cutscene starts",
+      "Archespore respawns directly inside the active cutscene boundary",
+      "Monster remains frozen in an aggressive attack loop beside Regis for the duration of the scene"
+    ],
+    "video_url": "https://youtu.be/KJ1U3ImE0SA",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "034",
+    "game": "mafiaoldcountry",
+    "game_name": "Mafia: The Old Country",
+    "title": "Enemy AI Enters Rapid Hyper-Evasion Loop Behind Cover on ADS Toggle",
+    "severity": "minor",
+    "type": "ai",
+    "type_display": "AI / Animation",
+    "description": "Aiming down sights (ADS) at an enemy NPC stationed behind cover after briefly releasing aim causes the NPC's lateral evasion animation state to loop at unnatural speed. The rapid oscillation persists until the player lowers and re-raises their weapon, suggesting an AI threat-response or animation state transition lock triggered by rapid ADS toggling.",
+    "tags": [
+      "AI",
+      "Animation",
+      "Combat",
+      "Cover System",
+      "State Lock",
+      "NPC"
+    ],
+    "reproduction_steps": [
+      "Engage an enemy NPC stationed behind waist-high cover during combat",
+      "Aim down sights (ADS) at the target, briefly lower weapon, and immediately re-aim",
+      "Observe NPC behavior while holding aim — enemy enters rapid left-to-right evasion animation loop",
+      "Lower weapon and re-aim a second time",
+      "NPC exits hyper-evasion loop and returns to standard cover behavior"
+    ],
+    "video_url": "https://youtu.be/dlx4_VtWveY",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "035",
+    "game": "crabstreasure",
+    "game_name": "Another Crab's Treasure",
+    "title": "Pinball Table — Overlapping Steam Vent Hitboxes Cause Multi-Hit Knockback Loop",
+    "severity": "major",
+    "type": "collision",
+    "type_display": "Collision / Physics",
+    "description": "During the pinball table traversal section in the penultimate level, two adjacent steam-vent pipes feature overlapping damage volumes that bypass standard invulnerability frame (i-frame) pacing. Making contact triggers rapid consecutive hit-stun and violent knockback loops, launching the player character unpredictably across platforms rather than applying a single controlled impulse.",
+    "tags": [
+      "Collision",
+      "Hitbox",
+      "Physics",
+      "Knockback",
+      "I-Frames",
+      "Progression"
+    ],
+    "reproduction_steps": [
+      "Navigate to steam pipe platforming section in the penultimate level",
+      "Approach the platforms of two active steam-vent pipes",
+      "Jump or dodge into the steam jet boundary",
+      "Damage volumes triggers knockback impulses without possible i-frame recovery",
+      "Player character is launched unpredictably across the level geometry"
+    ],
+    "video_url": "https://youtu.be/W6tzsEHjuGU",
+    "video_text": "Add YouTube link here"
+  },
+  {
+    "id": "036",
+    "game": "blueprince",
+    "game_name": "Blue Prince",
+    "title": "Boiler Room to Pool — Water Fill Cutaway Desyncs From Control Gauge Flow Rate",
+    "severity": "minor",
+    "type": "animation",
+    "type_display": "Animation / State Sync",
+    "description": "Activating the pool fill switch in the Boiler Room causes the cutaway camera view of the partially filled Pool to snap to full almost instantaneously, contradicting the slow, steady flow rate displayed on the boiler control gauges. Suggests the cutaway animation triggers a final state swap rather than interpolating water level proportionally to the simulated flow rate.",
+    "tags": [
+      "Animation",
+      "State Sync",
+      "Cutaway",
+      "Timing",
+      "Puzzle Mechanics",
+      "Visual"
+    ],
+    "reproduction_steps": [
+      "Draft both the Pool room (in a partially filled state) and the Boiler Room",
+      "Route power and activate the Boiler Room switch to fill the Pool",
+      "Observe the cutaway camera showing the Pool water level",
+      "Pool fills nearly instantaneously compared to the slow flow rate indicated on the boiler controls"
+    ],
+    "video_url": "https://youtu.be/u4JRpxJ72Ck",
+    "video_text": "Add YouTube link here"
   }
 ]

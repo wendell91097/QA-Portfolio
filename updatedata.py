@@ -23,6 +23,9 @@ GAME_CONFIG = {
     "the_invincible": {"label": "The Invincible",           "css_class": "game-invincible", "tier": "AA"},
     "dave_diver":     {"label": "Dave the Diver",           "css_class": "game-dave-diver", "tier": "indie"},
     "days_gone":      {"label": "Days Gone",                "css_class": "game-days-gone",  "tier": "AAA"},
+    "crabstreasure":  {"label": "Another Crab's Treasure",  "css_class": "game-crabstreasure",   "tier": "indie"},
+    "mafiaoldcountry":{"label": "Mafia: The Old Country",   "css_class": "game-mafiaoldcountry", "tier": "AAA"},
+    "blueprince":     {"label": "Blue Prince",              "css_class": "game-blueprince",      "tier": "indie"},
 }
 
 # ── SEVERITY CONFIG ────────────────────────────────────────────────────────────
@@ -607,20 +610,20 @@ def make_stats_bar(bugs: list) -> str:
     return f"""<div class="stats-bar">
   <div class="stat-item">
     <div class="stat-value">{total_bugs}</div>
-    <div class="stat-label">Documented Bugs</div>
+    <div class="stat-label">Privately Documented Bugs</div>
   </div>
   <div class="stat-item">
     <div class="stat-value">{total_titles}</div>
     <div class="stat-label">Titles Tested</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">1,300+</div>
-    <div class="stat-label">Hrs User Testing</div>
+    <div class="stat-value">1,000+</div>
+    <div class="stat-label">QA Sessions</div>
   </div>
   <div class="stat-item">
-    <a href="https://sovereigndev.itch.io/wordsmith" target="_blank" style="text-decoration:none; color:inherit; display:contents;">
-      <div class="stat-value" style="cursor:pointer;">1</div>
-      <div class="stat-label" style="cursor:pointer; text-decoration:underline; text-decoration-color:rgba(232,255,71,0.4);">Shipped Title</div>
+    <a href="https://sovereigndev.itch.io/" target="_blank" style="text-decoration:none; color:inherit; display:contents;">
+      <div class="stat-value" style="cursor:pointer;">2</div>
+      <div class="stat-label" style="cursor:pointer; text-decoration:underline; text-decoration-color:rgba(232,255,71,0.4);">Shipped Titles</div>
     </a>
   </div>
   <div class="open-to-work">
@@ -983,6 +986,9 @@ CSS = """
   .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }
   .game-dave-diver{ background: rgba(0,200,220,0.1);    color: #00c8dc; }
   .game-days-gone { background: rgba(180,120,40,0.15);  color: #c8902a; }
+  .game-crabstreasure  { background: rgba(255,105,85,0.12);  color: #ff6955; }
+  .game-mafiaoldcountry{ background: rgba(165,42,42,0.18);   color: #b84a39; }
+  .game-blueprince     { background: rgba(65,105,225,0.15);  color: #5c85ff; }
 
   /* EXPANDED DETAIL — BUG */
   .bug-detail {
@@ -1346,7 +1352,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, concepts_j
       <div class="about-body">
         <div class="about-col">
           <div class="about-col-title">Background</div>
-          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,300+ hours of paid user testing, and self-directed bug documentation across 15 titles. Open to remote entry-level QA roles.</p>
+          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across 15 titles. Open to remote entry-level QA roles.</p>
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>
