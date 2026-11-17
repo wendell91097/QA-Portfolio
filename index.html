@@ -2616,7 +2616,7 @@
         <div class="bug-card-header">
           <div class="bug-id">#035</div>
           <div class="game-tag game-crabstreasure">Another Crab&#x27;s Treasure</div>
-          <div class="bug-title-text">Pinball Table — Overlapping Steam Vent Hitboxes Cause Multi-Hit Knockback Loop</div>
+          <div class="bug-title-text">Pinball Table — Steam Vent Collision Desynced From Visual Loop</div>
           <div class="bug-type">Collision / Physics</div>
           <div class="severity-badge sev-major">Major</div>
         </div>
@@ -2624,8 +2624,8 @@
           <div class="detail-grid">
             <div>
               <div class="detail-section-title">Description</div>
-              <p class="detail-text">During the pinball table traversal section in the penultimate level, two adjacent steam-vent pipes feature overlapping damage volumes that bypass standard invulnerability frame (i-frame) pacing. Making contact triggers rapid consecutive hit-stun and violent knockback loops, launching the player character unpredictably across platforms rather than applying a single controlled impulse.</p>
-              <div class="detail-chips" style="margin-top:12px"><span class="chip">Collision</span><span class="chip">Hitbox</span><span class="chip">Physics</span><span class="chip">Knockback</span><span class="chip">I-Frames</span><span class="chip">Progression</span></div>
+              <p class="detail-text">During the pinball table traversal section in the penultimate level, two adjacent steam-vent pipes feature collision that is asynchronized to the object&#x27;s rendering loop. Making contact triggers knockback, launching the player character unpredictably across platforms.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">Collision</span><span class="chip">Hitbox</span><span class="chip">Physics</span><span class="chip">Knockback</span><span class="chip">Desync</span><span class="chip">Progression</span></div>
             </div>
             <div>
               <div class="detail-section-title">Reproduction Steps</div>
@@ -2636,15 +2636,15 @@
                 </li>
                 <li class="repro-step">
                   <span class="step-num">02</span>
-                  <span>Approach the platforms of two active steam-vent pipes</span>
+                  <span>Approach the platforms of two adjacent steam-vent pipes</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">03</span>
-                  <span>Jump or dodge into the steam jet boundary</span>
+                  <span>Observe visual steam state versus active hazard volume</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">04</span>
-                  <span>Damage volumes triggers knockback impulses without possible i-frame recovery</span>
+                  <span>Contact desynced collision boundary — triggers knockback impulse</span>
                 </li>
                 <li class="repro-step">
                   <span class="step-num">05</span>
@@ -3418,7 +3418,7 @@
       <div class="about-body">
         <div class="about-col">
           <div class="about-col-title">Background</div>
-          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across 15 titles. Open to remote entry-level QA roles.</p>
+          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across 18 titles. Open to contract work and async development + QA roles</p>
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>
@@ -3484,9 +3484,9 @@
     document.querySelectorAll('#sidebar-bugs .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["blueprince", "fallout4", "fallout76", "dqxi", "the_invincible", "rdr2", "rdr1", "gtav", "dave_diver", "cp77", "witcher3", "wolf", "days_gone", "crabstreasure", "eldenring", "ds3", "mafiaoldcountry", "spiderman"];
+    const gameKeys = ["crabstreasure", "fallout4", "dave_diver", "ds3", "wolf", "days_gone", "witcher3", "mafiaoldcountry", "rdr1", "rdr2", "the_invincible", "spiderman", "eldenring", "fallout76", "dqxi", "cp77", "gtav", "blueprince"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["ai", "physics", "spawning", "rendering", "animation", "collision"];
+    const typeKeys = ["spawning", "ai", "collision", "physics", "animation", "rendering"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;

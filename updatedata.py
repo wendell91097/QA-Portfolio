@@ -1352,7 +1352,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, concepts_j
       <div class="about-body">
         <div class="about-col">
           <div class="about-col-title">Background</div>
-          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across 15 titles. Open to remote entry-level QA roles.</p>
+          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across 18 titles. Open to contract work and async development + QA roles</p>
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>
