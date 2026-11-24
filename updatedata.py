@@ -19,6 +19,7 @@ GAME_CONFIG = {
     "wolf":           {"label": "Wolfenstein II",           "css_class": "game-wolf",       "tier": "AAA"},
     "cp77":           {"label": "Cyberpunk 2077",           "css_class": "game-cp77",       "tier": "AAA"},
     "gtav":           {"label": "GTA V",                    "css_class": "game-gtav",       "tier": "AAA"},
+    "gtavi":          {"label": "GTA VI",                   "css_class": "game-gtavi",      "tier": "AAA"},
     "dqxi":           {"label": "Dragon Quest XI",          "css_class": "game-dqxi",       "tier": "AAA"},
     "the_invincible": {"label": "The Invincible",           "css_class": "game-invincible", "tier": "AA"},
     "dave_diver":     {"label": "Dave the Diver",           "css_class": "game-dave-diver", "tier": "indie"},
@@ -982,6 +983,7 @@ CSS = """
   .game-cp77      { background: rgba(252,238,9,0.1);    color: #fcee09; }
   .game-default   { background: rgba(156,163,175,0.1);  color: #9ca3af; }
   .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }
+  .game-gtavi     { background: rgba(255,110,180,0.12); color: #ff6eb4; }
   .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }
   .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }
   .game-dave-diver{ background: rgba(0,200,220,0.1);    color: #00c8dc; }
@@ -1352,7 +1354,7 @@ def build_dashboard(bugs_json_path: str, case_studies_json_path: str, concepts_j
       <div class="about-body">
         <div class="about-col">
           <div class="about-col-title">Background</div>
-          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across 18 titles. Open to contract work and async development + QA roles</p>
+          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across {len(all_games)} titles. Open to contract work and async development + QA roles</p>
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>

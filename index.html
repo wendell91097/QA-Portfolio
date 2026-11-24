@@ -255,6 +255,7 @@
   .game-cp77      { background: rgba(252,238,9,0.1);    color: #fcee09; }
   .game-default   { background: rgba(156,163,175,0.1);  color: #9ca3af; }
   .game-gtav      { background: rgba(0,210,150,0.1);    color: #00d296; }
+  .game-gtavi     { background: rgba(255,110,180,0.12); color: #ff6eb4; }
   .game-dqxi      { background: rgba(100,160,255,0.12); color: #6aa0ff; }
   .game-invincible{ background: rgba(180,100,255,0.1);  color: #c87fff; }
   .game-dave-diver{ background: rgba(0,200,220,0.1);    color: #00c8dc; }
@@ -516,11 +517,11 @@
 <!-- STATS BAR -->
 <div class="stats-bar">
   <div class="stat-item">
-    <div class="stat-value">36</div>
+    <div class="stat-value">41</div>
     <div class="stat-label">Privately Documented Bugs</div>
   </div>
   <div class="stat-item">
-    <div class="stat-value">18</div>
+    <div class="stat-value">19</div>
     <div class="stat-label">Titles Tested</div>
   </div>
   <div class="stat-item">
@@ -549,7 +550,7 @@
       <div class="sidebar-section">
         <div class="sidebar-label">Filter by Game</div>
         <button class="filter-btn active" onclick="filterBugs('all', this)">
-          All Bugs <span class="filter-count">36</span>
+          All Bugs <span class="filter-count">41</span>
         </button>
         <button class="filter-btn" onclick="filterBugs('ds3', this)">
           <span>Dark Souls III</span>
@@ -595,6 +596,10 @@
           <span>GTA V</span>
           <span class="filter-count">1</span>
         </button>
+        <button class="filter-btn" onclick="filterBugs('gtavi', this)">
+          <span>GTA VI</span>
+          <span class="filter-count">5</span>
+        </button>
         <button class="filter-btn" onclick="filterBugs('dqxi', this)">
           <span>Dragon Quest XI</span>
           <span class="filter-count">1</span>
@@ -633,42 +638,42 @@
         </button>
         <button class="filter-btn" onclick="filterBugs('major', this)">
           <span><span class="severity-dot" style="background:var(--major)"></span>Major</span>
-          <span class="filter-count">8</span>
+          <span class="filter-count">9</span>
         </button>
         <button class="filter-btn" onclick="filterBugs('minor', this)">
           <span><span class="severity-dot" style="background:var(--minor)"></span>Minor</span>
-          <span class="filter-count">11</span>
+          <span class="filter-count">14</span>
         </button>
         <button class="filter-btn" onclick="filterBugs('visual', this)">
           <span><span class="severity-dot" style="background:var(--visual)"></span>Visual</span>
-          <span class="filter-count">14</span>
+          <span class="filter-count">15</span>
         </button>
       </div>
 
       <div class="sidebar-section">
         <div class="sidebar-label">Filter by Type</div>
-        <button class="filter-btn" onclick="filterBugs('animation', this)">
-          Animation / Model
-          <span class="filter-count">8</span>
-        </button>
         <button class="filter-btn" onclick="filterBugs('ai', this)">
           AI / Pathing
-          <span class="filter-count">8</span>
+          <span class="filter-count">10</span>
+        </button>
+        <button class="filter-btn" onclick="filterBugs('animation', this)">
+          Animation / Model
+          <span class="filter-count">9</span>
         </button>
         <button class="filter-btn" onclick="filterBugs('collision', this)">
           Collision / Physics
-          <span class="filter-count">8</span>
+          <span class="filter-count">9</span>
         </button>
         <button class="filter-btn" onclick="filterBugs('rendering', this)">
           Rendering / LOD
           <span class="filter-count">6</span>
         </button>
-        <button class="filter-btn" onclick="filterBugs('spawning', this)">
-          Spawning / Placement
-          <span class="filter-count">3</span>
-        </button>
         <button class="filter-btn" onclick="filterBugs('physics', this)">
           Physics
+          <span class="filter-count">4</span>
+        </button>
+        <button class="filter-btn" onclick="filterBugs('spawning', this)">
+          Spawning / Placement
           <span class="filter-count">3</span>
         </button>
       </div>
@@ -751,7 +756,7 @@
     <!-- BUG REPORTS PANEL -->
     <div class="tab-panel" id="panel-bugs">
       <div class="content-header">
-        <div class="result-count">Showing <span id="count">36</span> of 36 reports</div>
+        <div class="result-count">Showing <span id="count">41</span> of 41 reports</div>
       </div>
       <div class="bug-list" id="bugList">
 
@@ -2717,6 +2722,281 @@
           </div>
         </div>
       </div>
+
+      <div class="bug-card" data-game="gtavi" data-severity="major" data-type="physics" onclick="toggleCard(this)" style="animation-delay:0.30s">
+        <div class="bug-card-header">
+          <div class="bug-id">#037</div>
+          <div class="game-tag game-gtavi">GTA VI</div>
+          <div class="bug-title-text">Bathtub Gas Pickup Explosion — Persistent Wreck Wobble &amp; Emergency AI Pileup</div>
+          <div class="bug-type">Physics / AI Pathing</div>
+          <div class="severity-badge sev-major">Major</div>
+        </div>
+        <div class="bug-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-section-title">Description</div>
+              <p class="detail-text">Following the crash and explosion of an NPC pickup truck carrying a gasoline-filled bathtub, the destroyed vehicle chassis persists in a continuous physical wobble loop for approximately 20 seconds instead of settling. Subsequently, a responding fire truck navigates against oncoming traffic, triggers a multi-vehicle pileup while attempting to extinguish the wreck, and repeatedly collides with northbound traffic while executing an extended 4-point turnaround.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">Physics</span><span class="chip">Vehicle</span><span class="chip">AI</span><span class="chip">Pathfinding</span><span class="chip">Emergency Response</span><span class="chip">Multi-Bug</span></div>
+            </div>
+            <div>
+              <div class="detail-section-title">Reproduction Steps</div>
+              <ul class="repro-steps">
+                <li class="repro-step">
+                  <span class="step-num">01</span>
+                  <span>Observe the random world event at the Key Lento 247 featuring the NPC pickup truck with a gasoline-filled bathtub in the bed</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">02</span>
+                  <span>Allow the pickup truck&#x27;s driver to crash the vehicle and explode</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">03</span>
+                  <span>Observe the destroyed truck chassis as the vehicle continues wobbling persistently for ~20 seconds post-explosion</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">04</span>
+                  <span>Remain on scene as emergency services dispatch a fire truck</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">05</span>
+                  <span>Fire truck drives against traffic flow, causes a pileup near the wreck, and struggles to avoid the incoming traffic as it executes a 4-point turn to depart northbound</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-section-title">Clip</div>
+          
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/cMM2dYVRupY"
+              title="Bug clip #037"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="bug-card" data-game="gtavi" data-severity="visual" data-type="animation" onclick="toggleCard(this)" style="animation-delay:0.35s">
+        <div class="bug-card-header">
+          <div class="bug-id">#038</div>
+          <div class="game-tag game-gtavi">GTA VI</div>
+          <div class="bug-title-text">Store Vendor NPC — Idle Animation Arms Clipping Through Abdomen Geometry</div>
+          <div class="bug-type">Animation / Model</div>
+          <div class="severity-badge sev-visual">Visual</div>
+        </div>
+        <div class="bug-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-section-title">Description</div>
+              <p class="detail-text">A heavy-build street vendor NPC executes a standard idle animation in which both arms clip directly through the character&#x27;s abdomen geometry. Indicates the shared idle animation rig lacks body-mass IK or skeletal offset adjustments for wider NPC mesh variants.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">Animation</span><span class="chip">Clipping</span><span class="chip">NPC</span><span class="chip">Idle State</span><span class="chip">Mesh Offset</span></div>
+            </div>
+            <div>
+              <div class="detail-section-title">Reproduction Steps</div>
+              <ul class="repro-steps">
+                <li class="repro-step">
+                  <span class="step-num">01</span>
+                  <span>Locate a heavy-build street vendor NPC stationed in an open-world market or sidewalk area</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">02</span>
+                  <span>Observe the NPC while in a neutral standing idle state</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">03</span>
+                  <span>Both arms pass inward through the vendor&#x27;s abdomen geometry during the idle cycle</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-section-title">Clip</div>
+          
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/D_btu9lJU5I"
+              title="Bug clip #038"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="bug-card" data-game="gtavi" data-severity="minor" data-type="ai" onclick="toggleCard(this)" style="animation-delay:0.40s">
+        <div class="bug-card-header">
+          <div class="bug-id">#039</div>
+          <div class="game-tag game-gtavi">GTA VI</div>
+          <div class="bug-title-text">Traffic AI — Motorcyclist Fails Collision Avoidance &amp; Deadlocks Behind Stationary Van</div>
+          <div class="bug-type">AI / Pathing</div>
+          <div class="severity-badge sev-minor">Minor</div>
+        </div>
+        <div class="bug-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-section-title">Description</div>
+              <p class="detail-text">Observed shortly after completing the mission to fix Mandy&#x27;s sink, in response to a collision at a neighbor&#x27;s residence. An Air-Con service van halts indefinitely in an active traffic lane without a direct obstruction ahead. An approaching motorcyclist fails to trigger braking or obstacle-avoidance behavior, colliding with the rear of the stationary van at full speed and launching into the van&#x27;s rear compartment. After remounting, the motorcyclist remains deadlocked behind the van with no reverse or reroute input. Ramming the van fails to clear its state, whereas striking the motorcyclist triggers the van driver&#x27;s flee response.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Pathfinding</span><span class="chip">Traffic</span><span class="chip">Collision Avoidance</span><span class="chip">Deadlock</span><span class="chip">Vehicle</span></div>
+            </div>
+            <div>
+              <div class="detail-section-title">Reproduction Steps</div>
+              <ul class="repro-steps">
+                <li class="repro-step">
+                  <span class="step-num">01</span>
+                  <span>Complete the mission to fix Mandy&#x27;s sink. After completion, a collision occurs at a neighbor&#x27;s residence next to Mandy&#x27;s; approach the incident</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">02</span>
+                  <span>Observe an Air-Con service van halted in an open traffic lane near the collision site</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">03</span>
+                  <span>Wait for oncoming traffic — motorcyclist fails to brake and rear-ends the van at full speed</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">04</span>
+                  <span>Motorcyclist launches off the motorcycle, gets up, and remounts the bike</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">05</span>
+                  <span>Observe both vehicles — motorcyclist makes no attempt to reverse or path around the van</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">06</span>
+                  <span>Ram the stationary van with player vehicle — van remains unresponsive</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">07</span>
+                  <span>Ram the deadlocked motorcyclist — impact triggers flee AI on the van driver, clearing the lane but causes no pursuit from either injured party. They are thankful</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-section-title">Clip</div>
+          
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/td3vPZI-pYA"
+              title="Bug clip #039"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="bug-card" data-game="gtavi" data-severity="minor" data-type="ai" onclick="toggleCard(this)" style="animation-delay:0.05s">
+        <div class="bug-card-header">
+          <div class="bug-id">#040</div>
+          <div class="game-tag game-gtavi">GTA VI</div>
+          <div class="bug-title-text">Hey Arnold Mission — Brian Ignores Vehicle Impact, Drops Prop &amp; Suppresses Psycho Penalty</div>
+          <div class="bug-type">AI / Scripted State</div>
+          <div class="severity-badge sev-minor">Minor</div>
+        </div>
+        <div class="bug-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-section-title">Description</div>
+              <p class="detail-text">During the mission sequence following the bar conversation during &#x27;Hey Arnold&#x27;, boarding Brian&#x27;s pickup truck early and running him over produces zero injury states, damage dialogue, or Psycho meter penalties. Additionally, the ragdoll impact causes Brian&#x27;s held phone prop to despawn permanently while his scripted passenger-boarding AI immediately overrides recovery without acknowledgment.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">AI</span><span class="chip">Scripted State</span><span class="chip">Companion</span><span class="chip">Prop Despawn</span><span class="chip">Vehicle Impact</span><span class="chip">Mission</span></div>
+            </div>
+            <div>
+              <div class="detail-section-title">Reproduction Steps</div>
+              <ul class="repro-steps">
+                <li class="repro-step">
+                  <span class="step-num">01</span>
+                  <span>Complete the bar dialogue sequence with Brian regarding Arnold</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">02</span>
+                  <span>Exit the bar and enter the driver&#x27;s seat of Brian&#x27;s pickup truck before Brian boards</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">03</span>
+                  <span>Quickly reverse and strike Brian with his own truck as he crosses behind the vehicle</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">04</span>
+                  <span>Observe impact response — Brian ragdolls, his held phone prop disappears, and no Psycho penalty is applied</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">05</span>
+                  <span>Brian stands up with no visible injuries or dialogue reaction and proceeds to jog to his truck and enters the passenger seat</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-section-title">Clip</div>
+          
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/yEiZLKtNR3A"
+              title="Bug clip #040"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+
+      <div class="bug-card" data-game="gtavi" data-severity="minor" data-type="collision" onclick="toggleCard(this)" style="animation-delay:0.10s">
+        <div class="bug-card-header">
+          <div class="bug-id">#041</div>
+          <div class="game-tag game-gtavi">GTA VI</div>
+          <div class="bug-title-text">Tire Cart Collision — Ragdoll Interrupt Suppresses Lucia Car Door Prompt Until Vehicle Moves</div>
+          <div class="bug-type">Collision / Interaction State</div>
+          <div class="severity-badge sev-minor">Minor</div>
+        </div>
+        <div class="bug-detail">
+          <div class="detail-grid">
+            <div>
+              <div class="detail-section-title">Description</div>
+              <p class="detail-text">Initiating the contextual action to open the passenger car door for Lucia while positioned adjacent to a tire cart causes Jason to clip into the prop geometry, triggering a ragdoll fall into the car door. Interrupting the scripted door-opening animation mid-transition leaves the interaction prompt disabled until the player enters the driver&#x27;s seat and repositions the vehicle to re-evaluate the proximity trigger.</p>
+              <div class="detail-chips" style="margin-top:12px"><span class="chip">Collision</span><span class="chip">Interaction Prompt</span><span class="chip">Ragdoll</span><span class="chip">Animation Interrupt</span><span class="chip">State Lock</span><span class="chip">Lucia</span></div>
+            </div>
+            <div>
+              <div class="detail-section-title">Reproduction Steps</div>
+              <ul class="repro-steps">
+                <li class="repro-step">
+                  <span class="step-num">01</span>
+                  <span>Park a vehicle adjacent to Duke&#x27;s trailer near the tire-filled shopping cart prop with Lucia ready to board</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">02</span>
+                  <span>Approach the passenger side and trigger the &#x27;Open Door for Lucia&#x27; interaction prompt</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">03</span>
+                  <span>Jason&#x27;s legs partially clip into the tire cart geometry during approach, ragdolls, and strikes the car door</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">04</span>
+                  <span>Stand up and return to the passenger door — interaction prompt fails to reappear</span>
+                </li>
+                <li class="repro-step">
+                  <span class="step-num">05</span>
+                  <span>Enter the driver&#x27;s seat and move the vehicle away from the tire cart to reset the interaction trigger</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="detail-section-title">Clip</div>
+          
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/trc2CTpD_iU"
+              title="Bug clip #041"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
       </div>
     </div>
 
@@ -3418,7 +3698,7 @@
       <div class="about-body">
         <div class="about-col">
           <div class="about-col-title">Background</div>
-          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across 18 titles. Open to contract work and async development + QA roles</p>
+          <p>Independent QA tester and game developer based in the Greater Boston Metro. Shipped WordSmith on Itch.io (Godot), completed 1,000+ sessions of paid user testing over 7 years, and self-directed bug documentation across 19 titles. Open to contract work and async development + QA roles</p>
         </div>
         <div class="about-col">
           <div class="about-col-title">QA Skills</div>
@@ -3451,6 +3731,7 @@
             <div class="skill-item">Mafia: The Old Country</div>
             <div class="skill-item">Another Crab&#x27;s Treasure</div>
             <div class="skill-item">Blue Prince</div>
+            <div class="skill-item">GTA VI</div>
           </div>
         </div>
       </div>
@@ -3484,9 +3765,9 @@
     document.querySelectorAll('#sidebar-bugs .filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const gameKeys = ["crabstreasure", "fallout4", "dave_diver", "ds3", "wolf", "days_gone", "witcher3", "mafiaoldcountry", "rdr1", "rdr2", "the_invincible", "spiderman", "eldenring", "fallout76", "dqxi", "cp77", "gtav", "blueprince"];
+    const gameKeys = ["ds3", "days_gone", "mafiaoldcountry", "the_invincible", "witcher3", "cp77", "dqxi", "crabstreasure", "spiderman", "wolf", "blueprince", "gtavi", "eldenring", "rdr2", "gtav", "dave_diver", "rdr1", "fallout76", "fallout4"];
     const sevKeys  = ["critical", "major", "minor", "visual"];
-    const typeKeys = ["spawning", "ai", "collision", "physics", "animation", "rendering"];
+    const typeKeys = ["physics", "ai", "collision", "animation", "spawning", "rendering"];
 
     const cards = document.querySelectorAll('.bug-card');
     let visible = 0;
